@@ -1,0 +1,237 @@
+/**
+ *
+ * Copyright 2012-2015 David Rodal
+ *
+ *  This program is free software; you can redistribute it
+ *  and/or modify it under the terms of the GNU General Public License
+ *  as published by the Free Software Foundation;
+ *  either version 2 of the License, or (at your option) any later version
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/* Unit Styles */
+
+.roll{
+  background:white;
+}
+$badge-size: 14px;
+$vintage-badge-size:19px;
+$unit-numbers-size:16px;
+$vintage-unit-numbers-size:10px;
+
+.selected {
+  background:rgba(255,255,0,.6);
+}
+.pinned{
+  background: rgba(255,0,255,.6)
+}
+.die-roll{
+  background: cyan;
+}
+.range{
+  position:absolute;
+  right:4px;
+  top:0px;
+  font-size:12px;
+}
+@mixin player($nationality, $player, $color, $faceColor: $color, $desigColor: white){
+  .player#{$nationality}{
+    background:$color;
+    border-color:$color !important;
+  }
+  .#{$nationality}Face, .player#{$nationality}Face{
+    color:$faceColor;
+  }
+
+  .#{$nationality} {
+    background-color: $color;
+    .unit-desig{
+      color: $desigColor;
+    }
+  }
+
+}
+
+@mixin badge($nationality, $shortName) {
+  .vintage{
+
+    &.#{$nationality}.inf .counterWrapper .counter {
+      background-image: url('/js/#{$shortName}InfBadge.png');
+      background-size: $vintage-badge-size;
+    }
+    &.#{$nationality}.cavalry .counterWrapper .counter {
+      background-image: url('/js/#{$shortName}CavBadge.png');
+      background-size: $vintage-badge-size;
+    }
+
+    &.#{$nationality}.artillery .counterWrapper .counter {
+      background-image: url('/js/#{$shortName}ArtBadge.png');
+      background-size: $vintage-badge-size;
+    }
+    &.#{$nationality}.horseartillery .counterWrapper .counter {
+      background-image: url('/js/#{$shortName}HorArtBadge.png');
+      background-size: $vintage-badge-size;
+    }
+    &.#{$nationality}.hq .counterWrapper .counter {
+      background-color:lightgreen;
+      background-image: url('/js/HQBadge.png');
+      background-size: $vintage-badge-size;
+    }
+    &.#{$nationality}.pontoon {
+      .counterWrapper {
+        border:none;
+        .counter {
+
+          background-color: lightgreen;
+          background-image: url('/js/#{$shortName}Pontoon.png');
+          background-size: 32px;
+          width: 32px;
+          height: 32px;
+          border:none;
+        }
+      }
+      .unit-numbers {
+        display:none;
+      }
+    }
+  }
+  .counterWrapper .counter {
+    height:$badge-size;
+    background-repeat:no-repeat;
+    border-bottom:1px solid black;
+  }
+  .#{$nationality}.inf .counterWrapper .counter {
+    background-image: url('/js/#{$shortName}InfBadge.png');
+    background-size: $badge-size;
+  }
+  .#{$nationality}.cavalry .counterWrapper .counter {
+    background-image: url('/js/#{$shortName}CavBadge.png');
+    background-size: $badge-size;
+  }
+
+  .#{$nationality}.artillery .counterWrapper .counter {
+    background-image: url('/js/#{$shortName}ArtBadge.png');
+    background-size: $badge-size;
+  }
+  .#{$nationality}.horseartillery .counterWrapper .counter {
+    background-image: url('/js/#{$shortName}HorArtBadge.png');
+    background-size: $badge-size;
+  }
+  .#{$nationality}.hq .counterWrapper .counter {
+    background-color:lightgreen;
+    background-image: url('/js/HQBadge.png');
+    background-size: $badge-size;
+  }
+
+  .#{$nationality}.wagon .counterWrapper .counter {
+    background-image: url('/js/Wagon.png');
+    background-size: $badge-size;
+  }
+
+  .#{$nationality}.pontoon {
+    .counterWrapper {
+      border:none;
+      .counter {
+
+        background-color: lightgreen;
+        background-image: url('/js/#{$shortName}Pontoon.png');
+        background-size: 32px;
+        width: 32px;
+        height: 32px;
+        border:none;
+      }
+    }
+    .unit-numbers {
+      display:none;
+    }
+  }
+}
+
+@include player(rebel, One, rgb(223, 88, 66));
+@include player(loyalist, Two, rgb(132, 181, 255));
+
+.shadow-wrapper{
+  position:relative;
+}
+.screen{
+  position:absolute;
+  width:97%;
+
+  &.rows0{
+    height:0px;
+  }
+  &.rows1{
+    height:21px;
+  }
+  &.rows2{
+    height:42px;
+  }
+  &.rows3{
+    height:63px;
+  }
+  &.rows4{
+    height:84px;
+  }
+  &.rows5{
+    height:105px;
+  }
+  &.rows6{
+    height:126px;
+  }
+  &.shadowy{
+    background:rgba(0, 0, 0, 0.6) !important
+  }
+}
+.screen-one{
+  top:0px;
+}
+.screen-two{
+  bottom:0px;
+}
+.rebel div {
+  color: black;
+}
+
+.sympth div {
+  color: black;
+}
+
+.game-name {
+  word-break: break-all;
+  font-family: 'Nosifer';
+}
+
+.reduced {
+  color: white;
+}
+.row-2, .row0, .row8, .row10, .row12{
+  background:white;
+}
+@import "tmcwUnits";
+@import "tmcwBoxes";
+@import "tmcwSpecialVP";
+
+
+
+@mixin unitColor($nationality, $color, $shortName) {
+  .#{$nationality} .counterWrapper {
+    background-color: $color;
+  }
+  @include badge($nationality, $shortName);
+}
+
+@mixin headerColor($nationality, $color, $faceColor: $color){
+  .player#{$nationality}{
+    background:$color;
+    border-color:$color !important;
+  }
+  .#{$nationality}Face, .player#{$nationality}Face{
+    color:$faceColor;
+  }
+}

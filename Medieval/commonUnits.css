@@ -1,0 +1,84 @@
+/*
+Copyright 2012-2015 David Rodal
+
+This program is free software; you can redistribute it
+and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation;
+either version 2 of the License, or (at your option) any later version->
+
+This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   */
+.love {
+  color: peace; }
+
+.light {
+  backgroundColor: white; }
+
+.dark {
+  background-color: #000; }
+
+.blueUnit {
+  background-color: #84b5ff; }
+
+.darkBlueUnit {
+  background-color: #6388c0; }
+
+.redUnit {
+  background-color: #ef734a; }
+
+.darkRedUnit {
+  background-color: #b35637; }
+
+.armyGreen {
+  background-color: #94bd4a; }
+
+.gold {
+  background-color: #f7ef8e; }
+
+.lightYellow {
+  background-color: #ffef9c; }
+
+.gray {
+  background-color: #b5b59c; }
+
+.oliveDrab {
+  background-color: #739c73; }
+
+.kaki {
+  background-color: #dec684; }
+
+.lightGreen {
+  background-color: #b5ce73; }
+
+.lightBlue {
+  background-color: #c4d8e4; }
+
+.lightGray {
+  background-color: #d8dad6; }
+
+.brightGreen {
+  background-color: #7bde52; }
+
+.flesh {
+  background-color: #efc69c; }
+
+.brightRed {
+  background-color: #df5842; }
+
+.unit-desig {
+  font-size: 7px;
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  -webkit-transform: rotate(-90deg);
+  -webkit-transform-origin: center;
+  width: 30px;
+  text-align: center; }
+
+/*# sourceMappingURL=commonUnits.css.map */

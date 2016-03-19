@@ -1,0 +1,22 @@
+{
+    "Grunwald1410": {
+        "name": "Battle of Grunwald 1410",
+        "path": "Medieval",
+        "genre": "Medieval Games",
+        "fileName": "\\Wargame\\Medieval\\Grunwald1410\\Grunwald1410.php",
+        "description": "Old style combat",
+        "options":[
+          {
+            "name": "For of war during Deployment. Enemy units remain hidden until movement phase..",
+            "keyName":"fogDeploy",
+            "value": false
+          }
+        ],
+        "scenarios": {
+            "Main": {
+                "description": "Standard",
+                "longDescription":"in your face"
+            }
+        }
+    }
+}

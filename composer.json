@@ -1,0 +1,15 @@
+{
+    "name": "daverodal/Medieval",
+    "authors": [
+        {
+            "name": "daverodal",
+            "email": "dave.rodal@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload":{
+	"psr-4":{
+	    "Wargame\\Medieval\\": "Medieval"
+	    }
+	}
+}
