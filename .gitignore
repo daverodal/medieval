@@ -1,7 +1,7 @@
 /vendor
 /node_modules
 /.idea
-/.idea/workspace.xml
+.idea/workspace.xml
 .composer.lock
-/.idea/modules.xml
-/.idea/directories
+.idea/modules.xml
+.idea/directories
