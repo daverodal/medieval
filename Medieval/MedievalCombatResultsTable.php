@@ -51,22 +51,22 @@ class MedievalCombatResultsTable
         $this->crts->melee->header  = array("1:4", "1:3", "1:2", "1:1", "1.5:1", "2:1", "3:1", "4:1", "5:1", "6:1");
         $this->crts->melee->next = 'missile';
         $this->crts->melee->table = array(
-            array(AE, AE, AE, AR, AR, AR, DR, DR, DR, DR),
-            array(AE, AE, AE, AR, AR, AR, DR, DR, DR, DR),
-            array(AE, AE, AE, AR, AR, AR, DR, DR, DR, DR),
-            array(AE, AE, AE, AR, AR, AR, DR, DR, DR, DR),
-            array(AE, AE, AR, AR, AR, DR, DR, DR, DR, DE),
-            array(AE, AE, AR, AR, DR, DR, DR, DR, DE, DE),
-            array(AE, AE, NE, NE, DR, DR, EX, DE, DE, DE),
-            array(AE, AR, NE, DR, DR, EX, DE, DE, DE, DE),
-            array(AR, AR, DR, DR, EX, DE, DE, DE, DE, DE),
-            array(AR, AR, DR, DR, EX, DE, DE, DE, DE, DE),
-            array(AR, AR, DR, DR, EX, DE, DE, DE, DE, DE),
-            array(AR, AR, DR, DR, EX, DE, DE, DE, DE, DE),
-            array(AR, AR, DR, DR, EX, DE, DE, DE, DE, DE),
-            array(AR, AR, DR, DR, EX, DE, DE, DE, DE, DE),
-            array(AR, AR, DR, DR, EX, DE, DE, DE, DE, DE),
-            array(AR, AR, DR, DR, EX, DE, DE, DE, DE, DE),
+            array(AE,  AE,   AE,  ALF, ALR, AR, DR, DR, DR, DR),
+            array(AE,  AE,   AE,  ALR, AL, AR, DR, DR, DR, DR),
+            array(AE,  AE,   AE,  ALR, AL, AR, DR, DR, DR, DR),
+            array(AE,  AE,   AE,  ALR, AR, AR, DR, DR, DR, DR),
+            array(AE,  AE,   AR,  AR,  AR, DR, DR, DR, DR, DE),
+            array(AE,  AE,   AR,  AR,  NE, DR, DR, DR, DE, DE),
+            array(AE,  AE,   AE,  AR,  NE, DR, EX, DE, DE, DE),
+            array(AE,  AE,   AE,  NE,  BL, EX, DE, DE, DE, DE),
+            array(AE,  AE,   ALF, NE,  BL, DE, DE, DE, DE, DE),
+            array(AE,  AE,   ALF, NE,  DL, DE, DE, DE, DE, DE),
+            array(AE,  AE,   ALF, BL,  DL, DE, DE, DE, DE, DE),
+            array(AE,  ALF,  ALF, BL,  DLR, DE, DE, DE, DE, DE),
+            array(AE,  ALF,  ALF, DL,  DLR, DE, DE, DE, DE, DE),
+            array(ALF, ALF,  ALF, DL,  DLF, DE, DE, DE, DE, DE),
+            array(ALF, ALF,  NE,  DLR, DLF, DE, DE, DE, DE, DE),
+            array(ALF, ALF,  NE,  DLR, DEAL, DE, DE, DE, DE, DE),
         );
         $this->crts->missile = new stdClass();
         $this->crts->missile->header =  array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
@@ -92,7 +92,7 @@ class MedievalCombatResultsTable
 
         $this->combatIndexCount = 10;
         $this->maxCombatIndex = $this->combatIndexCount - 1;
-        $this->dieSideCount = 6;
+        $this->dieSideCount = 10;
         $this->combatResultCount = 5;
 
     }
@@ -100,10 +100,8 @@ class MedievalCombatResultsTable
     function getCombatResults(&$Die, $index, $combat)
     {
 //        $Die += $combat->dieShift;
-        $Die += 3;
 
-
-        return $this->crts->melee->table[$Die][$index];
+        return $this->crts->melee->table[$Die + 3 + $combat->dieOffset][$index];
     }
 
     function getCombatDisplay()

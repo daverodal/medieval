@@ -87,6 +87,8 @@ class MedievalLandBattle extends \Wargame\LandBattle
             $this->force = new Force();
             $this->terrain = new Terrain();
             $this->moveRules = new MoveRules($this->force, $this->terrain);
+            $this->moveRules->blockedRetreatDamages = true;
+            
 
             $this->combatRules = new CombatRules($this->force, $this->terrain);
             $this->gameRules = new GameRules($this->moveRules, $this->combatRules, $this->force);

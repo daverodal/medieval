@@ -167,6 +167,7 @@
                         newUnit.wrapperstyle.top = mapUnits[i].y-20+"px";
                         newUnit.wrapperstyle.left = mapUnits[i].x-20+"px";
                         newUnit.facing = mapUnits[i].facing;
+                        newUnit.strength = mapUnits[i].strength;
                         gameUnits[i] = newUnit;
                     }
                     if(mapUnits[i].parent === 'deployBox'){
@@ -352,7 +353,6 @@
                     }
                     if(status){
                         showStatus = true;
-                        debugger;
 
                         var x = $scope.mapUnits[i].wrapperstyle.left.replace(/px/,'');
                         var y = $scope.mapUnits[i].wrapperstyle.top.replace(/px/,'');
@@ -390,7 +390,6 @@
                             DR.$floatMessagePanZoom.panzoom('reset');
 //                            $("#floatMessage").css('top',y+"px");
 //                            $("#floatMessage").css('left',x+"px");
-                            debugger;
                             $scope.floatMessage.top = y+"px";
                             $scope.floatMessage.left = x+"px";
 
@@ -707,7 +706,7 @@
                                     }
                                 }
 
-                                $scope.topCrt.crts[crtName].combatRoll  = combatRoll;
+                                $scope.topCrt.crts[crtName].combatRoll  = combatRoll + combatRules.lastResolvedCombat.dieOffset + 2;
 
                             if(combatRules.lastResolvedCombat.useAlt){
 //                                showCrtTable($('#cavalryTable'));
@@ -824,8 +823,8 @@
                                 idx = combatRules.resolvedCombats[i].index + 1;
                                 newLine = "";
                                 if(combatRules.resolvedCombats[i].Die){
-                                    var x = $("#" + cD).css('left').replace(/px/, "");
-                                    var mapWidth = $("body").css('width').replace(/px/, "");
+//                                    var x = $("#" + cD).css('left').replace(/px/, "");
+//                                    var mapWidth = $("body").css('width').replace(/px/, "");
                                 }
                                 var oddsDisp = $(".col" + combatCol).html()
                                 newLine += " Attack = " + atkDisp + " / Defender " + def + atk / def + "<br>odds = " + Math.floor(atk / def) + " : 1<br>Coooooombined Arms Shift " + ter + " = " + oddsDisp + "<br>";

@@ -73,25 +73,31 @@ class Grunwald1410 extends MedievalLandBattle
         }
         /* Loyalists units */
         for($i = 0;$i < 10;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", "multiGor.png", 7, 7, 4,1,  STATUS_CAN_DEPLOY, "F", 1, "loyalist", 'cavalry',1, 0, 'K');
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", "multiGor.png", 7, 7, 4,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'K');
 
         }
         for($i = 0;$i < 9;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", "multiGor.png", 6, 6, 5,1,  STATUS_CAN_DEPLOY, "F", 1, "loyalist", 'cavalry',1, 0, 'H');
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", "multiGor.png", 6, 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'H');
 
         }
 
         for($i = 0;$i < 6;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", "multiGor.png", 5, 5, 4,1,  STATUS_CAN_DEPLOY, "F", 1, "loyalist", 'inf',1, 0, 'M');
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", "multiGor.png", 5, 5, 3,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M');
 
         }
 
-        UnitFactory::create("lll", TEUTONIC_FORCE, 'deployBox', "multiGor.png", $baseValue, $baseValue, 4,1,  STATUS_CAN_DEPLOY, "F", 1, "rebel", 'inf',1, 0, 'M');
-        UnitFactory::create("lll", TEUTONIC_FORCE, 304, "multiGor.png", $baseValue, $baseValue, 4,1,  STATUS_READY, "F", 1, "rebel", 'inf',1, 0, 'H');
+        for($i = 0;$i < 10;$i++) {
+            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox", "multiGor.png", 8, 8, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'cavalry',1, 3, 'K');
 
-        UnitFactory::create("lll", TEUTONIC_FORCE, 305, "multiGor.png", $baseValue, $baseValue, 4,1,  STATUS_READY, "F", 1, "rebel", 'inf',1, 0, 'K');
-        UnitFactory::create("lll", POLISH_FORCE, 507, "multiGor.png", $baseValue, $baseValue, 4,1,  STATUS_READY, "F", 1, "loyalist", 'inf',1, 0, 'L');
+        }
+        for($i = 0;$i < 6;$i++) {
+            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox", "multiGor.png", 6, 6, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'cavalry',1, 3, 'K');
 
+        }
+        for($i = 0;$i < 4;$i++) {
+            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox", "multiGor.png", 6, 6, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'inf',1, 3, 'H');
+
+        }
     }
 
     public static function myName(){

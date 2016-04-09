@@ -35,6 +35,9 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public $strength;
     public $defStrength;
     public $range;
+    public $steps;
+    public $origSteps;
+    public $origStrength;
 
 
     public function jsonSerialize()
@@ -52,7 +55,20 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
 
     public function getUnmodifiedStrength(){
-        return  $this->origStrength;
+
+        $strength = $this->origStrength;
+        $stepsLost = $this->origSteps - $this->steps;
+
+        for($i = 0; $i < $stepsLost; $i++){
+            $strength = floor($strength / 2);
+        }
+
+        /* TODO: ask lance about edge cases here */
+        if($strength < 1){
+            $strength = 1;
+        }
+
+        return  $strength;
     }
 
 
@@ -63,24 +79,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         if ($name !== "range" && $name !== "strength" && $name !== "torpedoStrength" && $name !== "attStrength" && $name !== "defStrength") {
             return false;
         }
-        if($name === "range") {
-            if ($b->gameRules->phase == BLUE_TORP_COMBAT_PHASE || $b->gameRules->phase == RED_TORP_COMBAT_PHASE) {
-                if ($this->nationality === "ijn") {
-                    return 7;
-                } else {
-                    return 3;
-                }
-            }else{
-                return $this->gunRange;
-            }
-        }
-        $strength = $this->origStrength;
-
-
-        if($name === "strength" && ($b->gameRules->phase == BLUE_TORP_COMBAT_PHASE || $b->gameRules->phase == RED_TORP_COMBAT_PHASE)){
-            $strength = $this->torpedoStrength;
-        }
-
+        $strength = $this->getUnmodifiedStrength();
 
         foreach ($this->adjustments as $adjustment) {
             switch ($adjustment) {
@@ -127,6 +126,12 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
         $this->hexagon = new Hexagon($unitHexagon);
         $this->strength  = $strength;
+        $this->steps = 2;
+        if($strength >= 6){
+            $this->steps = 3;
+        }
+        $this->origStrength = $strength;
+        $this->origSteps = $this->steps;
 
 
         $battle = Battle::getBattle();
@@ -165,75 +170,29 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     function eliminate(){
     }
 
-    function damageUnit($result = false)
+    function damageUnit($kill = false)
     {
         $battle = Battle::getBattle();
 
-        switch($result){
-//            case P:
-//                $this->pDamage++;
-//                if($this->pDamage == 1){
-//                    $this->maxMove = floor($this->maxMove/2);
-//                }
-//                if($this->pDamage > 1){
-//                    $this->maxMove = 0;
-//                }
-//                $this->hits++;
-//                break;
-//            case W:
-//                $Die = rand(1,6);
-//                if($Die <=2){
-//                    $this->startFire();
-//                }
-//                $this->wDamage++;
-//                if($this->wDamage == 1){
-//                    $this->origStrength /= 2;
-//                    $this->torpedoStrength /= 2;
-//                }
-//                if($this->wDamage > 1){
-//                    $this->origStrength = 0;
-//                    $this->torpedoStrength = 0;
-//                }
-//                $this->hits++;
-//                break;
-//            case PW:
-//                $Die = rand(1,6);
-//                if($Die <=2){
-//                    $this->startFire();
-//                }
-//                $this->wDamage++;
-//                $this->pDamage++;
-//                $this->hits += 2;
-//                if($this->pDamage == 1){
-//                    $this->maxMove = floor($this->maxMove/2);
-//                }
-//                if($this->pDamage > 1){
-//                    $this->maxMove = 0;
-//                }
-//                if($this->wDamage == 1){
-//                    $this->origStrength /= 2;
-//                    $this->torpedoStrength /= 2;
-//                }
-//                if($this->wDamage > 1){
-//                    $this->origStrength = 0;
-//                    $this->torpedoStrength = 0;
-//                }
-//                break;
-//            case P2:
-//                $this->pDamage += 2;
-//                $this->hits += 2;
-//                $this->maxMove = 0;
-//                break;
-//            case S:
-//                $this->hits = 3;
-//                break;
+        if ($this->steps === 1 || $kill) {
+
+            $this->status = STATUS_ELIMINATING;
+            $this->exchangeAmount = $this->getUnmodifiedStrength();
+            $this->defExchangeAmount = $this->getUnmodifiedStrength();
+            return true;
+        } else {
+
+
+            $before = $this->getUnmodifiedStrength();
+            $this->steps--;
+            $after = $this->getUnmodifiedStrength();
+            $this->damage = $before - $after;
+            $battle->victory->reduceUnit($this);
+            $this->exchangeAmount = $this->damage;
+            $this->defExchangeAmount = $this->damage;
         }
-
-
-        $battle->victory->scoreHit($this);
         return false;
     }
-
     function __construct($data = null)
     {
         if ($data) {
@@ -256,7 +215,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $mapUnit->parent = $this->hexagon->parent;
         $mapUnit->moveAmountUsed = $this->moveAmountUsed;
         $mapUnit->maxMove = $this->maxMove;
-        $mapUnit->strength = $this->strength;
+        $mapUnit->strength = $this->getUnmodifiedStrength();
         $mapUnit->class = $this->class;
         $mapUnit->id = $this->id;
         $mapUnit->defenseStrength = $this->defStrength;

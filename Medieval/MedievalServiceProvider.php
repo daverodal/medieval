@@ -15,6 +15,7 @@ class MedievalServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/Grunwald1410/all.css' => public_path('vendor/wargame/medieval/grunwald1410/css/all.css'),
+            __DIR__.'/Grunwald1410/all.css.map' => public_path('vendor/wargame/medieval/grunwald1410/css/all.css.map'),
             __DIR__.'/Grunwald1410/Images' => public_path('vendor/wargame/medieval/grunwald1410/images'),
 
         ], 'css');
