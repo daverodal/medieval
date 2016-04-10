@@ -19,14 +19,12 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 @import "grunwaldColors";
+/*df5842*/
 
-
-@include unitColor(rebel, orange, rebel);
-@include headerColor(Teutonic-Order, orange, orange);
-@include headerColor(Kingdom-of-Poland, powderblue, powderblue);
-@include unitColor(loyalist, powderblue, French);
-@include unitColor(rebel, red, Brit);
-
+@include headerColor(Teutonic-Order, #c0c0c0, gray);
+@include headerColor(Kingdom-of-Poland, #FFA99B, red);
+@include unitColor(loyalist,#FFA99B,  Brit, red );
+@include unitColor(teutonic, white, TeutonicAnti, black, white, black);
 
 #map {
 }
@@ -136,4 +134,8 @@
   border:0px;
   transform: rotate(180deg);
 }
-
+.unit-steps{
+  margin-top:-11px;
+  font-size:16px;
+  text-align:center;
+}

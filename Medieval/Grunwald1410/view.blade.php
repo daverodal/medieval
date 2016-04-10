@@ -64,6 +64,7 @@
                 <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
 
                 <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
+                <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
 
             </div>
         </div>
@@ -84,6 +85,8 @@
         <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
 
         <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
+        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+
 
     </div>
     </div>
@@ -94,6 +97,7 @@
         </div>
         <div class="range">@{{ unit.armorClass }}</div>
         <div class="unit-numbers">@{{ unit.strength }} - @{{ unit.pointsLeft }}</div>
+        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
 
     </div>
 
@@ -168,10 +172,12 @@
                         newUnit.wrapperstyle.left = mapUnits[i].x-20+"px";
                         newUnit.facing = mapUnits[i].facing;
                         newUnit.strength = mapUnits[i].strength;
+                        newUnit.steps = mapUnits[i].steps;
                         gameUnits[i] = newUnit;
                     }
                     if(mapUnits[i].parent === 'deployBox'){
                         newUnit.style = {float:'left'};
+                        newUnit.strength = mapUnits[i].strength;
                         if(mapUnits[i].status == <?=STATUS_DEPLOYING?>){
                             newUnit.style.boxShadow = "5px 5px 5px #333";
                         }

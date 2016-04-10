@@ -147,7 +147,7 @@
             @section('unit-boxes')
             <div class="unit-wrapper" id="deployWrapper">
                 <div class="close">X</div>
-                <div style="margin-right:3px;" class="left">Deploy/Staging area</div>
+                <div style="margin-right:3px;" class="deploy-label left">Deploy/Staging area</div>
                 @section('outer-deploy-box')
                 <div id="deployBox"></div>
                 @show

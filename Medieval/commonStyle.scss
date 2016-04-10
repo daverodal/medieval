@@ -1122,12 +1122,15 @@ svg {
   text-align: left;
   font-family: sans-serif;
   font-size: 1.2em;
-  color: white;
   border-radius: 10px;
   border: 10px solid #555;
   background: #999;
   margin-bottom: 5px;
   position: relative;
+  .close, .deploy-label{
+    color:white;
+  }
+;
 }
 #gameImages .a-unit-wrapper{
   position:absolute;

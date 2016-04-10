@@ -942,12 +942,13 @@ svg marker#head {
   text-align: left;
   font-family: sans-serif;
   font-size: 1.2em;
-  color: white;
   border-radius: 10px;
   border: 10px solid #555;
   background: #999;
   margin-bottom: 5px;
   position: relative; }
+  .unit-wrapper .close, .unit-wrapper .deploy-label {
+    color: white; }
 
 #gameImages .a-unit-wrapper {
   position: absolute;
@@ -992,30 +993,6 @@ svg marker#head {
   right: 4px;
   top: 0px;
   font-size: 12px; }
-
-.playerrebel {
-  background: #df5842;
-  border-color: #df5842 !important; }
-
-.rebelFace, .playerrebelFace {
-  color: #df5842; }
-
-.rebel {
-  background-color: #df5842; }
-  .rebel .unit-desig {
-    color: white; }
-
-.playerloyalist {
-  background: #84b5ff;
-  border-color: #84b5ff !important; }
-
-.loyalistFace, .playerloyalistFace {
-  color: #84b5ff; }
-
-.loyalist {
-  background-color: #84b5ff; }
-  .loyalist .unit-desig {
-    color: white; }
 
 .shadow-wrapper {
   position: relative; }
@@ -1265,107 +1242,46 @@ svg marker#head {
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-.rebel .counterWrapper {
-  background-color: orange; }
-
-.vintage.rebel.inf .counterWrapper .counter {
-  background-image: url("/js/rebelInfBadge.png");
-  background-size: 19px; }
-.vintage.rebel.cavalry .counterWrapper .counter {
-  background-image: url("/js/rebelCavBadge.png");
-  background-size: 19px; }
-.vintage.rebel.artillery .counterWrapper .counter {
-  background-image: url("/js/rebelArtBadge.png");
-  background-size: 19px; }
-.vintage.rebel.horseartillery .counterWrapper .counter {
-  background-image: url("/js/rebelHorArtBadge.png");
-  background-size: 19px; }
-.vintage.rebel.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
-  background-size: 19px; }
-.vintage.rebel.pontoon .counterWrapper {
-  border: none; }
-  .vintage.rebel.pontoon .counterWrapper .counter {
-    background-color: lightgreen;
-    background-image: url("/js/rebelPontoon.png");
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-    border: none; }
-.vintage.rebel.pontoon .unit-numbers {
-  display: none; }
-
-.counterWrapper .counter {
-  height: 14px;
-  background-repeat: no-repeat;
-  border-bottom: 1px solid black; }
-
-.rebel.inf .counterWrapper .counter {
-  background-image: url("/js/rebelInfBadge.png");
-  background-size: 14px; }
-
-.rebel.cavalry .counterWrapper .counter {
-  background-image: url("/js/rebelCavBadge.png");
-  background-size: 14px; }
-
-.rebel.artillery .counterWrapper .counter {
-  background-image: url("/js/rebelArtBadge.png");
-  background-size: 14px; }
-
-.rebel.horseartillery .counterWrapper .counter {
-  background-image: url("/js/rebelHorArtBadge.png");
-  background-size: 14px; }
-
-.rebel.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
-  background-size: 14px; }
-
-.rebel.wagon .counterWrapper .counter {
-  background-image: url("/js/Wagon.png");
-  background-size: 14px; }
-
-.rebel.pontoon .counterWrapper {
-  border: none; }
-  .rebel.pontoon .counterWrapper .counter {
-    background-color: lightgreen;
-    background-image: url("/js/rebelPontoon.png");
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-    border: none; }
-.rebel.pontoon .unit-numbers {
-  display: none; }
-
+/*df5842*/
 .playerTeutonic-Order {
-  background: orange;
-  border-color: orange !important; }
+  color: inherit;
+  background: #c0c0c0;
+  border-color: #c0c0c0 !important; }
+  .playerTeutonic-Order #statusWrapper {
+    color: black; }
 
 .Teutonic-OrderFace, .playerTeutonic-OrderFace {
-  color: orange; }
+  color: gray; }
 
 .playerKingdom-of-Poland {
-  background: powderblue;
-  border-color: powderblue !important; }
+  color: inherit;
+  background: #FFA99B;
+  border-color: #FFA99B !important; }
+  .playerKingdom-of-Poland #statusWrapper {
+    color: black; }
 
 .Kingdom-of-PolandFace, .playerKingdom-of-PolandFace {
-  color: powderblue; }
+  color: red; }
 
-.loyalist .counterWrapper {
-  background-color: powderblue; }
+.loyalist {
+  color: black;
+  background-color: #FFA99B; }
+  .loyalist .counterWrapper {
+    background-color: red; }
+  .loyalist .unit-steps, .loyalist .unit-numbers {
+    color: black; }
 
 .vintage.loyalist.inf .counterWrapper .counter {
-  background-image: url("/js/FrenchInfBadge.png");
+  background-image: url("/js/BritInfBadge.png");
   background-size: 19px; }
 .vintage.loyalist.cavalry .counterWrapper .counter {
-  background-image: url("/js/FrenchCavBadge.png");
+  background-image: url("/js/BritCavBadge.png");
   background-size: 19px; }
 .vintage.loyalist.artillery .counterWrapper .counter {
-  background-image: url("/js/FrenchArtBadge.png");
+  background-image: url("/js/BritArtBadge.png");
   background-size: 19px; }
 .vintage.loyalist.horseartillery .counterWrapper .counter {
-  background-image: url("/js/FrenchHorArtBadge.png");
+  background-image: url("/js/BritHorArtBadge.png");
   background-size: 19px; }
 .vintage.loyalist.hq .counterWrapper .counter {
   background-color: lightgreen;
@@ -1375,7 +1291,7 @@ svg marker#head {
   border: none; }
   .vintage.loyalist.pontoon .counterWrapper .counter {
     background-color: lightgreen;
-    background-image: url("/js/FrenchPontoon.png");
+    background-image: url("/js/BritPontoon.png");
     background-size: 32px;
     width: 32px;
     height: 32px;
@@ -1383,25 +1299,25 @@ svg marker#head {
 .vintage.loyalist.pontoon .unit-numbers {
   display: none; }
 
-.counterWrapper .counter {
+.loyalist .counterWrapper .counter {
   height: 14px;
   background-repeat: no-repeat;
   border-bottom: 1px solid black; }
 
 .loyalist.inf .counterWrapper .counter {
-  background-image: url("/js/FrenchInfBadge.png");
+  background-image: url("/js/BritInfBadge.png");
   background-size: 14px; }
 
 .loyalist.cavalry .counterWrapper .counter {
-  background-image: url("/js/FrenchCavBadge.png");
+  background-image: url("/js/BritCavBadge.png");
   background-size: 14px; }
 
 .loyalist.artillery .counterWrapper .counter {
-  background-image: url("/js/FrenchArtBadge.png");
+  background-image: url("/js/BritArtBadge.png");
   background-size: 14px; }
 
 .loyalist.horseartillery .counterWrapper .counter {
-  background-image: url("/js/FrenchHorArtBadge.png");
+  background-image: url("/js/BritHorArtBadge.png");
   background-size: 14px; }
 
 .loyalist.hq .counterWrapper .counter {
@@ -1417,7 +1333,7 @@ svg marker#head {
   border: none; }
   .loyalist.pontoon .counterWrapper .counter {
     background-color: lightgreen;
-    background-image: url("/js/FrenchPontoon.png");
+    background-image: url("/js/BritPontoon.png");
     background-size: 32px;
     width: 32px;
     height: 32px;
@@ -1425,77 +1341,82 @@ svg marker#head {
 .loyalist.pontoon .unit-numbers {
   display: none; }
 
-.rebel .counterWrapper {
-  background-color: red; }
+.teutonic {
+  color: white;
+  background-color: white; }
+  .teutonic .counterWrapper {
+    background-color: black; }
+  .teutonic .unit-steps, .teutonic .unit-numbers {
+    color: black; }
 
-.vintage.rebel.inf .counterWrapper .counter {
-  background-image: url("/js/BritInfBadge.png");
+.vintage.teutonic.inf .counterWrapper .counter {
+  background-image: url("/js/TeutonicAntiInfBadge.png");
   background-size: 19px; }
-.vintage.rebel.cavalry .counterWrapper .counter {
-  background-image: url("/js/BritCavBadge.png");
+.vintage.teutonic.cavalry .counterWrapper .counter {
+  background-image: url("/js/TeutonicAntiCavBadge.png");
   background-size: 19px; }
-.vintage.rebel.artillery .counterWrapper .counter {
-  background-image: url("/js/BritArtBadge.png");
+.vintage.teutonic.artillery .counterWrapper .counter {
+  background-image: url("/js/TeutonicAntiArtBadge.png");
   background-size: 19px; }
-.vintage.rebel.horseartillery .counterWrapper .counter {
-  background-image: url("/js/BritHorArtBadge.png");
+.vintage.teutonic.horseartillery .counterWrapper .counter {
+  background-image: url("/js/TeutonicAntiHorArtBadge.png");
   background-size: 19px; }
-.vintage.rebel.hq .counterWrapper .counter {
+.vintage.teutonic.hq .counterWrapper .counter {
   background-color: lightgreen;
   background-image: url("/js/HQBadge.png");
   background-size: 19px; }
-.vintage.rebel.pontoon .counterWrapper {
+.vintage.teutonic.pontoon .counterWrapper {
   border: none; }
-  .vintage.rebel.pontoon .counterWrapper .counter {
+  .vintage.teutonic.pontoon .counterWrapper .counter {
     background-color: lightgreen;
-    background-image: url("/js/BritPontoon.png");
+    background-image: url("/js/TeutonicAntiPontoon.png");
     background-size: 32px;
     width: 32px;
     height: 32px;
     border: none; }
-.vintage.rebel.pontoon .unit-numbers {
+.vintage.teutonic.pontoon .unit-numbers {
   display: none; }
 
-.counterWrapper .counter {
+.teutonic .counterWrapper .counter {
   height: 14px;
   background-repeat: no-repeat;
-  border-bottom: 1px solid black; }
+  border-bottom: 1px solid white; }
 
-.rebel.inf .counterWrapper .counter {
-  background-image: url("/js/BritInfBadge.png");
+.teutonic.inf .counterWrapper .counter {
+  background-image: url("/js/TeutonicAntiInfBadge.png");
   background-size: 14px; }
 
-.rebel.cavalry .counterWrapper .counter {
-  background-image: url("/js/BritCavBadge.png");
+.teutonic.cavalry .counterWrapper .counter {
+  background-image: url("/js/TeutonicAntiCavBadge.png");
   background-size: 14px; }
 
-.rebel.artillery .counterWrapper .counter {
-  background-image: url("/js/BritArtBadge.png");
+.teutonic.artillery .counterWrapper .counter {
+  background-image: url("/js/TeutonicAntiArtBadge.png");
   background-size: 14px; }
 
-.rebel.horseartillery .counterWrapper .counter {
-  background-image: url("/js/BritHorArtBadge.png");
+.teutonic.horseartillery .counterWrapper .counter {
+  background-image: url("/js/TeutonicAntiHorArtBadge.png");
   background-size: 14px; }
 
-.rebel.hq .counterWrapper .counter {
+.teutonic.hq .counterWrapper .counter {
   background-color: lightgreen;
   background-image: url("/js/HQBadge.png");
   background-size: 14px; }
 
-.rebel.wagon .counterWrapper .counter {
+.teutonic.wagon .counterWrapper .counter {
   background-image: url("/js/Wagon.png");
   background-size: 14px; }
 
-.rebel.pontoon .counterWrapper {
+.teutonic.pontoon .counterWrapper {
   border: none; }
-  .rebel.pontoon .counterWrapper .counter {
+  .teutonic.pontoon .counterWrapper .counter {
     background-color: lightgreen;
-    background-image: url("/js/BritPontoon.png");
+    background-image: url("/js/TeutonicAntiPontoon.png");
     background-size: 32px;
     width: 32px;
     height: 32px;
     border: none; }
-.rebel.pontoon .unit-numbers {
+.teutonic.pontoon .unit-numbers {
   display: none; }
 
 #crt {
@@ -1574,5 +1495,10 @@ svg marker#head {
   border-radius: 0px;
   border: 0px;
   transform: rotate(180deg); }
+
+.unit-steps {
+  margin-top: -11px;
+  font-size: 16px;
+  text-align: center; }
 
 /*# sourceMappingURL=all.css.map */

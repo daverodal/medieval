@@ -71,7 +71,7 @@ class Grunwald1410 extends MedievalLandBattle
         if(!empty($scenario->strongerLoyalist)){
             $baseValue = 7;
         }
-        /* Loyalists units */
+
         for($i = 0;$i < 10;$i++){
             UnitFactory::create("lll", POLISH_FORCE, "deployBox", "multiGor.png", 7, 7, 4,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'K');
 
@@ -87,15 +87,15 @@ class Grunwald1410 extends MedievalLandBattle
         }
 
         for($i = 0;$i < 10;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox", "multiGor.png", 8, 8, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'cavalry',1, 3, 'K');
+            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox", "multiGor.png", 8, 8, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'cavalry',1, 3, 'K');
 
         }
         for($i = 0;$i < 6;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox", "multiGor.png", 6, 6, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'cavalry',1, 3, 'K');
+            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox", "multiGor.png", 6, 6, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'cavalry',1, 3, 'K');
 
         }
         for($i = 0;$i < 4;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox", "multiGor.png", 6, 6, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'inf',1, 3, 'H');
+            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox", "multiGor.png", 6, 6, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'inf',1, 3, 'H');
 
         }
     }
@@ -123,7 +123,9 @@ class Grunwald1410 extends MedievalLandBattle
 //            $this->moveRules = new MoveRules($this->force, $this->terrain);
             $this->moveRules->enterZoc = "stop";
             $this->moveRules->exitZoc = 0;
-            $this->moveRules->noZocZocOneHex = false;
+            $this->moveRules->noZocZocOneHex = true;
+            $this->moveRules->noZocZoc = true;
+            $this->moveRules->retreatCannotOverstack = true;
             // game data
             $this->gameRules->setMaxTurn(7);
             $this->gameRules->setInitialPhaseMode(RED_DEPLOY_PHASE, DEPLOY_MODE);

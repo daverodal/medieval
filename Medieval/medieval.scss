@@ -58,7 +58,7 @@ $vintage-unit-numbers-size:10px;
 
 }
 
-@mixin badge($nationality, $shortName) {
+@mixin badge($nationality, $shortName, $borderColor: black) {
   .vintage{
 
     &.#{$nationality}.inf .counterWrapper .counter {
@@ -101,10 +101,10 @@ $vintage-unit-numbers-size:10px;
       }
     }
   }
-  .counterWrapper .counter {
+  .#{$nationality} .counterWrapper .counter {
     height:$badge-size;
     background-repeat:no-repeat;
-    border-bottom:1px solid black;
+    border-bottom:1px solid $borderColor;
   }
   .#{$nationality}.inf .counterWrapper .counter {
     background-image: url('/js/#{$shortName}InfBadge.png');
@@ -153,8 +153,7 @@ $vintage-unit-numbers-size:10px;
   }
 }
 
-@include player(rebel, One, rgb(223, 88, 66));
-@include player(loyalist, Two, rgb(132, 181, 255));
+
 
 .shadow-wrapper{
   position:relative;
@@ -219,17 +218,29 @@ $vintage-unit-numbers-size:10px;
 
 
 
-@mixin unitColor($nationality, $color, $shortName) {
-  .#{$nationality} .counterWrapper {
-    background-color: $color;
+@mixin unitColor($nationality, $background,  $shortName, $cwBackground: $background, $color: black, $unColor: $color) {
+
+  .#{$nationality} {
+    color: $color;
+    background-color: $background;
+    .counterWrapper{
+      background-color:$cwBackground;
+    }
+    .unit-steps, .unit-numbers{
+      color:$unColor;
+    }
   }
-  @include badge($nationality, $shortName);
+  @include badge($nationality, $shortName, $color);
 }
 
-@mixin headerColor($nationality, $color, $faceColor: $color){
+@mixin headerColor($nationality, $color, $faceColor: $color, $labelColor: inherit){
   .player#{$nationality}{
+    color: $labelColor;
     background:$color;
     border-color:$color !important;
+    #statusWrapper{
+      color:black;
+    }
   }
   .#{$nationality}Face, .player#{$nationality}Face{
     color:$faceColor;

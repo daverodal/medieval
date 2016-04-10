@@ -32,7 +32,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public $armorClass;
     /* battle ready, reserve, disorganized */
     public $orgStatus;
-    public $strength;
+    protected $strength;
     public $defStrength;
     public $range;
     public $steps;
@@ -76,7 +76,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     {
 
         $b = Battle::getBattle();
-        if ($name !== "range" && $name !== "strength" && $name !== "torpedoStrength" && $name !== "attStrength" && $name !== "defStrength") {
+        if ($name !== "range" && $name !== "strength" && $name !== "meleeStrength" && $name !== "attStrength" && $name !== "defStrength") {
             return false;
         }
         $strength = $this->getUnmodifiedStrength();
@@ -227,6 +227,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $mapUnit->forceId = $this->forceId;
         $mapUnit->orgStatus = $this->orgStatus;
         $mapUnit->armorClass = $this->armorClass;
+        $mapUnit->steps = $this->steps;
         return $mapUnit;
     }
 
