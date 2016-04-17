@@ -76,7 +76,7 @@
                         @include('wargame::stdIncludes.inner-crt',['topCrt'=> new \Wargame\TMCW\CombatResultsTable()])
                     @show
 
-                    <div ng-click="toggleDetails()" id="ccrtDetailsButton">details</div>
+                    <div ng-click="toggleDetails()" id="angCrtDetailsButton">details</div>
                 </div>
             </div>
             @include("wargame::stdIncludes.timeTravel")

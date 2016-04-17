@@ -768,7 +768,7 @@ fieldset {
   max-height: 500px;
   overflow: auto; }
 
-#crtDetailsButton {
+#angCrtDetailsButton {
   font-size: 20px;
   cursor: pointer; }
 
@@ -1420,9 +1420,11 @@ svg marker#head {
   display: none; }
 
 #crt {
-  width: 479px; }
+  width: 521px; }
   #crt .crt-table-name {
     display: none; }
+  #crt span {
+    width: 36px; }
 
 .reduced {
   color: white; }

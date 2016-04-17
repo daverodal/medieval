@@ -55,16 +55,16 @@ class MedievalCombatResultsTable
             array(AE,  AE,   AE,  ALR, AL, AR, DR, DR, DR, DR),
             array(AE,  AE,   AE,  ALR, AL, AR, DR, DR, DR, DR),
             array(AE,  AE,   AE,  ALR, AR, AR, DR, DR, DR, DR),
-            array(AE,  AE,   AR,  AR,  AR, DR, DR, DR, DR, DE),
-            array(AE,  AE,   AR,  AR,  NE, DR, DR, DR, DE, DE),
-            array(AE,  AE,   AE,  AR,  NE, DR, EX, DE, DE, DE),
-            array(AE,  AE,   AE,  NE,  BL, EX, DE, DE, DE, DE),
-            array(AE,  AE,   ALF, NE,  BL, DE, DE, DE, DE, DE),
-            array(AE,  AE,   ALF, NE,  DL, DE, DE, DE, DE, DE),
-            array(AE,  AE,   ALF, BL,  DL, DE, DE, DE, DE, DE),
-            array(AE,  ALF,  ALF, BL,  DLR, DE, DE, DE, DE, DE),
-            array(AE,  ALF,  ALF, DL,  DLR, DE, DE, DE, DE, DE),
-            array(ALF, ALF,  ALF, DL,  DLF, DE, DE, DE, DE, DE),
+            array(AE,  AE,   AE,  AR,  AR, DR, DR, DR, DR, DE),
+            array(AE,  AE,   DL2R,  AR,  NE, DR, DR, DR, DE, DE),
+            array(AE,  AE,   AL,  AR,  NE, DR, EX, DE, DE, DE),
+            array(AE,  AE,   AL,  NE,  BL, DLR, DE, DE, DE, DE),
+            array(AE,  AE,   ALF, NE,  BL, DLR, DE, DE, DE, DE),
+            array(AE,  AE,   ALF, NE,  DL, DL2R, DE, DE, DE, DE),
+            array(AE,  AE,   ALF, BL,  DL, DL2R, DE, DE, DE, DE),
+            array(AE,  ALF,  ALF, BL,  DLR, DL2R, DE, DE, DE, DE),
+            array(AE,  ALF,  ALF, DL,  DLR, DL2R, DE, DE, DE, DE),
+            array(ALF, ALF,  ALF, DL,  DLF, DL2R, DE, DE, DE, DE),
             array(ALF, ALF,  NE,  DLR, DLF, DE, DE, DE, DE, DE),
             array(ALF, ALF,  NE,  DLR, DEAL, DE, DE, DE, DE, DE),
         );
@@ -257,7 +257,7 @@ class MedievalCombatResultsTable
             }
 
             if ($unit->class == "infantry") {
-                $combinedArms[$battle->force->units[$attackerId]->class]++;
+//                $combinedArms[$battle->force->units[$attackerId]->class]++;
                 $combatLog .= "$unitStrength Infantry ";
                 if(!empty($scenario->jagersdorfCombat)){
                     if ($unit->nationality == "Prussian" && $isClear && !$acrossRiver) {
@@ -319,7 +319,7 @@ class MedievalCombatResultsTable
                     $unitStrength -= 1;
                     $combatLog .= "unit strength -1 for $terrainReason ";
                     if($unit->nationality != "Beluchi" && $unit->nationality != "Sikh"){
-                        $combinedArms[$battle->force->units[$attackerId]->class]++;
+//                        $combinedArms[$battle->force->units[$attackerId]->class]++;
                     }else{
                         $combatLog .= "no combined arms bonus for ".$unit->nationality." cavalry";
                     }
@@ -329,7 +329,7 @@ class MedievalCombatResultsTable
                         $combatLog .= "+1 for attack into clear ";
                     }
                     if($unit->nationality != "Beluchi" && $unit->nationality != "Sikh"){
-                        $combinedArms[$battle->force->units[$attackerId]->class]++;
+//                        $combinedArms[$battle->force->units[$attackerId]->class]++;
                     }else{
                         $combatLog .= "no combined arms bonus for ".$unit->nationality." cavalry";
                     }
@@ -356,7 +356,7 @@ class MedievalCombatResultsTable
                     $class = 'artillery';
                 }
                 if($unit->nationality != "Beluchi"){
-                    $combinedArms[$class]++;
+//                    $combinedArms[$class]++;
                 }else{
                     $combatLog .= "no combined arms bonus for Beluchi";
                 }
@@ -442,12 +442,12 @@ class MedievalCombatResultsTable
         $combatLog .= " = $defenseStrength";
         $armsShift = 0;
         if ($attackStrength >= $defenseStrength) {
-            foreach($combinedArms as $arms){
-                if($arms > 0){
-                    $armsShift++;
-                }
-            }
-            $armsShift--;
+//            foreach($combinedArms as $arms){
+//                if($arms > 0){
+//                    $armsShift++;
+//                }
+//            }
+//            $armsShift--;
         }
 
         if ($armsShift < 0) {
@@ -480,11 +480,7 @@ class MedievalCombatResultsTable
         }
         $combats->index = $combatIndex;
         $combats->useAlt = false;
-        if ($defendersAllCav && !$attackersCav) {
-            $combats->useAlt = true;
-            $combats->useDetermined = false;
-            $combatLog .= "using cavalry table ";
-        }
+        $combats->useDetermined = false;
         $combats->combatLog = $combatLog;
     }
 
