@@ -88,20 +88,20 @@ class VictoryCore extends \Wargame\TMCW\victoryCore
         $unit = $args[0];
 
         $vp = $unit->damage;
-
-        if ($unit->forceId == 1) {
-            $victorId = 2;
-            $this->victoryPoints[$victorId] += $vp;
-            $hex = $unit->hexagon;
-            $battle = Battle::getBattle();
-            $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='loyalistVictoryPoints'>+$vp vp</span>";
-        } else {
-            $victorId = 1;
-            $hex  = $unit->hexagon;
-            $battle = Battle::getBattle();
-            $battle->mapData->specialHexesVictory->{$hex->name} = "+$vp vp";
-            $this->victoryPoints[$victorId] += $vp;
-        }
+//
+//        if ($unit->forceId == 1) {
+//            $victorId = 2;
+//            $this->victoryPoints[$victorId] += $vp;
+//            $hex = $unit->hexagon;
+//            $battle = Battle::getBattle();
+//            $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='loyalistVictoryPoints'>+$vp vp</span>";
+//        } else {
+//            $victorId = 1;
+//            $hex  = $unit->hexagon;
+//            $battle = Battle::getBattle();
+//            $battle->mapData->specialHexesVictory->{$hex->name} = "+$vp vp";
+//            $this->victoryPoints[$victorId] += $vp;
+//        }
     }
 
     public function incrementTurn()
