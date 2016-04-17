@@ -51,10 +51,10 @@ class MedievalCombatResultsTable
         $this->crts->melee->header  = array("1:4", "1:3", "1:2", "1:1", "1.5:1", "2:1", "3:1", "4:1", "5:1", "6:1");
         $this->crts->melee->next = 'missile';
         $this->crts->melee->table = array(
-            array(AE,  AE,   AE,  ALF, ALR, AR, DR, DR, DR, DR),
-            array(AE,  AE,   AE,  ALR, AL, AR, DR, DR, DR, DR),
-            array(AE,  AE,   AE,  ALR, AL, AR, DR, DR, DR, DR),
-            array(AE,  AE,   AE,  ALR, AR, AR, DR, DR, DR, DR),
+            array(AE,  AE,   AE,  AL, ALR, AR, DR, DR, DR, DR),
+            array(AE,  AE,   AE,  AL, AL, AR, DR, DR, DR, DR),
+            array(AE,  AE,   AE,  AL, AL, AR, DR, DR, DR, DR),
+            array(AE,  AE,   AE,  AL, AR, AR, DR, DR, DR, DR),
             array(AE,  AE,   AE,  AR,  AR, DR, DR, DR, DR, DE),
             array(AE,  AE,   AL,  AR,  NE, DR, DR, DR, DE, DE),
             array(AE,  AE,   AL,  AR,  NE, DR, EX, DE, DE, DE),
