@@ -117,6 +117,11 @@
 //            var dieOffset = -2;
             $scope.dieOffset = 0;
             $scope.curCrt = 'melee';
+            $scope.showDetails = false;
+
+            $scope.toggleDetails = function(){
+              $scope.showDetails = !$scope.showDetails;
+            };
             $scope.$watch('dieOffset', function(newVal, oldVal){
                 $scope.topScreen = 'rows'+(3+(newVal-0));
                 $scope.bottomScreen = 'rows'+(3-newVal);
@@ -558,6 +563,7 @@
                 $scope.topCrt.crts.melee.selected = null;
                 $scope.topCrt.crts.melee.pinned = null;
                 $scope.topCrt.crts.melee.combatRoll = null;
+                $scope.crtOdds = null;
 
                 $scope.$apply();
 
@@ -607,7 +613,6 @@
                         var str = "";
                         cdLine = "";
                         var combatIndex = 0;
-//                        $('.unit').removeAttr('title');
 
                         for(i in combatRules.combats){
                             if(combatRules.combats[i].index !== null){
@@ -652,7 +657,7 @@
 
                                 if(cD !== false && cD == i){
                                     var details = renderCrtDetails(combatRules.combats[i]);
-                                    details = "<h5>odds = " + currentOddsDisp + " </h5>" +details;
+                                    $scope.crtOdds = "odds = " + currentOddsDisp;
                                     activeCombat = combatIndex;
                                     activeCombatLine = details;
                                 }
@@ -680,8 +685,6 @@
 
                     var lastCombat = "";
                     if(combatRules.combatsToResolve){
-//                        $('.unit').removeAttr('title');
-//                        $('.unit .unitOdds').remove();
                         if(combatRules.lastResolvedCombat){
                             var finalRoll = combatRules.lastResolvedCombat.Die + combatRules.lastResolvedCombat.dieOffset;
                             var orig = combatRules.lastResolvedCombat.Die + " ";
@@ -737,13 +740,12 @@
 
                             var details = renderCrtDetails(combatRules.lastResolvedCombat);
 
-                            newLine = "<h5>odds = " + oddsDisp + "</h5>"+details;
+                            $scope.crtOdds = "odds = " + oddsDisp;
+                            newLine = details;
 
 
-//                            $("#crtOddsExp").html(newLine);
                             $scope.topCrt.crts[crtName].crtOddsExp = $sce.trustAsHtml(newLine);
 
-//                    $(".row"+combatRoll+" .col"+combatCol).css('color',"white");
                         }
                         str += "";
                         var noCombats = false;
@@ -807,7 +809,8 @@
 //                                $("#"+i).attr('title',oddsDisp).prepend('<div class="unitOdds'+useAltColor+'">'+oddsDisp+'</div>');;
                                 var details = renderCrtDetails(combatRules.combatsToResolve[i]);
 
-                                newLine = "<h5>odds = " + oddsDisp + "</h5>" + details;
+                                $scope.crtOdds = "odds = " + oddsDisp;
+                                newLine = details;
                             }
 
                         }

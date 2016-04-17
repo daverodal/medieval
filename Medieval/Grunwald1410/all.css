@@ -1501,4 +1501,7 @@ svg marker#head {
   font-size: 16px;
   text-align: center; }
 
+#crtDetails {
+  display: inherit; }
+
 /*# sourceMappingURL=all.css.map */
