@@ -3,7 +3,7 @@ namespace Wargame\Medieval;
 use stdClass;
 use Wargame\MapData;
 use Wargame\MapViewer;
-use Wargame\Force;
+use Wargame\MedievalForce;
 use Wargame\MoveRules;
 use Wargame\Terrain;
 use Wargame\CombatRules;
@@ -63,7 +63,7 @@ class MedievalLandBattle extends \Wargame\LandBattle
             $this->mapViewer = array(new MapViewer($data->mapViewer[0]), new MapViewer($data->mapViewer[1]), new MapViewer($data->mapViewer[2]));
             $units = $data->force->units;
             unset($data->force->units);
-            $this->force = new Force($data->force);
+            $this->force = new MedievalForce($data->force);
             foreach($units as $unit){
                 $this->force->injectUnit(static::buildUnit($unit));
             }
@@ -84,7 +84,7 @@ class MedievalLandBattle extends \Wargame\LandBattle
             $this->scenario = $scenario;
 
             $this->mapViewer = array(new MapViewer(), new MapViewer(), new MapViewer());
-            $this->force = new Force();
+            $this->force = new MedievalForce();
             $this->terrain = new Terrain();
             $this->moveRules = new MoveRules($this->force, $this->terrain);
             $this->moveRules->blockedRetreatDamages = true;

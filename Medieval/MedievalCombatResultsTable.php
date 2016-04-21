@@ -60,7 +60,7 @@ class MedievalCombatResultsTable
             array(AE,  AE,   AL,  AR,  NE, DR, EX, DE, DE, DE),
             array(AE,  AE,   AL,  NE,  BL, DLR, DE, DE, DE, DE),
             array(AE,  AE,   ALF, NE,  BL, DLR, DE, DE, DE, DE),
-            array(AE,  AE,   ALF, NE,  DL, DL2R, DE, DE, DE, DE),
+            array(AE,  AE,   ALF, NE,  DL, DL2, DE, DE, DE, DE),
             array(AE,  AE,   ALF, BL,  DL, DL2R, DE, DE, DE, DE),
             array(AE,  ALF,  ALF, BL,  DLR, DL2R, DE, DE, DE, DE),
             array(AE,  ALF,  ALF, DL,  DLR, DL2R, DE, DE, DE, DE),

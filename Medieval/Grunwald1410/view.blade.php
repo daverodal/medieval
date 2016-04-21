@@ -344,6 +344,12 @@
                             }
                             color = "red";
                             break;
+                        case <?=STATUS_CAN_DEFEND_LOSE?>:
+                            if (data.gameRules.mode == <?=DEFENDER_LOSING_MODE?>) {
+                                status = "Click on one of the red units to reduce it."
+                            }
+                            color = "red";
+                            break;
                         case <?=STATUS_REPLACED?>:
                             color = "blue";
                             break;

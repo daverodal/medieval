@@ -33,7 +33,7 @@ use Wargame\Battle;
 class VictoryCore extends \Wargame\TMCW\victoryCore
 {
 
-
+    protected $outgoingVP;
 
     function __construct($data)
     {
@@ -43,6 +43,7 @@ class VictoryCore extends \Wargame\TMCW\victoryCore
         } else {
 
         }
+        $this->outgoingVP = [0,0,0,0,0];
     }
 
     public function setSupplyLen($supplyLen)
@@ -88,20 +89,22 @@ class VictoryCore extends \Wargame\TMCW\victoryCore
         $unit = $args[0];
 
         $vp = $unit->damage;
-//
-//        if ($unit->forceId == 1) {
-//            $victorId = 2;
-//            $this->victoryPoints[$victorId] += $vp;
-//            $hex = $unit->hexagon;
-//            $battle = Battle::getBattle();
-//            $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='loyalistVictoryPoints'>+$vp vp</span>";
-//        } else {
-//            $victorId = 1;
-//            $hex  = $unit->hexagon;
-//            $battle = Battle::getBattle();
-//            $battle->mapData->specialHexesVictory->{$hex->name} = "+$vp vp";
-//            $this->victoryPoints[$victorId] += $vp;
-//        }
+
+        if ($unit->forceId == 1) {
+            $victorId = 2;
+            $this->victoryPoints[$victorId] += $vp;
+            $hex = $unit->hexagon;
+            $battle = Battle::getBattle();
+            $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='loyalistVictoryPoints'>+$vp vp</span>";
+        } else {
+            $victorId = 1;
+            $hex  = $unit->hexagon;
+            $vp += $this->outgoingVP[$victorId];
+            $this->outgoingVP[$victorId] = $vp;
+            $battle = Battle::getBattle();
+            $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='rebelVictoryPoints'>+$vp vp</span>";
+            $this->victoryPoints[$victorId] += $vp;
+        }
     }
 
     public function incrementTurn()
