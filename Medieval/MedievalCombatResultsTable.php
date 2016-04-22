@@ -51,22 +51,22 @@ class MedievalCombatResultsTable
         $this->crts->melee->header  = array("1:4", "1:3", "1:2", "1:1", "1.5:1", "2:1", "3:1", "4:1", "5:1", "6:1");
         $this->crts->melee->next = 'missile';
         $this->crts->melee->table = array(
-            array(AE,  AE,   AE,  AL, ALR, AR, DR, DR, DR, DR),
-            array(AE,  AE,   AE,  AL, AL, AR, DR, DR, DR, DR),
-            array(AE,  AE,   AE,  AL, AL, AR, DR, DR, DR, DR),
-            array(AE,  AE,   AE,  AL, AR, AR, DR, DR, DR, DR),
-            array(AE,  AE,   AE,  AR,  AR, DR, DR, DR, DR, DE),
-            array(AE,  AE,   AL,  AR,  NE, DR, DR, DR, DE, DE),
-            array(AE,  AE,   AL,  AR,  NE, DR, EX, DE, DE, DE),
-            array(AE,  AE,   AL,  NE,  BL, DLR, DE, DE, DE, DE),
-            array(AE,  AE,   ALF, NE,  BL, DLR, DE, DE, DE, DE),
-            array(AE,  AE,   ALF, NE,  DL, DL2, DE, DE, DE, DE),
-            array(AE,  AE,   ALF, BL,  DL, DL2R, DE, DE, DE, DE),
-            array(AE,  ALF,  ALF, BL,  DLR, DL2R, DE, DE, DE, DE),
-            array(AE,  ALF,  ALF, DL,  DLR, DL2R, DE, DE, DE, DE),
-            array(ALF, ALF,  ALF, DL,  DLF, DL2R, DE, DE, DE, DE),
-            array(ALF, ALF,  NE,  DLR, DLF, DE, DE, DE, DE, DE),
-            array(ALF, ALF,  NE,  DLR, DEAL, DE, DE, DE, DE, DE),
+            array(AE,  AE,    AE,    AL,  ALR,  NE,   NE,   DLF,  DEAL, DEAL),
+            array(AE,  AE,    AE,    AL,  AL,   ALR,  BLDR, DLF,  DEAL, DEAL),
+            array(AE,  AE,    AE,    AL,  AL,   AR,   BLDR, DEAL, DEAL, DE),
+            array(AE,  AE,    AL2F,  AL,  AR,   BL,   BLDR, DEAL, DE,   DE),
+            array(AE,  AE,    AL2F,  AR,  AR,   BLDR, DLR,  DEAL, DE,   DE),
+            array(AE,  AE,    AL2F,  AR,  NE,   BLDR, DLR,  DEAL, DE,   DE),
+            array(AE,  AE,    AL2R,  AR,  NE,   BLDR, DLR,  DE,   DE,   DE),
+            array(AE,  AE,    AL2R,  NE,  BL,   DLR,  DL2R, DE,   DE,   DE),
+            array(AE,  AE,    ALR,   NE,  BL,   DLR,  DL2R, DE,   DE,   DE),
+            array(AE,  AE,    ALR,   NE,  DL,   DL2R, DL2F, DE,   DE,   DE),
+            array(AE,  ALF,   AL,    BL,  DL,   DL2R, DL2F, DE,   DE,   DE),
+            array(AE,  ALF,   AL,    BL,  DLR,  DL2F, DL2F, DE,   DE,   DE),
+            array(AE,  AL2F,  NE,    DL,  DLR,  DL2F, DL2F, DE,   DE,   DE),
+            array(ALF, AL2F,  NE,    DL,  DLF,  DL2F, DL2F, DE,   DE,   DE),
+            array(ALF, NE,    BL,    DLR, DLF,  DE,   DE,   DE,   DE,   DE),
+            array(ALF, NE,    BL,    DLR, DEAL, DE,   DE,   DE,   DE,   DE),
         );
         $this->crts->missile = new stdClass();
         $this->crts->missile->header =  array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
