@@ -514,7 +514,7 @@
 //                        $("#floatMessage header").html(result+": Attacker Loss Mode.");
 //                        var floatStat = $("#floatMessage p").html();
 
-                        $scope.floatMessage.body += "Lose at least "+data.force.exchangeAmount+ " strength points<br>";
+                        $scope.floatMessage.body += " Lose at least "+data.force.exchangeAmount+ " steps";
 //                        $("#floatMessage p").html(floatStat);
 
 //            html += "<br>Lose at least "+gameRules.exchangeAmount+" strength points from the units outlined in red";

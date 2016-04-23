@@ -188,8 +188,8 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             $after = $this->getUnmodifiedStrength();
             $this->damage = $before - $after;
             $battle->victory->reduceUnit($this);
-            $this->exchangeAmount = $this->damage;
-            $this->defExchangeAmount = $this->damage;
+            $this->exchangeAmount = 1;
+            $this->defExchangeAmount = 1;
         }
         return false;
     }
