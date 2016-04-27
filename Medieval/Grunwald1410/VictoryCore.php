@@ -95,14 +95,19 @@ class VictoryCore extends \Wargame\TMCW\victoryCore
             $this->victoryPoints[$victorId] += $vp;
             $hex = $unit->hexagon;
             $battle = Battle::getBattle();
-            $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='loyalistVictoryPoints'>+$vp vp</span>";
+            if($hex->name) {
+                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='loyalistVictoryPoints'>+$vp vp</span>";
+            }
         } else {
             $victorId = 1;
             $hex  = $unit->hexagon;
             $vp += $this->outgoingVP[$victorId];
             $this->outgoingVP[$victorId] = $vp;
             $battle = Battle::getBattle();
-            $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='rebelVictoryPoints'>+$vp vp</span>";
+            if($hex->name) {
+
+                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='rebelVictoryPoints'>+$vp vp</span>";
+            }
             $this->victoryPoints[$victorId] += $vp;
         }
     }
