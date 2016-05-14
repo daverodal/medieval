@@ -131,10 +131,13 @@ class MedievalCombatResultsTable
         $isFrozenSwamp = $isTown = $isHill = $isForest = $isSwamp = $attackerIsSunkenRoad = $isRedoubt = $isElevated = false;
 
         $defArmor = 0;
+        $defFacings = [];
         foreach ($defenders as $defId => $defender) {
-
+            
             $hexagon = $battle->force->units[$defId]->hexagon;
             $defendingUnit = $battle->force->units[$defId];
+            $defFacings[] = $defendingUnit->facing;
+
             $hexpart = new Hexpart();
             $hexpart->setXYwithNameAndType($hexagon->name, HEXAGON_CENTER);
             $isTown |= $battle->terrain->terrainIs($hexpart, 'town');
@@ -172,11 +175,25 @@ class MedievalCombatResultsTable
 
         $combatLog .= "Attackers<br>";
         foreach ($attackers as $attackerId => $attacker) {
-
-
-
             $terrainReason = "";
             $unit = $battle->force->units[$attackerId];
+            
+            $los = new \Wargame\Los();
+
+            foreach($defenders as $defId=> $def) {
+                $los->setOrigin($battle->force->getUnitHexagon($attackerId));
+                $los->setEndPoint($battle->force->getUnitHexagon($defId));
+                $range = $los->getRange();
+                $bearing = $los->getBearing();
+                $attackerBearing = $bearing/4;
+//                var_dump($bearing);
+//                var_dump($attackerBearing);
+//                var_dump($unit->facing);
+            }
+
+//            var_dump($bearing);
+
+
 
             if($this->armorValue($unit->armorClass) > $attackerArmor){
                 $attackerArmor = $this->armorValue($unit->armorClass);
@@ -486,7 +503,7 @@ class MedievalCombatResultsTable
 
     function armorDiff($a, $d){
 //        $strMap = ['K'=>3, 'H'=>2, 'M'=>1, 'L'=>0];
-        return $this->armorValue($a) - $this->armoaValue($d);
+        return $this->armorValue($a) - $this->armorValue($d);
     }
 
     function armorValue($class){
