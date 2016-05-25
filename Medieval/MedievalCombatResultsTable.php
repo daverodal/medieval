@@ -41,6 +41,8 @@ class MedievalCombatResultsTable
     /* starting number for die roll */
     public $rowNum = -2;
 
+    use CRTResults;
+
     //     combatIndexeCount is 6; maxCombatIndex = 5
     //     index is 0 to 5;  dieSidesCount = 6
 

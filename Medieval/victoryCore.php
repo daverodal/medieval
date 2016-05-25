@@ -1,5 +1,5 @@
 <?php
-namespace Wargame\TMCW;
+namespace Wargame\Medieval;
 use stdClass;
 /**
  *

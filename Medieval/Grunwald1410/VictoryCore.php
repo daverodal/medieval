@@ -30,7 +30,7 @@ use Wargame\Battle;
  */
 //include_once "victoryCore.php";
 
-class VictoryCore extends \Wargame\TMCW\victoryCore
+class VictoryCore extends \Wargame\Medieval\victoryCore
 {
 
     protected $outgoingVP;
@@ -68,17 +68,17 @@ class VictoryCore extends \Wargame\TMCW\victoryCore
             $vp = 1;
 
             $prevForceId = $battle->mapData->specialHexes->$mapHexName;
-            if ($forceId == REBEL_FORCE) {
-                $this->victoryPoints[REBEL_FORCE]  += $vp;
+            if ($forceId == POLISH_FORCE) {
+                $this->victoryPoints[POLISH_FORCE]  += $vp;
                 $battle->mapData->specialHexesVictory->$mapHexName = "<span class='rebel'>+$vp Rebel vp</span>";
-                $this->victoryPoints[LOYALIST_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='rebel'> -$vp Loyalist vp</span>";
+                $this->victoryPoints[TEUTONIC_FORCE] -= $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='rebel'> -$vp Teutonic vp</span>";
             }
-            if ($forceId == LOYALIST_FORCE) {
-                $this->victoryPoints[LOYALIST_FORCE]  += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='loyalist'>+$vp Loyalist vp</span>";
-                $this->victoryPoints[REBEL_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='loyalist'> -$vp Rebel vp</span>";
+            if ($forceId == TEUTONIC_FORCE) {
+                $this->victoryPoints[TEUTONIC_FORCE]  += $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='loyalist'>+$vp Teutonic vp</span>";
+                $this->victoryPoints[POLISH_FORCE] -= $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='loyalist'> -$vp Polish vp</span>";
             }
         }
 
@@ -129,15 +129,15 @@ class VictoryCore extends \Wargame\TMCW\victoryCore
     public function gameEnded()
     {
         $battle = Battle::getBattle();
-        if ($this->victoryPoints[LOYALIST_FORCE] > $this->victoryPoints[REBEL_FORCE]) {
-            $battle->gameRules->flashMessages[] = "Loyalist Player Wins";
-            $this->winner = LOYALIST_FORCE;
+        if ($this->victoryPoints[TEUTONIC_FORCE] > $this->victoryPoints[POLISH_FORCE]) {
+            $battle->gameRules->flashMessages[] = "Teutonic Player Wins";
+            $this->winner = TEUTONIC_FORCE;
         }
-        if ($this->victoryPoints[REBEL_FORCE] > $this->victoryPoints[LOYALIST_FORCE]) {
-            $battle->gameRules->flashMessages[] = "Rebel Player Wins";
-            $this->winner = REBEL_FORCE;
+        if ($this->victoryPoints[POLISH_FORCE] > $this->victoryPoints[TEUTONIC_FORCE]) {
+            $battle->gameRules->flashMessages[] = "Polish Player Wins";
+            $this->winner = POLISH_FORCE;
         }
-        if ($this->victoryPoints[LOYALIST_FORCE] == $this->victoryPoints[REBEL_FORCE]) {
+        if ($this->victoryPoints[TEUTONIC_FORCE] == $this->victoryPoints[POLISH_FORCE]) {
             $battle->gameRules->flashMessages[] = "Tie Game";
         }
         $this->gameOver = true;
