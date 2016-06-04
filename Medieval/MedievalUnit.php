@@ -190,6 +190,14 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $this->disorderedPlayerTurns = 2;
     }
 
+    public function checkLos(\Wargame\Los $los, $defenderId = false){
+        $attackFacing = $los->getBearing() / 4;
+        if(abs($attackFacing - $this->facing) <= 1){
+            return true;
+        }
+        return false;
+    }
+
     public function rallyCheck(){
         if($this->orgStatus === self::DISORDED){
 
