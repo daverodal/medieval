@@ -184,14 +184,13 @@ class MedievalCombatResultsTable
             foreach($defenders as $defId=> $def) {
                 $los->setOrigin($battle->force->getUnitHexagon($attackerId));
                 $los->setEndPoint($battle->force->getUnitHexagon($defId));
-                $range = $los->getRange();
-                $bearing = $los->getBearing();
-                $attackerBearing = $bearing/4;
+
                 $defUnit =  $battle->force->units[$defId];
 
-                if(abs($attackerBearing - $defUnit->facing) <= 1){
+                if($defUnit->checkLos($los)){
                     $flankedDefenders[$defId] = true;
                 }
+
 //                var_dump($bearing);
 //                var_dump($attackerBearing);
 //                var_dump($unit->facing);
