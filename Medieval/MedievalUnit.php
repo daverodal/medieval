@@ -192,9 +192,16 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function checkLos(\Wargame\Los $los, $defenderId = false){
         $attackFacing = $los->getBearing() / 4;
-        if(abs($attackFacing - $this->facing) <= 1){
+        if($this->facing == $attackFacing){
             return true;
         }
+        if(($attackFacing + 1) % 6 == $this->facing){
+            return true;
+        }
+        if(($this->facing + 1) % 6 == $attackFacing){
+            return true;
+        }
+
         return false;
     }
 
