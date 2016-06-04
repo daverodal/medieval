@@ -28,6 +28,8 @@ use stdClass;
 
 class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 {
+    const BATTLE_READY = 0;
+    const DISORDED = 1;
     /* L, M, H, K */
     public $armorClass;
     /* battle ready, reserve, disorganized */
@@ -38,6 +40,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public $steps;
     public $origSteps;
     public $origStrength;
+    public $disorderedPlayerTurns = 0;
 
 
     public function jsonSerialize()
@@ -54,6 +57,13 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     }
 
 
+    public function getMaxMove(){
+        $maxMove = parent::getMaxMove();
+        if($this->orgStatus === self::DISORDED){
+            $maxMove /= 2;
+        }
+        return $maxMove;
+    }
     public function getUnmodifiedStrength(){
 
         $strength = $this->origStrength;
@@ -68,6 +78,10 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             $strength = 1;
         }
 
+        if($this->orgStatus === self::DISORDED){
+            $strength /= 2;
+        }
+
         return  $strength;
     }
 
@@ -80,6 +94,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             return false;
         }
         $strength = $this->getUnmodifiedStrength();
+
 
         foreach ($this->adjustments as $adjustment) {
             switch ($adjustment) {
@@ -170,6 +185,21 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     function eliminate(){
     }
 
+    public function disorderUnit(){
+        $this->orgStatus = self::DISORDED;
+        $this->disorderedPlayerTurns = 2;
+    }
+
+    public function rallyCheck(){
+        if($this->orgStatus === self::DISORDED){
+
+            if($this->disorderedPlayerTurns === 0){
+                $this->orgStatus = self::BATTLE_READY;
+            }
+            $this->disorderedPlayerTurns--;
+        }
+    }
+    
     function damageUnit($kill = false)
     {
         $battle = Battle::getBattle();
@@ -182,6 +212,12 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             return true;
         } else {
 
+            if($this->status === STATUS_RETREATING){
+                /* Defender was not able to retreat and got a loss instead.
+                 * This makes the unit disorded.
+                 */
+                $this->disorderUnit();
+            }
 
             $before = $this->getUnmodifiedStrength();
             $this->steps--;
@@ -193,6 +229,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         }
         return false;
     }
+    
     function __construct($data = null)
     {
         if ($data) {
@@ -214,7 +251,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $mapUnit = new StdClass();
         $mapUnit->parent = $this->hexagon->parent;
         $mapUnit->moveAmountUsed = $this->moveAmountUsed;
-        $mapUnit->maxMove = $this->maxMove;
+        $mapUnit->maxMove = $this->getMaxMove();
         $mapUnit->strength = $this->getUnmodifiedStrength();
         $mapUnit->class = $this->class;
         $mapUnit->id = $this->id;

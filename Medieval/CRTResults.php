@@ -124,6 +124,7 @@ trait CRTResults
                 $defUnit->retreatCountRequired = $distance;
                 if($combatResults === DL2F || $combatResults === DLF){
                     $defUnit->retreatCountRequired = $defUnit->maxMove;
+                    $defUnit->disorderUnit();
                 }
                 break;
             case DR2:

@@ -63,7 +63,7 @@
 
                 <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
 
-                <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
+                <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
                 <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
 
             </div>
@@ -84,7 +84,7 @@
 
         <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
 
-        <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
+        <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
         <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
 
 
@@ -178,6 +178,7 @@
                         newUnit.facing = mapUnits[i].facing;
                         newUnit.strength = mapUnits[i].strength;
                         newUnit.steps = mapUnits[i].steps;
+                        newUnit.orgStatus = mapUnits[i].orgStatus;
                         gameUnits[i] = newUnit;
                     }
                     if(mapUnits[i].parent === 'deployBox'){

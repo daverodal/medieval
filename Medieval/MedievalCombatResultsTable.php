@@ -50,25 +50,25 @@ class MedievalCombatResultsTable
     {
         $this->crts = new stdClass();
         $this->crts->melee = new stdClass();
-        $this->crts->melee->header  = array("1:4", "1:3", "1:2", "1:1", "1.5:1", "2:1", "3:1", "4:1", "5:1", "6:1");
+        $this->crts->melee->header  = array("1:4", "1:3", "1:2", "1:1.5", "1:1", "1.5:1", "2:1", "3:1", "4:1", "5:1", "6:1");
         $this->crts->melee->next = 'missile';
         $this->crts->melee->table = array(
-            array(AE,  AE,    AE,    AL,  ALR,  NE,   NE,   DLF,  DEAL, DEAL),
-            array(AE,  AE,    AE,    AL,  AL,   ALR,  BLDR, DLF,  DEAL, DEAL),
-            array(AE,  AE,    AE,    AL,  AL,   AR,   BLDR, DEAL, DEAL, DE),
-            array(AE,  AE,    AL2F,  AL,  AR,   BL,   BLDR, DEAL, DE,   DE),
-            array(AE,  AE,    AL2F,  AR,  AR,   BLDR, DLR,  DEAL, DE,   DE),
-            array(AE,  AE,    AL2F,  AR,  NE,   BLDR, DLR,  DEAL, DE,   DE),
-            array(AE,  AE,    AL2R,  AR,  NE,   BLDR, DLR,  DE,   DE,   DE),
-            array(AE,  AE,    AL2R,  NE,  BL,   DLR,  DL2R, DE,   DE,   DE),
-            array(AE,  AE,    ALR,   NE,  BL,   DLR,  DL2R, DE,   DE,   DE),
-            array(AE,  AE,    ALR,   NE,  DL,   DL2R, DL2F, DE,   DE,   DE),
-            array(AE,  ALF,   AL,    BL,  DL,   DL2R, DL2F, DE,   DE,   DE),
-            array(AE,  ALF,   AL,    BL,  DLR,  DL2F, DL2F, DE,   DE,   DE),
-            array(AE,  AL2F,  NE,    DL,  DLR,  DL2F, DL2F, DE,   DE,   DE),
-            array(ALF, AL2F,  NE,    DL,  DLF,  DL2F, DL2F, DE,   DE,   DE),
-            array(ALF, NE,    BL,    DLR, DLF,  DE,   DE,   DE,   DE,   DE),
-            array(ALF, NE,    BL,    DLR, DEAL, DE,   DE,   DE,   DE,   DE),
+            array(AE,  AE,    AE,   AE,   AL,  ALR,  NE,   NE,   DLF,  DEAL, DEAL),
+            array(AE,  AE,    AE,   AL2F, AL,  AL,   ALR,  BLDR, DLF,  DEAL, DEAL),
+            array(AE,  AE,    AE,   AL2F, AL,  AL,   AR,   BLDR, DEAL, DEAL, DE),
+            array(AE,  AE,    AL2F, AL2F, AL,  AR,   BL,   BLDR, DEAL, DE,   DE),
+            array(AE,  AE,    AL2F, AL2F, AR,  AR,   BLDR, DLR,  DEAL, DE,   DE),
+            array(AE,  AE,    AL2F, AL2F, AR,  NE,   BLDR, DLR,  DEAL, DE,   DE),
+            array(AE,  AE,    AL2R, ALR,  AR,  NE,   BLDR, DLR,  DE,   DE,   DE),
+            array(AE,  AE,    AL2R, ALR,  NE,  BL,   DLR,  DL2R, DE,   DE,   DE),
+            array(AE,  AE,    ALR,  ALR,  NE,  BL,   DLR,  DL2R, DE,   DE,   DE),
+            array(AE,  AE,    ALR,  ALR,  NE,  DL,   DL2R, DL2F, DE,   DE,   DE),
+            array(AE,  ALF,   AL,   AL,   BL,  DL,   DL2R, DL2F, DE,   DE,   DE),
+            array(AE,  ALF,   AL,   AL,   BL,  DLR,  DL2F, DL2F, DE,   DE,   DE),
+            array(AE,  AL2F,  NE,   NE,   DL,  DLR,  DL2F, DL2F, DE,   DE,   DE),
+            array(ALF, AL2F,  NE,   NE,   DL,  DLF,  DL2F, DL2F, DE,   DE,   DE),
+            array(ALF, NE,    BL,   NE,   DLR, DLF,  DE,   DE,   DE,   DE,   DE),
+            array(ALF, NE,    BL,   NE,   DLR, DEAL, DE,   DE,   DE,   DE,   DE),
         );
         $this->crts->missile = new stdClass();
         $this->crts->missile->header =  array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
@@ -92,11 +92,9 @@ class MedievalCombatResultsTable
             array(AR, AR, DR, EX, EX, DE, DE, DE, DE, E),
         );
 
-        $this->combatIndexCount = 10;
+        $this->combatIndexCount = 11;
         $this->maxCombatIndex = $this->combatIndexCount - 1;
         $this->dieSideCount = 10;
-        $this->combatResultCount = 5;
-
     }
 
     function getCombatResults(&$Die, $index, $combat)
@@ -175,19 +173,25 @@ class MedievalCombatResultsTable
         $combinedArms = ['infantry'=>0, 'artillery'=>0, 'cavalry'=>0];
         $attackerArmor = 0;
 
+        $flankedDefenders = [];
         $combatLog .= "Attackers<br>";
         foreach ($attackers as $attackerId => $attacker) {
             $terrainReason = "";
             $unit = $battle->force->units[$attackerId];
             
             $los = new \Wargame\Los();
-
+            $defenderFlanked = false;
             foreach($defenders as $defId=> $def) {
                 $los->setOrigin($battle->force->getUnitHexagon($attackerId));
                 $los->setEndPoint($battle->force->getUnitHexagon($defId));
                 $range = $los->getRange();
                 $bearing = $los->getBearing();
                 $attackerBearing = $bearing/4;
+                $defUnit =  $battle->force->units[$defId];
+
+                if(abs($attackerBearing - $defUnit->facing) <= 1){
+                    $flankedDefenders[$defId] = true;
+                }
 //                var_dump($bearing);
 //                var_dump($attackerBearing);
 //                var_dump($unit->facing);
@@ -454,6 +458,10 @@ class MedievalCombatResultsTable
                     $combatLog .= "defender doubled for terrain ";
                 }
             }
+            if(!empty($flankedDefenders[$defId])){
+                $combatLog .= " Defender Flanked, halved";
+                $unitDefense /= 2;
+            }
             $defenseStrength += $unitDefense * $defMultiplier;
             $combatLog .= "<br>";
         }
@@ -516,12 +524,15 @@ class MedievalCombatResultsTable
     {
         $ratio = $attackStrength / $defenseStrength;
         if ($attackStrength >= $defenseStrength) {
-            $combatIndex = floor($ratio) + 2;
+            $combatIndex = floor($ratio) + 3;
             if ($ratio >= 1.5) {
                 $combatIndex++;
             }
         } else {
             $combatIndex = 4 - ceil($defenseStrength / $attackStrength);
+            if($ratio > .67){
+                $combatIndex++;
+            }
         }
         return $combatIndex;
     }

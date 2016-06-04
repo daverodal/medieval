@@ -186,5 +186,9 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
 
     public function playerTurnChange($arg)
     {
+        $battle = Battle::getBattle();
+        foreach($battle->force->units as $unit){
+            $unit->rallyCheck();
+        }
     }
 }
