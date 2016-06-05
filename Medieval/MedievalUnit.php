@@ -35,7 +35,6 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     /* battle ready, reserve, disorganized */
     public $orgStatus;
     protected $strength;
-    public $defStrength;
     public $range;
     public $steps;
     public $origSteps;
@@ -90,7 +89,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     {
 
         $b = Battle::getBattle();
-        if ($name !== "range" && $name !== "strength" && $name !== "meleeStrength" && $name !== "attStrength" && $name !== "defStrength") {
+        if ($name !== "strength") {
             return false;
         }
         $strength = $this->getUnmodifiedStrength();
@@ -116,10 +115,8 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     function set($unitName,
                   $unitForceId,
                   $unitHexagon,
-                  $unitImage,
                   $strength,
                   $range,
-                  $defenseStrength,
                   $unitMaxMove,
                   $unitStatus,
                   $unitReinforceZone,
@@ -129,7 +126,9 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
                   $unitDesig,
                  $orgStatus,
                   $facing,
-                 $armorClass
+                 $armorClass,
+                $bow, 
+                $orgStatus
 
                     )
     {
@@ -156,14 +155,12 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         if ($mapHex) {
             $mapHex->setUnit($this->forceId, $this);
         }
-        $this->image = $unitImage;
 
 
         $this->maxMove = $unitMaxMove;
         $this->moveAmountUnused = $unitMaxMove;
         $this->status = $unitStatus;
         $this->facing = $facing;
-        $this->defStrength = $defenseStrength;
         $this->moveAmountUsed = 0;
         $this->reinforceZone = $unitReinforceZone;
         $this->reinforceTurn = $unitReinforceTurn;
@@ -179,6 +176,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $this->orgStatus = $orgStatus;
         $this->armorClass = $armorClass;
         $this->vp = 0;
+        $this->bow = $bow;
     }
 
 
@@ -270,7 +268,6 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $mapUnit->strength = $this->getUnmodifiedStrength();
         $mapUnit->class = $this->class;
         $mapUnit->id = $this->id;
-        $mapUnit->defenseStrength = $this->defStrength;
         $mapUnit->facing = $this->facing;
         $mapUnit->range = $this->range;
         $mapUnit->unitDefenseStrength = $this->unitDefenseStrength;

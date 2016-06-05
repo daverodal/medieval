@@ -3065,7 +3065,7 @@ svg marker#head {
 
 .range {
   position: absolute;
-  right: 4px;
+  right: 2px;
   top: 0px;
   font-size: 12px; }
 
@@ -3580,5 +3580,18 @@ svg marker#head {
 
 #crtDetails {
   display: inherit; }
+
+.counterWrapper .bow {
+  position: absolute;
+  left: 12px;
+  height: 13px;
+  background: url("/vendor/wargame/medieval/grunwald1410/images/arrow.svg");
+  background-size: 10px 13px;
+  width: 10px; }
+
+.teutonic .counterWrapper .bow {
+  background: url("/vendor/wargame/medieval/grunwald1410/images/whiteArrow.svg");
+  background-size: 10px 13px;
+  width: 10px; }
 
 /*# sourceMappingURL=all.css.map */

@@ -36,9 +36,7 @@ class UnitFactory {
     public static function create($unitName,
                                   $unitForceId,
                                   $unitHexagon,
-                                  $unitImage,
                                   $unitStrength,
-                                  $defenseStrength,
                                   $unitMaxMove,
                                   $range = 1,
                                   $unitStatus,
@@ -49,10 +47,11 @@ class UnitFactory {
                                   $unitDesig = false,
                                   $facing,
                                   $armorClass,
+                                  $bow = false,
                                   $orgStatus = 0){
         $unit = static::build();
-        $unit->set($unitName, $unitForceId, $unitHexagon, $unitImage, $unitStrength,$range, $defenseStrength,
-            $unitMaxMove, $unitStatus, $unitReinforceZoneName, $unitReinforceTurn,  $nationality, $class, $unitDesig, $orgStatus, $facing, $armorClass);
+        $unit->set($unitName, $unitForceId, $unitHexagon, $unitStrength,$range, 
+            $unitMaxMove, $unitStatus, $unitReinforceZoneName, $unitReinforceTurn,  $nationality, $class, $unitDesig, $orgStatus, $facing, $armorClass, $bow, $orgStatus);
         self::$injector->injectUnit($unit);
     }
 }

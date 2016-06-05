@@ -57,6 +57,8 @@
                 <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
                 <div class="shadow-mask" ng-class="unit.shadow"></div>
                 <div class="counterWrapper">
+                    <div ng-show="unit.bow" class="bow" style=""></div>
+
                     <div class="counter"></div>
                 </div>
                 <div class="range">@{{ unit.armorClass }}</div>
@@ -78,6 +80,7 @@
         <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
         <div class="shadow-mask" ng-class="unit.shadow"></div>
         <div class="counterWrapper">
+            <div ng-show="unit.bow" class="bow" style=""></div>
             <div class="counter"></div>
         </div>
         <div class="range">@{{ unit.armorClass }}</div>
