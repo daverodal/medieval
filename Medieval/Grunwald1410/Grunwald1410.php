@@ -83,7 +83,22 @@ class Grunwald1410 extends MedievalLandBattle
         }
 
         for($i = 0;$i < 6;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 5,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M');
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 5,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M', true);
+
+        }
+
+        for($i = 0;$i < 6;$i++){
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'S', true);
+
+        }
+
+        for($i = 0;$i < 5;$i++){
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,1,  STATUS_CAN_DEPLOY, "C", 1, "tartar", 'cavalry',1, 0, 'S', true);
+
+        }
+
+        for($i = 0;$i < 6;$i++){
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,1,  STATUS_CAN_DEPLOY, "D", 1, "lithuanian", 'cavalry',1, 0, 'S', true);
 
         }
 
@@ -100,15 +115,21 @@ class Grunwald1410 extends MedievalLandBattle
 
         }
 
+        for($i = 0;$i < 4;$i++) {
+            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  4, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'inf',1, 3, 'M', true);
+
+        }
         for($i = 0;$i < 2;$i++) {
             UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  3, 5,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'cavalry',1, 3, 'M', true);
 
         }
 
-        for($i = 0;$i < 4;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  4, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'inf',1, 3, 'M', true);
+        for($i = 0;$i < 5;$i++) {
+            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  3, 6,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'cavalry',1, 3, 'S', true);
 
         }
+
+
     }
 
     public static function myName(){
@@ -146,9 +167,11 @@ class Grunwald1410 extends MedievalLandBattle
 
             $this->gameRules->addPhaseChange(RED_DEPLOY_PHASE, BLUE_DEPLOY_PHASE, DEPLOY_MODE, BLUE_FORCE, RED_FORCE, false);
             $this->gameRules->addPhaseChange(BLUE_DEPLOY_PHASE, BLUE_MOVE_PHASE, MOVING_MODE, BLUE_FORCE, RED_FORCE, false);
-            $this->gameRules->addPhaseChange(BLUE_MOVE_PHASE, BLUE_COMBAT_PHASE, COMBAT_SETUP_MODE, BLUE_FORCE, RED_FORCE, false);
+            $this->gameRules->addPhaseChange(BLUE_MOVE_PHASE, BLUE_FIRE_COMBAT_PHASE, FIRE_COMBAT_SETUP_MODE, BLUE_FORCE, RED_FORCE, false);
+            $this->gameRules->addPhaseChange(BLUE_FIRE_COMBAT_PHASE, BLUE_COMBAT_PHASE, COMBAT_SETUP_MODE, BLUE_FORCE, RED_FORCE, false);
             $this->gameRules->addPhaseChange(BLUE_COMBAT_PHASE, RED_MOVE_PHASE, MOVING_MODE, RED_FORCE, BLUE_FORCE, false);
-            $this->gameRules->addPhaseChange(RED_MOVE_PHASE, RED_COMBAT_PHASE, COMBAT_SETUP_MODE, RED_FORCE, BLUE_FORCE, false);
+            $this->gameRules->addPhaseChange(RED_MOVE_PHASE, RED_FIRE_COMBAT_PHASE, FIRE_COMBAT_SETUP_MODE, RED_FORCE, BLUE_FORCE, false);
+            $this->gameRules->addPhaseChange(RED_FIRE_COMBAT_PHASE, RED_COMBAT_PHASE, COMBAT_SETUP_MODE, RED_FORCE, BLUE_FORCE, false);
             $this->gameRules->addPhaseChange(RED_COMBAT_PHASE, BLUE_MOVE_PHASE, MOVING_MODE, BLUE_FORCE, RED_FORCE, true);
         }
     }

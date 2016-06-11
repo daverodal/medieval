@@ -70,29 +70,32 @@ class MedievalCombatResultsTable
             array(ALF, NE,    BL,   NE,   DLR, DLF,  DE,   DE,   DE,   DE,   DE),
             array(ALF, NE,    BL,   NE,   DLR, DEAL, DE,   DE,   DE,   DE,   DE),
         );
+        $this->crts->melee->maxCombatIndex = 10;
+
         $this->crts->missile = new stdClass();
-        $this->crts->missile->header =  array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+        $this->crts->missile->header =  array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12+");
         $this->crts->missile->next = 'melee';
         $this->crts->missile->table = array(
-            array(AE, AE, AE, AR, AR, AR, DR, DR, DR, D),
-            array(AE, AE, AE, AR, AR, AR, DR, DR, DR, D),
-            array(AE, AE, AE, AR, AR, AR, DR, DR, DR, D),
-            array(AE, AE, AE, AR, AR, AR, DR, DR, DR, D),
-            array(AE, AE, AR, AR, AR, DR, DR, DR, EX, D),
-            array(AE, AE, AR, AR, DR, DR, EX, EX, DE, R),
-            array(AE, AE, NE, NE, DR, EX, EX, DE, DE, R),
-            array(AE, AR, NE, DR, EX, EX, DE, DE, DE, F),
-            array(AR, AR, DR, EX, EX, DE, DE, DE, DE, F),
-            array(AR, AR, DR, EX, EX, DE, DE, DE, DE, F),
-            array(AR, AR, DR, EX, EX, DE, DE, DE, DE, E),
-            array(AR, AR, DR, EX, EX, DE, DE, DE, DE, E),
-            array(AR, AR, DR, EX, EX, DE, DE, DE, DE, E),
-            array(AR, AR, DR, EX, EX, DE, DE, DE, DE, E),
-            array(AR, AR, DR, EX, EX, DE, DE, DE, DE, E),
-            array(AR, AR, DR, EX, EX, DE, DE, DE, DE, E),
+            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
+            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
+            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
+            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, D),
+            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, D),
+            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, D,  D,  D),
+            array(NE, NE, NE, NE, NE, NE, NE, D,  D,  D,  D,  D),
+            array(NE, NE, NE, NE, NE, NE, NE, D,  D,  D,  D,  D),
+            array(NE, NE, NE, NE, NE,  D,  D, D,  D,  D,  D,  L),
+            array(NE, NE, NE,  D,  D,  D,  D, D,  D,  D,  D,  L),
+            array(NE,  D,  D,  D,  D,  D,  D, D,  D,  L,  L,  L),
+            array(NE,  D,  D,  D,  D,  D,  D, L,  L,  L,  L,  L),
+            array( D,  D,  D,  D,  D,  D,  D, L,  L,  L,  L,  L2),
+            array( D,  D,  D,  D,  D,  L,  L, L,  L,  L,  L,  L2),
+            array( D,  D,  D,  L,  L,  L,  L, L,  L,  L2,  L2,  L2),
+            array( D,  L,  L,  L,  L,  L,  L, L,  L2,  L2,  L2,  L2),
         );
+        $this->crts->missile->maxCombatIndex = 11;
 
-        $this->combatIndexCount = 11;
+        $this->combatIndexCount = 12;
         $this->maxCombatIndex = $this->combatIndexCount - 1;
         $this->dieSideCount = 10;
     }
@@ -100,8 +103,13 @@ class MedievalCombatResultsTable
     function getCombatResults(&$Die, $index, $combat)
     {
 //        $Die += $combat->dieShift;
+        $battle = \Wargame\Battle::getBattle();
+        $crt = $this->crts->melee;
+        if (($battle->gameRules->phase == BLUE_FIRE_COMBAT_PHASE) || ($battle->gameRules->phase == RED_FIRE_COMBAT_PHASE)) {
+            $crt = $this->crts->missile;
+        }
 
-        return $this->crts->melee->table[$Die + 3 + $combat->dieOffset][$index];
+        return $crt->table[$Die + 3 + $combat->dieOffset][$index];
     }
 
     function getCombatDisplay()
@@ -130,7 +138,8 @@ class MedievalCombatResultsTable
         $defenders = $combats->defenders;
         $isFrozenSwamp = $isTown = $isHill = $isForest = $isSwamp = $attackerIsSunkenRoad = $isRedoubt = $isElevated = false;
 
-        $defArmor = 0;
+        $defArmor = -1;
+        $defArmorClass = 'L';
         $defFacings = [];
         foreach ($defenders as $defId => $defender) {
             
@@ -153,6 +162,7 @@ class MedievalCombatResultsTable
 ;
             if($this->armorValue($defendingUnit->armorClass) > $defArmor){
                 $defArmor = $this->armorValue($defendingUnit->armorClass);
+                $defArmorClass = $defendingUnit->armorClass;
             }
 
             if($battle->terrain->terrainIs($hexpart, 'elevation1')){
@@ -483,10 +493,16 @@ class MedievalCombatResultsTable
         $combatIndex = $this->getCombatIndex($attackStrength, $defenseStrength);
         /* Do this before terrain effects */
         $combatIndex += $armsShift;
-
-        if ($combatIndex >= $this->maxCombatIndex) {
-            $combatIndex = $this->maxCombatIndex;
+        if($battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE) {
+            if ($combatIndex >= $this->crts->missile->maxCombatIndex) {
+                $combatIndex = $this->crts->missile->maxCombatIndex;
+            }
+        }else{
+            if ($combatIndex >= $this->crts->melee->maxCombatIndex) {
+                $combatIndex = $this->crts->melee->maxCombatIndex;
+            }
         }
+
 
 //        $terrainCombatEffect = $battle->combatRules->getDefenderTerrainCombatEffect($defenderId);
 
@@ -494,7 +510,30 @@ class MedievalCombatResultsTable
 
         $combats->attackStrength = $attackStrength;
         $combats->defenseStrength = $defenseStrength;
-        $combats->dieOffset = $attackerArmor - $defArmor;
+
+        if($battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE) {
+            /* knight */
+            $dieShift = 0;
+            if($defArmorClass === 'K'){
+                $dieShift = -2;
+            }
+            if($defArmorClass === 'M'){
+                $dieShift = 1;
+            }
+            if($defArmorClass === 'L'){
+                $dieShift = 2;
+            }
+            if($defArmorClass === 'S'){
+                $dieShift = -2;
+            }
+            /* for adjacent */
+            $dieShift++;
+            $combats->dieOffset = $dieShift;
+
+        }else{
+            $combats->dieOffset = $attackerArmor - $defArmor;
+
+        }
 
         if($combats->pinCRT !== false){
             $pinIndex = $combats->pinCRT;
@@ -516,11 +555,16 @@ class MedievalCombatResultsTable
     }
 
     function armorValue($class){
-        return  ['K'=>3, 'H'=>2, 'M'=>1, 'L'=>0][$class];
+        return  ['K'=>3, 'H'=>2, 'M'=>1, 'L'=>0, 'S'=>0][$class];
     }
 
     function getCombatIndex($attackStrength, $defenseStrength)
     {
+        $battle = \Wargame\Battle::getBattle();
+
+        if (($battle->gameRules->phase == BLUE_FIRE_COMBAT_PHASE) || ($battle->gameRules->phase == RED_FIRE_COMBAT_PHASE)) {
+            return $attackStrength - 1;
+        }
         $ratio = $attackStrength / $defenseStrength;
         if ($attackStrength >= $defenseStrength) {
             $combatIndex = floor($ratio) + 3;

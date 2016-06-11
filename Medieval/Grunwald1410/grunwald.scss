@@ -25,12 +25,14 @@
 @include headerColor(Kingdom-of-Poland, #FFA99B, red);
 @include unitColor(loyalist,#FFA99B,  Brit, red );
 @include unitColor(teutonic, white, TeutonicAnti, black, white, black);
+@include unitColor(tartar,#FFA99B,  Brit, gray );
+@include unitColor(lithuanian,#FFA99B,  Brit, orange );
 
 #map {
 }
 
 #crt {
-  width: 810px;
+  width: 875px;
   .crt-table-name{
     display:none;
   }
@@ -110,6 +112,16 @@
   width: auto;
 }
 
+.unit .unit-numbers {
+  &.infoLen7 {
+    letter-spacing: -1px;
+  }
+  &.infoLen9 {
+    letter-spacing: -1px;
+    font-size: 10px;
+  }
+
+}
 .game-name {
   word-break: break-all;
   font-family: 'Nosifer';
@@ -148,7 +160,7 @@
 .counterWrapper{
   .bow{
     position:absolute;
-    left: 12px;
+    left: 13px;
     height: 13px;
 
 

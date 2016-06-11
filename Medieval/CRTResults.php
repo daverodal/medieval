@@ -174,6 +174,25 @@ trait CRTResults
                 $defUnit->retreatCountRequired = 1;
 
                 break;
+            case D:
+                $defUnit->disorderUnit();
+                break;
+
+            case L:
+            case L2:
+                if ($numDefenders > 1) {
+                    $defUnit->status = STATUS_CAN_DEFEND_LOSE;
+                    $defUnit->retreatCountRequired = 0;
+
+                    $force->exchangeAmount = 1;
+                    break;
+                }
+
+                $eliminated = $defUnit->damageUnit();
+                if ($combatResults === L2 && !$eliminated) {
+                    $defUnit->damageUnit();
+                }
+                break;
             default:
                 break;
         }
@@ -245,6 +264,7 @@ trait CRTResults
                                 $attUnit->retreatCountRequired = 1;
                                 if ($combatResults === ALF || $combatResults === AL2F) {
                                     $attUnit->retreatCountRequired = $attUnit->maxMove;
+                                    $attUnit->disorderUnit();
 
                                 }
                             }

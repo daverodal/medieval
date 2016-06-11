@@ -182,6 +182,16 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
 
     }
 
+    public function postRecoverUnit($arg){
+        list($unit) = $arg;
+
+        $b = Battle::getBattle();
+        if($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE){
+            if(empty($unit->bow)){
+                $unit->status = STATUS_UNAVAIL_THIS_PHASE;
+            }
+        }
+    }
 
 
     public function playerTurnChange($arg)

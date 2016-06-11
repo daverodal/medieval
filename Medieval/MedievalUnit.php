@@ -65,6 +65,24 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     }
     public function getUnmodifiedStrength(){
 
+        $b = Battle::getBattle();
+
+        if($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE){
+            if($this->bow){
+                if($this->armorClass === 'S'){
+                    return 2;
+                }
+                if($this->class == 'inf'){
+                    return 4;
+                }
+                if($this->class == 'cavalry'){
+                    return 3;
+                }
+            }
+            return 0;
+        }
+
+
         $strength = $this->origStrength;
         $stepsLost = $this->origSteps - $this->steps;
 

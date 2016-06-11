@@ -87,7 +87,7 @@
 
         <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
 
-        <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
+        <div ng-class="unit.infoLen" class="unit-numbers">@{{ unit.unitNumbers }}</div>
         <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
 
 
@@ -104,7 +104,8 @@
 
     </div>
 
-<?php global $results_name;?>
+<?php global $results_name;
+?>
     <script>
         var lobbyApp = angular.module('lobbyApp', []);
         lobbyApp.controller('LobbyController', ['$scope', '$http', 'sync', '$sce', function($scope, $http, sync, $sce){
@@ -182,6 +183,9 @@
                         newUnit.strength = mapUnits[i].strength;
                         newUnit.steps = mapUnits[i].steps;
                         newUnit.orgStatus = mapUnits[i].orgStatus;
+                        var orgDisp = newUnit.orgStatus == 0 ? 'B':'D';
+                        newUnit.unitNumbers = newUnit.strength + ' ' + orgDisp + ' ' + (newUnit.maxMove - newUnit.moveAmountUsed);
+                        newUnit.infoLen = "infoLen" + newUnit.unitNumbers.length;
                         gameUnits[i] = newUnit;
                     }
                     if(mapUnits[i].parent === 'deployBox'){
@@ -563,7 +567,6 @@
             }
 
             x.register("combatRules", function(combatRules, data){
-
                 for(var arrowUnits in $scope.mapUnits){
                     $scope.mapUnits[arrowUnits].arrows = {};
                     $scope.mapUnits[arrowUnits].oddsDisp = null;
@@ -582,7 +585,10 @@
                 var activeCombat = false;
                 var activeCombatLine = "<div></div>";
                 var crtName = "melee";
-
+                if(data.gameRules.phase == <?= BLUE_FIRE_COMBAT_PHASE?> || data.gameRules.phase == <?= RED_FIRE_COMBAT_PHASE?>){
+                    $scope.curCrt = 'missile';
+                    crtName = 'missile';
+                }
                 if(combatRules){
                     cD = combatRules.currentDefender;
 
@@ -598,7 +604,12 @@
 //                                    showCrtTable($('#normalTable'));
                                 }
                             }
-                            crtName = 'melee';/* should decide this here */
+
+
+                            if(data.gameRules.phase == <?= BLUE_FIRE_COMBAT_PHASE?> || data.gameRules.phase == <?= RED_FIRE_COMBAT_PHASE?>){
+                                $scope.curCrt = 'missile';
+                                crtName = 'missile';
+                            }
 
                             for(var loop in defenders){
                                 $scope.mapUnits[loop].style.borderColor = 'yellow';
