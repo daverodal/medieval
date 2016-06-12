@@ -1,7 +1,5 @@
 <?php
 /* not happy about this part :( */
-global $results_name;
-
 /*
  * The template passes $topCrt
  * that is how a templates tells us which crt to render
@@ -32,44 +30,3 @@ $crts = $topCrt->crts;
     <h5>@{{ crtOdds }}</h5>
     <div ng-show="showDetails" ng-bind-html="crt.crtOddsExp"></div>
 </div>
-
-@foreach([] as $crtName => $crt)
-    <div ng-show="curCrt == '{{$crtName}}'" class=" {{$crtName}}Table">
-        <h4 class="crt-name">@{{curCrt}} combat table.</h4>
-
-        <div id="odds">
-            <span class="col0">@{{ crt.selected }}</span>
-            <?php  $i = 1;
-            $header = $crt->header;
-            $headerName = $crtName."ResultsHeader";
-           ?>
-            @foreach ($header as $odds)
-                <span class="col{{$i++}}">{{$odds}}</span>
-            @endforeach
-            <div class="clear"></div>
-        </div>
-        <div class="shadow-wrapper">
-            <div ng-class="topScreen" class="screen screen-one shadowy"></div>
-
-        <?php
-        $rowNum = 1;
-        if(isset($topCrt->rowNum)){
-            $rowNum = $topCrt->rowNum;
-        }?>
-        @foreach ($crt->table as $row)
-                <? $odd = ($rowNum & 1) ? "odd" : "even";?>
-            <div class="roll {{"row$rowNum $odd"}}">
-                <span class="col0">{{$rowNum++}}</span>
-                <?php $col = 1;?>
-                @foreach ($row as $cell)
-                    <span class="col{{$col++}}">{{$results_name[$cell]}}</span>
-                @endforeach
-                <div class="clear"></div>
-            </div>
-        @endforeach
-            <div ng-class="bottomScreen" class="screen screen-two shadowy"></div>
-        </div>
-
-    </div>
-
-@endforeach

@@ -40,6 +40,7 @@ class MedievalCombatResultsTable
     public $combatOddsTable;
     /* starting number for die roll */
     public $rowNum = -2;
+    public $resultsNames;
 
     use CRTResults;
 
@@ -48,6 +49,8 @@ class MedievalCombatResultsTable
 
     function __construct()
     {
+        global $results_name;
+        $this->resultsNames = $results_name;
         $this->crts = new stdClass();
         $this->crts->melee = new stdClass();
         $this->crts->melee->header  = array("1:4", "1:3", "1:2", "1:1.5", "1:1", "1.5:1", "2:1", "3:1", "4:1", "5:1", "6:1");

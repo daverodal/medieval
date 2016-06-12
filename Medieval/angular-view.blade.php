@@ -62,8 +62,6 @@
                     </ul>
                 </div>
             </div>
-            <?php global $results_name; ?>
-
             <div id="crtWrapper">
                 <h4 class="WrapperLabel" title='Combat Results Table'>
                     <span>CRT</span></h4>
@@ -237,4 +235,7 @@
     </div>
     <div id="display"></div>
 </div>
+
+@include('wargame::Medieval.medieval-controller')
+
 </body></html>

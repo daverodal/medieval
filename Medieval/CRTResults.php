@@ -151,6 +151,9 @@ trait CRTResults
                         $defUnit->retreatCountRequired = 1;
                     }
                     $force->exchangeAmount = 1;
+                    if ($combatResults === DL2) {
+                        $force->exchangeAmount = 2;
+                    }
                     break;
                 }
 
@@ -176,6 +179,7 @@ trait CRTResults
                 break;
             case D:
                 $defUnit->disorderUnit();
+                $defUnit->status = STATUS_DEFENDED;
                 break;
 
             case L:
@@ -185,6 +189,9 @@ trait CRTResults
                     $defUnit->retreatCountRequired = 0;
 
                     $force->exchangeAmount = 1;
+                    if ($combatResults === L2) {
+                        $force->exchangeAmount = 2;
+                    }
                     break;
                 }
 
@@ -192,7 +199,8 @@ trait CRTResults
                 if ($combatResults === L2 && !$eliminated) {
                     $defUnit->damageUnit();
                 }
-                break;
+            $defUnit->status = STATUS_DEFENDED;
+            break;
             default:
                 break;
         }
