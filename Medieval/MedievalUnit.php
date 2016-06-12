@@ -40,6 +40,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public $origSteps;
     public $origStrength;
     public $disorderedPlayerTurns = 0;
+    public $bow;
 
 
     public function jsonSerialize()
@@ -67,19 +68,16 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
         $b = Battle::getBattle();
 
-        if($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE){
-            if($this->bow){
-                if($this->armorClass === 'S'){
-                    return 2;
-                }
-                if($this->class == 'inf'){
-                    return 4;
-                }
-                if($this->class == 'cavalry'){
-                    return 3;
-                }
+        if($this->bow && $b->force->attackingForceId == $this->forceId && ($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE)){
+            if($this->armorClass === 'S'){
+                return 2;
             }
-            return 0;
+            if($this->class == 'inf'){
+                return 4;
+            }
+            if($this->class == 'cavalry'){
+                return 3;
+            }
         }
 
 
@@ -145,7 +143,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
                  $orgStatus,
                   $facing,
                  $armorClass,
-                $bow, 
+                $bow,
                 $orgStatus
 
                     )
@@ -235,7 +233,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             $this->disorderedPlayerTurns--;
         }
     }
-    
+
     function damageUnit($kill = false)
     {
         $battle = Battle::getBattle();
@@ -265,7 +263,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         }
         return false;
     }
-    
+
     function __construct($data = null)
     {
         if ($data) {
