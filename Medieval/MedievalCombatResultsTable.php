@@ -140,12 +140,10 @@ class MedievalCombatResultsTable
 
         $defArmor = -1;
         $defArmorClass = 'L';
-        $defFacings = [];
         foreach ($defenders as $defId => $defender) {
-            
+
             $hexagon = $battle->force->units[$defId]->hexagon;
             $defendingUnit = $battle->force->units[$defId];
-            $defFacings[] = $defendingUnit->facing;
 
             $hexpart = new Hexpart();
             $hexpart->setXYwithNameAndType($hexagon->name, HEXAGON_CENTER);
@@ -197,7 +195,7 @@ class MedievalCombatResultsTable
 
                 $defUnit =  $battle->force->units[$defId];
 
-                if($defUnit->checkLos($los)){
+                if(isset($defUnit->facing) && $defUnit->checkLos($los)){
                     $flankedDefenders[$defId] = true;
                 }
 

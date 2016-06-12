@@ -1,6 +1,5 @@
 @include('wargame::global-header')
-@include('wargame::TMCW.Amph.amph-header')
-<link rel="stylesheet" type="text/css" href="{{asset('vendor/wargame/medieval/grunwald1410/css/all.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('vendor/wargame/medieval/civitate1053/css/all.css')}}">
 <style>
     .semi-circle {
         width: 48px;

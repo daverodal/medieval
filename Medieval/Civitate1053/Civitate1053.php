@@ -1,5 +1,5 @@
 <?php
-namespace Wargame\Medieval\Grunwald1410;
+namespace Wargame\Medieval\Civitate1053;
 use Wargame\Medieval\MedievalLandBattle;
 use Wargame\Medieval\MedievalUnit;
 use Wargame\Medieval\UnitFactory;
@@ -25,11 +25,11 @@ use Wargame\MoveRules;
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define("POLISH_FORCE", 1);
-define("TEUTONIC_FORCE", 2);
+define("NORMAN_FORCE", 1);
+define("LOMBARD_FORCE", 2);
 
 
-class Grunwald1410 extends MedievalLandBattle
+class Civitate1053 extends MedievalLandBattle
 {
     /* a comment */
 
@@ -40,7 +40,7 @@ class Grunwald1410 extends MedievalLandBattle
     }
 
     static function getPlayerData($scenario){
-        $forceName = ["Neutral Observer", "Kingdom of Poland", "Teutonic Order"];
+        $forceName = ["Neutral Observer", "Norman", "Lombard"];
         return \Wargame\Battle::register($forceName,
             [$forceName[0], $forceName[2], $forceName[1]]);
     }
@@ -73,62 +73,39 @@ class Grunwald1410 extends MedievalLandBattle
             $baseValue = 7;
         }
 
-        for($i = 0;$i < 10;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 7, 4,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'K');
-
-        }
         for($i = 0;$i < 9;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'H');
+            UnitFactory::create("lll", NORMAN_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'cavalry',1, 0, 'H');
 
         }
 
-        for($i = 0;$i < 6;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 5,  3,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M', true);
+
+        for($i = 0;$i < 1;$i++){
+            UnitFactory::create("lll", NORMAN_FORCE, "deployBox", 4,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'inf',1, 0, 'M');
 
         }
 
-        for($i = 0;$i < 6;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, false, 'S', true);
+        for($i = 0;$i < 2;$i++){
+            UnitFactory::create("lll", NORMAN_FORCE, "deployBox", 1, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'cavalry',1, false, 'S', true);
 
         }
 
-        for($i = 0;$i < 5;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "C", 1, "tartar", 'cavalry',1, false, 'S', true);
-
-        }
-
-        for($i = 0;$i < 6;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "D", 1, "lithuanian", 'cavalry',1, false, 'S', true);
-
-        }
-
-        for($i = 0;$i < 10;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  8, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'cavalry',1, 3, 'K');
+        for($i = 0;$i < 8;$i++) {
+            UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  4, 5,1,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'cavalry',1, 3, 'H');
 
         }
         for($i = 0;$i < 6;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  6, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'cavalry',1, 3, 'K');
-
-        }
-        for($i = 0;$i < 4;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  6,  3,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'inf',1, 3, 'H');
-
-        }
-
-        for($i = 0;$i < 4;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  4, 3,2,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'inf',1, 3, 'M', true);
+            UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  3, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'inf',1, 3, 'M');
 
         }
         for($i = 0;$i < 2;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  3, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'cavalry',1, 3, 'M', true);
+            UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  2, 4,2,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'inf',1, 3, 'M', true);
 
         }
 
-        for($i = 0;$i < 5;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  3, 6,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'cavalry',1, false, 'S', true);
+        for($i = 0;$i < 2;$i++) {
+            UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  7, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "swabian", 'inf',1, 3, 'K');
 
         }
-
 
     }
 
@@ -148,7 +125,7 @@ class Grunwald1410 extends MedievalLandBattle
 
         } else {
 
-            $this->victory = new \Wargame\Victory("Wargame\\Medieval\\Grunwald1410\\VictoryCore");
+            $this->victory = new \Wargame\Victory("Wargame\\Medieval\\Civitate1053\\VictoryCore");
             if (!empty($scenario->supplyLen)) {
                 $this->victory->setSupplyLen($scenario->supplyLen);
             }

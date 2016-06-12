@@ -122,7 +122,7 @@ trait CRTResults
                     $defUnit->status = STATUS_CAN_RETREAT;
                 }
                 $defUnit->retreatCountRequired = $distance;
-                if($combatResults === DL2F || $combatResults === DLF){
+                if ($combatResults === DL2F || $combatResults === DLF) {
                     $defUnit->retreatCountRequired = $defUnit->maxMove;
                     $defUnit->disorderUnit();
                 }
@@ -147,7 +147,7 @@ trait CRTResults
                 if ($numDefenders > 1) {
                     $defUnit->status = STATUS_CAN_DEFEND_LOSE;
                     $defUnit->retreatCountRequired = 0;
-                    if($combatResults === BLDR){
+                    if ($combatResults === BLDR) {
                         $defUnit->retreatCountRequired = 1;
                     }
                     $force->exchangeAmount = 1;
@@ -168,7 +168,7 @@ trait CRTResults
                     $defUnit->status = STATUS_DEFENDED;
                     $defUnit->retreatCountRequired = 0;
                 }
-                if($combatResults === BLDR){
+                if ($combatResults === BLDR) {
                     $defUnit->status = STATUS_CAN_RETREAT;
                 }
                 $defUnit->retreatCountRequired = 1;
@@ -213,6 +213,15 @@ trait CRTResults
                 $attUnit->dieRoll = $dieRoll;
                 $attUnit->combatNumber = 0;
                 $attUnit->moveCount = 0;
+            }
+            if ($battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE) {
+                    $attUnit->status = STATUS_ATTACKED;
+                    $attUnit->combatResults = $combatResults;
+                    $attUnit->dieRoll = $dieRoll;
+                    $attUnit->combatNumber = 0;
+                    $attUnit->moveCount = 0;
+                    continue;
+                
             }
             if ($attUnit->status == STATUS_ATTACKING) {
                 switch ($combatResults) {

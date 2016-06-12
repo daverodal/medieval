@@ -178,7 +178,9 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $this->maxMove = $unitMaxMove;
         $this->moveAmountUnused = $unitMaxMove;
         $this->status = $unitStatus;
-        $this->facing = $facing;
+        if($facing !== false){
+            $this->facing = $facing;
+        }
         $this->moveAmountUsed = 0;
         $this->reinforceZone = $unitReinforceZone;
         $this->reinforceTurn = $unitReinforceTurn;
@@ -207,6 +209,9 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     }
 
     public function checkLos(\Wargame\Los $los, $defenderId = false){
+        if(!isset($this->facing)){
+            return true;
+        }
         $attackFacing = $los->getBearing() / 4;
         if($this->facing == $attackFacing){
             return true;
