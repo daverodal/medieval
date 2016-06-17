@@ -53,7 +53,6 @@ class Civitate1053 extends MedievalLandBattle
     function save()
     {
         $data = parent::save();
-        $data->specialHexA = $this->specialHexA;
         return $data;
     }
 
@@ -77,7 +76,6 @@ class Civitate1053 extends MedievalLandBattle
             UnitFactory::create("lll", NORMAN_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'cavalry',1, 0, 'H');
 
         }
-
 
         for($i = 0;$i < 1;$i++){
             UnitFactory::create("lll", NORMAN_FORCE, "deployBox", 4,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'inf',1, 0, 'M');
@@ -121,20 +119,11 @@ class Civitate1053 extends MedievalLandBattle
         $this->combatRules->injectCrt($crt);
 
         if ($data) {
-            $this->specialHexA = $data->specialHexA;
 
         } else {
 
             $this->victory = new \Wargame\Victory("Wargame\\Medieval\\Civitate1053\\VictoryCore");
-            if (!empty($scenario->supplyLen)) {
-                $this->victory->setSupplyLen($scenario->supplyLen);
-            }
-//            $this->moveRules = new MoveRules($this->force, $this->terrain);
-            $this->moveRules->enterZoc = "stop";
-            $this->moveRules->exitZoc = 0;
-            $this->moveRules->noZocZocOneHex = true;
-            $this->moveRules->noZocZoc = true;
-            $this->moveRules->retreatCannotOverstack = true;
+            
             // game data
             $this->gameRules->setMaxTurn(7);
             $this->gameRules->setInitialPhaseMode(RED_DEPLOY_PHASE, DEPLOY_MODE);

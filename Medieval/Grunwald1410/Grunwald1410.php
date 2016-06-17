@@ -149,15 +149,7 @@ class Grunwald1410 extends MedievalLandBattle
         } else {
 
             $this->victory = new \Wargame\Victory("Wargame\\Medieval\\Grunwald1410\\VictoryCore");
-            if (!empty($scenario->supplyLen)) {
-                $this->victory->setSupplyLen($scenario->supplyLen);
-            }
-//            $this->moveRules = new MoveRules($this->force, $this->terrain);
-            $this->moveRules->enterZoc = "stop";
-            $this->moveRules->exitZoc = 0;
-            $this->moveRules->noZocZocOneHex = true;
-            $this->moveRules->noZocZoc = true;
-            $this->moveRules->retreatCannotOverstack = true;
+
             // game data
             $this->gameRules->setMaxTurn(7);
             $this->gameRules->setInitialPhaseMode(RED_DEPLOY_PHASE, DEPLOY_MODE);
@@ -173,6 +165,8 @@ class Grunwald1410 extends MedievalLandBattle
             $this->gameRules->addPhaseChange(RED_MOVE_PHASE, RED_FIRE_COMBAT_PHASE, FIRE_COMBAT_SETUP_MODE, RED_FORCE, BLUE_FORCE, false);
             $this->gameRules->addPhaseChange(RED_FIRE_COMBAT_PHASE, RED_COMBAT_PHASE, COMBAT_SETUP_MODE, RED_FORCE, BLUE_FORCE, false);
             $this->gameRules->addPhaseChange(RED_COMBAT_PHASE, BLUE_MOVE_PHASE, MOVING_MODE, BLUE_FORCE, RED_FORCE, true);
+
         }
+
     }
 }

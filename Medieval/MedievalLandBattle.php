@@ -87,8 +87,14 @@ class MedievalLandBattle extends \Wargame\LandBattle
             $this->force = new MedievalForce();
             $this->terrain = new Terrain();
             $this->moveRules = new MoveRules($this->force, $this->terrain);
-            $this->moveRules->blockedRetreatDamages = true;
             
+            $this->moveRules->blockedRetreatDamages = true;
+            $this->moveRules->enterZoc = "stop";
+            $this->moveRules->exitZoc = 0;
+            $this->moveRules->noZocZocOneHex = true;
+            $this->moveRules->noZocZoc = true;
+            $this->moveRules->retreatCannotOverstack = true;
+            $this->moveRules->moveCannotOverstack = true;
 
             $this->combatRules = new CombatRules($this->force, $this->terrain);
             $this->gameRules = new GameRules($this->moveRules, $this->combatRules, $this->force);
