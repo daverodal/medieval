@@ -103,10 +103,13 @@ trait CRTResults
 
                 if ($numDefenders > 1) {
                     $defUnit->status = STATUS_CAN_DEFEND_LOSE;
-                    $defUnit->retreatCountRequired = 0;
                     $force->exchangeAmount = 1;
                     if ($combatResults === DL2R || $combatResults === DL2F) {
                         $force->exchangeAmount = 2;
+                    }
+                    $defUnit->retreatCountRequired = $distance;
+                    if($combatResults === DL2F || $combatResults === DLF){
+                        $defUnit->retreatCountRequired = $defUnit->maxMove;
                     }
                     break;
                 }
