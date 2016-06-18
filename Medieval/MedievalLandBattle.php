@@ -95,10 +95,22 @@ class MedievalLandBattle extends \Wargame\LandBattle
             $this->moveRules->noZocZoc = true;
             $this->moveRules->retreatCannotOverstack = true;
             $this->moveRules->moveCannotOverstack = true;
-
+            
             $this->combatRules = new CombatRules($this->force, $this->terrain);
             $this->gameRules = new GameRules($this->moveRules, $this->combatRules, $this->force);
         }
+        $this->moveRules->transitStacking = function($mapHex, $forceId, $unit){
+            if($unit->orgStatus === MedievalUnit::DISORDED){
+                return false;
+            }
+
+            foreach($mapHex->forces[$forceId] as $mKey => $mVal){
+                if($this->force->units[$mKey]->orgStatus === MedievalUnit::DISORDED){
+                    return false;
+                }
+            }
+            return count((array)$mapHex->forces[$forceId]) >= 1;
+        };
         static::getPlayerData($scenario);
     }
     /*
