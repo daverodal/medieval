@@ -111,6 +111,8 @@ trait CRTResults
                     if($combatResults === DL2F || $combatResults === DLF){
                         $defUnit->retreatCountRequired = $defUnit->maxMove;
                     }
+                    $force->addToRetreatHexagonList($defenderId, $force->getUnitHexagon($defenderId));
+
                     break;
                 }
                 $eliminated = $defUnit->damageUnit();
