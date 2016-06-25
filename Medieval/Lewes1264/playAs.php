@@ -24,7 +24,7 @@
 <style>
     <?php @include "playAs.css";?>
     body{
-        background:url("<?=asset("vendor/wargame/medieval/Lewes1264/images/Gérard_I,_Duke_of_Lorraine_Hadwiga.png")?>") #333 no-repeat;
+        background:url("<?=asset("vendor/wargame/medieval/Lewes1264/images/P291-Henry_III_at_the_Battle_of_Lewes.jpg")?>") #333 no-repeat;
         background-position:center 0;
         background-size:100%;
     }
@@ -38,5 +38,6 @@
     <a class="link"  href="<?=url("wargame/enter-multi");?>/<?=$wargame?>">Play Multi Player </a><br>
     <a class="link" href="<?=url("wargame/leave-game");?>">Go to Lobby</a>
     <div class="attribution">
-        By Augustin Calmet [Public domain], <a href="https://commons.wikimedia.org/wiki/File%3AG%C3%A9rard_I%2C_Duke_of_Lorraine_Hadwiga.png">via Wikimedia Commons</a>    </div>
+        By John Cassell (Internet Archive) [Public domain], <a href="https://commons.wikimedia.org/wiki/File%3AP291-Henry_III_at_the_Battle_of_Lewes.jpg">via Wikimedia Commons</a>
+    </div>
 </fieldset>
