@@ -1,5 +1,5 @@
 <?php
-namespace Wargame\Medieval\Civitate1053;
+namespace Wargame\Medieval\Lewes1264;
 use Wargame\Battle;
 /**
  *
@@ -68,17 +68,17 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
             $vp = 1;
 
             $prevForceId = $battle->mapData->specialHexes->$mapHexName;
-            if ($forceId == NORMAN_FORCE) {
-                $this->victoryPoints[NORMAN_FORCE]  += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='rebel'>+$vp Norman vp</span>";
-                $this->victoryPoints[LOMBARD_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='rebel'> -$vp Norman vp</span>";
+            if ($forceId == LOYALIST_FORCE) {
+                $this->victoryPoints[LOYALIST_FORCE]  += $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='rebel'>+$vp Loyalist vp</span>";
+                $this->victoryPoints[REBEL_FORCE] -= $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='rebel'> -$vp Loyalist vp</span>";
             }
-            if ($forceId == LOMBARD_FORCE) {
-                $this->victoryPoints[LOMBARD_FORCE]  += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='loyalist'>+$vp Lombard vp</span>";
-                $this->victoryPoints[NORMAN_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='loyalist'> -$vp Lombard vp</span>";
+            if ($forceId == REBEL_FORCE) {
+                $this->victoryPoints[REBEL_FORCE]  += $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='loyalist'>+$vp Rebel vp</span>";
+                $this->victoryPoints[LOYALIST_FORCE] -= $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='loyalist'> -$vp Rebel vp</span>";
             }
         }
 
@@ -129,15 +129,15 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
     public function gameEnded()
     {
         $battle = Battle::getBattle();
-        if ($this->victoryPoints[LOMBARD_FORCE] > $this->victoryPoints[NORMAN_FORCE]) {
-            $battle->gameRules->flashMessages[] = "Lombard Player Wins";
-            $this->winner = LOMBARD_FORCE;
+        if ($this->victoryPoints[REBEL_FORCE] > $this->victoryPoints[LOYALIST_FORCE]) {
+            $battle->gameRules->flashMessages[] = "Rebel Player Wins";
+            $this->winner = REBEL_FORCE;
         }
-        if ($this->victoryPoints[NORMAN_FORCE] > $this->victoryPoints[LOMBARD_FORCE]) {
-            $battle->gameRules->flashMessages[] = "Norman Player Wins";
-            $this->winner = NORMAN_FORCE;
+        if ($this->victoryPoints[LOYALIST_FORCE] > $this->victoryPoints[REBEL_FORCE]) {
+            $battle->gameRules->flashMessages[] = "Loyalist Player Wins";
+            $this->winner = LOYALIST_FORCE;
         }
-        if ($this->victoryPoints[LOMBARD_FORCE] == $this->victoryPoints[NORMAN_FORCE]) {
+        if ($this->victoryPoints[REBEL_FORCE] == $this->victoryPoints[LOYALIST_FORCE]) {
             $battle->gameRules->flashMessages[] = "Tie Game";
         }
         $this->gameOver = true;

@@ -20,6 +20,9 @@ class MedievalServiceProvider extends ServiceProvider
             __DIR__.'/Civitate1053/all.css' => public_path('vendor/wargame/medieval/civitate1053/css/all.css'),
             __DIR__.'/Civitate1053/all.css.map' => public_path('vendor/wargame/medieval/civitate1053/css/all.css.map'),
             __DIR__.'/Civitate1053/Images' => public_path('vendor/wargame/medieval/civitate1053/images'),
+            __DIR__.'/Lewes1264/all.css' => public_path('vendor/wargame/medieval/lewes1264/css/all.css'),
+            __DIR__.'/Lewes1264/all.css.map' => public_path('vendor/wargame/medieval/lewes1264/css/all.css.map'),
+            __DIR__.'/Lewes1264/Images' => public_path('vendor/wargame/medieval/lewes1264/images'),
             __DIR__.'/../Medieval/Maps' => public_path('battle-maps')
 
         ], 'medieval');

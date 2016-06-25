@@ -38,5 +38,25 @@
         "longDescription": "Killing up close"
       }
     }
+  },
+  "Lewes1264": {
+    "name": "Battle of Lewes 1264",
+    "path": "Medieval",
+    "genre": "Medieval Games",
+    "fileName": "\\Wargame\\Medieval\\Lewes1264\\Lewes1264",
+    "description": "Old style combat, even older than before",
+    "options": [
+      {
+        "name": "Fog of war during Deployment. Enemy units remain hidden until movement phase..",
+        "keyName": "fogDeploy",
+        "value": false
+      }
+    ],
+    "scenarios": {
+      "Main": {
+        "description": "Standard",
+        "longDescription": "Killing up close"
+      }
+    }
   }
 }
