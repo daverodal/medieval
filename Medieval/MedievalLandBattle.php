@@ -180,6 +180,11 @@ class MedievalLandBattle extends \Wargame\LandBattle
         $this->terrain->addTerrainFeature("fortb", "fortb", "f", 1, 0, 0, true);
         $this->terrain->addTerrainFeature("mine", "mine", "m", 0, 0, 0, false);
 
+        $this->terrain->addTerrainFeature("elevation1","elevation1", "e", 0, 0, 0, false);
+        $this->terrain->addTerrainFeature("elevation2","elevation2", "e", 0, 0, 0, false);
+        $this->terrain->addTerrainFeature("elevation0","elevation0", "e", 0, 0, 0, false);
+
+
 
         $terrainArr = json_decode($terrainDoc->hexStr->hexEncodedStr);
         $mapId = $terrainDoc->hexStr->map;
@@ -202,9 +207,14 @@ class MedievalLandBattle extends \Wargame\LandBattle
         $xOff = ($a + $c) * 2 - ($c / 2 + $a);
         $this->terrain->originX = $xOff - $map->x;
 
+        $elevationMap = [];
+
 
         for ($col = 100; $col <= $maxCol * 100; $col += 100) {
             for ($row = 1; $row <= $maxRow; $row++) {
+                $tNum = sprintf("%04d",$row + $col);
+
+                $elevationMap[$tNum] = true;
                 $this->terrain->addTerrain($row + $col, LOWER_LEFT_HEXSIDE, "clear");
                 $this->terrain->addTerrain($row + $col, UPPER_LEFT_HEXSIDE, "clear");
                 $this->terrain->addTerrain($row + $col, BOTTOM_HEXSIDE, "clear");
@@ -222,9 +232,16 @@ class MedievalLandBattle extends \Wargame\LandBattle
                     $this->terrain->addReinforceZone($terrain->number, $matches[1]);
                 } else {
                     $tNum = sprintf("%04d", $terrain->number);
+                    if(preg_match("/^Elevation/", $name)){
+
+                        unset($elevationMap[$tNum]);
+                    }
                     $this->terrain->addTerrain($tNum, $terrain->hexpartType, strtolower($name));
                 }
             }
+        }
+        foreach($elevationMap as $key => $val){
+            $this->terrain->addTerrain($key, HEXAGON_CENTER, 'elevation0');
         }
     }
 }
