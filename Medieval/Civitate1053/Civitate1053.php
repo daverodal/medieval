@@ -83,7 +83,7 @@ class Civitate1053 extends MedievalLandBattle
         }
 
         for($i = 0;$i < 2;$i++){
-            UnitFactory::create("lll", NORMAN_FORCE, "deployBox", 1, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'cavalry',1, false, 'S', true);
+            UnitFactory::create("lll", NORMAN_FORCE, "deployBox", 1, 3,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'inf',1, false, 'S', true);
 
         }
 
