@@ -3662,12 +3662,12 @@ svg marker#head {
   position: absolute;
   left: 13px;
   height: 13px;
-  background: url("/vendor/wargame/medieval/Lewes1264/images/arrow.svg");
+  background: url("/vendor/wargame/medieval/lewes1264/images/arrow.svg");
   background-size: 10px 13px;
   width: 10px; }
 
 .rebel .counterWrapper .bow {
-  background: url("/vendor/wargame/medieval/Lewes1264/images/whiteArrow.svg");
+  background: url("/vendor/wargame/medieval/lewes1264/images/whiteArrow.svg");
   background-size: 10px 13px;
   width: 10px; }
 
