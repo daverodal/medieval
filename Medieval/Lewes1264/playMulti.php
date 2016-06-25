@@ -25,7 +25,7 @@
     body {
         background: #ccc;
         color: #333;
-        background: url("<?=asset("vendor/wargame/medieval/Lewes1264/images/P291-Henry_III_at_the_Battle_of_Lewes.jpg")?>") #333 no-repeat;
+        background: url("<?=asset("vendor/wargame/medieval/lewes1264/images/P291-Henry_III_at_the_Battle_of_Lewes.jpg")?>") #333 no-repeat;
         background-position: 10% 0;
         background-size: 100%;
     }
