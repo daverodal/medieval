@@ -210,17 +210,20 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         if(!isset($this->facing)){
             return true;
         }
-        $attackFacing = $los->getBearing() / 4;
-        if($this->facing == $attackFacing){
-            return true;
+        $unitFacing = $this->facing;
+        $attackFacing = ($los->getBearing() / 4);
+        /*
+         * non wrapping facing
+         */
+        if($unitFacing >= 1 && $unitFacing <= 4){
+            return $attackFacing >= $unitFacing - 1 && $attackFacing <= $unitFacing + 1;
         }
-        if(($attackFacing + 1) % 6 == $this->facing){
-            return true;
+        if($unitFacing === 0){
+            return (($attackFacing >= 5 && $attackFacing <= 6) || ($attackFacing >= 0 && $attackFacing <= 1));
         }
-        if(($this->facing + 1) % 6 == $attackFacing){
-            return true;
+        if($unitFacing === 5){
+            return (($attackFacing >= 4 && $attackFacing <= 6) || ($attackFacing == 0));
         }
-
         return false;
     }
 
