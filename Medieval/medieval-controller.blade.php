@@ -109,6 +109,12 @@
             var newHexUnits = {};
             for(var i in mapUnits) {
                 var newUnit = $scope.units[i];
+                newUnit.hq = mapUnits[i].class === "hq";
+                newUnit.command = 0;
+                if(mapUnits[i].class === "hq"){
+                    var range = mapUnits[i].commandRadius;
+                    newUnit.command = ".........".slice(0,range);
+                }
                 if(mapUnits[i].parent === 'gameImages') {
                     newUnit.shift = 0;
                     if (unitsMap[i] === undefined) {

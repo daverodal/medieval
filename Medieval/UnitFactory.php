@@ -48,10 +48,11 @@ class UnitFactory {
                                   $facing,
                                   $armorClass,
                                   $bow = false,
-                                  $orgStatus = 0){
+                                  $orgStatus = 0,
+                                  $numSteps = 2){
         $unit = static::build();
         $unit->set($unitName, $unitForceId, $unitHexagon, $unitStrength,$range, 
-            $unitMaxMove, $unitStatus, $unitReinforceZoneName, $unitReinforceTurn,  $nationality, $class, $unitDesig, $orgStatus, $facing, $armorClass, $bow, $orgStatus);
+            $unitMaxMove, $unitStatus, $unitReinforceZoneName, $unitReinforceTurn,  $nationality, $class, $unitDesig, $orgStatus, $facing, $armorClass, $bow, $orgStatus, $numSteps);
         self::$injector->injectUnit($unit);
     }
 }

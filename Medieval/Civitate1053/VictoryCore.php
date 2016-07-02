@@ -112,20 +112,6 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
         }
     }
 
-    public function incrementTurn()
-    {
-        $battle = Battle::getBattle();
-
-        $theUnits = $battle->force->units;
-        foreach ($theUnits as $id => $unit) {
-
-            if ($unit->status == STATUS_CAN_REINFORCE && $unit->reinforceTurn <= $battle->gameRules->turn && $unit->hexagon->parent != "deployBox") {
-//                $theUnits[$id]->status = STATUS_ELIMINATED;
-                $theUnits[$id]->hexagon->parent = "deployBox";
-            }
-        }
-    }
-
     public function gameEnded()
     {
         $battle = Battle::getBattle();
@@ -142,63 +128,5 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
         }
         $this->gameOver = true;
         return true;
-    }
-
-    public function phaseChange()
-    {
-
-        /* @var $battle MartianCivilWar */
-        $battle = Battle::getBattle();
-        /* @var $gameRules GameRules */
-        $gameRules = $battle->gameRules;
-        $forceId = $gameRules->attackingForceId;
-        $turn = $gameRules->turn;
-        $force = $battle->force;
-
-        if ($gameRules->phase == RED_COMBAT_PHASE || $gameRules->phase == BLUE_COMBAT_PHASE) {
-            $gameRules->flashMessages[] = "@hide deployWrapper";
-        } else {
-            $gameRules->flashMessages[] = "@hide crt";
-
-            /* Restore all un-supplied strengths */
-            $force = $battle->force;
-            $this->restoreAllCombatEffects($force);
-        }
-        if ($gameRules->phase == BLUE_REPLACEMENT_PHASE || $gameRules->phase == RED_REPLACEMENT_PHASE) {
-            $gameRules->flashMessages[] = "@show deadpile";
-            $forceId = $gameRules->attackingForceId;
-        }
-        if ($gameRules->phase == BLUE_MOVE_PHASE || $gameRules->phase == RED_MOVE_PHASE) {
-            $gameRules->flashMessages[] = "@hide deadpile";
-            if (!empty($battle->force->reinforceTurns->$turn->$forceId)) {
-                $gameRules->flashMessages[] = "@show deployWrapper";
-                $gameRules->flashMessages[] = "Reinforcements have been moved to the Deploy/Staging Area";
-            }
-        }
-    }
-
-    public function preRecoverUnits($args)
-    {
-
-    }
-
-    public function postRecoverUnit($arg){
-        list($unit) = $arg;
-
-        $b = Battle::getBattle();
-        if($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE){
-            if(empty($unit->bow)){
-                $unit->status = STATUS_UNAVAIL_THIS_PHASE;
-            }
-        }
-    }
-
-
-    public function playerTurnChange($arg)
-    {
-        $battle = Battle::getBattle();
-        foreach($battle->force->units as $unit){
-            $unit->rallyCheck();
-        }
     }
 }

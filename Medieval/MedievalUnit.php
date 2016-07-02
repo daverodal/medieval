@@ -41,6 +41,8 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public $origStrength;
     public $disorderedPlayerTurns = 0;
     public $bow;
+    public $command = true;
+    public $commandRadius = false;
 
 
     public function jsonSerialize()
@@ -60,6 +62,9 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public function getMaxMove(){
         $maxMove = parent::getMaxMove();
         if($this->orgStatus === self::DISORDED){
+            $maxMove /= 2;
+        }
+        if($this->command === false){
             $maxMove /= 2;
         }
         return $maxMove;
@@ -144,7 +149,8 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
                   $facing,
                  $armorClass,
                 $bow,
-                $orgStatus
+                $orgStatus,
+                 $numSteps = 2
 
                     )
     {
@@ -156,7 +162,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
         $this->hexagon = new Hexagon($unitHexagon);
         $this->strength  = $strength;
-        $this->steps = 2;
+        $this->steps = $numSteps;
         if($strength >= 6){
             $this->steps = 3;
         }
@@ -188,7 +194,11 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $this->moveCount = 0;
         $this->retreatCountRequired = 0;
         $this->combatResults = NE;
-        $this->range = $range;
+        if($class = "hq"){
+            $this->commandRadius = $range;
+        }else{
+            $this->range = $range;
+        }
         $this->nationality = $nationality;
         $this->unitDesig = $unitDesig;
         $this->orgStatus = $orgStatus;
@@ -302,6 +312,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $mapUnit->armorClass = $this->armorClass;
         $mapUnit->steps = $this->steps;
         $mapUnit->hexagon = $this->hexagon->name;
+        $mapUnit->commandRadius = $this->commandRadius;
         return $mapUnit;
     }
 

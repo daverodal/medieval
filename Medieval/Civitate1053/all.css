@@ -2109,6 +2109,15 @@ This program is distributed in the hope that it will be useful,
 You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
    */
+.unit .counterWrapper .hq {
+  word-wrap: break-word;
+  width: 8px;
+  line-height: 4px;
+  top: -2px;
+  position: absolute;
+  left: 15px;
+  font-size: 16px; }
+
 body {
   min-width: 675px;
   margin: 0;
@@ -3320,13 +3329,13 @@ svg marker#head {
 /*df5842*/
 .playerLombard {
   color: inherit;
-  background: #6e87ff;
-  border-color: #6e87ff !important; }
+  background: #60b2ff;
+  border-color: #60b2ff !important; }
   .playerLombard #statusWrapper {
     color: black; }
 
 .LombardFace, .playerLombardFace {
-  color: #6e87ff; }
+  color: #60b2ff; }
 
 .playerNorman {
   color: inherit;
@@ -3419,9 +3428,9 @@ svg marker#head {
 
 .lombard {
   color: black;
-  background-color: #6e87ff; }
+  background-color: #60b2ff; }
   .lombard .counterWrapper {
-    background-color: #6e87ff; }
+    background-color: #60b2ff; }
   .lombard .unit-steps, .lombard .unit-numbers {
     color: black; }
 
@@ -3498,9 +3507,9 @@ svg marker#head {
 
 .swabian {
   color: black;
-  background-color: #fb001d; }
+  background-color: #60b2ff; }
   .swabian .counterWrapper {
-    background-color: #6e87ff; }
+    background-color: #fb001d; }
   .swabian .unit-steps, .swabian .unit-numbers {
     color: black; }
 
@@ -3574,6 +3583,9 @@ svg marker#head {
     border: none; }
 .swabian.pontoon .unit-numbers {
   display: none; }
+
+.lombard.hq .counterWrapper .counter:before {
+  color: white; }
 
 #crt {
   width: 875px; }

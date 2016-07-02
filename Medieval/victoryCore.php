@@ -1,5 +1,6 @@
 <?php
 namespace Wargame\Medieval;
+use Wargame\Battle;
 use stdClass;
 /**
  *
@@ -30,13 +31,12 @@ use stdClass;
 
 class victoryCore extends \Wargame\VictoryCore
 {
+    use Command;
     public $victoryPoints;
     protected $movementCache;
     protected $combatCache;
     protected $supplyLen = false;
-
-    use \Wargame\TMCW\ModernSupplyRules;
-
+    
     function __construct($data)
     {
         parent::__construct($data);
@@ -45,6 +45,7 @@ class victoryCore extends \Wargame\VictoryCore
             $this->movementCache = $data->victory->movementCache;
             $this->combatCache = $data->victory->combatCache;
             $this->supplyLen = $data->victory->supplyLen;
+            $this->headQuarters = $data->victory->headQuarters;
         } else {
             $this->victoryPoints = array(0, 0, 0);
             $this->movementCache = new stdClass();
@@ -59,11 +60,8 @@ class victoryCore extends \Wargame\VictoryCore
         $ret->movementCache = $this->movementCache;
         $ret->combatCache = $this->combatCache;
         $ret->supplyLen = $this->supplyLen;
+        $ret->headQuarters = $this->headQuarters;
         return $ret;
-    }
-
-    public function setSupplyLen($supplyLen){
-        $this->supplyLen = $supplyLen[0];
     }
 
     public function incrementTurn()
@@ -93,6 +91,11 @@ class victoryCore extends \Wargame\VictoryCore
         $gameRules = $battle->gameRules;
         $gameRules->flashMessages[] = "@hide crt";
 
+        $battle = Battle::getBattle();
+        foreach($battle->force->units as $unit){
+            $unit->rallyCheck();
+        }
+        
         if($this->checkVictory($attackingId,$battle)){
             return;
         }
@@ -109,25 +112,29 @@ class victoryCore extends \Wargame\VictoryCore
         $turn = $gameRules->turn;
 
         if ($gameRules->phase == RED_COMBAT_PHASE || $gameRules->phase == BLUE_COMBAT_PHASE) {
-            $gameRules->flashMessages[] = "@hide deployWrapper";
         } else {
             $gameRules->flashMessages[] = "@hide crt";
+        }
 
-            /* Restore all un-supplied strengths */
-            $force = $battle->force;
-            $this->restoreAllCombatEffects($force);
-        }
-        if ($gameRules->phase == BLUE_REPLACEMENT_PHASE || $gameRules->phase == RED_REPLACEMENT_PHASE) {
-            $gameRules->flashMessages[] = "@show deadpile";
-            $forceId = $gameRules->attackingForceId;
-        }
-        if ($gameRules->phase == BLUE_MOVE_PHASE || $gameRules->phase == RED_MOVE_PHASE) {
-            $gameRules->flashMessages[] = "@hide deadpile";
-            if ($battle->force->reinforceTurns->$turn->$forceId) {
-                $gameRules->flashMessages[] = "@show deployWrapper";
-                $gameRules->flashMessages[] = "Reinforcements have been moved to the Deploy/Staging Area";
+    }
+
+    public function preRecoverUnits(){
+
+        $this->initHeadquarters();
+
+    }
+        
+    public function postRecoverUnit($args)
+    {
+        list($unit) = $args;
+        $b = Battle::getBattle();
+        
+        $this->checkCommand($unit);
+
+        if($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE){
+            if(empty($unit->bow)){
+                $unit->status = STATUS_UNAVAIL_THIS_PHASE;
             }
         }
     }
-
 }

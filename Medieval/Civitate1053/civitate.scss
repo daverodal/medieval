@@ -21,11 +21,19 @@
 @import "civitateColors";
 /*df5842*/
 
-@include headerColor(Lombard, #6e87ff, #6e87ff);
+@include headerColor(Lombard, #60b2ff, #60b2ff);
 @include headerColor(Norman, #FFA99B, red);
 @include unitColor(norman,#FFA99B,  Brit, red );
-@include unitColor(lombard, #6e87ff, Bavarian, #6e87ff, black, black);
-@include unitColor(swabian,#fb001d,  Bavarian, #6e87ff, black, black );
+@include unitColor(lombard, #60b2ff, Bavarian, #60b2ff, black, black);
+@include unitColor(swabian,#60b2ff,  Bavarian, #fb001d, black, black );
+
+
+
+.lombard.hq .counterWrapper .counter{
+  &:before{
+    color:white;
+  }
+}
 
 #map {
 }

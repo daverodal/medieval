@@ -23,6 +23,63 @@
 <script src="<?=url("js/angular.js");?>"></script>
 <script src="<?=url("js/ng-right-click.js");?>"></script>
 
+@section('units')
+    <div class="a-unit-wrapper" ng-repeat="unit in mapUnits"  ng-style="unit.wrapperstyle">
+        <div id="@{{unit.id}}" ng-mouseDown="mouseDown(unit.id, $event)" ng-mouseUp="clickMe(unit.id, $event)" ng-right-click="rightClickMe(unit.id, $event)"  ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
+            <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
+            <div class="shadow-mask" ng-class="unit.shadow"></div>
+            <div class="counterWrapper">
+                <div ng-show="unit.bow" class="bow" style=""></div>
+                <div ng-show="unit.hq" class="hq">@{{ unit.command }}</div>
+                <div class="counter"></div>
+            </div>
+            <div class="range">@{{ unit.armorClass }}</div>
+
+            <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
+
+            <div ng-class="unit.infoLen" class="unit-numbers">@{{ unit.unitNumbers }}</div>
+            <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+
+
+        </div>
+    </div>
+
+    <div ng-mouseover="hoverThis(unit)" ng-mouseleave="unHoverThis(unit)" ng-click="clickMe(unit.id, $event)" ng-style="unit.style" ng-repeat="unit in moveUnits track by $index" class="unit" ng-class="[unit.nationality, unit.class]" >
+        <div class="counterWrapper">
+            <div class="counter"></div>
+        </div>
+        <div class="range">@{{ unit.armorClass }}</div>
+        <div class="unit-numbers">@{{ unit.strength }} - @{{ unit.pointsLeft }}</div>
+        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+
+    </div>
+
+
+@endsection
+@section('outer-deploy-box')
+    <div id="deployBox">
+        <div class="a-unit-wrapper" ng-repeat="unit in deployUnits"  ng-style="unit.wrapperstyle">
+            <div id="@{{unit.id}}" ng-mouseUp="clickMe(unit.id, $event)" ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
+                <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
+                <div class="shadow-mask" ng-class="unit.shadow"></div>
+                <div class="counterWrapper">
+                    <div ng-show="unit.bow" class="bow" style=""></div>
+                    <div ng-show="unit.hq" class="hq">@{{ unit.command }}</div>
+
+                    <div class="counter"></div>
+                </div>
+                <div class="range">@{{ unit.armorClass }}</div>
+
+                <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
+
+                <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
+                <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+@endsection
 <body ng-app="lobbyApp" xmlns="http://www.w3.org/1999/html">
 <div ng-controller="LobbyController" id="theDiv">
     <header id="header">

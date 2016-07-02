@@ -72,6 +72,10 @@ class Civitate1053 extends MedievalLandBattle
             $baseValue = 7;
         }
 
+        UnitFactory::create("lll", NORMAN_FORCE, "deployBox",  3, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", NORMAN_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", NORMAN_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
+
         for($i = 0;$i < 9;$i++){
             UnitFactory::create("lll", NORMAN_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'cavalry',1, 0, 'H');
 
@@ -87,6 +91,11 @@ class Civitate1053 extends MedievalLandBattle
 
         }
 
+        UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'hq',1, 3, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  1, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'hq',1, 3, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  1, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'hq',1, 3, 'H',false, MedievalUnit::BATTLE_READY, 1);
+
+
         for($i = 0;$i < 8;$i++) {
             UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  4, 5,1,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'cavalry',1, 3, 'H');
 
@@ -99,6 +108,8 @@ class Civitate1053 extends MedievalLandBattle
             UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  2, 4,2,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'inf',1, 3, 'M', true);
 
         }
+
+        UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  2, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "swabian", 'hq',1, 3, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 2;$i++) {
             UnitFactory::create("lll", LOMBARD_FORCE, "deployBox",  7, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "swabian", 'inf',1, 3, 'K');

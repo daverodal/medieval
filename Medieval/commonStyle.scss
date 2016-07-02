@@ -15,6 +15,16 @@ You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
    */
 
+.unit .counterWrapper .hq{
+  word-wrap: break-word;
+  width: 8px;
+  line-height: 4px;
+  top: -2px;
+  position: absolute;
+  left: 15px;
+  font-size:16px;
+
+}
 $darkBlack: #333;
 $stdFont: 16px;
 
