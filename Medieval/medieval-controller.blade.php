@@ -1,12 +1,53 @@
 <script>
-    var lobbyApp = angular.module('lobbyApp', []);
+    var lobbyApp = angular.module('lobbyApp', ['ngRightClick']);
     lobbyApp.controller('LobbyController', ['$scope', '$http', 'sync', '$sce', function($scope, $http, sync, $sce){
         $scope.topCrt = angular.fromJson('{!!json_encode(new \Wargame\Medieval\MedievalCombatResultsTable())!!}');
-        debugger;
         $scope.resultsNames = $scope.topCrt.resultsNames;
 
         $scope.units = angular.fromJson('{!!json_encode($units)!!}');
+        $scope.hexesMap = {};
+        $scope.unitsMap = {};
+        $scope.rightClicked = false;
+        $scope.mouseDown = function(id,event){
+            DR.clickX = event.clientX;
+            DR.clickY = event.clientY;
+            DR.dragged = false;
+        };
+        $scope.rightClickMe = function(id, event){
+            var hex = $scope.unitsMap[id];
+            var hexesMap = $scope.hexesMap;
+            if(hexesMap[hex] && hexesMap[hex].length > 0){
+                var tmp = hexesMap[hex].shift();
+                hexesMap[hex].push(tmp);
+
+                for(var i in hexesMap[hex]){
+                    var unit = $scope.units[hexesMap[hex][i]];
+                    unit.wrapperstyle.zIndex = i;
+                    var shift = unit.shift;
+                    var top = unit.wrapperstyle.top.replace(/px/,'');
+                    var left = unit.wrapperstyle.left.replace(/px/,'');
+                    unit.wrapperstyle.top = (top - shift + i * 5) + "px";
+                    unit.wrapperstyle.left = (left - shift + i * 5) + "px";
+                    unit.shift = i * 5;
+                }
+//                $scope.units[tmp].wrapperstyle.zIndex = 10;
+                $scope.rightClicked = true;
+                return true;
+            }
+            $scope.rightClicked = true;
+            return true;
+            doitUnit(id, event);
+            return true;
+        };
         $scope.clickMe = function(id, event){
+            if($scope.rightClicked){
+                $scope.rightClicked = false;
+                return;
+            }
+            if(DR.dragged){
+                DR.dragged = false;
+                return;
+            }
             doitUnit(id, event);
         };
         $scope.floatMessage = {};
@@ -62,16 +103,46 @@
         sync.register('mapUnits', function(mapUnits,data){
             var gameUnits = {};
             var deployUnits = [];
+            var hexesMap = $scope.hexesMap;
+            var newUnitHexes = {};
+            var unitsMap = $scope.unitsMap;
+            var newHexUnits = {};
             for(var i in mapUnits) {
                 var newUnit = $scope.units[i];
-                if(mapUnits[i].parent === 'gameImages'){
+                if(mapUnits[i].parent === 'gameImages') {
+                    newUnit.shift = 0;
+                    if (unitsMap[i] === undefined) {
+                            unitsMap[i] = mapUnits[i].hexagon;
+                            if(hexesMap[mapUnits[i].hexagon] === undefined){
+                                hexesMap[mapUnits[i].hexagon] = [];
+                            }
+                        hexesMap[mapUnits[i].hexagon].push(i);
+                    } else {
+
+                        if (unitsMap[i] !== mapUnits[i].hexagon) {
+                            /* unit moved */
+                            var dead = hexesMap[unitsMap[i]].indexOf(i);
+                            hexesMap[unitsMap[i]].splice(dead,1);
+//                            delete hexesMap[unitsMap[i]][i];
+                            if(hexesMap[mapUnits[i].hexagon] === undefined){
+                                hexesMap[mapUnits[i].hexagon] = [];
+                            }
+                            hexesMap[mapUnits[i].hexagon].push(i);
+                            unitsMap[i] = mapUnits[i].hexagon;
+                        }
+                    }
+                    if(Object.keys(hexesMap[mapUnits[i].hexagon]).length){
+                        newUnit.shift = hexesMap[mapUnits[i].hexagon].indexOf(i) * 5;
+                    }else{
+                    }
                     newUnit.maxMove = mapUnits[i].maxMove;
                     newUnit.moveAmountUsed = mapUnits[i].moveAmountUsed;
                     newUnit.wrapperstyle = {};
 //                        newUnit.facingstyle = {};
                     newUnit.wrapperstyle.transform = "rotate("+mapUnits[i].facing*60+"deg)";
-                    newUnit.wrapperstyle.top = mapUnits[i].y-20+"px";
-                    newUnit.wrapperstyle.left = mapUnits[i].x-20+"px";
+                    newUnit.wrapperstyle.top = newUnit.shift + mapUnits[i].y-20+"px";
+                    newUnit.wrapperstyle.left = newUnit.shift + mapUnits[i].x-20+"px";
+                    newUnit.wrapperstyle.zIndex = newUnit.shift;
                     newUnit.facing = mapUnits[i].facing;
                     newUnit.strength = mapUnits[i].strength;
                     newUnit.steps = mapUnits[i].steps;

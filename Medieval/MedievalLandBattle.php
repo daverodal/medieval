@@ -99,6 +99,28 @@ class MedievalLandBattle extends \Wargame\LandBattle
             $this->combatRules = new CombatRules($this->force, $this->terrain);
             $this->gameRules = new GameRules($this->moveRules, $this->combatRules, $this->force);
         }
+        $this->moveRules->stacking = function($mapHex, $forceId, $unit){
+            if($unit->class === "hq"){
+                foreach($mapHex->forces[$forceId] as $mKey => $mVal){
+                    if($this->force->units[$mKey]->class === "hq"){
+                        return true;
+                    }
+                }
+                return false;
+            }else{
+                $hasLeader = false;
+                foreach($mapHex->forces[$forceId] as $mKey => $mVal){
+                    if($this->force->units[$mKey]->class === "hq"){
+                        $hasLeader = true;
+                    }
+                }
+                if($hasLeader){
+                    return count((array)$mapHex->forces[$forceId]) >= 2;
+                }
+            }
+            return count((array)$mapHex->forces[$forceId]) >= 1;
+        };
+
         $this->moveRules->transitStacking = function($mapHex, $forceId, $unit){
             if($unit->orgStatus === MedievalUnit::DISORDED){
                 return false;
@@ -107,6 +129,24 @@ class MedievalLandBattle extends \Wargame\LandBattle
             foreach($mapHex->forces[$forceId] as $mKey => $mVal){
                 if($this->force->units[$mKey]->orgStatus === MedievalUnit::DISORDED){
                     return false;
+                }
+            }
+            if($unit->class === "hq"){
+                foreach($mapHex->forces[$forceId] as $mKey => $mVal){
+                    if($this->force->units[$mKey]->class === "hq"){
+                        return true;
+                    }
+                }
+                return false;
+            }else{
+                $hasLeader = false;
+                foreach($mapHex->forces[$forceId] as $mKey => $mVal){
+                    if($this->force->units[$mKey]->class === "hq"){
+                        $hasLeader = true;
+                    }
+                }
+                if($hasLeader){
+                    return count((array)$mapHex->forces[$forceId]) >= 2;
                 }
             }
             return count((array)$mapHex->forces[$forceId]) >= 1;

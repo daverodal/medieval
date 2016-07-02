@@ -28,6 +28,24 @@
 @include unitColor(tartar,#FFA99B,  Brit, green );
 @include unitColor(lithuanian,#FFA99B,  Brit, orange );
 
+.loyalist.hq .counterWrapper .counter{
+  &:before{
+    color:yellow;
+  }
+}
+
+.tartar.hq .counterWrapper .counter{
+  &:before{
+    color:yellow;
+  }
+}
+
+
+.lithuanian.hq .counterWrapper .counter{
+  &:before{
+    color:yellow;
+  }
+}
 #map {
 }
 

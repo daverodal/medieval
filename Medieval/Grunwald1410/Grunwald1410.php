@@ -73,6 +73,10 @@ class Grunwald1410 extends MedievalLandBattle
             $baseValue = 7;
         }
 
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K');
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K');
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 1, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'H');
+
         for($i = 0;$i < 10;$i++){
             UnitFactory::create("lll", POLISH_FORCE, "deployBox", 7, 4,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'K');
 
@@ -92,15 +96,24 @@ class Grunwald1410 extends MedievalLandBattle
 
         }
 
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "tartar", 'hq',1, 0, 'H');
+
         for($i = 0;$i < 5;$i++){
             UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "C", 1, "tartar", 'cavalry',1, false, 'S', true);
 
         }
 
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "lithuanian", 'hq',1, 0, 'H');
+
         for($i = 0;$i < 6;$i++){
             UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "D", 1, "lithuanian", 'cavalry',1, false, 'S', true);
 
         }
+
+        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  3, 4,5,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'hq',1, 3, 'K');
+        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  2, 4,4,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'hq',1, 3, 'K');
+        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  1, 4,3,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'hq',1, 3, 'K');
+        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  1, 4,3,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'hq',1, 3, 'K');
 
         for($i = 0;$i < 10;$i++) {
             UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  8, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic", 'cavalry',1, 3, 'K');

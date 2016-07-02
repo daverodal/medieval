@@ -79,9 +79,10 @@ $vintage-unit-numbers-size:10px;
       background-size: $vintage-badge-size;
     }
     &.#{$nationality}.hq .counterWrapper .counter {
-      background-color:lightgreen;
-      background-image: url('/js/HQBadge.png');
-      background-size: $vintage-badge-size;
+      font: normal normal normal 14px/1 FontAwesome;
+      &:before{
+        content:"\f024";
+      }
     }
     &.#{$nationality}.pontoon {
       .counterWrapper {
@@ -124,8 +125,10 @@ $vintage-unit-numbers-size:10px;
     background-size: $badge-size;
   }
   .#{$nationality}.hq .counterWrapper .counter {
-    background-color:lightgreen;
-    background-image: url('/js/HQBadge.png');
+    font: normal normal normal 14px/1 FontAwesome;
+    &:before{
+      content:"\f024";
+    }
     background-size: $badge-size;
   }
 

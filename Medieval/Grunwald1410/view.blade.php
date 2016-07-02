@@ -76,7 +76,7 @@
 
 @section('units')
     <div class="a-unit-wrapper" ng-repeat="unit in mapUnits"  ng-style="unit.wrapperstyle">
-    <div id="@{{unit.id}}" ng-mouseUp="clickMe(unit.id, $event)" ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
+    <div id="@{{unit.id}}" ng-mouseDown="mouseDown(unit.id, $event)" ng-mouseUp="clickMe(unit.id, $event)" ng-right-click="rightClickMe(unit.id, $event)" ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
         <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
         <div class="shadow-mask" ng-class="unit.shadow"></div>
         <div class="counterWrapper">
@@ -123,4 +123,5 @@
         </div>
     @endforeach
 @endsection
+
 @include('wargame::Medieval.angular-view' )

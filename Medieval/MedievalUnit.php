@@ -301,6 +301,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $mapUnit->orgStatus = $this->orgStatus;
         $mapUnit->armorClass = $this->armorClass;
         $mapUnit->steps = $this->steps;
+        $mapUnit->hexagon = $this->hexagon->name;
         return $mapUnit;
     }
 

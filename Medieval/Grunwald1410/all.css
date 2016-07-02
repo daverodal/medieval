@@ -3359,9 +3359,9 @@ svg marker#head {
   background-image: url("/js/BritHorArtBadge.png");
   background-size: 19px; }
 .vintage.loyalist.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
-  background-size: 19px; }
+  font: normal normal normal 14px/1 FontAwesome; }
+  .vintage.loyalist.hq .counterWrapper .counter:before {
+    content: "\f024"; }
 .vintage.loyalist.pontoon .counterWrapper {
   border: none; }
   .vintage.loyalist.pontoon .counterWrapper .counter {
@@ -3396,9 +3396,10 @@ svg marker#head {
   background-size: 14px; }
 
 .loyalist.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
+  font: normal normal normal 14px/1 FontAwesome;
   background-size: 14px; }
+  .loyalist.hq .counterWrapper .counter:before {
+    content: "\f024"; }
 
 .loyalist.wagon .counterWrapper .counter {
   background-image: url("/js/Wagon.png");
@@ -3437,9 +3438,9 @@ svg marker#head {
   background-image: url("/js/TeutonicAntiHorArtBadge.png");
   background-size: 19px; }
 .vintage.teutonic.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
-  background-size: 19px; }
+  font: normal normal normal 14px/1 FontAwesome; }
+  .vintage.teutonic.hq .counterWrapper .counter:before {
+    content: "\f024"; }
 .vintage.teutonic.pontoon .counterWrapper {
   border: none; }
   .vintage.teutonic.pontoon .counterWrapper .counter {
@@ -3474,9 +3475,10 @@ svg marker#head {
   background-size: 14px; }
 
 .teutonic.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
+  font: normal normal normal 14px/1 FontAwesome;
   background-size: 14px; }
+  .teutonic.hq .counterWrapper .counter:before {
+    content: "\f024"; }
 
 .teutonic.wagon .counterWrapper .counter {
   background-image: url("/js/Wagon.png");
@@ -3515,9 +3517,9 @@ svg marker#head {
   background-image: url("/js/BritHorArtBadge.png");
   background-size: 19px; }
 .vintage.tartar.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
-  background-size: 19px; }
+  font: normal normal normal 14px/1 FontAwesome; }
+  .vintage.tartar.hq .counterWrapper .counter:before {
+    content: "\f024"; }
 .vintage.tartar.pontoon .counterWrapper {
   border: none; }
   .vintage.tartar.pontoon .counterWrapper .counter {
@@ -3552,9 +3554,10 @@ svg marker#head {
   background-size: 14px; }
 
 .tartar.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
+  font: normal normal normal 14px/1 FontAwesome;
   background-size: 14px; }
+  .tartar.hq .counterWrapper .counter:before {
+    content: "\f024"; }
 
 .tartar.wagon .counterWrapper .counter {
   background-image: url("/js/Wagon.png");
@@ -3593,9 +3596,9 @@ svg marker#head {
   background-image: url("/js/BritHorArtBadge.png");
   background-size: 19px; }
 .vintage.lithuanian.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
-  background-size: 19px; }
+  font: normal normal normal 14px/1 FontAwesome; }
+  .vintage.lithuanian.hq .counterWrapper .counter:before {
+    content: "\f024"; }
 .vintage.lithuanian.pontoon .counterWrapper {
   border: none; }
   .vintage.lithuanian.pontoon .counterWrapper .counter {
@@ -3630,9 +3633,10 @@ svg marker#head {
   background-size: 14px; }
 
 .lithuanian.hq .counterWrapper .counter {
-  background-color: lightgreen;
-  background-image: url("/js/HQBadge.png");
+  font: normal normal normal 14px/1 FontAwesome;
   background-size: 14px; }
+  .lithuanian.hq .counterWrapper .counter:before {
+    content: "\f024"; }
 
 .lithuanian.wagon .counterWrapper .counter {
   background-image: url("/js/Wagon.png");
@@ -3649,6 +3653,15 @@ svg marker#head {
     border: none; }
 .lithuanian.pontoon .unit-numbers {
   display: none; }
+
+.loyalist.hq .counterWrapper .counter:before {
+  color: yellow; }
+
+.tartar.hq .counterWrapper .counter:before {
+  color: yellow; }
+
+.lithuanian.hq .counterWrapper .counter:before {
+  color: yellow; }
 
 #crt {
   width: 875px; }

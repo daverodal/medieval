@@ -21,6 +21,8 @@
  */
 ?>
 <script src="<?=url("js/angular.js");?>"></script>
+<script src="<?=url("js/ng-right-click.js");?>"></script>
+
 <body ng-app="lobbyApp" xmlns="http://www.w3.org/1999/html">
 <div ng-controller="LobbyController" id="theDiv">
     <header id="header">
