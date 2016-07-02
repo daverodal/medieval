@@ -7,12 +7,12 @@
         $scope.units = angular.fromJson('{!!json_encode($units)!!}');
         $scope.hexesMap = {};
         $scope.unitsMap = {};
-        $scope.rightClicked = false;
         $scope.mouseDown = function(id,event){
             DR.clickX = event.clientX;
             DR.clickY = event.clientY;
             DR.dragged = false;
         };
+
         $scope.rightClickMe = function(id, event){
             var hex = $scope.unitsMap[id];
             var hexesMap = $scope.hexesMap;
@@ -30,18 +30,14 @@
                     unit.wrapperstyle.left = (left - shift + i * 5) + "px";
                     unit.shift = i * 5;
                 }
-//                $scope.units[tmp].wrapperstyle.zIndex = 10;
-                $scope.rightClicked = true;
                 return true;
             }
-            $scope.rightClicked = true;
             return true;
-            doitUnit(id, event);
-            return true;
+
         };
+
         $scope.clickMe = function(id, event){
-            if($scope.rightClicked){
-                $scope.rightClicked = false;
+            if(event.button == 2){
                 return;
             }
             if(DR.dragged){
@@ -50,6 +46,7 @@
             }
             doitUnit(id, event);
         };
+
         $scope.floatMessage = {};
 
 //            var dieOffset = -2;
