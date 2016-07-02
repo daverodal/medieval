@@ -2118,6 +2118,13 @@ You should have received a copy of the GNU General Public License
   left: 15px;
   font-size: 16px; }
 
+.unit .unit-command {
+  position: absolute;
+  background: transparent;
+  bottom: 0px;
+  font-size: 6px;
+  color: black; }
+
 body {
   min-width: 675px;
   margin: 0;

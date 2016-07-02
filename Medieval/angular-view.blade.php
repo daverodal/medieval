@@ -30,7 +30,7 @@
             <div class="shadow-mask" ng-class="unit.shadow"></div>
             <div class="counterWrapper">
                 <div ng-show="unit.bow" class="bow" style=""></div>
-                <div ng-show="unit.hq" class="hq">@{{ unit.command }}</div>
+                <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
                 <div class="counter"></div>
             </div>
             <div class="range">@{{ unit.armorClass }}</div>
@@ -39,7 +39,7 @@
 
             <div ng-class="unit.infoLen" class="unit-numbers">@{{ unit.unitNumbers }}</div>
             <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
-
+            <i ng-show="!unit.command" class="fa fa-star unit-command" aria-hidden="true"></i>
 
         </div>
     </div>
@@ -64,7 +64,7 @@
                 <div class="shadow-mask" ng-class="unit.shadow"></div>
                 <div class="counterWrapper">
                     <div ng-show="unit.bow" class="bow" style=""></div>
-                    <div ng-show="unit.hq" class="hq">@{{ unit.command }}</div>
+                    <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
 
                     <div class="counter"></div>
                 </div>

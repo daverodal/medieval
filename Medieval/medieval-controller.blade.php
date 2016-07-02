@@ -110,10 +110,10 @@
             for(var i in mapUnits) {
                 var newUnit = $scope.units[i];
                 newUnit.hq = mapUnits[i].class === "hq";
-                newUnit.command = 0;
+                newUnit.commandRadius = 0;
                 if(mapUnits[i].class === "hq"){
                     var range = mapUnits[i].commandRadius;
-                    newUnit.command = ".........".slice(0,range);
+                    newUnit.commandRadius = ".........".slice(0,range);
                 }
                 if(mapUnits[i].parent === 'gameImages') {
                     newUnit.shift = 0;
@@ -142,6 +142,7 @@
                     }else{
                     }
                     newUnit.maxMove = mapUnits[i].maxMove;
+                    newUnit.command = mapUnits[i].command;
                     newUnit.moveAmountUsed = mapUnits[i].moveAmountUsed;
                     newUnit.wrapperstyle = {};
 //                        newUnit.facingstyle = {};

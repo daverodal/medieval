@@ -65,7 +65,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             $maxMove /= 2;
         }
         if($this->command === false){
-            $maxMove /= 2;
+            $maxMove = floor($maxMove/2);
         }
         return $maxMove;
     }
@@ -196,6 +196,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $this->combatResults = NE;
         if($class = "hq"){
             $this->commandRadius = $range;
+            $this->range = 1;
         }else{
             $this->range = $range;
         }
@@ -313,6 +314,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $mapUnit->steps = $this->steps;
         $mapUnit->hexagon = $this->hexagon->name;
         $mapUnit->commandRadius = $this->commandRadius;
+        $mapUnit->command = $this->command;
         return $mapUnit;
     }
 
