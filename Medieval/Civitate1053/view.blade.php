@@ -69,4 +69,3 @@
     @endforeach
 @endsection
 @include('wargame::Medieval.angular-view' )
-<div id="yin-yang"></div>

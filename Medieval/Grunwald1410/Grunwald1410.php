@@ -96,14 +96,14 @@ class Grunwald1410 extends MedievalLandBattle
 
         }
 
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "tartar", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,3,  STATUS_CAN_DEPLOY, "C", 1, "tartar", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 5;$i++){
             UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "C", 1, "tartar", 'cavalry',1, false, 'S', true);
 
         }
 
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,4,  STATUS_CAN_DEPLOY, "A", 1, "lithuanian", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,4,  STATUS_CAN_DEPLOY, "D", 1, "lithuanian", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 6;$i++){
             UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "D", 1, "lithuanian", 'cavalry',1, false, 'S', true);

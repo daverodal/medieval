@@ -194,7 +194,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $this->moveCount = 0;
         $this->retreatCountRequired = 0;
         $this->combatResults = NE;
-        if($class = "hq"){
+        if($class === "hq"){
             $this->commandRadius = $range;
             $this->range = 1;
         }else{

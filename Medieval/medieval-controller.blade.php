@@ -140,6 +140,7 @@
                     }
                     newUnit.maxMove = mapUnits[i].maxMove;
                     newUnit.command = mapUnits[i].command;
+                    newUnit.unitDesig = mapUnits[i].unitDesig;
                     newUnit.moveAmountUsed = mapUnits[i].moveAmountUsed;
                     newUnit.wrapperstyle = {};
 //                        newUnit.facingstyle = {};
@@ -630,7 +631,9 @@
                                     theta = thetas[j][k];
                                     theta *= 15;
                                     theta += 180;
-                                    theta -= $scope.mapUnits[j].facing * 60;
+                                    if($scope.mapUnits[j].facing !== undefined){
+                                        theta -= $scope.mapUnits[j].facing * 60;
+                                    }
 
                                     $scope.mapUnits[j].arrows[k] = {};
                                     $scope.mapUnits[j].arrows[k].style = {transform:' scale(.55,.55) rotate(' + theta + "deg) translateY(45px)" };

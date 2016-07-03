@@ -38,7 +38,7 @@ class UnitFactory {
                                   $unitHexagon,
                                   $unitStrength,
                                   $unitMaxMove,
-                                  $range = 1,
+                                  $range,
                                   $unitStatus,
                                   $unitReinforceZoneName,
                                   $unitReinforceTurn,
@@ -51,7 +51,7 @@ class UnitFactory {
                                   $orgStatus = 0,
                                   $numSteps = 2){
         $unit = static::build();
-        $unit->set($unitName, $unitForceId, $unitHexagon, $unitStrength,$range, 
+        $unit->set($unitName, $unitForceId, $unitHexagon, $unitStrength,$range,
             $unitMaxMove, $unitStatus, $unitReinforceZoneName, $unitReinforceTurn,  $nationality, $class, $unitDesig, $orgStatus, $facing, $armorClass, $bow, $orgStatus, $numSteps);
         self::$injector->injectUnit($unit);
     }
