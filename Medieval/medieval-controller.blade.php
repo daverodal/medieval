@@ -37,6 +37,7 @@
         };
 
         $scope.clickMe = function(id, event){
+            /* Right clicks are handled elsewhere */
             if(event.button == 2){
                 return;
             }
@@ -126,7 +127,6 @@
                             /* unit moved */
                             var dead = hexesMap[unitsMap[i]].indexOf(i);
                             hexesMap[unitsMap[i]].splice(dead,1);
-//                            delete hexesMap[unitsMap[i]][i];
                             if(hexesMap[mapUnits[i].hexagon] === undefined){
                                 hexesMap[mapUnits[i].hexagon] = [];
                             }
@@ -155,6 +155,12 @@
                     newUnit.unitNumbers = newUnit.strength + ' ' + orgDisp + ' ' + (newUnit.maxMove - newUnit.moveAmountUsed);
                     newUnit.infoLen = "infoLen" + newUnit.unitNumbers.length;
                     gameUnits[i] = newUnit;
+                }else{
+                    if(unitsMap[i] !== undefined){
+                        var dead = hexesMap[unitsMap[i]].indexOf(i);
+                        hexesMap[unitsMap[i]].splice(dead,1);
+                        unitsMap[i] = undefined;
+                    }
                 }
                 if(mapUnits[i].parent === 'deployBox'){
                     newUnit.style = {float:'left'};
