@@ -68,4 +68,4 @@
         </div>
     @endforeach
 @endsection
-@include('wargame::Medieval.angular-view' )
+@include('wargame::Medieval.angular-view',['topCrt'=> new \Wargame\Medieval\MedievalCombatResultsTable()] )

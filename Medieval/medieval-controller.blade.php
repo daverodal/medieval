@@ -1,7 +1,8 @@
 <script>
     var lobbyApp = angular.module('lobbyApp', ['ngRightClick']);
     lobbyApp.controller('LobbyController', ['$scope', '$http', 'sync', '$sce', function($scope, $http, sync, $sce){
-        $scope.topCrt = angular.fromJson('{!!json_encode(new \Wargame\Medieval\MedievalCombatResultsTable())!!}');
+        $scope.topCrt = angular.fromJson('{!!json_encode($topCrt)!!}');
+        $scope.curCrt = Object.keys($scope.topCrt.crts)[0];
         $scope.resultsNames = $scope.topCrt.resultsNames;
 
         $scope.units = angular.fromJson('{!!json_encode($units)!!}');
@@ -50,9 +51,7 @@
 
         $scope.floatMessage = {};
 
-//            var dieOffset = -2;
         $scope.dieOffset = 0;
-        $scope.curCrt = 'melee';
         $scope.showDetails = false;
 
         $scope.toggleDetails = function(){
@@ -64,10 +63,8 @@
         });
 
         $scope.showCrtTable = function(table){
-            if(table == 'melee'){
-                $scope.curCrt = 'missile';
-            }else{
-                $scope.curCrt = 'melee';
+            if($scope.topCrt.crts[table].next){
+                $scope.curCrt = $scope.topCrt.crts[table].next;
             }
         }
         $scope.unHoverThis = function(unit){
@@ -502,6 +499,21 @@
 
 //            html += "<br>Lose at least "+gameRules.exchangeAmount+" strength points from the units outlined in red";
                     break;
+
+                case <?=DEFENDER_LOSING_MODE?>:
+                    var result = data.combatRules.lastResolvedCombat.combatResult;
+
+                    $scope.floatMessage.header = result+": Defender Loss Mode.";
+
+
+//                        $("#floatMessage header").html(result+": Attacker Loss Mode.");
+//                        var floatStat = $("#floatMessage p").html();
+
+                    $scope.floatMessage.body += " Lose at least "+data.force.defenderLoseAmount+ " steps";
+//                        $("#floatMessage p").html(floatStat);
+
+//            html += "<br>Lose at least "+gameRules.exchangeAmount+" strength points from the units outlined in red";
+                    break
                 case <?=ADVANCING_MODE?>:
 //            html += "<br>Click on one of the black units to advance it.<br>then  click on a hex to advance, or the unit to stay put.";
                     var result = data.combatRules.lastResolvedCombat.combatResult;
@@ -540,7 +552,7 @@
             /*+ atk + " - Defender " + def + " = " + diff + "</div>";*/
             return html;
         }
-
+@section('combat-rules-controller')
         x.register("combatRules", function(combatRules, data){
             for(var arrowUnits in $scope.mapUnits){
                 $scope.mapUnits[arrowUnits].arrows = {};
@@ -548,11 +560,13 @@
             }
 
             $scope.dieOffset = 0;
-            $scope.topCrt.crts.melee.selected = null;
-            $scope.topCrt.crts.melee.pinned = null;
-            $scope.topCrt.crts.melee.combatRoll = null;
+            for(var i in $scope.topCrt.crts){
+                $scope.topCrt.crts[i].selected = null;
+                $scope.topCrt.crts[i].pinned = null;
+                $scope.topCrt.crts[i].combatRoll = null;
+            }
+
             $scope.crtOdds = null;
-            $scope.curCrt = 'melee';
             if(data.gameRules.phase == <?= BLUE_FIRE_COMBAT_PHASE?> || data.gameRules.phase == <?= RED_FIRE_COMBAT_PHASE?>){
                 $scope.curCrt = 'missile';
                 crtName = 'missile';
@@ -564,7 +578,7 @@
             var cdLine = "";
             var activeCombat = false;
             var activeCombatLine = "<div></div>";
-            var crtName = "melee";
+            var crtName = $scope.curCrt;
             var str = "";
 
 
@@ -856,6 +870,7 @@
             $scope.$apply();
 
         });
+@show
 
 
 

@@ -3354,83 +3354,83 @@ svg marker#head {
 .Kingdom-of-PolandFace, .playerKingdom-of-PolandFace {
   color: red; }
 
-.loyalist {
+.polish {
   color: black;
   background-color: #FFA99B; }
-  .loyalist .counterWrapper {
+  .polish .counterWrapper {
     background-color: red; }
-  .loyalist .unit-steps, .loyalist .unit-numbers {
+  .polish .unit-steps, .polish .unit-numbers {
     color: black; }
 
-.vintage.loyalist.inf .counterWrapper .counter {
+.vintage.polish.inf .counterWrapper .counter {
   background-image: url("/js/BritInfBadge.png");
   background-size: 19px; }
-.vintage.loyalist.cavalry .counterWrapper .counter {
+.vintage.polish.cavalry .counterWrapper .counter {
   background-image: url("/js/BritCavBadge.png");
   background-size: 19px; }
-.vintage.loyalist.artillery .counterWrapper .counter {
+.vintage.polish.artillery .counterWrapper .counter {
   background-image: url("/js/BritArtBadge.png");
   background-size: 19px; }
-.vintage.loyalist.horseartillery .counterWrapper .counter {
+.vintage.polish.horseartillery .counterWrapper .counter {
   background-image: url("/js/BritHorArtBadge.png");
   background-size: 19px; }
-.vintage.loyalist.hq .counterWrapper .counter {
+.vintage.polish.hq .counterWrapper .counter {
   font: normal normal normal 14px/1 FontAwesome; }
-  .vintage.loyalist.hq .counterWrapper .counter:before {
+  .vintage.polish.hq .counterWrapper .counter:before {
     content: "\f024"; }
-.vintage.loyalist.pontoon .counterWrapper {
+.vintage.polish.pontoon .counterWrapper {
   border: none; }
-  .vintage.loyalist.pontoon .counterWrapper .counter {
+  .vintage.polish.pontoon .counterWrapper .counter {
     background-color: lightgreen;
     background-image: url("/js/BritPontoon.png");
     background-size: 32px;
     width: 32px;
     height: 32px;
     border: none; }
-.vintage.loyalist.pontoon .unit-numbers {
+.vintage.polish.pontoon .unit-numbers {
   display: none; }
 
-.loyalist .counterWrapper .counter {
+.polish .counterWrapper .counter {
   height: 14px;
   background-repeat: no-repeat;
   border-bottom: 1px solid black; }
 
-.loyalist.inf .counterWrapper .counter {
+.polish.inf .counterWrapper .counter {
   background-image: url("/js/BritInfBadge.png");
   background-size: 14px; }
 
-.loyalist.cavalry .counterWrapper .counter {
+.polish.cavalry .counterWrapper .counter {
   background-image: url("/js/BritCavBadge.png");
   background-size: 14px; }
 
-.loyalist.artillery .counterWrapper .counter {
+.polish.artillery .counterWrapper .counter {
   background-image: url("/js/BritArtBadge.png");
   background-size: 14px; }
 
-.loyalist.horseartillery .counterWrapper .counter {
+.polish.horseartillery .counterWrapper .counter {
   background-image: url("/js/BritHorArtBadge.png");
   background-size: 14px; }
 
-.loyalist.hq .counterWrapper .counter {
+.polish.hq .counterWrapper .counter {
   font: normal normal normal 14px/1 FontAwesome;
   background-size: 14px; }
-  .loyalist.hq .counterWrapper .counter:before {
+  .polish.hq .counterWrapper .counter:before {
     content: "\f024"; }
 
-.loyalist.wagon .counterWrapper .counter {
+.polish.wagon .counterWrapper .counter {
   background-image: url("/js/Wagon.png");
   background-size: 14px; }
 
-.loyalist.pontoon .counterWrapper {
+.polish.pontoon .counterWrapper {
   border: none; }
-  .loyalist.pontoon .counterWrapper .counter {
+  .polish.pontoon .counterWrapper .counter {
     background-color: lightgreen;
     background-image: url("/js/BritPontoon.png");
     background-size: 32px;
     width: 32px;
     height: 32px;
     border: none; }
-.loyalist.pontoon .unit-numbers {
+.polish.pontoon .unit-numbers {
   display: none; }
 
 .teutonic {
@@ -3751,11 +3751,11 @@ svg marker#head {
 #gameTurn6 .unit {
   float: left; }
 
-.specialHexesVP .rebelVictoryPoints {
-  text-shadow: 0px 0px 1px orange, 0px 0px 1px orange, 0px 0px 1px orange, 0px 0px 2px orange, 0px 0px 2px orange, 0px 0px 2px orange, 0px 0px 3px orange, 0px 0px 3px orange, 0px 0px 3px orange, 0px 0px 4px orange, 0px 0px 4px orange, 0px 0px 4px orange, 0px 0px 5px orange, 0px 0px 5px orange, 0px 0px 5px orange, 0px 0px 6px orange, 0px 0px 6px orange, 0px 0px 6px orange, 0px 0px 7px orange, 0px 0px 7px orange, 0px 0px 7px orange, 0px 0px 8px orange, 0px 0px 8px orange, 0px 0px 8px orange, 0px 0px 9px orange, 0px 0px 9px orange, 0px 0px 9px orange, 0px 0px 10px orange, 0px 0px 10px orange, 0px 0px 10px orange, 0px 0px 1px orange, 0px 0px 1px orange, 0px 0px 1px orange, 0px 0px 2px orange, 0px 0px 2px orange, 0px 0px 2px orange, 0px 0px 3px orange, 0px 0px 3px orange, 0px 0px 3px orange, 0px 0px 4px orange, 0px 0px 4px orange, 0px 0px 4px orange, 0px 0px 5px orange, 0px 0px 5px orange, 0px 0px 5px orange, 0px 0px 6px orange, 0px 0px 6px orange, 0px 0px 6px orange, 0px 0px 7px orange, 0px 0px 7px orange, 0px 0px 7px orange, 0px 0px 8px orange, 0px 0px 8px orange, 0px 0px 8px orange, 0px 0px 9px orange, 0px 0px 9px orange, 0px 0px 9px orange, 0px 0px 10px orange, 0px 0px 10px orange, 0px 0px 10px orange; }
+.specialHexesVP .teutonicVictoryPoints {
+  text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black; }
 
-.specialHexesVP .loyalistVictoryPoints {
-  text-shadow: 0px 0px 1px #666, 0px 0px 1px #666, 0px 0px 1px #666, 0px 0px 2px #666, 0px 0px 2px #666, 0px 0px 2px #666, 0px 0px 3px #666, 0px 0px 3px #666, 0px 0px 3px #666, 0px 0px 4px #666, 0px 0px 4px #666, 0px 0px 4px #666, 0px 0px 5px #666, 0px 0px 5px #666, 0px 0px 5px #666, 0px 0px 6px #666, 0px 0px 6px #666, 0px 0px 6px #666, 0px 0px 7px #666, 0px 0px 7px #666, 0px 0px 7px #666, 0px 0px 8px #666, 0px 0px 8px #666, 0px 0px 8px #666, 0px 0px 9px #666, 0px 0px 9px #666, 0px 0px 9px #666, 0px 0px 10px #666, 0px 0px 10px #666, 0px 0px 10px #666, 0px 0px 1px #666, 0px 0px 1px #666, 0px 0px 1px #666, 0px 0px 2px #666, 0px 0px 2px #666, 0px 0px 2px #666, 0px 0px 3px #666, 0px 0px 3px #666, 0px 0px 3px #666, 0px 0px 4px #666, 0px 0px 4px #666, 0px 0px 4px #666, 0px 0px 5px #666, 0px 0px 5px #666, 0px 0px 5px #666, 0px 0px 6px #666, 0px 0px 6px #666, 0px 0px 6px #666, 0px 0px 7px #666, 0px 0px 7px #666, 0px 0px 7px #666, 0px 0px 8px #666, 0px 0px 8px #666, 0px 0px 8px #666, 0px 0px 9px #666, 0px 0px 9px #666, 0px 0px 9px #666, 0px 0px 10px #666, 0px 0px 10px #666, 0px 0px 10px #666; }
+.specialHexesVP .polishVictoryPoints {
+  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red; }
 
 .supply {
   font-size: 25px !important;

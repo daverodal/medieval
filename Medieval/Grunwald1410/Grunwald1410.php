@@ -63,36 +63,29 @@ class Grunwald1410 extends MedievalLandBattle
 
 
         $scenario = $this->scenario;
-        $baseValue = 6;
-        $reducedBaseValue = 3;
-        if(!empty($scenario->weakerLoyalist)){
-            $baseValue = 5;
-            $reducedBaseValue = 2;
-        }
-        if(!empty($scenario->strongerLoyalist)){
-            $baseValue = 7;
-        }
 
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,5,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,4,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 1, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
+
+
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,5,  STATUS_CAN_DEPLOY, "A", 1, "polish", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,4,  STATUS_CAN_DEPLOY, "A", 1, "polish", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 1, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "polish", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 10;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 7, 4,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'K');
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 7, 4,1,  STATUS_CAN_DEPLOY, "A", 1, "polish", 'cavalry',1, 0, 'K');
 
         }
         for($i = 0;$i < 9;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'H');
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "polish", 'cavalry',1, 0, 'H');
 
         }
 
         for($i = 0;$i < 6;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 5,  3,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M', true);
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 5,  3,2,  STATUS_CAN_DEPLOY, "A", 1, "polish", 'inf',1, 0, 'M', true);
 
         }
 
         for($i = 0;$i < 6;$i++){
-            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, false, 'S', true);
+            UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "A", 1, "polish", 'cavalry',1, false, 'S', true);
 
         }
 

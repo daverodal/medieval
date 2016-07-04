@@ -103,9 +103,9 @@ trait CRTResults
 
                 if ($numDefenders > 1) {
                     $defUnit->status = STATUS_CAN_DEFEND_LOSE;
-                    $force->exchangeAmount = 1;
+                    $force->defenderLoseAmount = 1;
                     if ($combatResults === DL2R || $combatResults === DL2F) {
-                        $force->exchangeAmount = 2;
+                        $force->defenderLoseAmount = 2;
                     }
                     $defUnit->retreatCountRequired = $distance;
                     if($combatResults === DL2F || $combatResults === DLF){
@@ -155,9 +155,9 @@ trait CRTResults
                     if ($combatResults === BLDR) {
                         $defUnit->retreatCountRequired = 1;
                     }
-                    $force->exchangeAmount = 1;
+                    $force->defenderLoseAmount = 1;
                     if ($combatResults === DL2) {
-                        $force->exchangeAmount = 2;
+                        $force->defenderLoseAmount = 2;
                     }
                     break;
                 }

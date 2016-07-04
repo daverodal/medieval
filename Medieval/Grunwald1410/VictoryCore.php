@@ -68,18 +68,18 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
             $vp = 1;
 
             $prevForceId = $battle->mapData->specialHexes->$mapHexName;
-            if ($forceId == POLISH_FORCE) {
-                $this->victoryPoints[POLISH_FORCE]  += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='rebel'>+$vp Rebel vp</span>";
-                $this->victoryPoints[TEUTONIC_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='rebel'> -$vp Teutonic vp</span>";
-            }
-            if ($forceId == TEUTONIC_FORCE) {
-                $this->victoryPoints[TEUTONIC_FORCE]  += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='loyalist'>+$vp Teutonic vp</span>";
-                $this->victoryPoints[POLISH_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='loyalist'> -$vp Polish vp</span>";
-            }
+//            if ($forceId == POLISH_FORCE) {
+//                $this->victoryPoints[POLISH_FORCE]  += $vp;
+//                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='teutonic'>+$vp Polish vp</span>";
+//                $this->victoryPoints[TEUTONIC_FORCE] -= $vp;
+//                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='teutonic'> -$vp Teutonic vp</span>";
+//            }
+//            if ($forceId == TEUTONIC_FORCE) {
+//                $this->victoryPoints[TEUTONIC_FORCE]  += $vp;
+//                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='polish'>+$vp Polish vp</span>";
+//                $this->victoryPoints[POLISH_FORCE] -= $vp;
+//                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='polish'> -$vp Polish vp</span>";
+//            }
         }
 
     }
@@ -96,7 +96,7 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
             $hex = $unit->hexagon;
             $battle = Battle::getBattle();
             if($hex->name) {
-                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='loyalistVictoryPoints'>+$vp vp</span>";
+                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='teutonicVictoryPoints'>+$vp vp</span>";
             }
         } else {
             $victorId = 1;
@@ -106,7 +106,7 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
             $battle = Battle::getBattle();
             if($hex->name) {
 
-                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='rebelVictoryPoints'>+$vp vp</span>";
+                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='polishVictoryPoints'>+$vp vp</span>";
             }
             $this->victoryPoints[$victorId] += $vp;
         }

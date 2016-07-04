@@ -329,6 +329,10 @@ class MedievalCombatResultsTable
                     }
                 }
             }
+            
+            if ($unit->class == "hq") {
+                $combatLog .= "$unitStrength Hq ";
+            }
 
             if ($unit->class == "cavalry") {
                 $combatLog .= "$unitStrength Cavalry ";

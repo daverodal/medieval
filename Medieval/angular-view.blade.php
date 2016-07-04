@@ -295,6 +295,6 @@
     <div id="display"></div>
 </div>
 
-@include('wargame::Medieval.medieval-controller')
+@include('wargame::Medieval.medieval-controller', ['topCrt'=> $topCrt])
 
 </body></html>

@@ -142,11 +142,11 @@
 }
 
 .specialHexesVP .rebelVictoryPoints {
-  @include victoryPoints(orange)
+  @include victoryPoints(blue)
 }
 
 .specialHexesVP .loyalistVictoryPoints {
- @include victoryPoints(#666);
+ @include victoryPoints(red);
 }
 
 .unit-steps{

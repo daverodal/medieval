@@ -23,7 +23,7 @@
 
 @include headerColor(Teutonic-Order, #c0c0c0, gray);
 @include headerColor(Kingdom-of-Poland, #FFA99B, red);
-@include unitColor(loyalist,#FFA99B,  Brit, red );
+@include unitColor(polish,#FFA99B,  Brit, red );
 @include unitColor(teutonic, white, TeutonicAnti, black, white, black);
 @include unitColor(tartar,#FFA99B,  Brit, green );
 @include unitColor(lithuanian,#FFA99B,  Brit, orange );
@@ -152,12 +152,12 @@
   float: left;
 }
 
-.specialHexesVP .rebelVictoryPoints {
-  @include victoryPoints(orange)
+.specialHexesVP .teutonicVictoryPoints {
+  @include victoryPoints(black)
 }
 
-.specialHexesVP .loyalistVictoryPoints {
- @include victoryPoints(#666);
+.specialHexesVP .polishVictoryPoints {
+  @include victoryPoints(red);
 }
 
 .supply{
