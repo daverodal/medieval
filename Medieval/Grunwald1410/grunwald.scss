@@ -29,51 +29,12 @@
 @include unitColor(tartar, $polishColor,  Brit, green );
 @include unitColor(lithuanian,$polishColor,  Brit, orange );
 
-.polish.hq .counterWrapper .counter{
-  &:before{
-    color:yellow;
-  }
-}
+@include specialColor(Teutonic-Order, black, white);
+@include specialColor(Kingdom-of-Poland, red, white);
 
-.tartar.hq .counterWrapper .counter{
-  &:before{
-    color:yellow;
-  }
-}
-
-
-.lithuanian.hq .counterWrapper .counter{
-  &:before{
-    color:yellow;
-  }
-}
-
-
-
-.specialHexesVP .teutonicVictoryPoints {
-  @include victoryPoints(black);
-  color:white;
-}
-
-.specialHexesVP .polishVictoryPoints {
-  @include victoryPoints(red);
-  color:white;
-}
-
-.specialHexesVP .Teutonic-Order{
-  color:white;
-  background:black;
-}
-
-.specialHexes.Teutonic-Order{
-  background:black;
-  color:white;
-}
-
-.specialHexes.Kingdom-of-Poland{
-  background:$polishColor;
-}
-
+@include flagColor(polish, yellow);
+@include flagColor(tartar, yellow);
+@include flagColor(lithuanian, yellow);
 
 .teutonic{
   .counterWrapper .bow{

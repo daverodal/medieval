@@ -62,56 +62,42 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
         $battle = Battle::getBattle();
 
         list($mapHexName, $forceId) = $args;
+        $vp = 10;
 
+        /*
+         *  Teutonic Camp
+         */
 
-        if(in_array($mapHexName,$battle->specialHexA)){
-            $vp = 1;
-
-            $prevForceId = $battle->mapData->specialHexes->$mapHexName;
+        $pData = $battle->getPlayerData(false);
+        $class = preg_replace("/ /", "-",$pData['forceName'][$forceId]);
+        if(in_array($mapHexName,$battle->specialHexB)) {
             if ($forceId == LOYALIST_FORCE) {
-                $this->victoryPoints[LOYALIST_FORCE]  += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='rebel'>+$vp Loyalist vp</span>";
-                $this->victoryPoints[REBEL_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='rebel'> -$vp Loyalist vp</span>";
+                $this->victoryPoints[LOYALIST_FORCE] += $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> +$vp Loyalist vp</span>";
+            }
+            if ($forceId == REBEL_FORCE) {
+                $this->victoryPoints[LOYALIST_FORCE] -= $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> -$vp Loyalist vp</span>";
+            }
+        }
+
+        /*
+         * Polish Camp
+         */
+        if(in_array($mapHexName,$battle->specialHexA)){
+
+            if ($forceId == LOYALIST_FORCE) {
+                $this->victoryPoints[REBEL_FORCE]  -= $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'>-$vp Rebel vp</span>";
             }
             if ($forceId == REBEL_FORCE) {
                 $this->victoryPoints[REBEL_FORCE]  += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='loyalist'>+$vp Rebel vp</span>";
-                $this->victoryPoints[LOYALIST_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='loyalist'> -$vp Rebel vp</span>";
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'>+$vp Rebel vp</span>";
             }
         }
 
     }
-
-    public function reduceUnit($args)
-    {
-        $unit = $args[0];
-
-        $vp = $unit->damage;
-
-        if ($unit->forceId == 1) {
-            $victorId = 2;
-            $this->victoryPoints[$victorId] += $vp;
-            $hex = $unit->hexagon;
-            $battle = Battle::getBattle();
-            if($hex->name) {
-                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='loyalistVictoryPoints'>+$vp vp</span>";
-            }
-        } else {
-            $victorId = 1;
-            $hex  = $unit->hexagon;
-            $vp += $this->outgoingVP[$victorId];
-            $this->outgoingVP[$victorId] = $vp;
-            $battle = Battle::getBattle();
-            if($hex->name) {
-
-                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='rebelVictoryPoints'>+$vp vp</span>";
-            }
-            $this->victoryPoints[$victorId] += $vp;
-        }
-    }
-
+    
     public function gameEnded()
     {
         $battle = Battle::getBattle();

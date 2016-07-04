@@ -3525,6 +3525,52 @@ svg marker#head {
 .lithuanian.pontoon .unit-numbers {
   display: none; }
 
+/*
+ * these are for the +5 vps when you kill a unit
+ */
+.specialHexesVP .Teutonic-OrderVictoryPoints {
+  text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
+  color: white; }
+
+/*
+ * These are for when you capture a town
+ * the vps aquired
+ */
+.specialHexesVP .Teutonic-Order {
+  color: white;
+  background: black; }
+
+/*
+ * These are the static state of a town
+ * and for the change message
+ */
+.specialHexes.Teutonic-Order {
+  background: black;
+  color: white; }
+
+/*
+ * these are for the +5 vps when you kill a unit
+ */
+.specialHexesVP .Kingdom-of-PolandVictoryPoints {
+  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red;
+  color: white; }
+
+/*
+ * These are for when you capture a town
+ * the vps aquired
+ */
+.specialHexesVP .Kingdom-of-Poland {
+  color: white;
+  background: red; }
+
+/*
+ * These are the static state of a town
+ * and for the change message
+ */
+.specialHexes.Kingdom-of-Poland {
+  background: red;
+  color: white; }
+
 .polish.hq .counterWrapper .counter:before {
   color: yellow; }
 
@@ -3533,25 +3579,6 @@ svg marker#head {
 
 .lithuanian.hq .counterWrapper .counter:before {
   color: yellow; }
-
-.specialHexesVP .teutonicVictoryPoints {
-  text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
-  color: white; }
-
-.specialHexesVP .polishVictoryPoints {
-  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red;
-  color: white; }
-
-.specialHexesVP .Teutonic-Order {
-  color: white;
-  background: black; }
-
-.specialHexes.Teutonic-Order {
-  background: black;
-  color: white; }
-
-.specialHexes.Kingdom-of-Poland {
-  background: #FFA99B; }
 
 .teutonic .counterWrapper .bow {
   background: url("/vendor/wargame/medieval/grunwald1410/images/whiteArrow.svg");

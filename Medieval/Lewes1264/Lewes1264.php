@@ -33,7 +33,7 @@ class Lewes1264 extends MedievalLandBattle
 {
     /* a comment */
 
-    public $specialHexesMap = ['SpecialHexA'=>2, 'SpecialHexB'=>2, 'SpecialHexC'=>1];
+    public $specialHexesMap = ['SpecialHexA'=>1, 'SpecialHexB'=>2, 'SpecialHexC'=>1];
 
     public static function buildUnit($data = false){
         return UnitFactory::build($data);
@@ -53,6 +53,8 @@ class Lewes1264 extends MedievalLandBattle
     function save()
     {
         $data = parent::save();
+        $data->specialHexA = $this->specialHexA;
+        $data->specialHexB = $this->specialHexB;
         return $data;
     }
 
@@ -72,9 +74,9 @@ class Lewes1264 extends MedievalLandBattle
             $baseValue = 7;
         }
 
-        UnitFactory::create("lll", LOYALIST_FORCE, "deployBox",  3, 5,3,  STATUS_CAN_DEPLOY, "B", 1, "loyalist", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "loyalist", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "loyalist", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", LOYALIST_FORCE, "deployBox",  3, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
 
 
         for($i = 0;$i < 6;$i++){
@@ -136,7 +138,8 @@ class Lewes1264 extends MedievalLandBattle
         $this->combatRules->injectCrt($crt);
 
         if ($data) {
-
+            $this->specialHexA = $data->specialHexA;
+            $this->specialHexB = $data->specialHexB;
         } else {
 
             $this->victory = new \Wargame\Victory("Wargame\\Medieval\\Lewes1264\\VictoryCore");

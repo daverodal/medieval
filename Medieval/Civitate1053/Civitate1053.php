@@ -33,7 +33,7 @@ class Civitate1053 extends MedievalLandBattle
 {
     /* a comment */
 
-    public $specialHexesMap = ['SpecialHexA'=>2, 'SpecialHexB'=>2, 'SpecialHexC'=>1];
+    public $specialHexesMap = ['SpecialHexA'=>1, 'SpecialHexB'=>2, 'SpecialHexC'=>1];
 
     public static function buildUnit($data = false){
         return UnitFactory::build($data);
@@ -53,6 +53,8 @@ class Civitate1053 extends MedievalLandBattle
     function save()
     {
         $data = parent::save();
+        $data->specialHexA = $this->specialHexA;
+        $data->specialHexB = $this->specialHexB;
         return $data;
     }
 
@@ -130,7 +132,8 @@ class Civitate1053 extends MedievalLandBattle
         $this->combatRules->injectCrt($crt);
 
         if ($data) {
-
+            $this->specialHexA = $data->specialHexA;
+            $this->specialHexB = $data->specialHexB;
         } else {
 
             $this->victory = new \Wargame\Victory("Wargame\\Medieval\\Civitate1053\\VictoryCore");

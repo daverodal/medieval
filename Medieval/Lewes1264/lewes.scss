@@ -22,20 +22,16 @@
 
 /*df5842*/
 
-@include headerColor(Rebel, #26d5ff, #86c3ff);
-@include headerColor(Loyalist, #FFA99B, red);
-@include unitColor(loyalist,#FFA99B,  Brit, red );
-@include unitColor(rebel, #26d5ff, Bavarian, #26d5ff, black, black);
-@include unitColor(swabian,#fb001d,  Bavarian, #6e87ff, black, black );
+@include headerColor(Rebel, $rebelColor, #86c3ff);
+@include headerColor(Loyalist, $loyalistColor, red);
+@include unitColor(loyalist,$loyalistColor,  Brit, red );
+@include unitColor(rebel, $rebelColor, Bavarian, #26d5ff, black, black);
+@include unitColor(swabian,#fb001d,  Bavarian, $rebelColor, black, black );
 
-.specialHexesVP .rebelVictoryPoints {
-  @include victoryPoints(orange)
-}
+@include flagColor(rebel, white);
 
-.specialHexesVP .loyalistVictoryPoints {
- @include victoryPoints(#666);
-}
-
+@include specialColor(Rebel, $rebelColor, white);
+@include specialColor(Loyalist, red, white);
 
 .rebel{
   .counterWrapper .bow{

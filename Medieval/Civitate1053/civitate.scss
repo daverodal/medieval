@@ -21,27 +21,16 @@
 @import "civitateColors";
 /*df5842*/
 
-@include headerColor(Lombard, #60b2ff, #60b2ff);
-@include headerColor(Norman, #FFA99B, red);
+@include headerColor(Lombard, $lombardColor, #60b2ff);
+@include headerColor(Norman, $normanColor, red);
 @include unitColor(norman,#FFA99B,  Brit, red );
-@include unitColor(lombard, #60b2ff, Bavarian, #60b2ff, black, black);
-@include unitColor(swabian,#60b2ff,  Bavarian, #fb001d, black, black );
+@include unitColor(lombard, $lombardColor, Bavarian, #60b2ff, black, black);
+@include unitColor(swabian, $lombardColor,  Bavarian, #fb001d, black, black );
 
+@include flagColor(lombard, white);
 
-
-.lombard.hq .counterWrapper .counter{
-  &:before{
-    color:white;
-  }
-}
-
-.specialHexesVP .rebelVictoryPoints {
-  @include victoryPoints(blue)
-}
-
-.specialHexesVP .loyalistVictoryPoints {
- @include victoryPoints(red);
-}
+@include specialColor(Lombard, $lombardColor, white);
+@include specialColor(Norman, red, white);
 
 .lombard{
   .counterWrapper .bow{

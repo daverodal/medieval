@@ -98,33 +98,7 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
 
     }
 
-    public function reduceUnit($args)
-    {
-        $unit = $args[0];
 
-        $vp = $unit->damage;
-
-        if ($unit->forceId == 1) {
-            $victorId = 2;
-            $this->victoryPoints[$victorId] += $vp;
-            $hex = $unit->hexagon;
-            $battle = Battle::getBattle();
-            if($hex->name) {
-                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='teutonicVictoryPoints'>+$vp vp</span>";
-            }
-        } else {
-            $victorId = 1;
-            $hex  = $unit->hexagon;
-            $vp += $this->outgoingVP[$victorId];
-            $this->outgoingVP[$victorId] = $vp;
-            $battle = Battle::getBattle();
-            if($hex->name) {
-
-                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='polishVictoryPoints'>+$vp vp</span>";
-            }
-            $this->victoryPoints[$victorId] += $vp;
-        }
-    }
     
 
     public function gameEnded()

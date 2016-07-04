@@ -3371,7 +3371,7 @@ svg marker#head {
   color: black;
   background-color: #fb001d; }
   .swabian .counterWrapper {
-    background-color: #6e87ff; }
+    background-color: #26d5ff; }
   .swabian .unit-steps, .swabian .unit-numbers {
     color: black; }
 
@@ -3446,11 +3446,54 @@ svg marker#head {
 .swabian.pontoon .unit-numbers {
   display: none; }
 
-.specialHexesVP .rebelVictoryPoints {
-  text-shadow: 0px 0px 1px orange, 0px 0px 1px orange, 0px 0px 1px orange, 0px 0px 2px orange, 0px 0px 2px orange, 0px 0px 2px orange, 0px 0px 3px orange, 0px 0px 3px orange, 0px 0px 3px orange, 0px 0px 4px orange, 0px 0px 4px orange, 0px 0px 4px orange, 0px 0px 5px orange, 0px 0px 5px orange, 0px 0px 5px orange, 0px 0px 6px orange, 0px 0px 6px orange, 0px 0px 6px orange, 0px 0px 7px orange, 0px 0px 7px orange, 0px 0px 7px orange, 0px 0px 8px orange, 0px 0px 8px orange, 0px 0px 8px orange, 0px 0px 9px orange, 0px 0px 9px orange, 0px 0px 9px orange, 0px 0px 10px orange, 0px 0px 10px orange, 0px 0px 10px orange, 0px 0px 1px orange, 0px 0px 1px orange, 0px 0px 1px orange, 0px 0px 2px orange, 0px 0px 2px orange, 0px 0px 2px orange, 0px 0px 3px orange, 0px 0px 3px orange, 0px 0px 3px orange, 0px 0px 4px orange, 0px 0px 4px orange, 0px 0px 4px orange, 0px 0px 5px orange, 0px 0px 5px orange, 0px 0px 5px orange, 0px 0px 6px orange, 0px 0px 6px orange, 0px 0px 6px orange, 0px 0px 7px orange, 0px 0px 7px orange, 0px 0px 7px orange, 0px 0px 8px orange, 0px 0px 8px orange, 0px 0px 8px orange, 0px 0px 9px orange, 0px 0px 9px orange, 0px 0px 9px orange, 0px 0px 10px orange, 0px 0px 10px orange, 0px 0px 10px orange; }
+.rebel.hq .counterWrapper .counter:before {
+  color: white; }
 
-.specialHexesVP .loyalistVictoryPoints {
-  text-shadow: 0px 0px 1px #666, 0px 0px 1px #666, 0px 0px 1px #666, 0px 0px 2px #666, 0px 0px 2px #666, 0px 0px 2px #666, 0px 0px 3px #666, 0px 0px 3px #666, 0px 0px 3px #666, 0px 0px 4px #666, 0px 0px 4px #666, 0px 0px 4px #666, 0px 0px 5px #666, 0px 0px 5px #666, 0px 0px 5px #666, 0px 0px 6px #666, 0px 0px 6px #666, 0px 0px 6px #666, 0px 0px 7px #666, 0px 0px 7px #666, 0px 0px 7px #666, 0px 0px 8px #666, 0px 0px 8px #666, 0px 0px 8px #666, 0px 0px 9px #666, 0px 0px 9px #666, 0px 0px 9px #666, 0px 0px 10px #666, 0px 0px 10px #666, 0px 0px 10px #666, 0px 0px 1px #666, 0px 0px 1px #666, 0px 0px 1px #666, 0px 0px 2px #666, 0px 0px 2px #666, 0px 0px 2px #666, 0px 0px 3px #666, 0px 0px 3px #666, 0px 0px 3px #666, 0px 0px 4px #666, 0px 0px 4px #666, 0px 0px 4px #666, 0px 0px 5px #666, 0px 0px 5px #666, 0px 0px 5px #666, 0px 0px 6px #666, 0px 0px 6px #666, 0px 0px 6px #666, 0px 0px 7px #666, 0px 0px 7px #666, 0px 0px 7px #666, 0px 0px 8px #666, 0px 0px 8px #666, 0px 0px 8px #666, 0px 0px 9px #666, 0px 0px 9px #666, 0px 0px 9px #666, 0px 0px 10px #666, 0px 0px 10px #666, 0px 0px 10px #666; }
+/*
+ * these are for the +5 vps when you kill a unit
+ */
+.specialHexesVP .RebelVictoryPoints {
+  text-shadow: 0px 0px 1px #26d5ff, 0px 0px 1px #26d5ff, 0px 0px 1px #26d5ff, 0px 0px 2px #26d5ff, 0px 0px 2px #26d5ff, 0px 0px 2px #26d5ff, 0px 0px 3px #26d5ff, 0px 0px 3px #26d5ff, 0px 0px 3px #26d5ff, 0px 0px 4px #26d5ff, 0px 0px 4px #26d5ff, 0px 0px 4px #26d5ff, 0px 0px 5px #26d5ff, 0px 0px 5px #26d5ff, 0px 0px 5px #26d5ff, 0px 0px 6px #26d5ff, 0px 0px 6px #26d5ff, 0px 0px 6px #26d5ff, 0px 0px 7px #26d5ff, 0px 0px 7px #26d5ff, 0px 0px 7px #26d5ff, 0px 0px 8px #26d5ff, 0px 0px 8px #26d5ff, 0px 0px 8px #26d5ff, 0px 0px 9px #26d5ff, 0px 0px 9px #26d5ff, 0px 0px 9px #26d5ff, 0px 0px 10px #26d5ff, 0px 0px 10px #26d5ff, 0px 0px 10px #26d5ff, 0px 0px 1px #26d5ff, 0px 0px 1px #26d5ff, 0px 0px 1px #26d5ff, 0px 0px 2px #26d5ff, 0px 0px 2px #26d5ff, 0px 0px 2px #26d5ff, 0px 0px 3px #26d5ff, 0px 0px 3px #26d5ff, 0px 0px 3px #26d5ff, 0px 0px 4px #26d5ff, 0px 0px 4px #26d5ff, 0px 0px 4px #26d5ff, 0px 0px 5px #26d5ff, 0px 0px 5px #26d5ff, 0px 0px 5px #26d5ff, 0px 0px 6px #26d5ff, 0px 0px 6px #26d5ff, 0px 0px 6px #26d5ff, 0px 0px 7px #26d5ff, 0px 0px 7px #26d5ff, 0px 0px 7px #26d5ff, 0px 0px 8px #26d5ff, 0px 0px 8px #26d5ff, 0px 0px 8px #26d5ff, 0px 0px 9px #26d5ff, 0px 0px 9px #26d5ff, 0px 0px 9px #26d5ff, 0px 0px 10px #26d5ff, 0px 0px 10px #26d5ff, 0px 0px 10px #26d5ff;
+  color: white; }
+
+/*
+ * These are for when you capture a town
+ * the vps aquired
+ */
+.specialHexesVP .Rebel {
+  color: white;
+  background: #26d5ff; }
+
+/*
+ * These are the static state of a town
+ * and for the change message
+ */
+.specialHexes.Rebel {
+  background: #26d5ff;
+  color: white; }
+
+/*
+ * these are for the +5 vps when you kill a unit
+ */
+.specialHexesVP .LoyalistVictoryPoints {
+  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red;
+  color: white; }
+
+/*
+ * These are for when you capture a town
+ * the vps aquired
+ */
+.specialHexesVP .Loyalist {
+  color: white;
+  background: red; }
+
+/*
+ * These are the static state of a town
+ * and for the change message
+ */
+.specialHexes.Loyalist {
+  background: red;
+  color: white; }
 
 .rebel .counterWrapper .bow {
   background: url("/vendor/wargame/medieval/lewes1264/images/whiteArrow.svg");

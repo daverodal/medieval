@@ -3449,11 +3449,51 @@ svg marker#head {
 .lombard.hq .counterWrapper .counter:before {
   color: white; }
 
-.specialHexesVP .rebelVictoryPoints {
-  text-shadow: 0px 0px 1px blue, 0px 0px 1px blue, 0px 0px 1px blue, 0px 0px 2px blue, 0px 0px 2px blue, 0px 0px 2px blue, 0px 0px 3px blue, 0px 0px 3px blue, 0px 0px 3px blue, 0px 0px 4px blue, 0px 0px 4px blue, 0px 0px 4px blue, 0px 0px 5px blue, 0px 0px 5px blue, 0px 0px 5px blue, 0px 0px 6px blue, 0px 0px 6px blue, 0px 0px 6px blue, 0px 0px 7px blue, 0px 0px 7px blue, 0px 0px 7px blue, 0px 0px 8px blue, 0px 0px 8px blue, 0px 0px 8px blue, 0px 0px 9px blue, 0px 0px 9px blue, 0px 0px 9px blue, 0px 0px 10px blue, 0px 0px 10px blue, 0px 0px 10px blue, 0px 0px 1px blue, 0px 0px 1px blue, 0px 0px 1px blue, 0px 0px 2px blue, 0px 0px 2px blue, 0px 0px 2px blue, 0px 0px 3px blue, 0px 0px 3px blue, 0px 0px 3px blue, 0px 0px 4px blue, 0px 0px 4px blue, 0px 0px 4px blue, 0px 0px 5px blue, 0px 0px 5px blue, 0px 0px 5px blue, 0px 0px 6px blue, 0px 0px 6px blue, 0px 0px 6px blue, 0px 0px 7px blue, 0px 0px 7px blue, 0px 0px 7px blue, 0px 0px 8px blue, 0px 0px 8px blue, 0px 0px 8px blue, 0px 0px 9px blue, 0px 0px 9px blue, 0px 0px 9px blue, 0px 0px 10px blue, 0px 0px 10px blue, 0px 0px 10px blue; }
+/*
+ * these are for the +5 vps when you kill a unit
+ */
+.specialHexesVP .LombardVictoryPoints {
+  text-shadow: 0px 0px 1px #60b2ff, 0px 0px 1px #60b2ff, 0px 0px 1px #60b2ff, 0px 0px 2px #60b2ff, 0px 0px 2px #60b2ff, 0px 0px 2px #60b2ff, 0px 0px 3px #60b2ff, 0px 0px 3px #60b2ff, 0px 0px 3px #60b2ff, 0px 0px 4px #60b2ff, 0px 0px 4px #60b2ff, 0px 0px 4px #60b2ff, 0px 0px 5px #60b2ff, 0px 0px 5px #60b2ff, 0px 0px 5px #60b2ff, 0px 0px 6px #60b2ff, 0px 0px 6px #60b2ff, 0px 0px 6px #60b2ff, 0px 0px 7px #60b2ff, 0px 0px 7px #60b2ff, 0px 0px 7px #60b2ff, 0px 0px 8px #60b2ff, 0px 0px 8px #60b2ff, 0px 0px 8px #60b2ff, 0px 0px 9px #60b2ff, 0px 0px 9px #60b2ff, 0px 0px 9px #60b2ff, 0px 0px 10px #60b2ff, 0px 0px 10px #60b2ff, 0px 0px 10px #60b2ff, 0px 0px 1px #60b2ff, 0px 0px 1px #60b2ff, 0px 0px 1px #60b2ff, 0px 0px 2px #60b2ff, 0px 0px 2px #60b2ff, 0px 0px 2px #60b2ff, 0px 0px 3px #60b2ff, 0px 0px 3px #60b2ff, 0px 0px 3px #60b2ff, 0px 0px 4px #60b2ff, 0px 0px 4px #60b2ff, 0px 0px 4px #60b2ff, 0px 0px 5px #60b2ff, 0px 0px 5px #60b2ff, 0px 0px 5px #60b2ff, 0px 0px 6px #60b2ff, 0px 0px 6px #60b2ff, 0px 0px 6px #60b2ff, 0px 0px 7px #60b2ff, 0px 0px 7px #60b2ff, 0px 0px 7px #60b2ff, 0px 0px 8px #60b2ff, 0px 0px 8px #60b2ff, 0px 0px 8px #60b2ff, 0px 0px 9px #60b2ff, 0px 0px 9px #60b2ff, 0px 0px 9px #60b2ff, 0px 0px 10px #60b2ff, 0px 0px 10px #60b2ff, 0px 0px 10px #60b2ff;
+  color: white; }
 
-.specialHexesVP .loyalistVictoryPoints {
-  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red; }
+/*
+ * These are for when you capture a town
+ * the vps aquired
+ */
+.specialHexesVP .Lombard {
+  color: white;
+  background: #60b2ff; }
+
+/*
+ * These are the static state of a town
+ * and for the change message
+ */
+.specialHexes.Lombard {
+  background: #60b2ff;
+  color: white; }
+
+/*
+ * these are for the +5 vps when you kill a unit
+ */
+.specialHexesVP .NormanVictoryPoints {
+  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red;
+  color: white; }
+
+/*
+ * These are for when you capture a town
+ * the vps aquired
+ */
+.specialHexesVP .Norman {
+  color: white;
+  background: red; }
+
+/*
+ * These are the static state of a town
+ * and for the change message
+ */
+.specialHexes.Norman {
+  background: red;
+  color: white; }
 
 .lombard .counterWrapper .bow {
   background: url("/vendor/wargame/medieval/civitate1053/images/whiteArrow.svg");

@@ -123,7 +123,39 @@ class victoryCore extends \Wargame\VictoryCore
         $this->initHeadquarters();
 
     }
-        
+
+    public function reduceUnit($args)
+    {
+        $unit = $args[0];
+        $battle = Battle::getBattle();
+
+        $vp = $unit->damage;
+
+        $pData = $battle->getPlayerData(false);
+
+        if ($unit->forceId == 1) {
+            $victorId = 2;
+            $class = preg_replace("/ /", "-",$pData['forceName'][$victorId]);
+
+            $this->victoryPoints[$victorId] += $vp;
+            $hex = $unit->hexagon;
+            if($hex->name) {
+                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='${class}VictoryPoints'>+$vp vp</span>";
+            }
+        } else {
+            $victorId = 1;
+            $class = preg_replace("/ /", "-",$pData['forceName'][$victorId]);
+            $hex  = $unit->hexagon;
+            $vp += $this->outgoingVP[$victorId];
+            $this->outgoingVP[$victorId] = $vp;
+            if($hex->name) {
+
+                $battle->mapData->specialHexesVictory->{$hex->name} = "<span class='${class}VictoryPoints'>+$vp vp</span>";
+            }
+            $this->victoryPoints[$victorId] += $vp;
+        }
+    }
+    
     public function postRecoverUnit($args)
     {
         list($unit) = $args;
