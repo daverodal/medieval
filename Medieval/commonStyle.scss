@@ -140,7 +140,6 @@ h5 {
 
 .specialHexesVP {
   background: transparent !important;
-  color: white;
 }
 
 #display {
@@ -322,8 +321,11 @@ body {
 
 #infoWrapper {
   .WrapperLabel {
+    width: auto;
+
   }
 }
+
 
 #phaseDiv, #statusDiv, #chatsDiv, #victoryDiv {
   display: inline;
@@ -1154,7 +1156,14 @@ svg {
   z-index:1;
 
 }
+#deployBox, #deadpile{
+  .unit{
+    border: solid 3px;
+    border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204);
+    margin-right:5px;
+  }
+  font-family: serif;
+}
 #deployBox .unit {
-  border: solid 3px;
-  border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204);
+
 }

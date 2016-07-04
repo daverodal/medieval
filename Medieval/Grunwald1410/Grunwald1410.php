@@ -33,7 +33,7 @@ class Grunwald1410 extends MedievalLandBattle
 {
     /* a comment */
 
-    public $specialHexesMap = ['SpecialHexA'=>2, 'SpecialHexB'=>2, 'SpecialHexC'=>1];
+    public $specialHexesMap = ['SpecialHexA'=>1, 'SpecialHexB'=>2, 'SpecialHexC'=>2, 'SpecialHexD'=>2];
 
     public static function buildUnit($data = false){
         return UnitFactory::build($data);
@@ -54,6 +54,7 @@ class Grunwald1410 extends MedievalLandBattle
     {
         $data = parent::save();
         $data->specialHexA = $this->specialHexA;
+        $data->specialHexB = $this->specialHexB;
         return $data;
     }
 
@@ -151,6 +152,7 @@ class Grunwald1410 extends MedievalLandBattle
 
         if ($data) {
             $this->specialHexA = $data->specialHexA;
+            $this->specialHexB = $data->specialHexB;
 
         } else {
 

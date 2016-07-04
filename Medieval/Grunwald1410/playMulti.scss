@@ -20,10 +20,10 @@
  */
 @import "grunwaldColors";
 @import "../commonPlay";
-.Loyalist {
-  color:darken($loyalistColor,20%);
+.Teutonic-Order {
+  color: $teutonicColor;
 }
 
-.Rebel, .sympth {
-  color: $rebelColor;
+.Kingdom-of-Poland {
+  color: $polishColor;
 }

@@ -23,7 +23,7 @@
 
                 for(var i in hexesMap[hex]){
                     var unit = $scope.units[hexesMap[hex][i]];
-                    unit.wrapperstyle.zIndex = i;
+                    unit.wrapperstyle.zIndex = i + 1;
                     var shift = unit.shift;
                     var top = unit.wrapperstyle.top.replace(/px/,'');
                     var left = unit.wrapperstyle.left.replace(/px/,'');
@@ -98,6 +98,7 @@
         sync.register('mapUnits', function(mapUnits,data){
             var gameUnits = {};
             var deployUnits = [];
+            var retiredUnits = [];
             var hexesMap = $scope.hexesMap;
             var newUnitHexes = {};
             var unitsMap = $scope.unitsMap;
@@ -144,7 +145,7 @@
                     newUnit.wrapperstyle.transform = "rotate("+mapUnits[i].facing*60+"deg)";
                     newUnit.wrapperstyle.top = newUnit.shift + mapUnits[i].y-20+"px";
                     newUnit.wrapperstyle.left = newUnit.shift + mapUnits[i].x-20+"px";
-                    newUnit.wrapperstyle.zIndex = newUnit.shift;
+                    newUnit.wrapperstyle.zIndex = newUnit.shift + 1;
                     newUnit.facing = mapUnits[i].facing;
                     newUnit.strength = mapUnits[i].strength;
                     newUnit.steps = mapUnits[i].steps;
@@ -169,9 +170,15 @@
 
                     deployUnits.push(newUnit);
                 }
+                if(mapUnits[i].parent === 'deadpile'){
+                    newUnit.style = {float:'left'};
+                    newUnit.strength = mapUnits[i].strength;
+                    retiredUnits.push(newUnit);
+                }
             }
             $scope.mapUnits = gameUnits;
             $scope.deployUnits = deployUnits;
+            $scope.retiredUnits = retiredUnits;
 
             $scope.$apply();
         });
@@ -910,4 +917,65 @@
         return sync;
     });
 
+    /* still doing this the non angular way :( */
+    x.register("specialHexes", function(specialHexes, data) {
+        $('.specialHexes').remove();
+        var lab = ['unowned','<?=$forceName[1]?>','<?=$forceName[2]?>'];
+
+        var classLab = ['unowned','<?=preg_replace("/ /", '-', $forceName[1])?>','<?=preg_replace("/ /", '-', $forceName[2])?>'];
+        debugger;
+        for(var i in specialHexes){
+            var newHtml = lab[specialHexes[i]];
+            var curHtml = $("#special"+i).html();
+
+            if(true || newHtml != curHtml){
+                var hexPos = i.replace(/\.\d*/g,'');
+                var x = hexPos.match(/x(\d*)y/)[1];
+                var y = hexPos.match(/y(\d*)\D*/)[1];
+                $("#special"+hexPos).remove();
+                if(data.specialHexesChanges[i]){
+                    $("#gameImages").append('<div id="special'+hexPos+'" style="border-radius:30px;border:10px solid black;top:'+y+'px;left:'+x+'px;font-size:205px;z-index:1000;" class="'+classLab[specialHexes[i]]+' specialHexes">'+lab[specialHexes[i]]+'</div>');
+                    $('#special'+hexPos).animate({fontSize:"16px",zIndex:0,borderWidth:"0px",borderRadius:"0px"},1900,function(){
+                        var id = $(this).attr('id');
+                        id = id.replace(/special/,'');
+
+
+                        if(data.specialHexesVictory[id]){
+                            var hexPos = id.replace(/\.\d*/g,'');
+
+                            var x = hexPos.match(/x(\d*)y/)[1];
+                            var y = hexPos.match(/y(\d*)\D*/)[1];
+                            var newVP = $('<div style="z-index:1000;border-radius:0px;border:0px;top:'+y+'px;left:'+x+'px;font-size:60px;" class="'+' specialHexesVP">'+data.specialHexesVictory[id]+'</div>').insertAfter('#special'+i);
+                            $(newVP).animate({top:y-30,opacity:0.0},1900,function(){
+                                $(this).remove();
+                            });
+                        }
+                    });
+
+                }else{
+
+                        $("#gameImages").append('<div id="special'+i+'" class="specialHexes">'+lab[specialHexes[i]]+'</div>');
+                        $("#special"+i).css({top:y+"px", left:x+"px"}).addClass(classLab[specialHexes[i]]);                    }
+
+            }
+        }
+
+        for(var id in data.specialHexesVictory)
+        {
+            if(data.specialHexesChanges[id]){
+                continue;
+            }
+            var hexPos = id.replace(/\.\d*/g,'');
+            var x = hexPos.match(/x(\d*)y/)[1];
+            var y = hexPos.match(/y(\d*)\D*/)[1];
+            var newVP = $('<div  style="z-index:1000;border-radius:0px;border:0px;top:'+y+'px;left:'+x+'px;font-size:60px;" class="'+' specialHexesVP">'+data.specialHexesVictory[id]+'</div>').appendTo('#gameImages');
+            $(newVP).animate({top:y-30,opacity:0.0},1900,function(){
+                var id = $(this).attr('id');
+
+                $(this).remove();
+            });
+        }
+
+
+    });
 </script>

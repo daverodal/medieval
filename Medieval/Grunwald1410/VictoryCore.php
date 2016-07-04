@@ -62,24 +62,38 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
         $battle = Battle::getBattle();
 
         list($mapHexName, $forceId) = $args;
+        $vp = 10;
 
+        /*
+         *  Teutonic Camp
+         */
 
-        if(in_array($mapHexName,$battle->specialHexA)){
-            $vp = 1;
+        $pData = $battle->getPlayerData(false);
+        $class = preg_replace("/ /", "-",$pData['forceName'][$forceId]);
+        if(in_array($mapHexName,$battle->specialHexB)) {
+            if ($forceId == POLISH_FORCE) {
+                $this->victoryPoints[POLISH_FORCE] += $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> +$vp Polish vp</span>";
+            }
+            if ($forceId == TEUTONIC_FORCE) {
+                $this->victoryPoints[POLISH_FORCE] -= $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> -$vp Polish vp</span>";
+            }
+        }
 
-            $prevForceId = $battle->mapData->specialHexes->$mapHexName;
-//            if ($forceId == POLISH_FORCE) {
-//                $this->victoryPoints[POLISH_FORCE]  += $vp;
-//                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='teutonic'>+$vp Polish vp</span>";
-//                $this->victoryPoints[TEUTONIC_FORCE] -= $vp;
-//                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='teutonic'> -$vp Teutonic vp</span>";
-//            }
-//            if ($forceId == TEUTONIC_FORCE) {
-//                $this->victoryPoints[TEUTONIC_FORCE]  += $vp;
-//                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='polish'>+$vp Polish vp</span>";
-//                $this->victoryPoints[POLISH_FORCE] -= $vp;
-//                $battle->mapData->specialHexesVictory->$mapHexName .= "<span class='polish'> -$vp Polish vp</span>";
-//            }
+        /*
+         * Polish Camp
+         */
+            if(in_array($mapHexName,$battle->specialHexA)){
+
+            if ($forceId == POLISH_FORCE) {
+                $this->victoryPoints[TEUTONIC_FORCE]  -= $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'>-$vp Teutonic vp</span>";
+            }
+            if ($forceId == TEUTONIC_FORCE) {
+                $this->victoryPoints[TEUTONIC_FORCE]  += $vp;
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'>+$vp Teutonic vp</span>";
+            }
         }
 
     }

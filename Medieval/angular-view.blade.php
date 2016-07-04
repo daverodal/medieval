@@ -80,6 +80,7 @@
         <div class="clear"></div>
     </div>
 @endsection
+
 <body ng-app="lobbyApp" xmlns="http://www.w3.org/1999/html">
 <div ng-controller="LobbyController" id="theDiv">
     <header id="header">
@@ -209,11 +210,32 @@
                 @show
                 <div style="clear:both;"></div>
             </div>
-            <div class="unit-wrapper" style="display:none;" id="deadpile">
+
+            <div class="unit-wrapper" style="display:none;"  id="deadpile">
                 <div class="close">X</div>
                 <div style="right:10px;font-size:50px;font-family:sans-serif;bottom:10px;position:absolute;color:#666;">
                     Retired Units
                 </div>
+                <div class="a-unit-wrapper" ng-repeat="unit in retiredUnits"  ng-style="unit.wrapperstyle">
+                    <div id="@{{unit.id}}" ng-mouseUp="clickMe(unit.id, $event)" ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
+                        <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
+                        <div class="shadow-mask" ng-class="unit.shadow"></div>
+                        <div class="counterWrapper">
+                            <div ng-show="unit.bow" class="bow" style=""></div>
+                            <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
+
+                            <div class="counter"></div>
+                        </div>
+                        <div class="range">@{{ unit.armorClass }}</div>
+
+                        <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
+
+                        <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
+                        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+
+                    </div>
+                </div>
+                <div class="clear"></div>
             </div>
             <div class="unit-wrapper" style="display:none;" id="exitWrapper">
                 <div class="close">X</div>

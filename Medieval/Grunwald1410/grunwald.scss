@@ -22,13 +22,14 @@
 /*df5842*/
 
 @include headerColor(Teutonic-Order, #c0c0c0, gray);
-@include headerColor(Kingdom-of-Poland, #FFA99B, red);
-@include unitColor(polish,#FFA99B,  Brit, red );
-@include unitColor(teutonic, white, TeutonicAnti, black, white, black);
-@include unitColor(tartar,#FFA99B,  Brit, green );
-@include unitColor(lithuanian,#FFA99B,  Brit, orange );
+@include headerColor(Kingdom-of-Poland, $polishColor, red);
 
-.loyalist.hq .counterWrapper .counter{
+@include unitColor(polish,$polishColor,  Brit, red );
+@include unitColor(teutonic, white, TeutonicAnti, black, white, black);
+@include unitColor(tartar, $polishColor,  Brit, green );
+@include unitColor(lithuanian,$polishColor,  Brit, orange );
+
+.polish.hq .counterWrapper .counter{
   &:before{
     color:yellow;
   }
@@ -46,147 +47,34 @@
     color:yellow;
   }
 }
-#map {
-}
 
-#crt {
-  width: 875px;
-  .crt-table-name{
-    display:none;
-  }
-  span{
-    width:56px;
-  }
-}
 
-.reduced {
-  color: white;
-}
-
-#TECWrapper #TEC {
-  padding-bottom:15px;
-  width:700px;
-  ul {
-    width: 600px;
-    margin-left: 10px;
-    li {
-      clear:both;
-      padding: 20px 5px 34px 0px;
-
-      &.row-one .column-image {
-        background-position: 0px 0px;
-      }
-      &.row-two .column-image {
-        background-position: 0px -55px;
-      }
-      &.row-three .column-image {
-        background-position: 0px -110px;
-      }
-      &.row-four .column-image {
-        background-position: 0px -165px;
-      }
-      &.row-five .column-image {
-        background-position: 0px -220px;
-      }
-      &.row-six .column-image {
-        background-position: 0px -303px;
-      }
-      &.row-seven .column-image {
-        background-position: 0px -385px;
-      }
-      &.row-eight .column-image {
-        background-position: 0px -465px;
-      }
-      &.row-nine .column-image {
-        background-position: 0px -550px;
-      }
-    }
-    .column-image {
-      float: left;
-      width: 94px;
-      height: 56px;
-      background-image: url('js/AmphTEC.png');
-      background-repeat: no-repeat;
-
-    }
-    .column-one {
-      float: left;
-      width: 24%;
-      padding-right: 4%;
-      padding-top: 10px;
-    }
-    .column-two {
-      float: left;
-      width: 24%;
-      padding-right: 4%;
-    }
-    .column-three {
-      float: left;
-      width: 24%;
-    }
-  }
-}
-#infoWrapper .WrapperLabel {
-  width: auto;
-}
-
-.unit .unit-numbers {
-  &.infoLen7 {
-    letter-spacing: -1px;
-  }
-  &.infoLen9 {
-    letter-spacing: -1px;
-    font-size: 10px;
-  }
-
-}
-.game-name {
-  word-break: break-all;
-  font-family: 'Nosifer';
-}
-
-#gameTurn6 {
-}
-
-#gameTurn6 .unit {
-  float: left;
-}
 
 .specialHexesVP .teutonicVictoryPoints {
-  @include victoryPoints(black)
+  @include victoryPoints(black);
+  color:white;
 }
 
 .specialHexesVP .polishVictoryPoints {
   @include victoryPoints(red);
+  color:white;
 }
 
-.supply{
-  font-size:25px !important;
-  z-index:0;
-  border-radius:0px;
-  border:0px;
-  transform: rotate(180deg);
+.specialHexesVP .Teutonic-Order{
+  color:white;
+  background:black;
 }
-.unit-steps{
-  margin-top:-11px;
-  font-size:16px;
-  text-align:center;
+
+.specialHexes.Teutonic-Order{
+  background:black;
+  color:white;
 }
-#crtDetails{
-  display:inherit;
+
+.specialHexes.Kingdom-of-Poland{
+  background:$polishColor;
 }
-.counterWrapper{
-  .bow{
-    position:absolute;
-    left: 13px;
-    height: 13px;
 
 
-    background: url('/vendor/wargame/medieval/grunwald1410/images/arrow.svg');
-    background-size:10px 13px;
-    width:10px;
-  }
-}
 .teutonic{
   .counterWrapper .bow{
     background: url('/vendor/wargame/medieval/grunwald1410/images/whiteArrow.svg');

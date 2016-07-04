@@ -157,56 +157,63 @@ $vintage-unit-numbers-size:10px;
 }
 
 
+#crt {
+  width: 875px;
+  .crt-table-name{
+    display:none;
+  }
+  span{
+    width:56px;
+  }
 
-.shadow-wrapper{
-  position:relative;
-}
-.screen{
-  position:absolute;
-  width:98%;
 
-  &.rows0{
-    height:0px;
+  .shadow-wrapper{
+    position:relative;
   }
-  &.rows1{
-    height:21px;
+
+  .screen{
+    position:absolute;
+    width:98%;
+
+    &.rows0{
+      height:0px;
+    }
+    &.rows1{
+      height:21px;
+    }
+    &.rows2{
+      height:42px;
+    }
+    &.rows3{
+      height:63px;
+    }
+    &.rows4{
+      height:84px;
+    }
+    &.rows5{
+      height:105px;
+    }
+    &.rows6{
+      height:126px;
+    }
+    &.shadowy{
+      background:rgba(0, 0, 0, 0.6) !important
+    }
   }
-  &.rows2{
-    height:42px;
+  .screen-one{
+    top:0px;
   }
-  &.rows3{
-    height:63px;
+  .screen-two{
+    bottom:0px;
   }
-  &.rows4{
-    height:84px;
-  }
-  &.rows5{
-    height:105px;
-  }
-  &.rows6{
-    height:126px;
-  }
-  &.shadowy{
-    background:rgba(0, 0, 0, 0.6) !important
-  }
-}
-.screen-one{
-  top:0px;
-}
-.screen-two{
-  bottom:0px;
-}
-.rebel div {
-  color: black;
+
+
 }
 
-.sympth div {
-  color: black;
-}
 
 .game-name {
   word-break: break-all;
-  font-family: 'Nosifer';
+  font-family: 'sans-serif';
 }
 
 .reduced {
@@ -215,9 +222,19 @@ $vintage-unit-numbers-size:10px;
 .row-2, .row0, .row8, .row10, .row12{
   background:white;
 }
-@import "tmcwUnits";
-@import "tmcwBoxes";
-@import "tmcwSpecialVP";
+
+
+
+.unit .unit-numbers {
+  &.infoLen7 {
+    letter-spacing: -1px;
+  }
+  &.infoLen9 {
+    letter-spacing: -1px;
+    font-size: 10px;
+  }
+
+}
 
 
 
@@ -235,7 +252,11 @@ $vintage-unit-numbers-size:10px;
   }
   @include badge($nationality, $shortName, $color);
 }
-
+.unit-steps{
+  margin-top:-11px;
+  font-size:16px;
+  text-align:center;
+}
 @mixin headerColor($nationality, $color, $faceColor: $color, $labelColor: inherit){
   .player#{$nationality}{
     color: $labelColor;
@@ -247,5 +268,18 @@ $vintage-unit-numbers-size:10px;
   }
   .#{$nationality}Face, .player#{$nationality}Face{
     color:$faceColor;
+  }
+}
+
+.counterWrapper{
+  .bow{
+    position:absolute;
+    left: 13px;
+    height: 13px;
+
+
+    background: url('/vendor/wargame/medieval/grunwald1410/images/arrow.svg');
+    background-size:10px 13px;
+    width:10px;
   }
 }

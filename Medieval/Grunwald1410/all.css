@@ -2213,8 +2213,7 @@ h5 {
   z-index: 0; }
 
 .specialHexesVP {
-  background: transparent !important;
-  color: white; }
+  background: transparent !important; }
 
 #display {
   display: none;
@@ -2299,9 +2298,6 @@ This program is distributed in the hope that it will be useful,
 You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
    */
-.love {
-  color: peace; }
-
 .light {
   backgroundColor: white; }
 
@@ -2430,6 +2426,9 @@ You should have received a copy of the GNU General Public License
   #menu ul {
     margin: 0;
     padding: 0; }
+
+#infoWrapper .WrapperLabel {
+  width: auto; }
 
 #phaseDiv, #statusDiv, #chatsDiv, #victoryDiv {
   display: inline;
@@ -3045,9 +3044,12 @@ svg marker#head {
   position: absolute;
   z-index: 1; }
 
-#deployBox .unit {
-  border: solid 3px;
-  border-color: #cccccc #666666 #666666 #cccccc; }
+#deployBox, #deadpile {
+  font-family: serif; }
+  #deployBox .unit, #deadpile .unit {
+    border: solid 3px;
+    border-color: #cccccc #666666 #666666 #cccccc;
+    margin-right: 5px; }
 
 /**
  *
@@ -3085,44 +3087,41 @@ svg marker#head {
   top: 0px;
   font-size: 12px; }
 
-.shadow-wrapper {
-  position: relative; }
-
-.screen {
-  position: absolute;
-  width: 98%; }
-  .screen.rows0 {
-    height: 0px; }
-  .screen.rows1 {
-    height: 21px; }
-  .screen.rows2 {
-    height: 42px; }
-  .screen.rows3 {
-    height: 63px; }
-  .screen.rows4 {
-    height: 84px; }
-  .screen.rows5 {
-    height: 105px; }
-  .screen.rows6 {
-    height: 126px; }
-  .screen.shadowy {
-    background: rgba(0, 0, 0, 0.6) !important; }
-
-.screen-one {
-  top: 0px; }
-
-.screen-two {
-  bottom: 0px; }
-
-.rebel div {
-  color: black; }
-
-.sympth div {
-  color: black; }
+#crt {
+  width: 875px; }
+  #crt .crt-table-name {
+    display: none; }
+  #crt span {
+    width: 56px; }
+  #crt .shadow-wrapper {
+    position: relative; }
+  #crt .screen {
+    position: absolute;
+    width: 98%; }
+    #crt .screen.rows0 {
+      height: 0px; }
+    #crt .screen.rows1 {
+      height: 21px; }
+    #crt .screen.rows2 {
+      height: 42px; }
+    #crt .screen.rows3 {
+      height: 63px; }
+    #crt .screen.rows4 {
+      height: 84px; }
+    #crt .screen.rows5 {
+      height: 105px; }
+    #crt .screen.rows6 {
+      height: 126px; }
+    #crt .screen.shadowy {
+      background: rgba(0, 0, 0, 0.6) !important; }
+  #crt .screen-one {
+    top: 0px; }
+  #crt .screen-two {
+    bottom: 0px; }
 
 .game-name {
   word-break: break-all;
-  font-family: 'Nosifer'; }
+  font-family: 'sans-serif'; }
 
 .reduced {
   color: white; }
@@ -3130,168 +3129,24 @@ svg marker#head {
 .row-2, .row0, .row8, .row10, .row12 {
   background: white; }
 
-/**
- *
- * Copyright 2012-2015 David Rodal
- *
- *  This program is free software; you can redistribute it
- *  and/or modify it under the terms of the GNU General Public License
- *  as published by the Free Software Foundation;
- *  either version 2 of the License, or (at your option) any later version
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-.unit .unitSize {
-  height: 10px;
-  font-size: 9px;
-  text-align: center;
-  color: black; }
-
-.unit .counter {
-  width: 32px; }
-
-.unit .unit-numbers {
-  font-size: 12px;
-  font-weight: bold; }
-
-.unit .unit-numbers .infoLen45 {
-  font-size: 11px;
+.unit .unit-numbers.infoLen7 {
   letter-spacing: -1px; }
+.unit .unit-numbers.infoLen9 {
+  letter-spacing: -1px;
+  font-size: 10px; }
 
-.unit .unit-numbers .infoLen5 {
-  letter-spacing: -1px; }
+.unit-steps {
+  margin-top: -11px;
+  font-size: 16px;
+  text-align: center; }
 
-.unit .unit-numbers .infoLen7 {
-  font-size: 13px;
-  letter-spacing: -1px; }
-
-.unit .unit-numbers .infoLen8 {
-  letter-spacing: -1px; }
-
-/**
- *
- * Copyright 2012-2015 David Rodal
- *
- *  This program is free software; you can redistribute it
- *  and/or modify it under the terms of the GNU General Public License
- *  as published by the Free Software Foundation;
- *  either version 2 of the License, or (at your option) any later version
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/* dropdown styles */
-#OBC {
-  background: white;
-  width: 514px; }
-
-#crt {
-  width: 308px; }
-
-#TEC {
-  background: white;
-  width: 579px; }
-
-#TECWrapper .closer {
-  height: 0px;
-  padding: 0px; }
-
-#TECWrapper .colOne.riverHex {
-  background-image: url('<?=asset("js/river.png")?>');
-  background-position: 0px -26px; }
-
-#TECWrapper .colOne.bridgeHex {
-  background-image: url('<?=url("js/riverRoad.png")?>');
-  background-position: 0px -26px; }
-
-#TECWrapper .colOne.blankHex {
-  background-image: url('<?=url("js/blank.png")?>'); }
-
-#TECWrapper .colOne.forestHex {
-  background-image: url('<?=url("js/forest 2.png")?>'); }
-
-#TECWrapper .colOne.mountainHex {
-  background-image: url('<?=url("js/mountain.png")?>'); }
-
-#TECWrapper .colOne.roadHex {
-  background-image: url('<?=url("js/road.png")?>');
-  background-position: 0px -26px; }
-
-#TECWrapper .colOne.trailHex {
-  background-image: url('<?=url("js/trail.png")?>');
-  background-position: 0px -26px;
-  background-size: 516px;
-  /* TODO why this different from others */ }
-
-#TECWrapper .colOne {
-  background-size: 400px;
-  width: 220px;
-  height: 56px;
-  margin-left: 20px; }
-
-#TECWrapper .colTwo {
-  width: 170px;
-  padding-right: 10px; }
-
-#TECWrapper .colThree {
-  width: 136px; }
-
-#TECWrapper .colOne span {
-  margin-top: 12px;
-  margin-left: 80px;
-  display: inline-block; }
-
-#TECWrapper .colTwo, #TECWrapper .colThree {
-  margin-top: 12px; }
-
-#TECWrapper .colOne,
-#TECWrapper .colTwo,
-#TECWrapper .colThree {
-  float: left; }
-
-#TECWrapper li {
-  list-style-type: none;
-  padding: 5px 20px 5px 0px; }
-
-#GR {
-  width: 600px; }
-
-/**
- *
- * Copyright 2012-2015 David Rodal
- *
- *  This program is free software; you can redistribute it
- *  and/or modify it under the terms of the GNU General Public License
- *  as published by the Free Software Foundation;
- *  either version 2 of the License, or (at your option) any later version
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-.specialHexesVP .prcVictoryPoints {
-  text-shadow: 0px 0px 1px gold, 0px 0px 1px gold, 0px 0px 1px gold, 0px 0px 2px gold, 0px 0px 2px gold, 0px 0px 2px gold, 0px 0px 3px gold, 0px 0px 3px gold, 0px 0px 3px gold, 0px 0px 4px gold, 0px 0px 4px gold, 0px 0px 4px gold, 0px 0px 5px gold, 0px 0px 5px gold, 0px 0px 5px gold, 0px 0px 6px gold, 0px 0px 6px gold, 0px 0px 6px gold, 0px 0px 7px gold, 0px 0px 7px gold, 0px 0px 7px gold, 0px 0px 8px gold, 0px 0px 8px gold, 0px 0px 8px gold, 0px 0px 9px gold, 0px 0px 9px gold, 0px 0px 9px gold, 0px 0px 10px gold, 0px 0px 10px gold, 0px 0px 10px gold, 0px 0px 1px gold, 0px 0px 1px gold, 0px 0px 1px gold, 0px 0px 2px gold, 0px 0px 2px gold, 0px 0px 2px gold, 0px 0px 3px gold, 0px 0px 3px gold, 0px 0px 3px gold, 0px 0px 4px gold, 0px 0px 4px gold, 0px 0px 4px gold, 0px 0px 5px gold, 0px 0px 5px gold, 0px 0px 5px gold, 0px 0px 6px gold, 0px 0px 6px gold, 0px 0px 6px gold, 0px 0px 7px gold, 0px 0px 7px gold, 0px 0px 7px gold, 0px 0px 8px gold, 0px 0px 8px gold, 0px 0px 8px gold, 0px 0px 9px gold, 0px 0px 9px gold, 0px 0px 9px gold, 0px 0px 10px gold, 0px 0px 10px gold, 0px 0px 10px gold; }
-
-.specialHexesVP .sovietVictoryPoints, .specialHexesVP .rebelVictoryPoints {
-  text-shadow: 0px 0px 1px #df5842, 0px 0px 1px #df5842, 0px 0px 1px #df5842, 0px 0px 2px #df5842, 0px 0px 2px #df5842, 0px 0px 2px #df5842, 0px 0px 3px #df5842, 0px 0px 3px #df5842, 0px 0px 3px #df5842, 0px 0px 4px #df5842, 0px 0px 4px #df5842, 0px 0px 4px #df5842, 0px 0px 5px #df5842, 0px 0px 5px #df5842, 0px 0px 5px #df5842, 0px 0px 6px #df5842, 0px 0px 6px #df5842, 0px 0px 6px #df5842, 0px 0px 7px #df5842, 0px 0px 7px #df5842, 0px 0px 7px #df5842, 0px 0px 8px #df5842, 0px 0px 8px #df5842, 0px 0px 8px #df5842, 0px 0px 9px #df5842, 0px 0px 9px #df5842, 0px 0px 9px #df5842, 0px 0px 10px #df5842, 0px 0px 10px #df5842, 0px 0px 10px #df5842, 0px 0px 1px #df5842, 0px 0px 1px #df5842, 0px 0px 1px #df5842, 0px 0px 2px #df5842, 0px 0px 2px #df5842, 0px 0px 2px #df5842, 0px 0px 3px #df5842, 0px 0px 3px #df5842, 0px 0px 3px #df5842, 0px 0px 4px #df5842, 0px 0px 4px #df5842, 0px 0px 4px #df5842, 0px 0px 5px #df5842, 0px 0px 5px #df5842, 0px 0px 5px #df5842, 0px 0px 6px #df5842, 0px 0px 6px #df5842, 0px 0px 6px #df5842, 0px 0px 7px #df5842, 0px 0px 7px #df5842, 0px 0px 7px #df5842, 0px 0px 8px #df5842, 0px 0px 8px #df5842, 0px 0px 8px #df5842, 0px 0px 9px #df5842, 0px 0px 9px #df5842, 0px 0px 9px #df5842, 0px 0px 10px #df5842, 0px 0px 10px #df5842, 0px 0px 10px #df5842; }
-
-.specialHexesVP .loyalistVictoryPoints {
-  text-shadow: 0px 0px 1px #84b5ff, 0px 0px 1px #84b5ff, 0px 0px 1px #84b5ff, 0px 0px 2px #84b5ff, 0px 0px 2px #84b5ff, 0px 0px 2px #84b5ff, 0px 0px 3px #84b5ff, 0px 0px 3px #84b5ff, 0px 0px 3px #84b5ff, 0px 0px 4px #84b5ff, 0px 0px 4px #84b5ff, 0px 0px 4px #84b5ff, 0px 0px 5px #84b5ff, 0px 0px 5px #84b5ff, 0px 0px 5px #84b5ff, 0px 0px 6px #84b5ff, 0px 0px 6px #84b5ff, 0px 0px 6px #84b5ff, 0px 0px 7px #84b5ff, 0px 0px 7px #84b5ff, 0px 0px 7px #84b5ff, 0px 0px 8px #84b5ff, 0px 0px 8px #84b5ff, 0px 0px 8px #84b5ff, 0px 0px 9px #84b5ff, 0px 0px 9px #84b5ff, 0px 0px 9px #84b5ff, 0px 0px 10px #84b5ff, 0px 0px 10px #84b5ff, 0px 0px 10px #84b5ff, 0px 0px 1px #84b5ff, 0px 0px 1px #84b5ff, 0px 0px 1px #84b5ff, 0px 0px 2px #84b5ff, 0px 0px 2px #84b5ff, 0px 0px 2px #84b5ff, 0px 0px 3px #84b5ff, 0px 0px 3px #84b5ff, 0px 0px 3px #84b5ff, 0px 0px 4px #84b5ff, 0px 0px 4px #84b5ff, 0px 0px 4px #84b5ff, 0px 0px 5px #84b5ff, 0px 0px 5px #84b5ff, 0px 0px 5px #84b5ff, 0px 0px 6px #84b5ff, 0px 0px 6px #84b5ff, 0px 0px 6px #84b5ff, 0px 0px 7px #84b5ff, 0px 0px 7px #84b5ff, 0px 0px 7px #84b5ff, 0px 0px 8px #84b5ff, 0px 0px 8px #84b5ff, 0px 0px 8px #84b5ff, 0px 0px 9px #84b5ff, 0px 0px 9px #84b5ff, 0px 0px 9px #84b5ff, 0px 0px 10px #84b5ff, 0px 0px 10px #84b5ff, 0px 0px 10px #84b5ff; }
+.counterWrapper .bow {
+  position: absolute;
+  left: 13px;
+  height: 13px;
+  background: url("/vendor/wargame/medieval/grunwald1410/images/arrow.svg");
+  background-size: 10px 13px;
+  width: 10px; }
 
 /**
  *
@@ -3670,7 +3525,7 @@ svg marker#head {
 .lithuanian.pontoon .unit-numbers {
   display: none; }
 
-.loyalist.hq .counterWrapper .counter:before {
+.polish.hq .counterWrapper .counter:before {
   color: yellow; }
 
 .tartar.hq .counterWrapper .counter:before {
@@ -3679,106 +3534,24 @@ svg marker#head {
 .lithuanian.hq .counterWrapper .counter:before {
   color: yellow; }
 
-#crt {
-  width: 875px; }
-  #crt .crt-table-name {
-    display: none; }
-  #crt span {
-    width: 56px; }
-
-.reduced {
+.specialHexesVP .teutonicVictoryPoints {
+  text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
   color: white; }
 
-#TECWrapper #TEC {
-  padding-bottom: 15px;
-  width: 700px; }
-  #TECWrapper #TEC ul {
-    width: 600px;
-    margin-left: 10px; }
-    #TECWrapper #TEC ul li {
-      clear: both;
-      padding: 20px 5px 34px 0px; }
-      #TECWrapper #TEC ul li.row-one .column-image {
-        background-position: 0px 0px; }
-      #TECWrapper #TEC ul li.row-two .column-image {
-        background-position: 0px -55px; }
-      #TECWrapper #TEC ul li.row-three .column-image {
-        background-position: 0px -110px; }
-      #TECWrapper #TEC ul li.row-four .column-image {
-        background-position: 0px -165px; }
-      #TECWrapper #TEC ul li.row-five .column-image {
-        background-position: 0px -220px; }
-      #TECWrapper #TEC ul li.row-six .column-image {
-        background-position: 0px -303px; }
-      #TECWrapper #TEC ul li.row-seven .column-image {
-        background-position: 0px -385px; }
-      #TECWrapper #TEC ul li.row-eight .column-image {
-        background-position: 0px -465px; }
-      #TECWrapper #TEC ul li.row-nine .column-image {
-        background-position: 0px -550px; }
-    #TECWrapper #TEC ul .column-image {
-      float: left;
-      width: 94px;
-      height: 56px;
-      background-image: url("js/AmphTEC.png");
-      background-repeat: no-repeat; }
-    #TECWrapper #TEC ul .column-one {
-      float: left;
-      width: 24%;
-      padding-right: 4%;
-      padding-top: 10px; }
-    #TECWrapper #TEC ul .column-two {
-      float: left;
-      width: 24%;
-      padding-right: 4%; }
-    #TECWrapper #TEC ul .column-three {
-      float: left;
-      width: 24%; }
-
-#infoWrapper .WrapperLabel {
-  width: auto; }
-
-.unit .unit-numbers.infoLen7 {
-  letter-spacing: -1px; }
-.unit .unit-numbers.infoLen9 {
-  letter-spacing: -1px;
-  font-size: 10px; }
-
-.game-name {
-  word-break: break-all;
-  font-family: 'Nosifer'; }
-
-#gameTurn6 .unit {
-  float: left; }
-
-.specialHexesVP .teutonicVictoryPoints {
-  text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black; }
-
 .specialHexesVP .polishVictoryPoints {
-  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red; }
+  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red;
+  color: white; }
 
-.supply {
-  font-size: 25px !important;
-  z-index: 0;
-  border-radius: 0px;
-  border: 0px;
-  transform: rotate(180deg); }
+.specialHexesVP .Teutonic-Order {
+  color: white;
+  background: black; }
 
-.unit-steps {
-  margin-top: -11px;
-  font-size: 16px;
-  text-align: center; }
+.specialHexes.Teutonic-Order {
+  background: black;
+  color: white; }
 
-#crtDetails {
-  display: inherit; }
-
-.counterWrapper .bow {
-  position: absolute;
-  left: 13px;
-  height: 13px;
-  background: url("/vendor/wargame/medieval/grunwald1410/images/arrow.svg");
-  background-size: 10px 13px;
-  width: 10px; }
+.specialHexes.Kingdom-of-Poland {
+  background: #FFA99B; }
 
 .teutonic .counterWrapper .bow {
   background: url("/vendor/wargame/medieval/grunwald1410/images/whiteArrow.svg");
