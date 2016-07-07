@@ -2863,7 +2863,7 @@ fieldset {
   cursor: pointer; }
 
 #crtDetails {
-  display: none; }
+  display: block; }
 
 svg {
   z-index: 1;

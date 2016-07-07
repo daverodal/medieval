@@ -708,14 +708,21 @@
                 var lastCombat = "";
                 if(combatRules.combatsToResolve){
                     if(combatRules.lastResolvedCombat){
-                        var finalRoll = combatRules.lastResolvedCombat.Die + combatRules.lastResolvedCombat.dieOffset;
-                        var orig = combatRules.lastResolvedCombat.Die + " ";
-                        if(combatRules.lastResolvedCombat.dieOffset < 0){
-                            orig += "- " + Math.abs(combatRules.lastResolvedCombat.dieOffset);
-                        }else{
-                            orig += "+ " + combatRules.lastResolvedCombat.dieOffset;
+                        var finalRoll = combatRules.lastResolvedCombat.Die;
+                        var orig = '';
+
+                        if(combatRules.lastResolvedCombat.dieOffset !== undefined){
+                            orig = combatRules.lastResolvedCombat.Die + " ";
+
+                            finalRoll += combatRules.lastResolvedCombat.dieOffset;
+                            if(combatRules.lastResolvedCombat.dieOffset < 0){
+                                orig += "- " + Math.abs(combatRules.lastResolvedCombat.dieOffset);
+                            }else{
+                                orig += "+ " + combatRules.lastResolvedCombat.dieOffset;
+                            }
+                            orig += " = ";
                         }
-                        title += orig+" = <strong style='font-size:150%'>" + finalRoll + " " + combatRules.lastResolvedCombat.combatResult + "</strong>";
+                        title += orig+"<strong style='font-size:150%'>" + finalRoll + " " + combatRules.lastResolvedCombat.combatResult + "</strong>";
                         combatCol = combatRules.lastResolvedCombat.index + 1;
 
                         combatRoll = combatRules.lastResolvedCombat.Die;
@@ -736,8 +743,13 @@
                                 $scope.topCrts.crts[crtName].pinned = combatCol;
                             }
                         }
+                        var dieOffset = -1; /* for normal 0 based crt */
 
-                        $scope.topCrt.crts[crtName].combatRoll  = combatRoll + combatRules.lastResolvedCombat.dieOffset + 2;
+                        if(combatRules.lastResolvedCombat.dieOffset !== undefined){
+                            dieOffset = combatRules.lastResolvedCombat.dieOffset + 2;
+                        }
+
+                        $scope.topCrt.crts[crtName].combatRoll  = combatRoll + dieOffset;
 
                         if(combatRules.lastResolvedCombat.useAlt){
 //                                showCrtTable($('#cavalryTable'));
