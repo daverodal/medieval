@@ -99,6 +99,9 @@
             var gameUnits = {};
             var deployUnits = [];
             var retiredUnits = [];
+            var notUsedUnits = [];
+            var reinforcements = {};
+
             var hexesMap = $scope.hexesMap;
             var newUnitHexes = {};
             var unitsMap = $scope.unitsMap;
@@ -164,11 +167,19 @@
                 if(mapUnits[i].parent === 'deployBox'){
                     newUnit.style = {float:'left'};
                     newUnit.strength = mapUnits[i].strength;
-                    if(mapUnits[i].status == <?=STATUS_DEPLOYING?>){
+                    if(mapUnits[i].status == <?=STATUS_DEPLOYING?> || mapUnits[i].status == <?=STATUS_REINFORCING?>){
                         newUnit.style.boxShadow = "5px 5px 5px #333";
                     }
 
                     deployUnits.push(newUnit);
+                }
+
+                if(mapUnits[i].parent.match(/gameTurn/)){
+                    debugger;
+                    if(reinforcements[mapUnits[i].parent] === undefined){
+                        reinforcements[mapUnits[i].parent] = [];
+                    }
+                    reinforcements[mapUnits[i].parent].push(newUnit);
                 }
                 if(mapUnits[i].parent === 'deadpile'){
                     newUnit.style = {float:'left'};
@@ -179,6 +190,8 @@
             $scope.mapUnits = gameUnits;
             $scope.deployUnits = deployUnits;
             $scope.retiredUnits = retiredUnits;
+            $scope.notUsedUnits = notUsedUnits;
+            $scope.reinforcements = reinforcements;
 
             $scope.$apply();
         });
@@ -922,6 +935,27 @@
         });
     }]);
 
+    lobbyApp.directive('offmapUnit', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'offmap-unit.html'
+        }
+    });
+
+    lobbyApp.directive('unit', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'unit.html'
+        }
+    });
+
+    lobbyApp.directive('ghostUnit', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'ghost-unit.html'
+        }
+    });
+
     lobbyApp.factory('sync',function(){
         var fetchUrl = '{{ url("wargame/fetch-lobby/") }}';
 
@@ -935,7 +969,6 @@
         var lab = ['unowned','<?=$forceName[1]?>','<?=$forceName[2]?>'];
 
         var classLab = ['unowned','<?=preg_replace("/ /", '-', $forceName[1])?>','<?=preg_replace("/ /", '-', $forceName[2])?>'];
-        debugger;
         for(var i in specialHexes){
             var newHtml = lab[specialHexes[i]];
             var curHtml = $("#special"+i).html();

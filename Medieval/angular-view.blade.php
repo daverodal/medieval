@@ -25,61 +25,24 @@
 
 @section('units')
     <div class="a-unit-wrapper" ng-repeat="unit in mapUnits"  ng-style="unit.wrapperstyle">
-        <div id="@{{unit.id}}" ng-mouseDown="mouseDown(unit.id, $event)" ng-mouseUp="clickMe(unit.id, $event)" ng-right-click="rightClickMe(unit.id, $event)"  ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
-            <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
-            <div class="shadow-mask" ng-class="unit.shadow"></div>
-            <div class="counterWrapper">
-                <div ng-show="unit.bow" class="bow" style=""></div>
-                <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
-                <div class="counter"></div>
-            </div>
-            <div class="range">@{{ unit.armorClass }}</div>
-
-            <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
-
-            <div ng-class="unit.infoLen" class="unit-numbers">@{{ unit.unitNumbers }}</div>
-            <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
-            <i ng-show="!unit.command" class="fa fa-star unit-command" aria-hidden="true"></i>
-
-        </div>
+        <unit unit="unit"></unit>
     </div>
 
     <div ng-mouseover="hoverThis(unit)" ng-mouseleave="unHoverThis(unit)" ng-click="clickMe(unit.id, $event)" ng-style="unit.style" ng-repeat="unit in moveUnits track by $index" class="unit" ng-class="[unit.nationality, unit.class]" >
-        <div class="counterWrapper">
-            <div class="counter"></div>
-        </div>
-        <div class="range">@{{ unit.armorClass }}</div>
-        <div class="unit-numbers">@{{ unit.strength }} - @{{ unit.pointsLeft }}</div>
-        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+        <ghost-unit unit="unit"></ghost-unit>
 
     </div>
-
-
 @endsection
 @section('outer-deploy-box')
     <div id="deployBox">
         <div class="a-unit-wrapper" ng-repeat="unit in deployUnits"  ng-style="unit.wrapperstyle">
-            <div id="@{{unit.id}}" ng-mouseUp="clickMe(unit.id, $event)" ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
-                <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
-                <div class="shadow-mask" ng-class="unit.shadow"></div>
-                <div class="counterWrapper">
-                    <div ng-show="unit.bow" class="bow" style=""></div>
-                    <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
-
-                    <div class="counter"></div>
-                </div>
-                <div class="range">@{{ unit.armorClass }}</div>
-
-                <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
-
-                <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
-                <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
-
-            </div>
+             <offmap-unit unit="unit"></offmap-unit>
         </div>
         <div class="clear"></div>
     </div>
 @endsection
+
+
 
 <body ng-app="lobbyApp" xmlns="http://www.w3.org/1999/html">
 <div ng-controller="LobbyController" id="theDiv">
@@ -217,23 +180,7 @@
                     Retired Units
                 </div>
                 <div class="a-unit-wrapper" ng-repeat="unit in retiredUnits"  ng-style="unit.wrapperstyle">
-                    <div id="@{{unit.id}}" ng-mouseUp="clickMe(unit.id, $event)" ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
-                        <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
-                        <div class="shadow-mask" ng-class="unit.shadow"></div>
-                        <div class="counterWrapper">
-                            <div ng-show="unit.bow" class="bow" style=""></div>
-                            <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
-
-                            <div class="counter"></div>
-                        </div>
-                        <div class="range">@{{ unit.armorClass }}</div>
-
-                        <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
-
-                        <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
-                        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
-
-                    </div>
+                    <offmap-unit unit="unit"></offmap-unit>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -247,8 +194,10 @@
             <div class="unit-wrapper" style="display:none;" id="notUsedWrapper">
                 <div class="close">X</div>
                 <div style="margin-right:3px;" class="left">Units not used.</div>
-                <div id="not-used"></div>
-                <div style="clear:both;"></div>
+                <div class="a-unit-wrapper" ng-repeat="unit in notUsedUnits"  ng-style="unit.wrapperstyle">
+                    <offmap-unit unit="unit"></offmap-unit>
+                </div>
+                <div class="clear"></div>
             </div>
 
             <div class="unit-wrapper" style="display:none;" id="undeadpile"></div>
@@ -286,17 +235,7 @@
                         <?php $id = 0; ?>
 
                         @section('units')
-                        @foreach ($units as $unit)
-                            <div class="unit {{$unit['nationality']}}" id="{{$unit['id']}}" alt="0">
-                                <div class="shadow-mask"></div>
-                                <div class="unitSize">{{$unit['unitSize']}}</div>
-                                <img class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
-                                <div class="counterWrapper">
-                                    <img src="{{asset("js/".$unit['image'])}}" class="counter"><span class="unit-desig"><?=$unit['unitDesig']?></span>
-                                </div>
-                                <div class="unit-numbers">5 - 4</div>
-                            </div>
-                            @endforeach
+                            {{-- Handled by angular above and below --}}
                         @show
 
                         <div ng-style="{top: floatMessage.top, left: floatMessage.left}" ng-show="floatMessage.header" id="floatMessage">
@@ -319,4 +258,57 @@
 
 @include('wargame::Medieval.medieval-controller', ['topCrt'=> $topCrt])
 
-</body></html>
+</body>
+
+<script type="text/ng-template" id="unit.html" >
+    <div id="@{{unit.id}}" ng-mouseDown="mouseDown(unit.id, $event)" ng-mouseUp="clickMe(unit.id, $event)" ng-right-click="rightClickMe(unit.id, $event)"  ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
+        <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
+        <div class="shadow-mask" ng-class="unit.shadow"></div>
+        <div class="counterWrapper">
+            <div ng-show="unit.bow" class="bow" style=""></div>
+            <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
+            <div class="counter"></div>
+        </div>
+        <div class="range">@{{ unit.armorClass }}</div>
+
+        <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
+
+        <div ng-class="unit.infoLen" class="unit-numbers">@{{ unit.unitNumbers }}</div>
+        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+        <i ng-show="!unit.command" class="fa fa-star unit-command" aria-hidden="true"></i>
+
+    </div>
+</script>
+
+<script type="text/ng-template" id="offmap-unit.html" >
+    <div id="@{{unit.id}}" ng-mouseUp="clickMe(unit.id, $event)" ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
+        <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
+        <div class="shadow-mask" ng-class="unit.shadow"></div>
+        <div class="counterWrapper">
+            <div ng-show="unit.bow" class="bow" style=""></div>
+            <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
+
+            <div class="counter"></div>
+        </div>
+        <div class="range">@{{ unit.armorClass }}</div>
+
+        <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
+
+        <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
+        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+
+    </div>
+</script>
+
+<script type="text/ng-template" id="ghost-unit.html" >
+<div class="counterWrapper">
+    <div ng-show="unit.bow" class="bow" style=""></div>
+    <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
+    <div class="counter"></div>
+</div>
+<div class="range">@{{ unit.armorClass }}</div>
+<div class="unit-numbers">@{{ unit.strength }} - @{{ unit.pointsLeft }}</div>
+<div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+</script>
+
+</html>

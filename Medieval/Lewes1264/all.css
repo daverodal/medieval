@@ -3044,9 +3044,9 @@ svg marker#head {
   position: absolute;
   z-index: 1; }
 
-#deployBox, #deadpile {
+#deployBox, #deadpile, #notUsedWrapper, #undeadpile, #exitBox {
   font-family: serif; }
-  #deployBox .unit, #deadpile .unit {
+  #deployBox .unit, #deadpile .unit, #notUsedWrapper .unit, #undeadpile .unit, #exitBox .unit {
     border: solid 3px;
     border-color: #cccccc #666666 #666666 #cccccc;
     margin-right: 5px; }
