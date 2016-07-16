@@ -66,15 +66,7 @@ class victoryCore extends \Wargame\VictoryCore
 
     public function incrementTurn()
     {
-        $battle = Battle::getBattle();
 
-        $theUnits = $battle->force->units;
-        foreach ($theUnits as $id => $unit) {
-
-            if ($unit->status == STATUS_CAN_REINFORCE && $unit->reinforceTurn <= $battle->gameRules->turn && $unit->hexagon->parent != "deployBox") {
-                $theUnits[$id]->hexagon->parent = "deployBox";
-            }
-        }
     }
 
     protected function checkVictory($attackingId, $battle){
@@ -92,6 +84,25 @@ class victoryCore extends \Wargame\VictoryCore
         $gameRules->flashMessages[] = "@hide crt";
 
         $battle = Battle::getBattle();
+
+
+        $gameRules = $battle->gameRules;
+
+        $theUnits = $battle->force->units;
+        foreach ($theUnits as $id => $unit) {
+
+
+            if ($unit->forceId !== $battle->force->attackingForceId && $unit->class === 'hq' && $unit->hexagon->parent === "deadpile") {
+
+                $theUnits[$id]->hexagon->parent = "deployBox";
+                $theUnits[$id]->commandRadius = ceil($theUnits[$id]->commandRadius/2);
+                $theUnits[$id]->origStrength = ceil($theUnits[$id]->origStrength/2);
+                $theUnits[$id]->status = STATUS_CAN_REINFORCE;
+                $gameRules->flashMessages[] = "@show deployWrapper";
+                $gameRules->flashMessages[] = "Reinforcements have been moved to the Deploy/Staging Area";
+            }
+        }
+
         foreach($battle->force->units as $unit){
             $unit->rallyCheck();
         }
@@ -115,7 +126,6 @@ class victoryCore extends \Wargame\VictoryCore
         } else {
             $gameRules->flashMessages[] = "@hide crt";
         }
-
     }
 
     public function preRecoverUnits(){

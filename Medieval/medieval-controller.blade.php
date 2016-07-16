@@ -591,6 +591,10 @@
                 $scope.curCrt = 'missile';
                 crtName = 'missile';
             }
+            if(data.gameRules.phase == <?= BLUE_COMBAT_PHASE?> || data.gameRules.phase == <?= RED_COMBAT_PHASE?>){
+                $scope.curCrt = 'melee';
+                crtName = 'melee';
+            }
 
             $scope.$apply();
 
