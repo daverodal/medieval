@@ -2213,7 +2213,10 @@ h5 {
   z-index: 0; }
 
 .specialHexesVP {
-  background: transparent !important; }
+  background: transparent !important;
+  font-size: 30px; }
+  .specialHexesVP.fire-phase {
+    background: white !important; }
 
 #display {
   display: none;
@@ -3087,6 +3090,11 @@ svg marker#head {
   top: 0px;
   font-size: 12px; }
 
+#arrow-svg {
+  display: block; }
+  #arrow-svg .range-hex {
+    fill-opacity: .1; }
+
 #crt {
   width: 875px; }
   #crt .crt-table-name {
@@ -3548,6 +3556,10 @@ svg marker#head {
   background: black;
   color: white; }
 
+#arrow-svg .range-hex.Teutonic-Order {
+  display: none;
+  stroke: black; }
+
 /*
  * these are for the +5 vps when you kill a unit
  */
@@ -3570,6 +3582,10 @@ svg marker#head {
 .specialHexes.Kingdom-of-Poland {
   background: red;
   color: white; }
+
+#arrow-svg .range-hex.Kingdom-of-Poland {
+  display: none;
+  stroke: red; }
 
 .polish.hq .counterWrapper .counter:before {
   color: yellow; }

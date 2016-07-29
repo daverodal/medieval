@@ -92,12 +92,14 @@ class victoryCore extends \Wargame\VictoryCore
         foreach ($theUnits as $id => $unit) {
 
 
-            if ($unit->forceId !== $battle->force->attackingForceId && $unit->class === 'hq' && $unit->hexagon->parent === "deadpile") {
+            if ($gameRules->mode === MOVING_MODE && $unit->forceId !== $battle->force->attackingForceId && $unit->class === 'hq' && $unit->hexagon->parent === "deadpile") {
 
-                $theUnits[$id]->hexagon->parent = "deployBox";
-                $theUnits[$id]->commandRadius = ceil($theUnits[$id]->commandRadius/2);
-                $theUnits[$id]->origStrength = ceil($theUnits[$id]->origStrength/2);
-                $theUnits[$id]->status = STATUS_CAN_REINFORCE;
+                $unit->hexagon->parent = "deployBox";
+                $unit->commandRadius = ceil($unit->commandRadius/2);
+                $unit->origStrength = ceil($unit->origStrength/2);
+                $unit->orgStatus = MedievalUnit::BATTLE_READY;
+                $unit->steps = $unit->origSteps;
+                $unit->status = STATUS_CAN_REINFORCE;
                 $gameRules->flashMessages[] = "@show deployWrapper";
                 $gameRules->flashMessages[] = "Reinforcements have been moved to the Deploy/Staging Area";
             }
@@ -173,7 +175,7 @@ class victoryCore extends \Wargame\VictoryCore
         $battle = Battle::getBattle();
         $hex = $unit->hexagon;
 
-        $battle->mapData->specialHexesVictory->{$hex->name} = "DISORDERED!";
+        $battle->mapData->specialHexesVictory->{$hex->name} = "D";
 
 
     }
@@ -190,4 +192,20 @@ class victoryCore extends \Wargame\VictoryCore
             }
         }
     }
+
+    public function noEffectUnit($args)
+    {
+        list($unit) = $args;
+        $hex = $unit->hexagon;
+        $battle = Battle::getBattle();
+        $pData = $battle->getPlayerData(false);
+
+        $playerOne = $pData['forceName'][1];
+        $playerTwo = $pData['forceName'][2];
+
+        if ($hex->name) {
+            $battle->mapData->specialHexesVictory->{$hex->name} = "NE";
+        }
+    }
+
 }

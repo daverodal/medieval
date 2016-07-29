@@ -81,6 +81,18 @@
             }
         };
 
+        $scope.hoverHq = function(unit){
+            if(unit.class === 'hq'){
+                $("#rangeHex"+unit.id).css({display:'block'});
+            }
+        }
+
+        $scope.unHoverHq = function(unit){
+            if(unit.class === 'hq'){
+                $("#rangeHex"+unit.id).css({display:'none'});
+            }
+        }
+
         $scope.hoverThis = function(unit){
             unit.style.border = "3px solid purple";
             unit.style.opacity = 1.0;
@@ -101,6 +113,8 @@
             var retiredUnits = [];
             var notUsedUnits = [];
             var reinforcements = {};
+            clearHexes();
+
 
             var hexesMap = $scope.hexesMap;
             var newUnitHexes = {};
@@ -148,6 +162,19 @@
                     newUnit.wrapperstyle.transform = "rotate("+mapUnits[i].facing*60+"deg)";
                     newUnit.wrapperstyle.top = newUnit.shift + mapUnits[i].y-20+"px";
                     newUnit.wrapperstyle.left = newUnit.shift + mapUnits[i].x-20+"px";
+                    /*
+                     * Blaaaaaa Very non angular way to live one's life.........
+                     * Should not be removed and reinserted every mouse click.
+                     * only about 8 of them so for now :'( tears will stay this way.....
+                     */
+                    if(mapUnits[i].class === "hq"){
+
+                        var hexSideLen = 32.0;
+                        var b = hexSideLen * .866;
+
+                        /* jquery way */
+                        drawHex(b * (range * 2 + 1), mapUnits[i]);
+                    }
                     newUnit.wrapperstyle.zIndex = newUnit.shift + 1;
                     newUnit.facing = mapUnits[i].facing;
                     newUnit.strength = mapUnits[i].strength;
@@ -157,6 +184,7 @@
                     newUnit.unitNumbers = newUnit.strength + ' ' + orgDisp + ' ' + (newUnit.maxMove - newUnit.moveAmountUsed);
                     newUnit.infoLen = "infoLen" + newUnit.unitNumbers.length;
                     gameUnits[i] = newUnit;
+
                 }else{
                     if(unitsMap[i] !== undefined){
                         var dead = hexesMap[unitsMap[i]].indexOf(i);
@@ -165,8 +193,17 @@
                     }
                 }
                 if(mapUnits[i].parent === 'deployBox'){
+                    newUnit.wrapperstyle = {};
                     newUnit.style = {float:'left'};
+                    newUnit.oddsDisp = null;
                     newUnit.strength = mapUnits[i].strength;
+
+
+                    newUnit.strength = mapUnits[i].strength;
+                    newUnit.steps = mapUnits[i].steps;
+                    newUnit.orgStatus = mapUnits[i].orgStatus;
+                    var orgDisp = newUnit.orgStatus == 0 ? 'B':'D';
+
                     if(mapUnits[i].status == <?=STATUS_DEPLOYING?> || mapUnits[i].status == <?=STATUS_REINFORCING?>){
                         newUnit.style.boxShadow = "5px 5px 5px #333";
                     }
@@ -175,7 +212,6 @@
                 }
 
                 if(mapUnits[i].parent.match(/gameTurn/)){
-                    debugger;
                     if(reinforcements[mapUnits[i].parent] === undefined){
                         reinforcements[mapUnits[i].parent] = [];
                     }
@@ -944,6 +980,46 @@
         });
     }]);
 
+    function drawHex(hexside, unit, isShort){
+
+        var decoration = isShort || "";
+        var c = hexside - 0;
+        var a = (c / 2);
+        var b = .866 * c;
+        var ac = a+c;
+        var x = unit.x;
+        var y = unit.y;
+        var id = unit.id+decoration;
+        var nat = DR.players[unit.forceId];
+        var type= nat+'-'+unit.class;
+        var cls = unit.class;
+        var width = 2;
+        var strokeDash = "1,0";
+
+        if(unit.range > 7){
+            width = 4;
+            strokeDash = "5,5";
+        }
+        if(unit.range > 11){
+            width = 6;
+            strokeDash = "1,10";
+        }
+
+        x = x - b;
+        y = y - c;
+
+        var path = '<path stroke-dasharray="'+strokeDash+'" class="range-hex '+nat+' '+decoration+' '+cls+'" stroke="transparent" id="rangeHex'+id+'" fill="#000" fill-opacity="0" stroke-width="'+width+'" d="M '+x+' ' + (ac + y) + ' L ' + x + ' '+ (a + y) + ' L ' + (b + x) + ' ' + y;
+        path += ' L ' + (2 * b + x) + ' ' + (a + y) + ' L ' + (2 * b + x) + ' ' + (ac + y) + ' L ' + (b + x) + ' '+ (2 * c + y)+' Z"></path>';
+
+        $('#arrow-svg').append(path);
+        $('#arrow-svg').html($('#arrow-svg').html());
+    }
+
+
+    function clearHexes(){
+        $('#arrow-svg .range-hex').remove();
+    }
+
     lobbyApp.directive('offmapUnit', function() {
         return {
             restrict: 'E',
@@ -974,6 +1050,11 @@
 
     /* still doing this the non angular way :( */
     x.register("specialHexes", function(specialHexes, data) {
+        var phase = data.gameRules.phase;
+        var firePhase =  (phase === <?=BLUE_COMBAT_RES_PHASE?> || phase === <?=RED_COMBAT_RES_PHASE?>);
+        var firePhaseClass = firePhase ? "fire-phase" : "";
+
+        $('.specialHexesVP').remove();
         $('.specialHexes').remove();
         var lab = ['unowned','<?=$forceName[1]?>','<?=$forceName[2]?>'];
 
@@ -999,10 +1080,12 @@
 
                             var x = hexPos.match(/x(\d*)y/)[1];
                             var y = hexPos.match(/y(\d*)\D*/)[1];
-                            var newVP = $('<div style="z-index:1000;border-radius:0px;border:0px;top:'+y+'px;left:'+x+'px;font-size:60px;" class="'+' specialHexesVP">'+data.specialHexesVictory[id]+'</div>').insertAfter('#special'+i);
-                            $(newVP).animate({top:y-30,opacity:0.0},1900,function(){
-                                $(this).remove();
-                            });
+                            var newVP = $('<div style="z-index:1000;border-radius:0px;border:0px;top:'+y+'px;left:'+x+'px;" class="'+firePhaseClass+' specialHexesVP">'+data.specialHexesVictory[id]+'</div>').insertAfter('#special'+i);
+                            if(!firePhase) {
+                                $(newVP).animate({top: y - 30, opacity: 0.0}, 1900, function () {
+                                    $(this).remove();
+                                });
+                            }
                         }
                     });
 
@@ -1022,12 +1105,14 @@
             var hexPos = id.replace(/\.\d*/g,'');
             var x = hexPos.match(/x(\d*)y/)[1];
             var y = hexPos.match(/y(\d*)\D*/)[1];
-            var newVP = $('<div  style="z-index:1000;border-radius:0px;border:0px;top:'+y+'px;left:'+x+'px;font-size:60px;" class="'+' specialHexesVP">'+data.specialHexesVictory[id]+'</div>').appendTo('#gameImages');
-            $(newVP).animate({top:y-30,opacity:0.0},1900,function(){
-                var id = $(this).attr('id');
+            var newVP = $('<div  style="z-index:1000;border-radius:0px;border:0px;top:'+y+'px;left:'+x+'px;" class="'+firePhaseClass+' specialHexesVP">'+data.specialHexesVictory[id]+'</div>').appendTo('#gameImages');
+            if(!firePhase){
+                $(newVP).animate({top:y-30,opacity:0.0},1900,function(){
+                    var id = $(this).attr('id');
 
-                $(this).remove();
-            });
+                    $(this).remove();
+                });
+            }
         }
 
 

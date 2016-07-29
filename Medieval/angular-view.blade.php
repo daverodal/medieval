@@ -24,7 +24,7 @@
 <script src="<?=url("js/ng-right-click.js");?>"></script>
 
 @section('units')
-    <div class="a-unit-wrapper" ng-repeat="unit in mapUnits"  ng-style="unit.wrapperstyle">
+    <div ng-mouseover="hoverHq(unit)" ng-mouseleave="unHoverHq(unit)" class="a-unit-wrapper" ng-repeat="unit in mapUnits"  ng-style="unit.wrapperstyle">
         <unit unit="unit"></unit>
     </div>
 

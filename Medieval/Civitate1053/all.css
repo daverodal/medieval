@@ -2213,7 +2213,10 @@ h5 {
   z-index: 0; }
 
 .specialHexesVP {
-  background: transparent !important; }
+  background: transparent !important;
+  font-size: 30px; }
+  .specialHexesVP.fire-phase {
+    background: white !important; }
 
 #display {
   display: none;
@@ -3087,6 +3090,11 @@ svg marker#head {
   top: 0px;
   font-size: 12px; }
 
+#arrow-svg {
+  display: block; }
+  #arrow-svg .range-hex {
+    fill-opacity: .1; }
+
 #crt {
   width: 875px; }
   #crt .crt-table-name {
@@ -3472,6 +3480,10 @@ svg marker#head {
   background: #60b2ff;
   color: white; }
 
+#arrow-svg .range-hex.Lombard {
+  display: none;
+  stroke: #60b2ff; }
+
 /*
  * these are for the +5 vps when you kill a unit
  */
@@ -3494,6 +3506,10 @@ svg marker#head {
 .specialHexes.Norman {
   background: red;
   color: white; }
+
+#arrow-svg .range-hex.Norman {
+  display: none;
+  stroke: red; }
 
 .lombard .counterWrapper .bow {
   background: url("/vendor/wargame/medieval/civitate1053/images/whiteArrow.svg");

@@ -140,6 +140,10 @@ h5 {
 
 .specialHexesVP {
   background: transparent !important;
+  font-size:30px;
+  &.fire-phase{
+    background: white !important;
+  }
 }
 
 #display {

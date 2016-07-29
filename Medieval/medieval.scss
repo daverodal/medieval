@@ -55,7 +55,13 @@ $vintage-unit-numbers-size:10px;
       color: $desigColor;
     }
   }
+}
 
+#arrow-svg{
+  display:block;
+  .range-hex{
+    fill-opacity:.1;
+  }
 }
 
 @mixin badge($nationality, $shortName, $borderColor: black) {
@@ -271,6 +277,12 @@ $vintage-unit-numbers-size:10px;
     color:$foreground;
   }
 
+  #arrow-svg{
+    .range-hex.#{$nationality}{
+      display:none;
+      stroke:$background;
+    }
+  }
 }
 
 

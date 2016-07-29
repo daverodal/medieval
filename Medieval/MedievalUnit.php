@@ -43,6 +43,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public $bow;
     public $command = true;
     public $commandRadius = false;
+    public $fireCombat = false;
 
 
     public function jsonSerialize()
@@ -69,24 +70,26 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         }
         return $maxMove;
     }
+
     public function getUnmodifiedStrength(){
 
         $b = Battle::getBattle();
 
-        if($this->bow && $b->force->attackingForceId == $this->forceId && ($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE)){
+        if($this->bow && $b->force->attackingForceId == $this->forceId && ($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE_TWO || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE_TWO ||
+                $b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE)){
             if($this->armorClass === 'S'){
-                return 2;
+                $strength =  2;
             }
             if($this->class == 'inf'){
-                return 4;
+                $strength =  4;
             }
             if($this->class == 'cavalry'){
-                return 3;
+                $strength =  3;
             }
+        }else{
+            $strength = $this->origStrength;
         }
 
-
-        $strength = $this->origStrength;
         $stepsLost = $this->origSteps - $this->steps;
 
         for($i = 0; $i < $stepsLost; $i++){
@@ -259,6 +262,10 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             $this->status = STATUS_ELIMINATING;
             $this->exchangeAmount = $this->getUnmodifiedStrength();
             $this->defExchangeAmount = $this->getUnmodifiedStrength();
+            $this->disorderedPlayerTurns = 0;
+            $this->orgStatus = self::BATTLE_READY;
+            $this->steps = $this->origSteps;
+
             return true;
         } else {
 
@@ -482,6 +489,17 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         return $this->range;
     }
 
+    public function usedFireCombat(){
+        return $this->fireCombat;
+    }
+
+    public function setFireCombat(){
+        $this->fireCombat = true;
+    }
+
+    public function clearFireCombat(){
+        $this->fireCombat = false;
+    }
     /* 999999999 */
 
 }

@@ -569,7 +569,8 @@ class MedievalCombatResultsTable
     {
         $battle = \Wargame\Battle::getBattle();
 
-        if (($battle->gameRules->phase == BLUE_FIRE_COMBAT_PHASE) || ($battle->gameRules->phase == RED_FIRE_COMBAT_PHASE)) {
+        if (($battle->gameRules->phase == BLUE_FIRE_COMBAT_PHASE) || ($battle->gameRules->phase == RED_FIRE_COMBAT_PHASE) ||
+            $battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE_TWO || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE_TWO) {
             return $attackStrength - 1;
         }
         $ratio = $attackStrength / $defenseStrength;
