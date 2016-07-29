@@ -568,7 +568,10 @@
             var ter = combat.terrainCombatEffect;
             var combatCol = combat.index + 1;
 
-            var html = "<div id='crtDetails'>"+combat.combatLog+"</div><div>Attack = " + atk + " / Defender " + def + " = " + div + "</div>"
+            var html = "<div id='crtDetails'>"+combat.combatLog+"</div>";
+            if($scope.curCrt !== 'missile'){
+                html += "<div>Attack = " + atk + " / Defender " + def + " = " + div + "</div>";
+            }
             /*+ atk + " - Defender " + def + " = " + diff + "</div>";*/
             return html;
         }
@@ -587,7 +590,7 @@
             }
 
             $scope.crtOdds = null;
-            if(data.gameRules.phase == <?= BLUE_FIRE_COMBAT_PHASE?> || data.gameRules.phase == <?= RED_FIRE_COMBAT_PHASE?>){
+            if(data.gameRules.phase == <?= BLUE_FIRE_COMBAT_PHASE_TWO?> || data.gameRules.phase == <?= RED_FIRE_COMBAT_PHASE_TWO?> || data.gameRules.phase == <?= BLUE_FIRE_COMBAT_PHASE?> || data.gameRules.phase == <?= RED_FIRE_COMBAT_PHASE?>){
                 $scope.curCrt = 'missile';
                 crtName = 'missile';
             }
@@ -885,8 +888,10 @@
 //                                    var mapWidth = $("body").css('width').replace(/px/, "");
                             }
                             var oddsDisp = $(".col" + combatCol).html()
-                            newLine += " Attack = " + atkDisp + " / Defender " + def + atk / def + "<br>odds = " + Math.floor(atk / def) + " : 1<br>Coooooombined Arms Shift " + ter + " = " + oddsDisp + "<br>";
-                            newLine += "Roll: "+combatRules.resolvedCombats[i].Die + " result: " + combatRules.resolvedCombats[i].combatResult+"<br><br>";
+                            if($scope.curCrt !== 'missile') {
+                                newLine += " Attack = " + atkDisp + " / Defender " + def + atk / def + "<br>odds = " + Math.floor(atk / def) + " : 1<br>Coooooombined Arms Shift " + ter + " = " + oddsDisp + "<br>";
+                                newLine += "Roll: " + combatRules.resolvedCombats[i].Die + " result: " + combatRules.resolvedCombats[i].combatResult + "<br><br>";
+                            }
                             if(cD === i){
                                 newLine = "";
                             }

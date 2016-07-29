@@ -108,7 +108,7 @@ class MedievalCombatResultsTable
 //        $Die += $combat->dieShift;
         $battle = \Wargame\Battle::getBattle();
         $crt = $this->crts->melee;
-        if (($battle->gameRules->phase == BLUE_FIRE_COMBAT_PHASE) || ($battle->gameRules->phase == RED_FIRE_COMBAT_PHASE)) {
+        if (($battle->gameRules->phase == BLUE_COMBAT_RES_PHASE) || ($battle->gameRules->phase == RED_COMBAT_RES_PHASE)) {
             $crt = $this->crts->missile;
         }
 
@@ -123,13 +123,18 @@ class MedievalCombatResultsTable
     public function setCombatIndex($defenderId)
     {
 
+        $fireCombat = false;
+
         $combatLog = "";
         /* @var JagCore $battle */
         $battle = Battle::getBattle();
         $scenario = $battle->scenario;
         $combats = $battle->combatRules->combats->$defenderId;
         $combats->dieShift = 0;
-
+        if($battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE ||
+            $battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE_TWO || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE_TWO) {
+            $fireCombat = true;
+        }
         if (count((array)$combats->attackers) == 0) {
             $combats->index = null;
             $combats->attackStrength = null;
@@ -143,6 +148,7 @@ class MedievalCombatResultsTable
 
         $defArmor = -1;
         $defArmorClass = 'L';
+        $range = 1;
         foreach ($defenders as $defId => $defender) {
 
             $hexagon = $battle->force->units[$defId]->hexagon;
@@ -195,6 +201,9 @@ class MedievalCombatResultsTable
             foreach($defenders as $defId=> $def) {
                 $los->setOrigin($battle->force->getUnitHexagon($attackerId));
                 $los->setEndPoint($battle->force->getUnitHexagon($defId));
+                if($los->getRange() > 1){
+                    $range = $los->getRange();
+                }
 
                 $defUnit =  $battle->force->units[$defId];
 
@@ -398,20 +407,25 @@ class MedievalCombatResultsTable
                     $combatLog .= "no combined arms bonus for Beluchi";
                 }
             }
-            $combatLog .= "<br>";
             $attackStrength += $unitStrength;
+            $combatLog .= $unit->class." $unitStrength = $attackStrength<br>";
         }
 //        $combatLog .= "<br>";
 
         $defenseStrength = 0;
         $defendersAllCav = true;
-        $combatLog .= " = $attackStrength<br>Defenders<br>";
+        $combatLog .= " total = $attackStrength";
+        if(!$fireCombat){
+            $combatLog .= " <br>Defenders<br>";
+        }
         foreach ($defenders as $defId => $defender) {
 
             $unit = $battle->force->units[$defId];
             $class = $unit->class;
             $unitDefense = $unit->strength;
-            $combatLog .= "$unitDefense ".$unit->class." ";
+            if(!$fireCombat){
+                $combatLog .= "$unitDefense ".$unit->class." ";
+            }
             /* set to true to disable for not scenario->doubleArt */
             $clearHex = false;
             $artInNonTown = false;
@@ -439,31 +453,6 @@ class MedievalCombatResultsTable
                 $defendersAllCav = false;
             }
 
-            if(!empty($scenario->jagersdorfCombat)){
-                if ($unit->forceId == PRUSSIAN_FORCE && $class == "infantry" && $isClear) {
-                    $unitDefense += 1;
-                    $combatLog .= "+1 for defending in clear ";
-                }
-                if ($unit->forceId == RUSSIAN_FORCE && $class == "infantry" && ($isTown || $isForest)) {
-                    $unitDefense += 1;
-                    $combatLog .= "+1 for defending in town or forest ";
-                }
-            }
-            if(!empty($scenario->americanRevolution)){
-                if ($unit->forceId == LOYALIST_FORCE && $class == "infantry" && $isClear) {
-                    $unitDefense += 1;
-                    $combatLog .= "+1 for defending in clear ";
-                }
-                if ($unit->forceId == REBEL_FORCE && $class == "infantry" && (!$isClear || $battle->combatRules->allAreAttackingThisAcrossRiver($defId))) {
-                    $unitDefense += 1;
-                    $combatLog .= "+1 for defending in town or forest ";
-                }
-            }
-            if (($unit->nationality == "Beluchi" || $unit->nationality == "Sikh") && $class == "infantry" && ($isTown || $isForest)) {
-                $unitDefense++;
-                $combatLog .= "+1 for defending into town or forest ";
-            }
-
             $defMultiplier = 1;
             if(($isTown && $class !== 'cavalry') || $artInNonTown || $isHill){
                 $defMultiplier = 2.0;
@@ -480,7 +469,9 @@ class MedievalCombatResultsTable
             $combatLog .= "<br>";
         }
 
-        $combatLog .= " = $defenseStrength";
+        if(!$fireCombat) {
+            $combatLog .= " = $defenseStrength";
+        }
         $armsShift = 0;
         if ($attackStrength >= $defenseStrength) {
 //            foreach($combinedArms as $arms){
@@ -498,7 +489,7 @@ class MedievalCombatResultsTable
         $combatIndex = $this->getCombatIndex($attackStrength, $defenseStrength);
         /* Do this before terrain effects */
         $combatIndex += $armsShift;
-        if($battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE) {
+        if($fireCombat) {
             if ($combatIndex >= $this->crts->missile->maxCombatIndex) {
                 $combatIndex = $this->crts->missile->maxCombatIndex;
             }
@@ -516,23 +507,33 @@ class MedievalCombatResultsTable
         $combats->attackStrength = $attackStrength;
         $combats->defenseStrength = $defenseStrength;
 
-        if($battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE) {
+        if($fireCombat) {
             /* knight */
             $dieShift = 0;
             if($defArmorClass === 'K'){
                 $dieShift = -2;
+                $combatLog .= "Kinghts Die Shift -2<br>";
             }
             if($defArmorClass === 'M'){
+                $combatLog .= "Medium Die Shift +1<br>";
+
                 $dieShift = 1;
             }
             if($defArmorClass === 'L'){
+                $combatLog .= "Light Die Shift +2<br>";
+
                 $dieShift = 2;
             }
             if($defArmorClass === 'S'){
+                $combatLog .= "Skirmisher Die Shift -2<br>";
+
                 $dieShift = -2;
             }
             /* for adjacent */
-            $dieShift++;
+            if($range === 1){
+                $dieShift++;
+                $combatLog .= "Adjacent Die Shift +1<br>";
+            }
             $combats->dieOffset = $dieShift;
 
         }else{
@@ -548,6 +549,7 @@ class MedievalCombatResultsTable
                 $combats->pinCRT = false;
             }
         }
+        $combatLog .= "Die Shift ".$combats->dieOffset."<br>";
         $combats->index = $combatIndex;
         $combats->useAlt = false;
         $combats->useDetermined = false;

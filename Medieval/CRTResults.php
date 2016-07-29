@@ -227,7 +227,7 @@ trait CRTResults
                 $attUnit->combatNumber = 0;
                 $attUnit->moveCount = 0;
             }
-            if ($battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE) {
+            if ($battle->gameRules->phase === BLUE_COMBAT_RES_PHASE || $battle->gameRules->phase === RED_COMBAT_RES_PHASE) {
                     $attUnit->status = STATUS_ATTACKED;
                     $attUnit->combatResults = $combatResults;
                     $attUnit->dieRoll = $dieRoll;

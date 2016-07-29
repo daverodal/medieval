@@ -213,8 +213,10 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     }
 
     public function disorderUnit(){
+        $b = Battle::getBattle();
         $this->orgStatus = self::DISORDED;
         $this->disorderedPlayerTurns = 2;
+        $b->victory->disorderUnit($this);
     }
 
     public function checkLos(\Wargame\Los $los, $defenderId = false){

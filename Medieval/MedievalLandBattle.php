@@ -98,6 +98,23 @@ class MedievalLandBattle extends \Wargame\LandBattle
             
             $this->combatRules = new CombatRules($this->force, $this->terrain);
             $this->gameRules = new GameRules($this->moveRules, $this->combatRules, $this->force);
+
+            $this->gameRules->addPhaseChange(BLUE_MOVE_PHASE, BLUE_FIRE_COMBAT_PHASE, FIRE_COMBAT_SETUP_MODE, BLUE_FORCE, RED_FORCE, false);
+            $this->gameRules->addPhaseChange(BLUE_FIRE_COMBAT_PHASE, RED_FIRE_COMBAT_PHASE, FIRE_COMBAT_SETUP_MODE, RED_FORCE, BLUE_FORCE, false);
+
+            $this->gameRules->addPhaseChange(RED_FIRE_COMBAT_PHASE, BLUE_COMBAT_RES_PHASE, COMBAT_RESOLUTION_MODE, BLUE_FORCE, RED_FORCE, false);
+
+            $this->gameRules->addPhaseChange(BLUE_COMBAT_RES_PHASE, BLUE_COMBAT_PHASE, COMBAT_SETUP_MODE, BLUE_FORCE,RED_FORCE , false);
+
+
+
+            $this->gameRules->addPhaseChange(BLUE_COMBAT_PHASE, RED_MOVE_PHASE, MOVING_MODE, RED_FORCE, BLUE_FORCE, false);
+
+            $this->gameRules->addPhaseChange(RED_MOVE_PHASE, RED_FIRE_COMBAT_PHASE_TWO, FIRE_COMBAT_SETUP_MODE, RED_FORCE, BLUE_FORCE, false);
+            $this->gameRules->addPhaseChange(RED_FIRE_COMBAT_PHASE_TWO, BLUE_FIRE_COMBAT_PHASE_TWO, FIRE_COMBAT_SETUP_MODE, BLUE_FORCE, RED_FORCE, false);
+            $this->gameRules->addPhaseChange(BLUE_FIRE_COMBAT_PHASE_TWO, RED_COMBAT_RES_PHASE, COMBAT_RESOLUTION_MODE, RED_FORCE, BLUE_FORCE, false);
+            $this->gameRules->addPhaseChange(RED_COMBAT_RES_PHASE, RED_COMBAT_PHASE, COMBAT_SETUP_MODE, RED_FORCE,BLUE_FORCE , false);
+            $this->gameRules->addPhaseChange(RED_COMBAT_PHASE, BLUE_MOVE_PHASE, MOVING_MODE, BLUE_FORCE, RED_FORCE, true);
         }
         $this->moveRules->stacking = function($mapHex, $forceId, $unit){
             if($unit->class === "hq"){
@@ -151,6 +168,7 @@ class MedievalLandBattle extends \Wargame\LandBattle
             }
             return count((array)$mapHex->forces[$forceId]) >= 1;
         };
+
         static::getPlayerData($scenario);
     }
     /*

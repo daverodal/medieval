@@ -123,7 +123,9 @@ class victoryCore extends \Wargame\VictoryCore
         $turn = $gameRules->turn;
 
         if ($gameRules->phase == RED_COMBAT_PHASE || $gameRules->phase == BLUE_COMBAT_PHASE) {
+            $gameRules->gameHasCombatResolutionMode = true;
         } else {
+            $gameRules->gameHasCombatResolutionMode = false;
             $gameRules->flashMessages[] = "@hide crt";
         }
     }
@@ -165,7 +167,16 @@ class victoryCore extends \Wargame\VictoryCore
             $this->victoryPoints[$victorId] += $vp;
         }
     }
-    
+
+    public function disorderUnit($args){
+        list($unit) = $args;
+        $battle = Battle::getBattle();
+        $hex = $unit->hexagon;
+
+        $battle->mapData->specialHexesVictory->{$hex->name} = "DISORDERED!";
+
+
+    }
     public function postRecoverUnit($args)
     {
         list($unit) = $args;
