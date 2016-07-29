@@ -28,6 +28,7 @@ You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
    */
 
+
 class MedievalLandBattle extends \Wargame\LandBattle
 {
     public $specialHexesMap = ['SpecialHexA'=>1, 'SpecialHexB'=>2, 'SpecialHexC'=>2];
@@ -53,6 +54,11 @@ class MedievalLandBattle extends \Wargame\LandBattle
 
 
     function __construct($data = null, $arg = false, $scenario = false){
+        global $phase_name;
+        /* Gross !*/
+        $phase_name[ 2] .= " Melee";
+        $phase_name[ 5] .= " Melee";
+
         $this->mapData = MapData::getInstance();
 
         if ($data) {
