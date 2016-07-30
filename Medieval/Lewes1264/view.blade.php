@@ -68,4 +68,3 @@
     @endforeach
 @endsection
 @include('wargame::Medieval.angular-view',['topCrt'=> new \Wargame\Medieval\MedievalCombatResultsTable()] )
-<div id="yin-yang"></div>

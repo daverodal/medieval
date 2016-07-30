@@ -905,7 +905,6 @@ fieldset {
 
 svg {
   z-index: 1;
-  display: none;
 }
 
 .unitOdds {
@@ -994,14 +993,16 @@ svg {
 
 $arrowColor: red;
 $arrowHead: red;
-svg {
-  g {
+svg#arrow-svg {
+  display:block;
+  .unit-path {
     opacity: .6;
     fill: $arrowColor;
     stroke: $arrowColor;
     &:hover, .hover {
       opacity: 1.0;
     }
+    display:none;
   }
   marker#head {
     fill: $arrowHead;
