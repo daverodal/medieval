@@ -3094,8 +3094,6 @@ svg#arrow-svg {
 
 #arrow-svg {
   display: block; }
-  #arrow-svg .range-hex {
-    fill-opacity: .1; }
 
 #crt {
   width: 875px; }
@@ -3484,7 +3482,8 @@ svg#arrow-svg {
 
 #arrow-svg .range-hex.Lombard {
   display: none;
-  stroke: #60b2ff; }
+  stroke: #60b2ff;
+  fill-opacity: .1; }
 
 /*
  * these are for the +5 vps when you kill a unit
@@ -3511,7 +3510,8 @@ svg#arrow-svg {
 
 #arrow-svg .range-hex.Norman {
   display: none;
-  stroke: red; }
+  stroke: red;
+  fill-opacity: .1; }
 
 .lombard .counterWrapper .bow {
   background: url("/vendor/wargame/medieval/civitate1053/images/whiteArrow.svg");

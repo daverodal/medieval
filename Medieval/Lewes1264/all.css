@@ -3094,8 +3094,6 @@ svg#arrow-svg {
 
 #arrow-svg {
   display: block; }
-  #arrow-svg .range-hex {
-    fill-opacity: .1; }
 
 #crt {
   width: 875px; }
@@ -3484,7 +3482,8 @@ svg#arrow-svg {
 
 #arrow-svg .range-hex.Rebel {
   display: none;
-  stroke: #26d5ff; }
+  stroke: #26d5ff;
+  fill-opacity: .1; }
 
 /*
  * these are for the +5 vps when you kill a unit
@@ -3511,7 +3510,8 @@ svg#arrow-svg {
 
 #arrow-svg .range-hex.Loyalist {
   display: none;
-  stroke: red; }
+  stroke: red;
+  fill-opacity: .1; }
 
 .rebel .counterWrapper .bow {
   background: url("/vendor/wargame/medieval/lewes1264/images/whiteArrow.svg");

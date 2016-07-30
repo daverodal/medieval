@@ -32,6 +32,9 @@
 @include specialColor(Teutonic-Order, black, white);
 @include specialColor(Kingdom-of-Poland, red, white);
 
+@include specialColor(Teutonic, black, white);
+@include specialColor(Kingdom, red, white);
+
 @include flagColor(polish, yellow);
 @include flagColor(tartar, yellow);
 @include flagColor(lithuanian, yellow);
