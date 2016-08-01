@@ -3589,62 +3589,6 @@ svg#arrow-svg {
   stroke: red;
   fill-opacity: .1; }
 
-/*
- * these are for the +5 vps when you kill a unit
- */
-.specialHexesVP .TeutonicVictoryPoints {
-  text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 7px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 8px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 9px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
-  color: white; }
-
-/*
- * These are for when you capture a town
- * the vps aquired
- */
-.specialHexesVP .Teutonic {
-  color: white;
-  background: black; }
-
-/*
- * These are the static state of a town
- * and for the change message
- */
-.specialHexes.Teutonic {
-  background: black;
-  color: white; }
-
-#arrow-svg .range-hex.Teutonic {
-  display: none;
-  stroke: black;
-  fill-opacity: .1; }
-
-/*
- * these are for the +5 vps when you kill a unit
- */
-.specialHexesVP .KingdomVictoryPoints {
-  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 2px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 3px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 4px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 5px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 6px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 7px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 8px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 9px red, 0px 0px 10px red, 0px 0px 10px red, 0px 0px 10px red;
-  color: white; }
-
-/*
- * These are for when you capture a town
- * the vps aquired
- */
-.specialHexesVP .Kingdom {
-  color: white;
-  background: red; }
-
-/*
- * These are the static state of a town
- * and for the change message
- */
-.specialHexes.Kingdom {
-  background: red;
-  color: white; }
-
-#arrow-svg .range-hex.Kingdom {
-  display: none;
-  stroke: red;
-  fill-opacity: .1; }
-
 .polish.hq .counterWrapper .counter:before {
   color: yellow; }
 

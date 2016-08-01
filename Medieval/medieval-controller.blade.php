@@ -991,6 +991,7 @@
         var y = unit.y;
         var id = unit.id+decoration;
         var nat = DR.players[unit.forceId];
+        nat = nat.replace(/ /g,'-').replace(/\//gi,'_');
         var type= nat+'-'+unit.class;
         var cls = unit.class;
         var width = 2;
