@@ -2,7 +2,7 @@
     var lobbyApp = angular.module('lobbyApp', ['ngRightClick']);
     lobbyApp.controller('LobbyController', ['$scope', '$http', 'sync', '$sce', function($scope, $http, sync, $sce){
         $scope.topCrt = angular.fromJson('{!!json_encode($topCrt)!!}');
-        $scope.curCrt = Object.keys($scope.topCrt.crts)[0];
+        $scope.defaultCrt = $scope.curCrt = Object.keys($scope.topCrt.crts)[0];
         $scope.resultsNames = $scope.topCrt.resultsNames;
 
         $scope.units = angular.fromJson('{!!json_encode($units)!!}');
@@ -631,8 +631,7 @@
                 crtName = 'missile';
             }
             if(data.gameRules.phase == <?= BLUE_COMBAT_PHASE?> || data.gameRules.phase == <?= RED_COMBAT_PHASE?>){
-                $scope.curCrt = 'melee';
-                crtName = 'melee';
+                crtName = $scope.curCrt = $scope.defaultCrt;
             }
 
             $scope.$apply();
