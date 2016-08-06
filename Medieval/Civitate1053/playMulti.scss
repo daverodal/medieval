@@ -20,10 +20,4 @@
  */
 @import "civitateColors";
 @import "../commonPlay";
-.Loyalist {
-  color:darken($loyalistColor,20%);
-}
 
-.Rebel, .sympth {
-  color: $rebelColor;
-}

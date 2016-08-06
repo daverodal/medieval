@@ -1,5 +1,5 @@
 @include('wargame::global-header')
-<link rel="stylesheet" type="text/css" href="{{asset('vendor/wargame/medieval/civitate1053/css/all.css')}}">
+<link rel="stylesheet" type="text/css" href="{{elixir('vendor/wargame/medieval/css/Civitate1053.css')}}">
 <style>
     .semi-circle {
         width: 48px;
