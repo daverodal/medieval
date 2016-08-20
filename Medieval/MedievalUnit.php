@@ -77,14 +77,15 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
         if($this->bow && $b->force->attackingForceId == $this->forceId && ($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE_TWO || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE_TWO ||
                 $b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE)){
-            if($this->armorClass === 'S'){
-                $strength =  2;
-            }
+
             if($this->class == 'inf'){
                 $strength =  4;
             }
             if($this->class == 'cavalry'){
                 $strength =  3;
+            }
+            if($this->armorClass === 'S'){
+                $strength =  2;
             }
         }else{
             $strength = $this->origStrength;

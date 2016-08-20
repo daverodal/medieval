@@ -340,7 +340,7 @@ class MedievalCombatResultsTable
             }
             
             if ($unit->class == "hq") {
-                $combatLog .= "$unitStrength Hq ";
+//                $combatLog .= "$unitStrength Hq ";
             }
 
             if ($unit->class == "cavalry") {
@@ -414,9 +414,9 @@ class MedievalCombatResultsTable
 
         $defenseStrength = 0;
         $defendersAllCav = true;
-        $combatLog .= " total = $attackStrength";
+        $combatLog .= " Total Attack = $attackStrength<br>";
         if(!$fireCombat){
-            $combatLog .= " <br>Defenders<br>";
+            $combatLog .= "<br>Defenders<br>";
         }
         foreach ($defenders as $defId => $defender) {
 
@@ -466,29 +466,14 @@ class MedievalCombatResultsTable
                 $unitDefense /= 2;
             }
             $defenseStrength += $unitDefense * $defMultiplier;
-            $combatLog .= "<br>";
+            $combatLog .= " = $defenseStrength<br>";
         }
 
-        if(!$fireCombat) {
-            $combatLog .= " = $defenseStrength";
-        }
-        $armsShift = 0;
-        if ($attackStrength >= $defenseStrength) {
-//            foreach($combinedArms as $arms){
-//                if($arms > 0){
-//                    $armsShift++;
-//                }
-//            }
-//            $armsShift--;
-        }
+        $combatLog .= "Total Defense = $defenseStrength<br><br>";
 
-        if ($armsShift < 0) {
-            $armsShift = 0;
-        }
 
         $combatIndex = $this->getCombatIndex($attackStrength, $defenseStrength);
-        /* Do this before terrain effects */
-        $combatIndex += $armsShift;
+
         if($fireCombat) {
             if ($combatIndex >= $this->crts->missile->maxCombatIndex) {
                 $combatIndex = $this->crts->missile->maxCombatIndex;
@@ -498,11 +483,6 @@ class MedievalCombatResultsTable
                 $combatIndex = $this->crts->melee->maxCombatIndex;
             }
         }
-
-
-//        $terrainCombatEffect = $battle->combatRules->getDefenderTerrainCombatEffect($defenderId);
-
-//        $combatIndex -= $terrainCombatEffect;
 
         $combats->attackStrength = $attackStrength;
         $combats->defenseStrength = $defenseStrength;
@@ -549,7 +529,7 @@ class MedievalCombatResultsTable
                 $combats->pinCRT = false;
             }
         }
-        $combatLog .= "Die Shift ".$combats->dieOffset."<br>";
+        $combatLog .= "Total Die Shift ".$combats->dieOffset."<br>";
         $combats->index = $combatIndex;
         $combats->useAlt = false;
         $combats->useDetermined = false;

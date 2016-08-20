@@ -601,12 +601,13 @@
             var atk = combat.attackStrength;
             var def = combat.defenseStrength;
             var div = atk / def;
+            div = div.toPrecision(2);
             var ter = combat.terrainCombatEffect;
             var combatCol = combat.index + 1;
 
             var html = "<div id='crtDetails'>"+combat.combatLog+"</div>";
             if($scope.curCrt !== 'missile'){
-                html += "<div>Attack = " + atk + " / Defender " + def + " = " + div + "</div>";
+                html += "<div class='clear'>Attack = " + atk + " / Defender " + def + " = " + div + "</div>";
             }
             /*+ atk + " - Defender " + def + " = " + diff + "</div>";*/
             return html;

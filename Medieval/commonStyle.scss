@@ -659,6 +659,10 @@ fieldset {
     }
   }
 
+  .crt-odds{
+    font-size:16px;
+  }
+
 }
 
 
@@ -897,10 +901,13 @@ fieldset {
 #angCrtDetailsButton {
   font-size: 20px;
   cursor: pointer;
+  clear:both;
 }
 
 #crtDetails {
   display: block;
+  text-align:right;
+  float:left;
 }
 
 svg {

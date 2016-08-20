@@ -2681,6 +2681,8 @@ fieldset {
       position: absolute;
       right: 19px;
       top: 3px; }
+  #crt .crt-odds {
+    font-size: 16px; }
 
 #crt h3 {
   vertical-align: bottom; }
@@ -2863,10 +2865,13 @@ fieldset {
 
 #angCrtDetailsButton {
   font-size: 20px;
-  cursor: pointer; }
+  cursor: pointer;
+  clear: both; }
 
 #crtDetails {
-  display: block; }
+  display: block;
+  text-align: right;
+  float: left; }
 
 svg {
   z-index: 1; }

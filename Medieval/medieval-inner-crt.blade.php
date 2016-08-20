@@ -27,6 +27,6 @@ $crts = $topCrt->crts;
         </div>
         <div ng-class="bottomScreen" class="screen screen-two shadowy"></div>
     </div>
-    <h5>@{{ crtOdds }}</h5>
+    <h5 class="crt-odds"> @{{ crtOdds }}</h5>
     <div ng-show="showDetails" ng-bind-html="crt.crtOddsExp"></div>
 </div>
