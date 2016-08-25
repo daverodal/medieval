@@ -1,6 +1,6 @@
 <script>
-    var lobbyApp = angular.module('lobbyApp', ['ngRightClick']);
-    lobbyApp.controller('LobbyController', ['$scope', '$http', 'sync', '$sce', function($scope, $http, sync, $sce){
+    var gameApp = angular.module('gameApp', ['ngRightClick']);
+    gameApp.controller('GameController', ['$scope', '$http', 'sync', '$sce', function($scope, $http, sync, $sce){
         $scope.topCrt = angular.fromJson('{!!json_encode($topCrt)!!}');
         $scope.defaultCrt = $scope.curCrt = Object.keys($scope.topCrt.crts)[0];
         $scope.resultsNames = $scope.topCrt.resultsNames;
@@ -13,6 +13,8 @@
             DR.clickY = event.clientY;
             DR.dragged = false;
         };
+
+        $scope.ruleUnit1 = {strength:4, nationality:'loyalist', class:'inf', armorClass:'K', maxMove: 6};
 
         $scope.rightClickMe = function(id, event){
             var hex = $scope.unitsMap[id];
@@ -122,6 +124,9 @@
             var newHexUnits = {};
             for(var i in mapUnits) {
                 var newUnit = $scope.units[i];
+                Object.keys(mapUnits[i]).forEach(function(cur, index, arr){
+                    newUnit[cur] = mapUnits[i][cur];
+                });
                 newUnit.hq = mapUnits[i].class === "hq";
                 newUnit.commandRadius = 0;
                 if(mapUnits[i].class === "hq"){
@@ -220,6 +225,7 @@
                 if(mapUnits[i].parent === 'deadpile'){
                     newUnit.style = {float:'left'};
                     newUnit.strength = mapUnits[i].strength;
+                    newUnit.style.borderColor = 'rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204)';
                     retiredUnits.push(newUnit);
                 }
             }
@@ -454,15 +460,17 @@
                     status = "";
                 }
 
-                $scope.mapUnits[i].style = {};
-                $scope.mapUnits[i].style.borderColor = color;
-                $scope.mapUnits[i].style.borderStyle = style;
-                $scope.mapUnits[i].style.boxShadow = boxShadow;
+                if($scope.mapUnits) {
+                    $scope.mapUnits[i].style = {};
+                    $scope.mapUnits[i].style.borderColor = color;
+                    $scope.mapUnits[i].style.borderStyle = style;
+                    $scope.mapUnits[i].style.boxShadow = boxShadow;
 
-                if(shadow){
-                    $scope.mapUnits[i].shadow = 'shadowy';
-                }else{
-                    $scope.mapUnits[i].shadow = '';
+                    if (shadow) {
+                        $scope.mapUnits[i].shadow = 'shadowy';
+                    } else {
+                        $scope.mapUnits[i].shadow = '';
+                    }
                 }
             }
 
@@ -1021,28 +1029,38 @@
         $('#arrow-svg .range-hex').remove();
     }
 
-    lobbyApp.directive('offmapUnit', function() {
+    gameApp.directive('offmapUnit', function() {
         return {
             restrict: 'E',
-            templateUrl: 'offmap-unit.html'
+            templateUrl: 'offmap-unit.html',
+            scope:{
+                unit: "<"
+            }
         }
     });
 
-    lobbyApp.directive('unit', function() {
+    gameApp.directive('unit', function() {
         return {
             restrict: 'E',
-            templateUrl: 'unit.html'
+            templateUrl: 'unit.html',
+            scope:{
+                unit: "<",
+                rightClickMe: '&'
+            }
         }
     });
 
-    lobbyApp.directive('ghostUnit', function() {
+    gameApp.directive('ghostUnit', function() {
         return {
             restrict: 'E',
-            templateUrl: 'ghost-unit.html'
+            templateUrl: 'ghost-unit.html',
+            scope:{
+                unit: "<"
+            }
         }
     });
 
-    lobbyApp.factory('sync',function(){
+    gameApp.factory('sync',function(){
         var fetchUrl = '{{ url("wargame/fetch-lobby/") }}';
 
         var sync = new Sync(fetchUrl);

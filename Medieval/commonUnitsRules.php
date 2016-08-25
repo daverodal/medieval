@@ -17,30 +17,12 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 ?>
-    <li>
+    <li >
         <?= $forceName[1] ?> units are this color.
-        <div class="unit <?= strtolower($forceName[1]) ?>" alt="0"
-             src="<?= url('js/short-red-arrow-md.png'); ?>"
-             style="border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204);   position: relative;">
-            <div class="unitSize">xx</div>
-            <div class="counterWrapper">
-                <img src="<?= url('js/multiArmor.png'); ?>" class="counter">
-            </div>
-
-            <div class="unit-numbers">6 - 8</div>
-        </div>
+        <offmap-unit unit="{strength:4, nationality:'loyalist', class:'inf', armorClass:'K', maxMove: 3}" ></offmap-unit>
     </li>
     <li>
         <?= $forceName[2] ?> units are this color.
-        <div class="unit <?= strtolower($forceName[2]) ?>" alt="0"
-             src="<?= url('js/short-red-arrow-md.png'); ?>"
-             style="border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204); position: relative;">
-            <div class="unitSize">xx</div>
-            <div class="counterWrapper">
-                <img src="<?= url('js/multiMech.png'); ?>" class="counter">
-            </div>
-            <div class="unit-numbers">9 - 6</div>
-        </div>
     </li>
     <li>
         The symbol above the numbers represents the unit type.

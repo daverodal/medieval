@@ -20,33 +20,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 ?>
-<script src="<?=url("js/angular.js");?>"></script>
-<script src="<?=url("js/ng-right-click.js");?>"></script>
+<script src="<?=elixir("javascripts/common.js");?>"></script>
 
-@section('units')
-    <div ng-mouseover="hoverHq(unit)" ng-mouseleave="unHoverHq(unit)" class="a-unit-wrapper" ng-repeat="unit in mapUnits"  ng-style="unit.wrapperstyle">
-        <unit unit="unit"></unit>
-    </div>
-
-    <div ng-mouseover="hoverThis(unit)" ng-mouseleave="unHoverThis(unit)" ng-click="clickMe(unit.id, $event)" ng-style="unit.style" ng-repeat="unit in moveUnits track by $index" class="unit" ng-class="[unit.nationality, unit.class]" >
-        <ghost-unit unit="unit"></ghost-unit>
-
-    </div>
-@endsection
-@section('outer-deploy-box')
-    <div style="margin-right:3px;" class="left">Deploy/Staging area</div>
-    <div id="deployBox">
-        <div class="a-unit-wrapper" ng-repeat="unit in deployUnits"  ng-style="unit.wrapperstyle">
-             <offmap-unit unit="unit"></offmap-unit>
-        </div>
-        <div class="clear"></div>
-    </div>
-@endsection
-
-
-
-<body ng-app="lobbyApp" xmlns="http://www.w3.org/1999/html">
-<div ng-controller="LobbyController" id="theDiv">
+<body ng-app="gameApp" xmlns="http://www.w3.org/1999/html">
+<div ng-controller="GameController" id="theDiv">
     <header id="header">
         <div id="headerContent">
             <div id="mouseMove">mouse</div>
@@ -179,7 +156,7 @@
                 <div style="right:10px;font-size:50px;font-family:sans-serif;bottom:10px;position:absolute;color:#666;">
                     Retired Units
                 </div>
-                <div class="a-unit-wrapper" ng-repeat="unit in retiredUnits"  ng-style="unit.wrapperstyle">
+                <div class="a-unit-wrapper" ng-click="clickMe(unit.id, $event)" ng-repeat="unit in retiredUnits"  ng-style="unit.wrapperstyle">
                     <offmap-unit unit="unit"></offmap-unit>
                 </div>
                 <div class="clear"></div>
@@ -254,61 +231,26 @@
         </div>
     </div>
     <div id="display"></div>
+
 </div>
 
-@include('wargame::Medieval.medieval-controller', ['topCrt'=> $topCrt])
 
 </body>
 
 <script type="text/ng-template" id="unit.html" >
-    <div id="@{{unit.id}}" ng-mouseDown="mouseDown(unit.id, $event)" ng-mouseUp="clickMe(unit.id, $event)" ng-right-click="rightClickMe(unit.id, $event)"  ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
-        <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
-        <div class="shadow-mask" ng-class="unit.shadow"></div>
-        <div class="counterWrapper">
-            <div ng-show="unit.bow" class="bow" style=""></div>
-            <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
-            <div class="counter"></div>
-        </div>
-        <div class="range">@{{ unit.armorClass }}</div>
-
-        <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
-
-        <div ng-class="unit.infoLen" class="unit-numbers">@{{ unit.unitNumbers }}</div>
-        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
-        <i ng-show="!unit.command" class="fa fa-star unit-command" aria-hidden="true"></i>
-
-    </div>
+    @section('ng-unit-template')
+    @show
 </script>
 
 <script type="text/ng-template" id="offmap-unit.html" >
-    <div id="@{{unit.id}}" ng-mouseUp="clickMe(unit.id, $event)" ng-style="unit.style" class="unit rel-unit" ng-class="[unit.nationality, unit.class]" >
-        <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>
-        <div class="shadow-mask" ng-class="unit.shadow"></div>
-        <div class="counterWrapper">
-            <div ng-show="unit.bow" class="bow" style=""></div>
-            <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
-
-            <div class="counter"></div>
-        </div>
-        <div class="range">@{{ unit.armorClass }}</div>
-
-        <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
-
-        <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
-        <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
-
-    </div>
+    @section('ng-offmap-unit-template')
+    @show
 </script>
 
 <script type="text/ng-template" id="ghost-unit.html" >
-<div class="counterWrapper">
-    <div ng-show="unit.bow" class="bow" style=""></div>
-    <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
-    <div class="counter"></div>
-</div>
-<div class="range">@{{ unit.armorClass }}</div>
-<div class="unit-numbers">@{{ unit.strength }} - @{{ unit.pointsLeft }}</div>
-<div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+    @section('ng-ghost-unit-template')
+    @show
 </script>
 
+@include('wargame::Medieval.medieval-controller', ['topCrt'=> $topCrt])
 </html>

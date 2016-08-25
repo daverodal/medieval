@@ -39,7 +39,7 @@
 @endsection
 
 @section('commonRules')
-    @include('wargame::TMCW.commonRules')
+    @include('wargame::Medieval.commonRules')
 @endsection
 
 @section('exclusiveRules')
@@ -50,21 +50,4 @@
     @include('wargame::TMCW.obc')
 @endsection
 
-
-@section('nounits')
-
-
-
-    @foreach ($units as $unit)
-        <div class="unit {{$unit['nationality']}}" id="{{$unit['id']}}" alt="0">
-            <div class="shadow-mask"></div>
-            <div class="unitSize">{{$unit['unitSize']}}</div>
-            <img class="arrow" src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
-            <div class="counterWrapper">
-                <img src="{{asset("js/".$unit['image'])}}" class="counter"><span class="unit-desig"><?=$unit['unitDesig']?></span>
-            </div>
-            <div class="unit-numbers">5 - 4</div>
-        </div>
-    @endforeach
-@endsection
-@include('wargame::Medieval.angular-view',['topCrt'=> new \Wargame\Medieval\MedievalCombatResultsTable()] )
+@extends('wargame::Medieval.medieval')

@@ -18,36 +18,30 @@
  */
 ?><span class="big">Sequence of Play</span>
 
-<p>The game is made up of <span class="gameLength">7</span> Game turns, each Game turn consists of two
-    player turns, Each player turn has
-    several phases. These are described below in the sequence of play.</p>
+<p>The game is played in turns each game turn consists of two player turns; one following the other.
+    Each player turn is identical. The player whose turn it currently is referred to as the Phasing player the other as the Non Phasing player. Events in the phasing players turn are further referred to occasionally as the Friendly Phase
+</p>
 <ol>
     <li>
         <?= $forceName[1] ?> Player Turn
         <ol>
             <li>
-                Replacement Phase
-                <p>The phasing player may allocate as many replacements as they
-                received. <?= $forceName[1] ?>
-                forces receive <span class="player-one-replacements"></span> replacement per turn. (There is no replacement phase
-                for the <?= $forceName[1] ?> player on turn one).</p>
-            </li>
-            <li>
                 Movement Phase
-                <p>The phasing player may move any or all of their units. Movement is voluntary.</p>
+                <p>Movement: The <?= $forceName[1] ?> player moves some none or all of their units following the rules for movement</p>
             </li>
             <li>
-                Combat Phase
-                <p>The phasing player may any and all units that adjacent to their units. Combat is
-                voluntary.</p>
+                Missile Combat Phase
+                <p>Both sides execute missile combat with units armed with bows. First the phasing player allocates their attacks, then the defending player
+                allocates their attacks. Then both sides resolve fire combat simultaneously.</p>
             </li>
             <li>
-                Second Movement Phase
-                <p>The phasing player may move any or all of their <strong>Armored</strong> or
-                <strong>mechinized
-                    infantry</strong> units. Infantry units may <strong>not</strong> move in the
-                second
-                movement phase.</p>
+                Melee Combat Phase
+                <p>The phasing player must allocate attacks for all their units that have enemy units within their zones of control. See mandatory attack in combat below.
+                Phasing player units that participated in missile combat may not attack.</p>
+            </li>
+            <li>
+                Rally Phase
+                <p>All units of both sides eligible to rally from "Disordered" to "Battle Ready" in the <?= $forceName[1] ?> players turn do so.</p>
             </li>
         </ol>
     </li>
@@ -55,27 +49,22 @@
         <?= $forceName[2] ?> Player Turn
         <ol>
             <li>
-                Replacement Phase
-                The phasing player may receive as many replacements as they are
-                allocated. <?= $forceName[2] ?>
-                s receive <span class="player-two-replacements"></span> replacements per turn.
-            </li>
-            <li>
                 Movement Phase
-                The phasing player may move any or all of their units. Movement is voluntary.
+                <p>Movement: The <?= $forceName[2] ?> player moves some none or all of their units following the rules for movement</p>
             </li>
             <li>
-                Combat Phase
-                The phasing player may any and all units that adjacent to their units. Combat is
-                voluntary.
+                Missile Combat Phase
+                <p>Both sides may execute missile combat with units armed with bows. First the phasing player allocates their attacks, then the defending player
+                    allocates their attacks. Then both sides resolve fire combat simultaneously.</p>
             </li>
             <li>
-                Second Movement Phase
-                The phasing player may move any or all of their <strong>Armored</strong> or
-                <strong>mechinized
-                    infantry</strong> units. Infantry units may <strong>not</strong> move in the
-                second
-                movement phase.
+                Melee Combat Phase
+                <p>The phasing player must allocate attacks for all their units that have enemy units within their zones of control. See mandatory attack in combat below.
+                    Phasing player units that participated in missile combat may not attack.</p>
+            </li>
+            <li>
+                Rally Phase
+                <p>All units of both sides eligible to rally from "Disordered" to "Battle Ready" in the <?= $forceName[2] ?> players turn do so.</p>
             </li>
         </ol>
     </li>

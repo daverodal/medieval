@@ -10,7 +10,6 @@ $crts = $topCrt->crts;
         <div  ng-click="showCrtTable(crtName)" ng-repeat="(crtName, crt) in topCrt.crts"  ng-show="crtName == curCrt" class="crt-switch" id="@{{crtName}}Table">show  @{{ crt.next }} Table</div>
 </div>
 <h4>Armor Class Offset @{{ dieOffset > 0 ?  '+':'' }}@{{ dieOffset }}</h4>
-@{{ topCrts }}
 <div ng-show="crtName == curCrt" ng-repeat="(crtName, crt) in topCrt.crts">
     <h4>@{{ crtName }} Combat Results Table</h4>
     <div id="odds">

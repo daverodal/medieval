@@ -38,6 +38,9 @@
         font-size: 60px;
 
     }
+    #GR {
+        width:600px;
+    }
 
 
 </style>
@@ -51,12 +54,6 @@
 
             <h2>Rules of Play</h2>
 
-            <h2>Design Context</h2>
-
-            <p><?= $name ?> is a continuation of the gaming framework first pioneered by the game The Martian Civil War.
-                We hope you enjoy playing our game.</p>
-
-
             <ol class="topNumbers">
                 <li id="contentsRules">
                     @include('wargame::TMCW.commonContents')
@@ -69,14 +66,14 @@
                         @section('unitRules')
 
                             <li>Brore</li>
-                            @include('wargame::TMCW.commonUnitsRules')
+                            @include('wargame::Medieval.commonUnitsRules')
                     @show
                     </ol>
 
                 <?php //include "commonUnitsRules.php" ?>
                 </li>
                 <li id="sopRules">
-                    @include('wargame::TMCW.commonSequenceOfPlay')
+                    @include('wargame::Medieval.commonSequenceOfPlay')
 
                 <?php //include "commonSequenceOfPlay.php" ?>
                 </li>

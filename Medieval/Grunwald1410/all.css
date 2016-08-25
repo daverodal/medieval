@@ -3054,9 +3054,9 @@ svg#arrow-svg {
   position: absolute;
   z-index: 1; }
 
-#deployBox, #deadpile, #notUsedWrapper, #undeadpile, #exitBox {
+#deployBox, #deadpile, #notUsedWrapper, #undeadpile, #exitBox, #GR {
   font-family: serif; }
-  #deployBox .unit, #deadpile .unit, #notUsedWrapper .unit, #undeadpile .unit, #exitBox .unit {
+  #deployBox .unit, #deadpile .unit, #notUsedWrapper .unit, #undeadpile .unit, #exitBox .unit, #GR .unit {
     border: solid 3px;
     border-color: #cccccc #666666 #666666 #cccccc;
     margin-right: 5px; }
