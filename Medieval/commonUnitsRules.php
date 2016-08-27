@@ -19,92 +19,62 @@
 ?>
     <li >
         <?= $forceName[1] ?> units are this color.
-        <offmap-unit unit="{strength:4, nationality:'loyalist', class:'inf', armorClass:'K', maxMove: 3}" ></offmap-unit>
+        <offmap-unit unit="{orgStatus: 0, strength:6, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'cavalry', armorClass:'K', maxMove: 5}" ></offmap-unit>
     </li>
+
     <li>
         <?= $forceName[2] ?> units are this color.
+        <offmap-unit unit="{orgStatus: 0,strength:6, nationality:'<?= str_replace(' ','-',strtolower($forceName[2])) ?>', class:'cavalry', armorClass:'K', maxMove: 5}" ></offmap-unit>
+
+    </li>
+    <li>
+        The number on the left is the melee combat strength, the number on the right is the movement allowence.
+        <offmap-unit unit="{orgStatus: 0, strength:6, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'inf', armorClass:'M', maxMove: 3}" ></offmap-unit>
+
     </li>
     <li>
         The symbol above the numbers represents the unit type.
-        This is Armor (tanks).
-        <div class="unit <?= strtolower($forceName[1]) ?>" alt="0"
-             src="<?= url('js/short-red-arrow-md.png'); ?>"
-             style="border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204);  position: relative;">
+        This is Infantry (men on foot), represented by an X pattern.
+        <offmap-unit unit="{orgStatus: 0, strength:6, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'inf', armorClass:'M', maxMove: 3}" ></offmap-unit>
 
-            <div class="unitSize">xx</div>
-            <div class="counterWrapper">
-                <img src="<?= url('js/multiArmor.png'); ?>" class="counter">
-            </div>
+    </li>
 
-            <div class="unit-numbers">6 - 8</div>
-        </div>
-    </li>
     <li>
-        This is Mechinized Infantry (soldiers in half tracks, with small arms).
-        <div class="unit <?= strtolower($forceName[1]) ?>" alt="0"
-             src="<?= url('js/short-red-arrow-md.png'); ?>"
-             style="border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204);  position: relative;">
-            <div class="unitSize">xx</div>
-            <div class="counterWrapper">
-                <img src="<?= url('js/multiMech.png'); ?>" class="counter">
-            </div>
-            <div class="unit-numbers">4 - 8</div>
-        </div>
+        This is Cavalry (men on horses) represented by a slash pattern.
+        <offmap-unit unit="{orgStatus: 0, strength:6, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'cavalry', armorClass:'K', maxMove: 5}" ></offmap-unit>
     </li>
-    <li>
-        This is Infantry. (soldiers on foot, with small arms).
-        <div class="unit <?= strtolower($forceName[1]) ?>" alt="0"
-             src="<?= url('js/short-red-arrow-md.png'); ?>"
-             style="border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204); position: relative;">
-            <div class="unitSize">xx</div>
-            <div class="counterWrapper">
-                <img src="<?= url('js/multiInf.png'); ?>" class="counter">
-            </div>
 
-            <div class="unit-numbers">2 - 8</div>
-        </div>
-    </li>
     <li>
-        The number on the left is the combat strength. The number on the right is the movement allowance
-        <div class="unit <?= strtolower($forceName[2]) ?>" alt="0"
-             src="<?= url('js/short-red-arrow-md.png'); ?>"
-             style="border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204); position: relative;">
-            <div class="unitSize">xx</div>
-            <div class="counterWrapper">
-                <img src="<?= url('js/multiMech.png'); ?>" class="counter">
-            </div>
-
-            <div class="unit-numbers">9 - 6</div>
-        </div>
-        <p class="ruleComment">
-            The above unit has a combat strength of 9 and a movenent allowance of 6.</p>
-    </li>
-    <li>
-        If a units numbers are in white, that means this unit is at reduced strength and can receive
-        replacements
-        during the replacement phase.
+        An arrow next to the unit symbol means armed with bows.
         <div class="clear"></div>
-        <div class="unit <?= strtolower($forceName[1]) ?>" alt="0"
-             src="<?= url('js/short-red-arrow-md.png'); ?>"
-             style="border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204); float:left;  position: relative;">
-            <div class="unitSize">xx</div>
-            <div class="counterWrapper">
-                <img src="<?= url('js/multiArmor.png'); ?>" class="counter">
-            </div>
+        <offmap-unit class="left" unit="{orgStatus: 0, bow: true, strength:2, steps: 2, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'inf', armorClass:'M', maxMove: 3}" ></offmap-unit>
+        <offmap-unit class="left" unit="{orgStatus: 0, bow: true, strength:2, steps: 2, nationality:'<?= str_replace(' ','-',strtolower($forceName[2])) ?>', class:'inf', armorClass:'M', maxMove: 3}" ></offmap-unit>
+        <div class="clear"></div>
 
-            <div class="unit-numbers"><span class="reduced">3 - 8</span></div>
-        </div>
-        <div class="unit <?= strtolower($forceName[2]) ?>" alt="0"
-             src="<?= url('js/short-red-arrow-md.png'); ?>"
-             style="border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204); float:left; position: relative;">
-            <div class="unitSize">xx</div>
-            <div class="counterWrapper">
-                <img src="<?= url('js/multiMech.png'); ?>" class="counter">
-            </div>
-
-            <div class="unit-numbers"><span class="reduced">4 - 6</span></div>
-
-        </div>
-
-        <div class="clear">&nbsp;</div>
     </li>
+    <li>
+        An number of dots along the bottom represent the number of steps, 3, 2 or 1 (when a unit's steps are reduced to 0 it's eliminated).
+        It's combat strength is reduced as it's steps are lost in combat.
+        <div class="clear"></div>
+        <offmap-unit class="left" unit="{orgStatus: 0, bow: true, strength:6, steps: 3, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'inf', armorClass:'M', maxMove: 3}" ></offmap-unit>
+        <offmap-unit class="left" unit="{orgStatus: 0, bow: true, strength:3, steps: 2, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'inf', armorClass:'M', maxMove: 3}" ></offmap-unit>
+        <offmap-unit class="left" unit="{orgStatus: 0, bow: true, strength:1, steps: 1, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'inf', armorClass:'M', maxMove: 3}" ></offmap-unit>
+        <div class="clear"></div>
+    </li>
+    <li>
+        This is a Headquarters. (leaders) the number of dots in the middle top represend it's command radius.
+        <div class="clear"></div>
+        <offmap-unit class="left" unit="{orgStatus: 0,strength:3,steps: 1,  hq: true, commandRadius: '.....', nationality:'<?= str_replace(' ','-',strtolower($forceName[2])) ?>', class:'hq', armorClass:'K', maxMove: 5}" ></offmap-unit>
+        <offmap-unit class="left" unit="{orgStatus: 0,strength:2,steps: 1,  hq: true, commandRadius: '...', nationality:'<?= str_replace(' ','-',strtolower($forceName[2])) ?>', class:'hq', armorClass:'K', maxMove: 5}" ></offmap-unit>
+        <offmap-unit class="left" unit="{orgStatus: 0,strength:1,steps: 1,  hq: true, commandRadius: '.', nationality:'<?= str_replace(' ','-',strtolower($forceName[2])) ?>', class:'hq', armorClass:'K', maxMove: 5}" ></offmap-unit>
+        <div class="clear"></div>
+
+    </li>
+
+<li>
+    The Letter in the middle bottom is their Org Status. B means Battle Ready. D means Disordered (combat and movement halved)
+    <div class="clear"></div>
+    <offmap-unit class="left" unit="{orgStatus: 0, strength:6, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'cavalry', armorClass:'K', maxMove: 5}" ></offmap-unit>
+    <offmap-unit class="left" unit="{orgStatus: 1, strength:3, nationality:'<?= str_replace(' ','-',strtolower($forceName[1])) ?>', class:'cavalry', armorClass:'K', maxMove: 2}" ></offmap-unit>
+    <div class="clear"></div>
+</li>

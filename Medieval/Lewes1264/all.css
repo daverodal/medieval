@@ -2480,9 +2480,14 @@ You should have received a copy of the GNU General Public License
 #header, #content, #theDiv, #gameViewer {
   -webkit-user-select: none;
   -moz-user-select: none;
-  -moz-user-select: -moz-none;
   -ms-user-select: none;
   user-select: none; }
+
+#GR {
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto; }
 
 .dropDown, #zoomWrapper {
   font-size: 30px;
@@ -2592,8 +2597,8 @@ You should have received a copy of the GNU General Public License
   text-decoration: none; }
 
 .game-rules p {
-  font-size: 18px;
-  font-weight: normal; }
+  font-size: 16px;
+  font-weight: 300; }
 
 #GR {
   background: white;
@@ -2608,11 +2613,12 @@ You should have received a copy of the GNU General Public License
     margin: 3px 0;
     display: block;
     font-size: 16px !important;
-    font-weight: normal !important; }
+    font-weight: 300 !important; }
     #GR li:before {
       content: "[" counters(item,".") "] ";
       counter-increment: item;
-      font-weight: bold; }
+      font-weight: bold;
+      font-family: 'Open Sans'; }
   #GR .topNumbers {
     counter-reset: item -1; }
     #GR .topNumbers > li {
@@ -3075,6 +3081,10 @@ svg#arrow-svg {
   font-size: 19px;
   font-weight: bold; }
 
+.less-big {
+  font-size: 17px;
+  font-weight: 600; }
+
 .swooshy {
   background: black;
   color: #eee; }
@@ -3152,7 +3162,7 @@ svg#arrow-svg {
 .unit-wrapper {
   padding: 4px 7px 4px 7px;
   text-align: left;
-  font-family: sans-serif;
+  font-family: serif;
   font-size: 1.2em;
   border-radius: 10px;
   border: 10px solid #555;
@@ -3171,7 +3181,32 @@ svg#arrow-svg {
   #deployBox .unit, #deadpile .unit, #notUsedWrapper .unit, #undeadpile .unit, #exitBox .unit, #GR .unit {
     border: solid 3px;
     border-color: #cccccc #666666 #666666 #cccccc;
-    margin-right: 5px; }
+    margin-right: 5px;
+    font-family: serif; }
+
+#GR .game-rules {
+  font-family: "Dosis", sans-serif; }
+
+#GR .big {
+  font-family: "Dosis", sans-serif; }
+
+#GR li p {
+  margin-left: 10px; }
+#GR li .big {
+  font-weight: 900; }
+#GR li li .big {
+  font-weight: 700;
+  font-size: 18px; }
+#GR li li li .big {
+  font-weight: 500;
+  font-size: 17px; }
+#GR li li li li .big {
+  font-weight: 400;
+  font-size: 16px; }
+#GR li li li li li .big {
+  font-weight: 300;
+  font-style: italic;
+  font-size: 16px; }
 
 /**
  *

@@ -24,30 +24,20 @@
 </style>
 </head>
 
-@section('unitRules')
-    @parent
-    <li class="exclusive">No units may be receive replacements in this game.
-    </li>
-@endsection
-
 @section('inner-crt')
     @include('wargame::Medieval.medieval-inner-crt', ['topCrt'=> new \Wargame\Medieval\MedievalCombatResultsTable()])
 @endsection
 
-@section('victoryConditions')
-    @include('wargame::TMCW.Amph.victoryConditions')
-@endsection
-
 @section('commonRules')
-    @include('wargame::TMCW.commonRules')
+    @include('wargame::Medieval.commonRules')
 @endsection
 
 @section('exclusiveRules')
-    @include('wargame::TMCW.exclusiveRules')
+    @include('wargame::Medieval.exclusiveRules')
 @endsection
 
 @section('obc')
-    @include('wargame::TMCW.obc')
+    @include('wargame::Medieval.obc')
 @endsection
 
 @extends('wargame::Medieval.medieval')

@@ -24,8 +24,8 @@
 @include headerColor(Teutonic-Order, #c0c0c0, gray);
 @include headerColor(Kingdom-of-Poland, $polishColor, red);
 
-@include unitColor(polish,$polishColor,  Brit, red );
-@include unitColor(teutonic, white, TeutonicAnti, black, white, black);
+@include unitColor(kingdom-of-poland,$polishColor,  Brit, red );
+@include unitColor(teutonic-order, white, TeutonicAnti, black, white, black);
 @include unitColor(tartar, $polishColor,  Brit, green );
 @include unitColor(lithuanian,$polishColor,  Brit, orange );
 
@@ -33,7 +33,7 @@
 @include specialColor(Kingdom-of-Poland, red, white);
 
 
-@include flagColor(polish, yellow);
+@include flagColor(kingdom-of-poland, yellow);
 @include flagColor(tartar, yellow);
 @include flagColor(lithuanian, yellow);
 

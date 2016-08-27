@@ -48,7 +48,7 @@
             <h2 class="exclusive"> EXCLUSIVE RULES
             </h2>
             @section('victoryConditions')
-                @include('wargame::TMCW.victoryConditions')
+                @include('wargame::Medieval.victoryConditions')
             @show
         </div>
     </div>
