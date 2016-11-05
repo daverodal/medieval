@@ -3750,7 +3750,7 @@ svg#arrow-svg {
 .lithuanian.hq .counterWrapper .counter:before {
   color: yellow; }
 
-.teutonic .counterWrapper .bow {
+.teutonic-order .counterWrapper .bow {
   background: url("/vendor/wargame/medieval/grunwald1410/images/whiteArrow.svg");
   background-size: 10px 13px;
   width: 10px; }
