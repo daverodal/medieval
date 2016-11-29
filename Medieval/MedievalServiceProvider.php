@@ -15,6 +15,7 @@ class MedievalServiceProvider extends ServiceProvider
     {
 
         \App\Services\WargameService::addProvider(dirname(__DIR__));
+        \App\Services\WargameService::addBattleMap( __DIR__.'/../Medieval/Maps');
         $this->publishes([
             __DIR__.'/Grunwald1410/all.css' => public_path('vendor/wargame/medieval/css/Grunwald1410.css'),
             __DIR__.'/Grunwald1410/all.css.map' => public_path('vendor/wargame/medieval/css/Grunwald1410.css.map'),

@@ -114,6 +114,93 @@ class victoryCore extends \Wargame\VictoryCore
         }
     }
 
+//    public function postUnsetAttacker($args){
+//        $this->calcFromAttackers();
+//        list($unit) = $args;
+//        $id = $unit->id;
+//    }
+//    public function postUnsetDefender($args){
+//        $this->calcFromAttackers();
+//
+//        list($unit) = $args;
+//    }
+//    public function postSetAttacker($args){
+//        $this->calcFromAttackers();
+//
+//        list($unit) = $args;
+//    }
+//    public function postSetDefender($args){
+//        $this->calcFromAttackers();
+//
+//    }
+//
+//    public function calcFromAttackers(){
+//        $mapData = \Wargame\MapData::getInstance();
+//
+//        $battle = Battle::getBattle();
+//        /* @var CombatRules $cR */
+//        $cR = $battle->combatRules;
+//        /* @var Force $force */
+//        $force = $battle->force;
+//        echo "Def ";
+//        var_dump($force->requiredDefenses);
+//        echo "Att ";
+//        var_dump($force->requiredAttacks);
+//        $force->clearRequiredCombats();
+//        $defenderForceId = $force->defendingForceId;
+//        var_dump($cR->attackers);
+//        foreach($cR->attackers as $attackId => $combatId){
+//            $unit = $battle->force->units[$attackId];
+//            $mapHex = $mapData->getHex($force->getUnitHexagon($attackId)->name);
+//            $zocHexes = $mapHex->getZocNeighbors($unit);
+//            foreach($zocHexes as $zocHex){
+//                $zocMapHex = $mapData->getHex($zocHex);
+//                if($zocMapHex->isOccupied($defenderForceId)){
+//                    $units = $zocMapHex->forces[$defenderForceId];
+//                    foreach($units as $unitId=>$unitVal){
+//                        $requiredVal = true;
+//                        $combatId = isset($cR->defenders->$unitId) ? $cR->defenders->$unitId : null ;
+//                        if($combatId !== null){
+//                            $attackers = $cR->combats->$combatId->attackers;
+//                            if($attackers){
+//                                if(count((array)$attackers) > 0){
+//                                    $requiredVal = false;
+//                                }
+//                            }
+//
+//                        }
+//
+//                        $force->requiredDefenses->$unitId = $requiredVal;
+//                    }
+//                }
+//            }
+//            var_dump($force->requiredDefenses);
+////            $neighbors = $mapHex->getZocUnits($defenderForceId);
+////            foreach($neighbors as $neighbor){
+////                /* @var MapHex $hex */
+////                $hex = $mapData->getHex($force->getUnit($neighbor)->hexagon->name);
+////                if($hex->isOccupied($defenderForceId)){
+////                    $units = $hex->forces[$defenderForceId];
+////                    foreach($units as $unitId=>$unitVal){
+////                        $requiredVal = true;
+////                        $combatId = isset($cR->defenders->$unitId) ? $cR->defenders->$unitId : null ;
+////                        if($combatId !== null){
+////                            $attackers = $cR->combats->$combatId->attackers;
+////                            if($attackers){
+////                                if(count((array)$attackers) > 0){
+////                                    $requiredVal = false;
+////                                }
+////                            }
+////
+////                        }
+////
+////                        $force->requiredDefenses->$unitId = $requiredVal;
+////                    }
+////                }
+////            }
+//        }
+//    }
+
     public function phaseChange()
     {
 

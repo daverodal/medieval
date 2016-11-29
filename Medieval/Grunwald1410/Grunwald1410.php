@@ -132,7 +132,7 @@ class Grunwald1410 extends MedievalLandBattle
         }
 
         for($i = 0;$i < 5;$i++) {
-            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  3, 6,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'cavalry',1, false, 'S', true);
+            UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  3, 6,2,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'cavalry',1, false, 'S', true);
 
         }
 
