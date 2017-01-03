@@ -71,12 +71,12 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
         $pData = $battle->getPlayerData(false);
         $class = preg_replace("/ /", "-",$pData['forceName'][$forceId]);
         if(in_array($mapHexName,$battle->specialHexB)) {
-            if ($forceId == LOYALIST_FORCE) {
-                $this->victoryPoints[LOYALIST_FORCE] += $vp;
+            if ($forceId == Lewes1264::LOYALIST_FORCE) {
+                $this->victoryPoints[Lewes1264::LOYALIST_FORCE] += $vp;
                 $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> +$vp Loyalist vp</span>";
             }
-            if ($forceId == REBEL_FORCE) {
-                $this->victoryPoints[LOYALIST_FORCE] -= $vp;
+            if ($forceId == Lewes1264::REBEL_FORCE) {
+                $this->victoryPoints[Lewes1264::LOYALIST_FORCE] -= $vp;
                 $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> -$vp Loyalist vp</span>";
             }
         }
@@ -86,12 +86,12 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
          */
         if(in_array($mapHexName,$battle->specialHexA)){
 
-            if ($forceId == LOYALIST_FORCE) {
-                $this->victoryPoints[REBEL_FORCE]  -= $vp;
+            if ($forceId == Lewes1264::LOYALIST_FORCE) {
+                $this->victoryPoints[Lewes1264::REBEL_FORCE]  -= $vp;
                 $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'>-$vp Rebel vp</span>";
             }
-            if ($forceId == REBEL_FORCE) {
-                $this->victoryPoints[REBEL_FORCE]  += $vp;
+            if ($forceId == Lewes1264::REBEL_FORCE) {
+                $this->victoryPoints[Lewes1264::REBEL_FORCE]  += $vp;
                 $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'>+$vp Rebel vp</span>";
             }
         }
@@ -101,15 +101,15 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
     public function gameEnded()
     {
         $battle = Battle::getBattle();
-        if ($this->victoryPoints[REBEL_FORCE] > $this->victoryPoints[LOYALIST_FORCE]) {
+        if ($this->victoryPoints[Lewes1264::REBEL_FORCE] > $this->victoryPoints[Lewes1264::LOYALIST_FORCE]) {
             $battle->gameRules->flashMessages[] = "Rebel Player Wins";
-            $this->winner = REBEL_FORCE;
+            $this->winner = Lewes1264::REBEL_FORCE;
         }
-        if ($this->victoryPoints[LOYALIST_FORCE] > $this->victoryPoints[REBEL_FORCE]) {
+        if ($this->victoryPoints[Lewes1264::LOYALIST_FORCE] > $this->victoryPoints[Lewes1264::REBEL_FORCE]) {
             $battle->gameRules->flashMessages[] = "Loyalist Player Wins";
-            $this->winner = LOYALIST_FORCE;
+            $this->winner = Lewes1264::LOYALIST_FORCE;
         }
-        if ($this->victoryPoints[REBEL_FORCE] == $this->victoryPoints[LOYALIST_FORCE]) {
+        if ($this->victoryPoints[Lewes1264::REBEL_FORCE] == $this->victoryPoints[Lewes1264::LOYALIST_FORCE]) {
             $battle->gameRules->flashMessages[] = "Tie Game";
         }
         $this->gameOver = true;

@@ -25,14 +25,14 @@ use Wargame\MoveRules;
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define("LOYALIST_FORCE", 1);
-define("REBEL_FORCE", 2);
 
 
 class Lewes1264 extends MedievalLandBattle
 {
-    /* a comment */
 
+    const LOYALIST_FORCE = 1;
+    const REBEL_FORCE = 2;
+    
     public $specialHexesMap = ['SpecialHexA'=>1, 'SpecialHexB'=>2, 'SpecialHexC'=>1];
 
     public static function buildUnit($data = false){
@@ -74,54 +74,54 @@ class Lewes1264 extends MedievalLandBattle
             $baseValue = 7;
         }
 
-        UnitFactory::create("lll", LOYALIST_FORCE, "deployBox",  3, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox",  3, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
 
 
         for($i = 0;$i < 6;$i++){
-            UnitFactory::create("lll", LOYALIST_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'H');
+            UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'cavalry',1, 0, 'H');
 
         }
 
         for($i = 0;$i < 3;$i++){
-            UnitFactory::create("lll", LOYALIST_FORCE, "deployBox", 4,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M');
+            UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox", 4,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M');
 
         }
 
         for($i = 0;$i < 7;$i++){
-            UnitFactory::create("lll", LOYALIST_FORCE, "deployBox", 2, 3,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, false, 'M', true);
+            UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox", 2, 3,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, false, 'M', true);
 
         }
 
         for($i = 0;$i < 4;$i++){
-            UnitFactory::create("lll", LOYALIST_FORCE, "deployBox", 2,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M');
+            UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox", 2,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M');
 
         }
 
-        UnitFactory::create("lll", REBEL_FORCE, "deployBox",  3, 5,3,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", REBEL_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", REBEL_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", REBEL_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::REBEL_FORCE, "deployBox",  3, 5,3,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::REBEL_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::REBEL_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::REBEL_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
 
 
         for($i = 0;$i < 4;$i++) {
-            UnitFactory::create("lll", REBEL_FORCE, "deployBox",  6, 5,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'cavalry',1, 3, 'K');
+            UnitFactory::create("lll", self::REBEL_FORCE, "deployBox",  6, 5,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'cavalry',1, 3, 'K');
 
         }
         for($i = 0;$i < 3;$i++) {
-            UnitFactory::create("lll", REBEL_FORCE, "deployBox",  4, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'inf',1, 3, 'M');
+            UnitFactory::create("lll", self::REBEL_FORCE, "deployBox",  4, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'inf',1, 3, 'M');
 
         }
 
         for($i = 0;$i < 3;$i++) {
-            UnitFactory::create("lll", REBEL_FORCE, "deployBox",  2, 3,2,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'inf',1, 3, 'M', true);
+            UnitFactory::create("lll", self::REBEL_FORCE, "deployBox",  2, 3,2,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'inf',1, 3, 'M', true);
 
         }
 
 
         for($i = 0;$i < 3;$i++) {
-            UnitFactory::create("lll", REBEL_FORCE, "deployBox",  2, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'inf',1, 3, 'M');
+            UnitFactory::create("lll", self::REBEL_FORCE, "deployBox",  2, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "rebel", 'inf',1, 3, 'M');
 
         }
     }

@@ -459,6 +459,10 @@
                     $scope.floatMessage.header = status;
                     status = "";
                 }
+                if($scope.mapUnits[i].supplyUsed){
+                    color = 'red';
+                    style = 'dotted';
+                }
 
                 if($scope.mapUnits) {
                     $scope.mapUnits[i].style = {};

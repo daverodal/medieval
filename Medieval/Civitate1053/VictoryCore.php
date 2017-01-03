@@ -72,12 +72,12 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
         $pData = $battle->getPlayerData(false);
         $class = preg_replace("/ /", "-",$pData['forceName'][$forceId]);
         if(in_array($mapHexName,$battle->specialHexB)) {
-            if ($forceId == NORMAN_FORCE) {
-                $this->victoryPoints[NORMAN_FORCE] += $vp;
+            if ($forceId == Civitate1053::NORMAN_FORCE) {
+                $this->victoryPoints[Civitate1053::NORMAN_FORCE] += $vp;
                 $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> +$vp Norman vp</span>";
             }
-            if ($forceId == LOMBARD_FORCE) {
-                $this->victoryPoints[NORMAN_FORCE] -= $vp;
+            if ($forceId == Civitate1053::LOMBARD_FORCE) {
+                $this->victoryPoints[Civitate1053::NORMAN_FORCE] -= $vp;
                 $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> -$vp Norman vp</span>";
             }
         }
@@ -85,12 +85,12 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
         if(in_array($mapHexName,$battle->specialHexA)){
 
             $prevForceId = $battle->mapData->specialHexes->$mapHexName;
-            if ($forceId == NORMAN_FORCE) {
-                $this->victoryPoints[LOMBARD_FORCE] -= $vp;
+            if ($forceId == Civitate1053::NORMAN_FORCE) {
+                $this->victoryPoints[Civitate1053::LOMBARD_FORCE] -= $vp;
                 $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> -$vp Lombard vp</span>";
             }
-            if ($forceId == LOMBARD_FORCE) {
-                $this->victoryPoints[LOMBARD_FORCE]  += $vp;
+            if ($forceId == Civitate1053::LOMBARD_FORCE) {
+                $this->victoryPoints[Civitate1053::LOMBARD_FORCE]  += $vp;
                 $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'>+$vp Lombard vp</span>";
 
             }
@@ -101,15 +101,15 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
     public function gameEnded()
     {
         $battle = Battle::getBattle();
-        if ($this->victoryPoints[LOMBARD_FORCE] > $this->victoryPoints[NORMAN_FORCE]) {
+        if ($this->victoryPoints[Civitate1053::LOMBARD_FORCE] > $this->victoryPoints[Civitate1053::NORMAN_FORCE]) {
             $battle->gameRules->flashMessages[] = "Lombard Player Wins";
-            $this->winner = LOMBARD_FORCE;
+            $this->winner = Civitate1053::LOMBARD_FORCE;
         }
-        if ($this->victoryPoints[NORMAN_FORCE] > $this->victoryPoints[LOMBARD_FORCE]) {
+        if ($this->victoryPoints[Civitate1053::NORMAN_FORCE] > $this->victoryPoints[Civitate1053::LOMBARD_FORCE]) {
             $battle->gameRules->flashMessages[] = "Norman Player Wins";
-            $this->winner = NORMAN_FORCE;
+            $this->winner = Civitate1053::NORMAN_FORCE;
         }
-        if ($this->victoryPoints[LOMBARD_FORCE] == $this->victoryPoints[NORMAN_FORCE]) {
+        if ($this->victoryPoints[Civitate1053::LOMBARD_FORCE] == $this->victoryPoints[Civitate1053::NORMAN_FORCE]) {
             $battle->gameRules->flashMessages[] = "Tie Game";
         }
         $this->gameOver = true;
