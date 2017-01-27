@@ -21,7 +21,7 @@
 ?>
 
 @section('units')
-    <div ng-mouseDown="mouseDown( unit.id,  $event)" ng-mouseUp="clickMe(unit.id,  $event)" ng-mouseover="hoverHq(unit)" ng-mouseleave="unHoverHq(unit)" class="a-unit-wrapper" ng-repeat="unit in mapUnits"  ng-style="unit.wrapperstyle">
+    <div  ng-click="clickMe(unit.id,  $event)" ng-mouseover="hoverHq(unit)" ng-mouseleave="unHoverHq(unit)" class="a-unit-wrapper" ng-repeat="unit in mapUnits"  ng-style="unit.wrapperstyle">
         <unit right-click-me="rightClickMe(id)" unit="unit"></unit>
     </div>
 
@@ -34,7 +34,7 @@
 @section('outer-deploy-box')
     <div style="margin-right:3px;" class="left">Deploy/Staging area</div>
     <div id="deployBox">
-        <div ng-mouseUp="clickMe(unit.id,  $event)" class="a-unit-wrapper" ng-repeat="unit in deployUnits"  ng-style="unit.wrapperstyle">
+        <div ng-click="clickMe(unit.id,  $event)" class="a-unit-wrapper" ng-repeat="unit in deployUnits"  ng-style="unit.wrapperstyle">
             <offmap-unit unit="unit"></offmap-unit>
         </div>
         <div class="clear"></div>

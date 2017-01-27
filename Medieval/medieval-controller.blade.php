@@ -8,11 +8,11 @@
         $scope.units = angular.fromJson('{!!json_encode($units)!!}');
         $scope.hexesMap = {};
         $scope.unitsMap = {};
-        $scope.mouseDown = function(id,event){
-            DR.clickX = event.clientX;
-            DR.clickY = event.clientY;
-            DR.dragged = false;
-        };
+//        $scope.mouseDown = function(id,event){
+//            DR.clickX = event.clientX;
+//            DR.clickY = event.clientY;
+//            DR.dragged = false;
+//        };
 
         $scope.ruleUnit1 = {strength:4, nationality:'loyalist', class:'inf', armorClass:'K', maxMove: 6};
 
@@ -26,12 +26,6 @@
                 for(var i in hexesMap[hex]){
                     var unit = $scope.units[hexesMap[hex][i]];
                     unit.wrapperstyle.zIndex = i + 1;
-                    var shift = unit.shift;
-                    var top = unit.wrapperstyle.top.replace(/px/,'');
-                    var left = unit.wrapperstyle.left.replace(/px/,'');
-                    unit.wrapperstyle.top = (top - shift + i * 5) + "px";
-                    unit.wrapperstyle.left = (left - shift + i * 5) + "px";
-                    unit.shift = i * 5;
                 }
                 return true;
             }
@@ -84,14 +78,16 @@
         };
 
         $scope.hoverHq = function(unit){
-            if(unit.class === 'hq'){
+            if(unit.class === 'hq' || unit.class === "supply"){
                 $("#rangeHex"+unit.id).css({display:'block'});
             }
         }
 
         $scope.unHoverHq = function(unit){
-            if(unit.class === 'hq'){
-                $("#rangeHex"+unit.id).css({display:'none'});
+            if(unit.class === 'hq' || unit.class === "supply"){
+                if(!unit.supplyUsed) {
+                    $("#rangeHex" + unit.id).css({display: 'none'});
+                }
             }
         }
 
@@ -129,9 +125,14 @@
                 });
                 newUnit.hq = mapUnits[i].class === "hq";
                 newUnit.commandRadius = 0;
+                var range = 0;
                 if(mapUnits[i].class === "hq"){
-                    var range = mapUnits[i].commandRadius;
+                    range = mapUnits[i].commandRadius;
                     newUnit.commandRadius = ".........".slice(0,range);
+                }
+                newUnit.supplyRadius = 0;
+                if(mapUnits[i].class === "supply"){
+                    range = mapUnits[i].supplyRadius;
                 }
                 if(mapUnits[i].parent === 'gameImages') {
                     newUnit.shift = 0;
@@ -172,7 +173,7 @@
                      * Should not be removed and reinserted every mouse click.
                      * only about 8 of them so for now :'( tears will stay this way.....
                      */
-                    if(mapUnits[i].class === "hq"){
+                    if(mapUnits[i].class === "hq" || mapUnits[i].class === "supply"){
 
                         var hexSideLen = 32.0;
                         var b = hexSideLen * .866;
@@ -462,6 +463,7 @@
                 if($scope.mapUnits[i].supplyUsed){
                     color = 'red';
                     style = 'dotted';
+                    $("#rangeHex"+i).css({display:'block', stroke: 'red'});
                 }
 
                 if($scope.mapUnits) {
@@ -979,8 +981,8 @@
                 newUnit.style.borderColor = 'rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204)';
                 newUnit.style.opacity = .6;
                 newUnit.style.transform = "rotate("+mapUnits[i].facing*60+"deg)";
-                newUnit.style.top = mapUnits[i].pixY-20+"px";
-                newUnit.style.left = mapUnits[i].pixX-20+"px";
+                newUnit.style.top = mapUnits[i].pixY-15+"px";
+                newUnit.style.left = mapUnits[i].pixX-15+"px";
                 newUnit.hex = i;
                 newUnit.id = moveRules.movingUnitId+"Hex"+i;
 
