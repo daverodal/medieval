@@ -20,10 +20,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 ?>
-<script src="<?=elixir("javascripts/common.js");?>"></script>
+<script src="<?=elixir("javascripts/ngGameMain.js");?>"></script>
 
 <body ng-app="gameApp" xmlns="http://www.w3.org/1999/html">
-<div ng-controller="GameController" id="theDiv">
+<div ng-controller="GameController" id="main-viewer">
     <header id="header">
         <div id="headerContent">
             <div id="mouseMove">mouse</div>
@@ -156,7 +156,7 @@
                 <div style="right:10px;font-size:50px;font-family:sans-serif;bottom:10px;position:absolute;color:#666;">
                     Retired Units
                 </div>
-                <div class="a-unit-wrapper" ng-click="clickMe(unit.id, $event)" ng-repeat="unit in retiredUnits"  ng-style="unit.wrapperstyle">
+                <div class="retired-unit-wrapper" ng-click="clickMe(unit.id, $event)" ng-repeat="unit in retiredUnits"  ng-style="unit.wrapperstyle">
                     <offmap-unit unit="unit"></offmap-unit>
                 </div>
                 <div class="clear"></div>

@@ -238,7 +238,7 @@ body {
 
 }
 
-#header, #content, #theDiv, #gameViewer {
+#header, #content, #main-viewer, #gameViewer {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -1179,6 +1179,12 @@ svg#arrow-svg {
   z-index:1;
 
 }
+.unit-wrapper{
+  .a-unit-wrapper{
+    float:left;
+  }
+}
+
 #deployBox, #deadpile, #notUsedWrapper, #undeadpile, #exitBox, #GR{
   .unit{
     border: solid 3px;

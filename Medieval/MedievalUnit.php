@@ -149,7 +149,6 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
                   $nationality,
                   $class,
                   $unitDesig,
-                 $orgStatus,
                   $facing,
                  $armorClass,
                 $bow,
