@@ -4,7 +4,7 @@ use stdClass;
 use Wargame\MapData;
 use Wargame\MapViewer;
 use Wargame\MedievalForce;
-use Wargame\MoveRules;
+use Wargame\FacingMoveRules;
 use Wargame\Terrain;
 use Wargame\CombatRules;
 use Wargame\GameRules;
@@ -79,7 +79,7 @@ class MedievalLandBattle extends \Wargame\LandBattle
             }else{
                 $this->terrain = new \stdClass();
             }
-            $this->moveRules = new MoveRules($this->force, $this->terrain, $data->moveRules);
+            $this->moveRules = new FacingMoveRules($this->force, $this->terrain, $data->moveRules);
             $this->combatRules = new CombatRules($this->force, $this->terrain, $data->combatRules);
             $this->gameRules = new GameRules($this->moveRules, $this->combatRules, $this->force, $data->gameRules);
             $this->victory = new Victory($data);
@@ -92,7 +92,7 @@ class MedievalLandBattle extends \Wargame\LandBattle
             $this->mapViewer = array(new MapViewer(), new MapViewer(), new MapViewer());
             $this->force = new MedievalForce();
             $this->terrain = new Terrain();
-            $this->moveRules = new MoveRules($this->force, $this->terrain);
+            $this->moveRules = new FacingMoveRules($this->force, $this->terrain);
             
             $this->moveRules->blockedRetreatDamages = true;
             $this->moveRules->enterZoc = "stop";

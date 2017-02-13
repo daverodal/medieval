@@ -3,7 +3,7 @@ namespace Wargame\Medieval\Lewes1264;
 use Wargame\Medieval\MedievalLandBattle;
 use Wargame\Medieval\MedievalUnit;
 use Wargame\Medieval\UnitFactory;
-use Wargame\MoveRules;
+use Wargame\FacingMoveRules;
 /**
  *
  * Copyright 2012-2015 David Rodal
