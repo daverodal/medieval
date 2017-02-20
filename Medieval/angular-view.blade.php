@@ -20,7 +20,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 ?>
-<script src="<?=elixir("javascripts/ngGameMain.js");?>"></script>
+@include('wargame::Medieval.ng-global-header', ['topCrt'=> $topCrt])
+
+<script>
+</script>
 
 <body ng-app="gameApp" xmlns="http://www.w3.org/1999/html">
 <div ng-controller="GameController" id="main-viewer">
@@ -252,5 +255,4 @@
     @show
 </script>
 
-@include('wargame::Medieval.medieval-controller', ['topCrt'=> $topCrt])
 </html>

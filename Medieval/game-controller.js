@@ -23,6 +23,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import {doitUnit} from "../../wargaming/Wargame/global-funcs.js";
+import fixHeader from "../../wargaming/Wargame/fix-header.js";
+
+export var flashMessages = [];
+
 export default class GameController {
     constructor($scope, $http, sync, $sce) {
         $scope.topCrt = angular.fromJson(topCrtJson);
@@ -133,7 +138,7 @@ export default class GameController {
 
         sync.register("flashMessages", function (messages, data) {
 
-            flashMessages = messages;
+            window.flashMessages = messages;
             flashMessage(data.gameRules.playerStatus);
         });
 
@@ -664,6 +669,7 @@ export default class GameController {
         }
 
         x.register("combatRules", function (combatRules, data) {
+            var chattyCrt;
             var attackers;
             var i, thetas;
             for (var arrowUnits in $scope.mapUnits) {
@@ -698,7 +704,7 @@ export default class GameController {
 
 
             if (combatRules) {
-                cD = combatRules.currentDefender;
+                var cD = combatRules.currentDefender;
 
                 if (combatRules.combats && Object.keys(combatRules.combats).length > 0) {
                     if (cD !== false) {
@@ -1030,6 +1036,186 @@ export default class GameController {
             $scope.moveUnits = moveUnits;
             $scope.$apply();
         });
+
+        sync.register("phaseClicks", function (clicks, data) {
+            var str = "";
+            var phaseClickNames = data.gameRules.phaseClickNames;
+            if (x.timeTravel) {
+                clicks = DR.clicks;
+                phaseClickNames = DR.phaseClickNames;
+            } else {
+                DR.phaseClickNames = phaseClickNames;
+                DR.clicks = clicks;
+                DR.maxClick = data.click;
+                DR.playTurnClicks = data.gameRules.playTurnClicks;
+            }
+            var maxClick = DR.maxClick;
+
+            var i;
+            var num = clicks.length;
+            var ticker;
+            ticker = clicks[0];
+            var q = 0;
+            for (i = 0; i < num; i++) {
+                str += '<div class="newPhase"><a class="phaseClick" data-click="' + ticker + '">';
+                if (data.gameRules.phaseClickNames) {
+                    str += phaseClickNames[q++];
+                    str += '</a><br><div class="newTick tickShim"></div>';
+
+                }
+                if (i + 1 < num) {
+                    while (ticker < clicks[i + 1]) {
+                        str += '<div class="newTick" data-click="' + ticker + '"><a class="phaseClick" data-click="' + ticker + '">' + ticker + '</a></div>';
+                        ticker++;
+                    }
+                } else {
+                    while (ticker <= maxClick) {
+                        str += '<div class="newTick" data-click="' + ticker + '"><a class="phaseClick" data-click="' + ticker + '">' + ticker + '</a></div>';
+                        ticker++;
+                    }
+                    if (x.timeTravel) {
+                        str += '<div class="newTick"><a class="phaseClick realtime" >realtime</a></div>';
+                    }
+                }
+                str += '</div>';
+
+            }
+            $("#phaseClicks").html(str);
+            var click = data.click;
+            if (x.timeTravel) {
+                $(".newTick[data-click='" + click + "']").addClass('activeTick');
+            }
+        });
+
+        sync.register("click", function (click) {
+            if (x.timeTravel) {
+                $("#clickCnt").html('time travel ' + click);
+            } else {
+                $("#clickCnt").html('realtime ' + click);
+            }
+            DR.currentClick = click;
+        });
+
+        sync.register("users", function (users) {
+            var str;
+            $("#users").html("");
+            for (i in users) {
+                str = "<li>" + users[i] + "</li>";
+                $("#users").append(str);
+            }
+        });
+
     }
 }
+
+function clearHexes(){
+    $('#arrow-svg .range-hex').remove();
+}
+function drawHex(hexside, unit, isShort){
+
+    var decoration = isShort || "";
+    var c = hexside - 0;
+    var a = (c / 2);
+    var b = .866 * c;
+    var ac = a+c;
+    var x = unit.x;
+    var y = unit.y;
+    var id = unit.id+decoration;
+    var nat = DR.players[unit.forceId];
+    nat = nat.replace(/ /g,'-').replace(/\//gi,'_');
+    var type= nat+'-'+unit.class;
+    var cls = unit.class;
+    var width = 2;
+    var strokeDash = "1,0";
+
+    if(unit.range > 7){
+        width = 4;
+        strokeDash = "5,5";
+    }
+    if(unit.range > 11){
+        width = 6;
+        strokeDash = "1,10";
+    }
+
+    x = x - b;
+    y = y - c;
+
+    var path = '<path stroke-dasharray="'+strokeDash+'" class="range-hex '+nat+' '+decoration+' '+cls+'" stroke="transparent" id="rangeHex'+id+'" fill="#000" fill-opacity="0" stroke-width="'+width+'" d="M '+x+' ' + (ac + y) + ' L ' + x + ' '+ (a + y) + ' L ' + (b + x) + ' ' + y;
+    path += ' L ' + (2 * b + x) + ' ' + (a + y) + ' L ' + (2 * b + x) + ' ' + (ac + y) + ' L ' + (b + x) + ' '+ (2 * c + y)+' Z"></path>';
+
+    $('#arrow-svg').append(path);
+    $('#arrow-svg').html($('#arrow-svg').html());
+}
+function flashMessage(playerStatus) {
+    var x = 100;
+    var y = 200;
+    fixHeader();
+    var mess = window.flashMessages.shift();
+    $("#FlashMessage").remove();
+    var fadeOut = 2800;
+    while (mess) {
+
+        if (mess.match(/^@/)) {
+            if (mess.match(/^@hex/)) {
+
+                var hexPos = mess.replace(/\.\d*/g, '');
+                var x = hexPos.match(/x(\d*)y/)[1] - 0;
+                var y = hexPos.match(/y(\d*)\D*/)[1] - 0;
+
+                var newHtml;
+                newHtml = '<img src="'+Const_line21+'" class="row-hex">';
+                $("#gameImages").append('<div id="FlashMessage" class="mapFlashSymbols">' + newHtml + '</div>');
+                $("#FlashMessage").css({top: y + "px", left: x + "px"});
+                $("#FlashMessage img").animate({
+                    opacity: 0.2,
+                    width: 190,
+                    marginLeft: (190 - 71) / -2 + "px",
+                    marginTop: (190 - 71) / -2 + "px"
+                }, fadeOut)
+                    .animate({opacity: 1, width: 71, marginLeft: 0, marginTop: 0}, 0).animate({
+                    opacity: 0.2,
+                    width: 190,
+                    marginLeft: (190 - 71) / -2 + "px",
+                    marginTop: (190 - 71) / -2 + "px"
+                }, fadeOut)
+                    .animate({opacity: 1, width: 71, marginLeft: 0, marginTop: 0}, 0).animate({
+                    opacity: 0.2,
+                    width: 190,
+                    marginLeft: (190 - 71) / -2 + "px",
+                    marginTop: (190 - 71) / -2 + "px"
+                }, fadeOut)
+                    .animate({opacity: 1, width: 71, marginLeft: 0, marginTop: 0}, 0).animate({
+                    opacity: 0.2,
+                    width: 190,
+                    marginLeft: (190 - 71) / -2 + "px",
+                    marginTop: (190 - 71) / -2 + "px"
+                }, fadeOut, flashMessage);
+                return;
+            }
+            var showRegex = new RegExp('^@'+'show');
+            if (mess.match(showRegex)) {
+                showRegex = new RegExp('^@'+'show ([^,]*)');
+                var game = mess.match(showRegex);
+                id = game[1];
+                $("#" + id).show({effect: "blind", direction: "up", complete: flashMessage});
+                return;
+            }
+            if (mess.match(/^@hide/)) {
+                game = mess.match(/^@hide ([^,]*)/);
+                var id = game[1];
+                $("#" + id).hide({effect: "blind", direction: "up", complete: flashMessage});
+                return;
+            }
+            if (mess.match(/^@gameover/)) {
+                $("#gameViewer").append('<div id="FlashMessage" style="top:' + y + 'px;left:' + x + 'px;" class="flashMessage">' + "Game Over" + '</div>');
+                $("#FlashMessage").animate({opacity: 0}, fadeOut, flashMessage);
+                return;
+            }
+        }
+        $("#main-viewer").append('<div id="FlashMessage" style="top:' + y + 'px;left:' + x + 'px;" class="flashMessage">' + mess + '</div>');
+        $("#FlashMessage").animate({opacity: 0}, fadeOut, flashMessage);
+        return;
+    }
+}
+
 GameController.$inject =     ['$scope', '$http', 'sync', '$sce']
