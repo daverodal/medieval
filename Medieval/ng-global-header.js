@@ -2,14 +2,19 @@ import initialize from "../../wargaming/Wargame/initialize.js";
 import fixHeader from "../../wargaming/Wargame/fix-header.js";
 
 import Sync from "../../wargaming/Wargame/Sync.js";
-import {SubGameController as GameController } from "./game-controller.js";
+import {SubGameController , GameController } from "./game-controller.js";
 
+const classes = {
+    SubGameController,
+    GameController
+};
+var controllerName = 1;
 window.x = new Sync(fetchUrl);
 var x = window.x;
 
 
     var gameApp = angular.module('gameApp', ['ngRightClick']);
-    gameApp.controller('GameController',  GameController);
+        gameApp.controller('GameController',  classes[GAME_NAME_DUDE]);
 
 
 

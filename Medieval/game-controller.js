@@ -28,7 +28,7 @@ import fixHeader from "../../wargaming/Wargame/fix-header.js";
 
 export var flashMessages = [];
 
-export default class GameController {
+export class GameController {
     constructor($scope, $http, sync, $sce) {
         this.sync = sync;
         this.$http = $http;
@@ -1272,5 +1272,9 @@ function flashMessage(playerStatus) {
 GameController.$inject =     ['$scope', '$http', 'sync', '$sce']
 
 export  class SubGameController  extends GameController{
+    moveRules(){
+        console.log("SUper");
+        super.moveRules();
+    }
 
 }
