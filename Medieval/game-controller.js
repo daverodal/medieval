@@ -33,6 +33,7 @@ export default class GameController {
         this.sync = sync;
         this.$http = $http;
         this.$scope = $scope;
+        this.$sce = $sce;
         $scope.topCrt = angular.fromJson(topCrtJson);
         $scope.defaultCrt = $scope.curCrt = Object.keys($scope.topCrt.crts)[0];
         $scope.resultsNames = $scope.topCrt.resultsNames;
@@ -509,6 +510,7 @@ export default class GameController {
     }
     combatRules(){
         let $scope = this.$scope;
+        let $sce = this.$sce;
         this.sync.register("combatRules",  (combatRules, data) => {
             var chattyCrt;
             var attackers;
