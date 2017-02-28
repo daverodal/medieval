@@ -1,7 +1,7 @@
-import initialize from "../../wargaming/Wargame/initialize.js";
-import fixHeader from "../../wargaming/Wargame/fix-header.js";
+import initialize from "./initialize.js";
+import fixHeader from "./fix-header.js";
 
-import Sync from "../../wargaming/Wargame/Sync.js";
+import Sync from "./Sync.js";
 import GameController from "./game-controller.js";
 
 window.x = new Sync(fetchUrl);
