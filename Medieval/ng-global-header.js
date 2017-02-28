@@ -2,14 +2,19 @@ import initialize from "./initialize.js";
 import fixHeader from "./fix-header.js";
 
 import Sync from "./Sync.js";
-import GameController from "./game-controller.js";
+import {SubGameController , GameController } from "./game-controller.js";
 
+const classes = {
+    SubGameController,
+    GameController
+};
+var controllerName = 1;
 window.x = new Sync(fetchUrl);
 var x = window.x;
 
 
     var gameApp = angular.module('gameApp', ['ngRightClick']);
-    gameApp.controller('GameController',  GameController);
+        gameApp.controller('GameController',  classes[GAME_NAME_DUDE]);
 
 
 
@@ -54,7 +59,6 @@ var x = window.x;
 
     /* still doing this the non angular way :( */
     x.register("specialHexes", function(specialHexes, data) {
-        debugger;
         var phase = data.gameRules.phase;
         var firePhase =  (phase === BLUE_COMBAT_RES_PHASE || phase === RED_COMBAT_RES_PHASE);
         var firePhaseClass = firePhase ? "fire-phase" : "";
@@ -122,7 +126,6 @@ var x = window.x;
 
 
     });
-debugger;
 DR.globalZoom = 1;
 DR.playerNameMap = ["Zero", "One", "Two", "Three", "Four"];
 

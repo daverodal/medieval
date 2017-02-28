@@ -28,8 +28,12 @@ import fixHeader from "./fix-header.js";
 
 export var flashMessages = [];
 
-export default class GameController {
+export class GameController {
     constructor($scope, $http, sync, $sce) {
+        this.sync = sync;
+        this.$http = $http;
+        this.$scope = $scope;
+        this.$sce = $sce;
         $scope.topCrt = angular.fromJson(topCrtJson);
         $scope.defaultCrt = $scope.curCrt = Object.keys($scope.topCrt.crts)[0];
         $scope.resultsNames = $scope.topCrt.resultsNames;
@@ -136,147 +140,73 @@ export default class GameController {
             }
         };
 
-        sync.register("flashMessages", function (messages, data) {
+        this.flashMessages();
 
+        this.mapUnits();
+        this.force();
+        this.gameRules();
+
+        function renderCrtDetails(combat) {
+            var atk = combat.attackStrength;
+            var def = combat.defenseStrength;
+            var div = atk / def;
+            div = div.toPrecision(2);
+            var ter = combat.terrainCombatEffect;
+            var combatCol = combat.index + 1;
+
+            var html = "<div id='crtDetails'>" + combat.combatLog + "</div>";
+            if ($scope.curCrt !== 'missile') {
+                html += "<div class='clear'>Attack = " + atk + " / Defender " + def + " = " + div + "</div>";
+            }
+            /*+ atk + " - Defender " + def + " = " + diff + "</div>";*/
+            return html;
+        }
+
+        this.combatRules();
+
+
+        this.moveRules();
+
+        this.phaseClicks();
+
+        this.click();
+
+        this.users();
+
+    }
+
+    users(){
+
+        this.sync.register("users",  (users) => {
+            var str;
+            $("#users").html("");
+            for (i in users) {
+                str = "<li>" + users[i] + "</li>";
+                $("#users").append(str);
+            }
+        });
+    }
+    click(){
+        this.sync.register("click",  (click) => {
+            if (this.sync.timeTravel) {
+                $("#clickCnt").html('time travel ' + click);
+            } else {
+                $("#clickCnt").html('realtime ' + click);
+            }
+            window.DR.currentClick = click;
+        });
+    }
+    flashMessages(){
+
+        this.sync.register("flashMessages",  (messages, data) => {
             window.flashMessages = messages;
             flashMessage(data.gameRules.playerStatus);
         });
+    }
 
-        sync.register('mapUnits', function (mapUnits, data) {
-            var gameUnits = {};
-            var deployUnits = [];
-            var retiredUnits = [];
-            var notUsedUnits = [];
-            var reinforcements = {};
-            clearHexes();
-
-
-            var hexesMap = $scope.hexesMap;
-            var newUnitHexes = {};
-            var unitsMap = $scope.unitsMap;
-            var newHexUnits = {};
-            for (var i in mapUnits) {
-                var newUnit = $scope.units[i];
-                Object.keys(mapUnits[i]).forEach(function (cur, index, arr) {
-                    newUnit[cur] = mapUnits[i][cur];
-                });
-                newUnit.hq = mapUnits[i].class === "hq";
-                newUnit.commandRadius = 0;
-                var range = 0;
-                if (mapUnits[i].class === "hq") {
-                    range = mapUnits[i].commandRadius;
-                    newUnit.commandRadius = ".........".slice(0, range);
-                }
-                newUnit.supplyRadius = 0;
-                if (mapUnits[i].class === "supply") {
-                    range = mapUnits[i].supplyRadius;
-                }
-                if (mapUnits[i].parent === 'gameImages') {
-                    newUnit.shift = 0;
-                    if (unitsMap[i] === undefined) {
-                        unitsMap[i] = mapUnits[i].hexagon;
-                        if (hexesMap[mapUnits[i].hexagon] === undefined) {
-                            hexesMap[mapUnits[i].hexagon] = [];
-                        }
-                        hexesMap[mapUnits[i].hexagon].push(i);
-                    } else {
-
-                        if (unitsMap[i] !== mapUnits[i].hexagon) {
-                            /* unit moved */
-                            var dead = hexesMap[unitsMap[i]].indexOf(i);
-                            hexesMap[unitsMap[i]].splice(dead, 1);
-                            if (hexesMap[mapUnits[i].hexagon] === undefined) {
-                                hexesMap[mapUnits[i].hexagon] = [];
-                            }
-                            hexesMap[mapUnits[i].hexagon].push(i);
-                            unitsMap[i] = mapUnits[i].hexagon;
-                        }
-                    }
-                    if (Object.keys(hexesMap[mapUnits[i].hexagon]).length) {
-                        newUnit.shift = hexesMap[mapUnits[i].hexagon].indexOf(i) * 5;
-                    } else {
-                    }
-                    newUnit.maxMove = mapUnits[i].maxMove;
-                    newUnit.command = mapUnits[i].command;
-                    newUnit.unitDesig = mapUnits[i].unitDesig;
-                    newUnit.moveAmountUsed = mapUnits[i].moveAmountUsed;
-                    newUnit.wrapperstyle = {};
-//                        newUnit.facingstyle = {};
-                    newUnit.wrapperstyle.transform = "rotate(" + mapUnits[i].facing * 60 + "deg)";
-                    newUnit.wrapperstyle.top = newUnit.shift + mapUnits[i].y - 20 + "px";
-                    newUnit.wrapperstyle.left = newUnit.shift + mapUnits[i].x - 20 + "px";
-                    /*
-                     * Blaaaaaa Very non angular way to live one's life.........
-                     * Should not be removed and reinserted every mouse click.
-                     * only about 8 of them so for now :'( tears will stay this way.....
-                     */
-                    if (mapUnits[i].class === "hq" || mapUnits[i].class === "supply") {
-
-                        var hexSideLen = 32.0;
-                        var b = hexSideLen * .866;
-
-                        /* jquery way */
-                        drawHex(b * (range * 2 + 1), mapUnits[i]);
-                    }
-                    newUnit.wrapperstyle.zIndex = newUnit.shift + 1;
-                    newUnit.facing = mapUnits[i].facing;
-                    newUnit.strength = mapUnits[i].strength;
-                    newUnit.steps = mapUnits[i].steps;
-                    newUnit.orgStatus = mapUnits[i].orgStatus;
-                    var orgDisp = newUnit.orgStatus == 0 ? 'B' : 'D';
-                    newUnit.unitNumbers = newUnit.strength + ' ' + orgDisp + ' ' + (newUnit.maxMove - newUnit.moveAmountUsed);
-                    newUnit.infoLen = "infoLen" + newUnit.unitNumbers.length;
-                    gameUnits[i] = newUnit;
-
-                } else {
-                    if (unitsMap[i] !== undefined) {
-                        var dead = hexesMap[unitsMap[i]].indexOf(i);
-                        hexesMap[unitsMap[i]].splice(dead, 1);
-                        unitsMap[i] = undefined;
-                    }
-                }
-                if (mapUnits[i].parent === 'deployBox') {
-                    newUnit.wrapperstyle = {};
-                    newUnit.style = {};
-                    newUnit.oddsDisp = null;
-                    newUnit.strength = mapUnits[i].strength;
-
-
-                    newUnit.strength = mapUnits[i].strength;
-                    newUnit.steps = mapUnits[i].steps;
-                    newUnit.orgStatus = mapUnits[i].orgStatus;
-                    var orgDisp = newUnit.orgStatus == 0 ? 'B' : 'D';
-
-                    if (mapUnits[i].status == STATUS_DEPLOYING || mapUnits[i].status == STATUS_REINFORCING) {
-                        newUnit.style.boxShadow = "5px 5px 5px #333";
-                    }
-
-                    deployUnits.push(newUnit);
-                }
-
-                if (mapUnits[i].parent.match(/gameTurn/)) {
-                    if (reinforcements[mapUnits[i].parent] === undefined) {
-                        reinforcements[mapUnits[i].parent] = [];
-                    }
-                    reinforcements[mapUnits[i].parent].push(newUnit);
-                }
-                if (mapUnits[i].parent === 'deadpile') {
-                    newUnit.style = {};
-                    newUnit.strength = mapUnits[i].strength;
-                    newUnit.style.borderColor = 'rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204)';
-                    retiredUnits.push(newUnit);
-                }
-            }
-            $scope.mapUnits = gameUnits;
-            $scope.deployUnits = deployUnits;
-            $scope.retiredUnits = retiredUnits;
-            $scope.notUsedUnits = notUsedUnits;
-            $scope.reinforcements = reinforcements;
-
-            $scope.$apply();
-        });
-
-        sync.register('force', function (force, data) {
+    force(){
+        let $scope = this.$scope;
+        this.sync.register('force',  (force, data) => {
             var units = data.mapUnits;
 
             var showStatus = false;
@@ -522,153 +452,66 @@ export default class GameController {
             }
 
         });
-        x.register("gameRules", function (gameRules, data) {
-            $(".dynamicButton").hide();
-            if (gameRules.mode === MOVING_MODE) {
-                $(".movementButton").show();
-            }
-            if (gameRules.mode === COMBAT_SETUP_MODE) {
-                $(".combatButton").show();
-            }
-            if (gameRules.display) {
-                if (gameRules.display.currentMessage) {
-                    $("#display").html(gameRules.display.currentMessage + "<button onclick='doitNext()'>Next</button>").show();
-                } else {
-                    $("#display").html("").hide();
-                }
-            }
-            var status = "";
-            var turn = gameRules.turn;
-            var maxTurn = gameRules.maxTurn
-            if ("gameTurn" + turn != $("#turnCounter").parent().attr("id")) {
-                $("#gameTurn" + turn).prepend($("#turnCounter"));
-            }
 
-            var pix = turn + (turn - 1) * 36 + 1;
-            var playerName = "player" + (DR.players[gameRules.attackingForceId].replace(/ /g, '-').replace(/\//gi, '_'));
-            $scope.playerName = playerName;
-            var removeThese = "";
-            $("#header").removeClass().addClass(playerName);
-            $("#turnCounter").css("background", "rgb(0,128,0)");
-            $("#turnCounter").css("color", "white");
+    }
 
-            var alsoRemoveThese = DR.players.join('@@@').trim();
-            alsoRemoveThese = alsoRemoveThese.replace(/ /g, '-');
-            alsoRemoveThese = alsoRemoveThese.replace(/\//g, '_');
-            alsoRemoveThese = alsoRemoveThese.replace(/@@@/g, ' ');
-            alsoRemoveThese = alsoRemoveThese.replace(/([^ ]+)/g, "player$1");
-            removeThese += " " + alsoRemoveThese;
-            $("#crt").removeClass(removeThese).addClass(playerName);
-            $(".row-1,.row1,.row3,.row5,.row7,.row9,.row11,.row13").removeClass(removeThese).addClass(playerName);
-            $("#revolt-table").removeClass(removeThese).addClass(playerName);
-
-            var html = "<span id='turn'>Turn " + turn + " of " + maxTurn + "</span> ";
-            var phase = gameRules.phase_name[gameRules.phase];
-            phase = phase.replace(/fNameOne/, DR.playerOne);
-            phase = phase.replace(/playerOneFace/, "player" + DR.playerOne.replace(/ /g, '-') + "Face");
-            phase = phase.replace(/playerTwoFace/, "player" + DR.playerTwo.replace(/ /g, '-') + "Face");
-            phase = phase.replace(/playerThreeFace/, "player" + DR.playerThree.replace(/ /g, '-') + "Face");
-            phase = phase.replace(/playerFourFace/, "player" + DR.playerFour.replace(/ /g, '-') + "Face");
-
-            phase = phase.replace(/fNameTwo/, DR.playerTwo);
-            phase = phase.replace(/fNameThree/, DR.playerThree);
-            phase = phase.replace(/fNameFour/, DR.playerFour);
-            html += "<span id='phase'>" + phase;
-            if (gameRules.mode_name[gameRules.mode]) {
-                html += " " + gameRules.mode_name[gameRules.mode];
-            }
-            html += "</span>";
-
-            switch (gameRules.phase) {
-                case BLUE_REPLACEMENT_PHASE:
-                case RED_REPLACEMENT_PHASE:
-                case TEAL_REPLACEMENT_PHASE:
-                case PURPLE_REPLACEMENT_PHASE:
-                    if (gameRules.replacementsAvail !== false && gameRules.replacementsAvail != null) {
-                        status = "There are " + gameRules.replacementsAvail + " available";
-                    }
-                    break;
-            }
-            switch (gameRules.mode) {
-                case EXCHANGING_MODE:
-                    var result = data.combatRules.lastResolvedCombat.combatResult;
-
-//                        $("#floatMessage header").html(result+": Exchanging Mode");
-                    $scope.floatMessage.header = result + ": Exchanging Mode";
-
-                case ATTACKER_LOSING_MODE:
-                    var result = data.combatRules.lastResolvedCombat.combatResult;
-
-                    $scope.floatMessage.header = result + ": Attacker Loss Mode.";
-
-
-//                        $("#floatMessage header").html(result+": Attacker Loss Mode.");
-//                        var floatStat = $("#floatMessage p").html();
-
-                    $scope.floatMessage.body += " Lose at least " + data.force.exchangeAmount + " steps";
-//                        $("#floatMessage p").html(floatStat);
-
-//            html += "<br>Lose at least "+gameRules.exchangeAmount+" strength points from the units outlined in red";
-                    break;
-
-                case DEFENDER_LOSING_MODE:
-                    var result = data.combatRules.lastResolvedCombat.combatResult;
-
-                    $scope.floatMessage.header = result + ": Defender Loss Mode.";
-
-
-//                        $("#floatMessage header").html(result+": Attacker Loss Mode.");
-//                        var floatStat = $("#floatMessage p").html();
-
-                    $scope.floatMessage.body += " Lose at least " + data.force.defenderLoseAmount + " steps";
-//                        $("#floatMessage p").html(floatStat);
-
-//            html += "<br>Lose at least "+gameRules.exchangeAmount+" strength points from the units outlined in red";
-                    break
-                case ADVANCING_MODE:
-//            html += "<br>Click on one of the black units to advance it.<br>then  click on a hex to advance, or the unit to stay put.";
-                    var result = data.combatRules.lastResolvedCombat.combatResult;
-
-                    $scope.floatMessage.header = result + ": Advancing Mode";
-
-//                        $("#floatMessage header").html(result+": Advancing Mode");
-                    break;
-                case RETREATING_MODE:
-                    var result = data.combatRules.lastResolvedCombat.combatResult;
-                    $scope.floatMessage.header = result + ": Retreating Mode";
-
-//                        $("#floatMessage header").html(result+": Retreating Mode");
-                    break;
-            }
-            $("#topStatus").html(html);
-            if (status) {
-                $("#status").html(status);
-                $("#status").show();
-
+    phaseClicks(){
+        let $scope = this.$scope;
+        this.sync.register("phaseClicks",  (clicks, data) => {
+            var str = "";
+            var phaseClickNames = data.gameRules.phaseClickNames;
+            if (this.sync.timeTravel) {
+                clicks = DR.clicks;
+                phaseClickNames = DR.phaseClickNames;
             } else {
-                $("#status").html(status);
-                $("#status").hide();
+                DR.phaseClickNames = phaseClickNames;
+                DR.clicks = clicks;
+                DR.maxClick = data.click;
+                DR.playTurnClicks = data.gameRules.playTurnClicks;
+            }
+            var maxClick = DR.maxClick;
 
+            var i;
+            var num = clicks.length;
+            var ticker;
+            ticker = clicks[0];
+            var q = 0;
+            for (i = 0; i < num; i++) {
+                str += '<div class="newPhase"><a class="phaseClick" data-click="' + ticker + '">';
+                if (data.gameRules.phaseClickNames) {
+                    str += phaseClickNames[q++];
+                    str += '</a><br><div class="newTick tickShim"></div>';
+
+                }
+                if (i + 1 < num) {
+                    while (ticker < clicks[i + 1]) {
+                        str += '<div class="newTick" data-click="' + ticker + '"><a class="phaseClick" data-click="' + ticker + '">' + ticker + '</a></div>';
+                        ticker++;
+                    }
+                } else {
+                    while (ticker <= maxClick) {
+                        str += '<div class="newTick" data-click="' + ticker + '"><a class="phaseClick" data-click="' + ticker + '">' + ticker + '</a></div>';
+                        ticker++;
+                    }
+                    if (this.sync.timeTravel) {
+                        str += '<div class="newTick"><a class="phaseClick realtime" >realtime</a></div>';
+                    }
+                }
+                str += '</div>';
+
+            }
+            $("#phaseClicks").html(str);
+            var click = data.click;
+            if (this.sync.timeTravel) {
+                $(".newTick[data-click='" + click + "']").addClass('activeTick');
             }
         });
 
-        function renderCrtDetails(combat) {
-            var atk = combat.attackStrength;
-            var def = combat.defenseStrength;
-            var div = atk / def;
-            div = div.toPrecision(2);
-            var ter = combat.terrainCombatEffect;
-            var combatCol = combat.index + 1;
-
-            var html = "<div id='crtDetails'>" + combat.combatLog + "</div>";
-            if ($scope.curCrt !== 'missile') {
-                html += "<div class='clear'>Attack = " + atk + " / Defender " + def + " = " + div + "</div>";
-            }
-            /*+ atk + " - Defender " + def + " = " + diff + "</div>";*/
-            return html;
-        }
-
-        x.register("combatRules", function (combatRules, data) {
+    }
+    combatRules(){
+        let $scope = this.$scope;
+        let $sce = this.$sce;
+        this.sync.register("combatRules",  (combatRules, data) => {
             var chattyCrt;
             var attackers;
             var i, thetas;
@@ -1006,19 +849,156 @@ export default class GameController {
 
         });
 
-        {
-        }
+    }
 
 
-        sync.register('moveRules', function (moveRules, data) {
+
+    gameRules(){
+        let $scope = this.$scope;
+        this.sync.register("gameRules",  (gameRules, data) => {
+            $(".dynamicButton").hide();
+            if (gameRules.mode === MOVING_MODE) {
+                $(".movementButton").show();
+            }
+            if (gameRules.mode === COMBAT_SETUP_MODE) {
+                $(".combatButton").show();
+            }
+            if (gameRules.display) {
+                if (gameRules.display.currentMessage) {
+                    $("#display").html(gameRules.display.currentMessage + "<button onclick='doitNext()'>Next</button>").show();
+                } else {
+                    $("#display").html("").hide();
+                }
+            }
+            var status = "";
+            var turn = gameRules.turn;
+            var maxTurn = gameRules.maxTurn
+            if ("gameTurn" + turn != $("#turnCounter").parent().attr("id")) {
+                $("#gameTurn" + turn).prepend($("#turnCounter"));
+            }
+
+            var pix = turn + (turn - 1) * 36 + 1;
+            var playerName = "player" + (DR.players[gameRules.attackingForceId].replace(/ /g, '-').replace(/\//gi, '_'));
+            $scope.playerName = playerName;
+            var removeThese = "";
+            $("#header").removeClass().addClass(playerName);
+            $("#turnCounter").css("background", "rgb(0,128,0)");
+            $("#turnCounter").css("color", "white");
+
+            var alsoRemoveThese = DR.players.join('@@@').trim();
+            alsoRemoveThese = alsoRemoveThese.replace(/ /g, '-');
+            alsoRemoveThese = alsoRemoveThese.replace(/\//g, '_');
+            alsoRemoveThese = alsoRemoveThese.replace(/@@@/g, ' ');
+            alsoRemoveThese = alsoRemoveThese.replace(/([^ ]+)/g, "player$1");
+            removeThese += " " + alsoRemoveThese;
+            $("#crt").removeClass(removeThese).addClass(playerName);
+            $(".row-1,.row1,.row3,.row5,.row7,.row9,.row11,.row13").removeClass(removeThese).addClass(playerName);
+            $("#revolt-table").removeClass(removeThese).addClass(playerName);
+
+            var html = "<span id='turn'>Turn " + turn + " of " + maxTurn + "</span> ";
+            var phase = gameRules.phase_name[gameRules.phase];
+            phase = phase.replace(/fNameOne/, DR.playerOne);
+            phase = phase.replace(/playerOneFace/, "player" + DR.playerOne.replace(/ /g, '-') + "Face");
+            phase = phase.replace(/playerTwoFace/, "player" + DR.playerTwo.replace(/ /g, '-') + "Face");
+            phase = phase.replace(/playerThreeFace/, "player" + DR.playerThree.replace(/ /g, '-') + "Face");
+            phase = phase.replace(/playerFourFace/, "player" + DR.playerFour.replace(/ /g, '-') + "Face");
+
+            phase = phase.replace(/fNameTwo/, DR.playerTwo);
+            phase = phase.replace(/fNameThree/, DR.playerThree);
+            phase = phase.replace(/fNameFour/, DR.playerFour);
+            html += "<span id='phase'>" + phase;
+            if (gameRules.mode_name[gameRules.mode]) {
+                html += " " + gameRules.mode_name[gameRules.mode];
+            }
+            html += "</span>";
+
+            switch (gameRules.phase) {
+                case BLUE_REPLACEMENT_PHASE:
+                case RED_REPLACEMENT_PHASE:
+                case TEAL_REPLACEMENT_PHASE:
+                case PURPLE_REPLACEMENT_PHASE:
+                    if (gameRules.replacementsAvail !== false && gameRules.replacementsAvail != null) {
+                        status = "There are " + gameRules.replacementsAvail + " available";
+                    }
+                    break;
+            }
+            switch (gameRules.mode) {
+                case EXCHANGING_MODE:
+                    var result = data.combatRules.lastResolvedCombat.combatResult;
+
+//                        $("#floatMessage header").html(result+": Exchanging Mode");
+                    $scope.floatMessage.header = result + ": Exchanging Mode";
+
+                case ATTACKER_LOSING_MODE:
+                    var result = data.combatRules.lastResolvedCombat.combatResult;
+
+                    $scope.floatMessage.header = result + ": Attacker Loss Mode.";
+
+
+//                        $("#floatMessage header").html(result+": Attacker Loss Mode.");
+//                        var floatStat = $("#floatMessage p").html();
+
+                    $scope.floatMessage.body += " Lose at least " + data.force.exchangeAmount + " steps";
+//                        $("#floatMessage p").html(floatStat);
+
+//            html += "<br>Lose at least "+gameRules.exchangeAmount+" strength points from the units outlined in red";
+                    break;
+
+                case DEFENDER_LOSING_MODE:
+                    var result = data.combatRules.lastResolvedCombat.combatResult;
+
+                    $scope.floatMessage.header = result + ": Defender Loss Mode.";
+
+
+//                        $("#floatMessage header").html(result+": Attacker Loss Mode.");
+//                        var floatStat = $("#floatMessage p").html();
+
+                    $scope.floatMessage.body += " Lose at least " + data.force.defenderLoseAmount + " steps";
+//                        $("#floatMessage p").html(floatStat);
+
+//            html += "<br>Lose at least "+gameRules.exchangeAmount+" strength points from the units outlined in red";
+                    break
+                case ADVANCING_MODE:
+//            html += "<br>Click on one of the black units to advance it.<br>then  click on a hex to advance, or the unit to stay put.";
+                    var result = data.combatRules.lastResolvedCombat.combatResult;
+
+                    $scope.floatMessage.header = result + ": Advancing Mode";
+
+//                        $("#floatMessage header").html(result+": Advancing Mode");
+                    break;
+                case RETREATING_MODE:
+                    var result = data.combatRules.lastResolvedCombat.combatResult;
+                    $scope.floatMessage.header = result + ": Retreating Mode";
+
+//                        $("#floatMessage header").html(result+": Retreating Mode");
+                    break;
+            }
+            $("#topStatus").html(html);
+            if (status) {
+                $("#status").html(status);
+                $("#status").show();
+
+            } else {
+                $("#status").html(status);
+                $("#status").hide();
+
+            }
+        });
+
+    }
+    moveRules(){
+        let $scope = this.$scope;
+        this.sync.register('moveRules',  (moveRules, data) => {
             var moveUnits = [];
             var movingUnitId = moveRules.movingUnitId;
             var mapUnits = moveRules.moves;
+            var newUnit;
+            console.log("MoveRules!");
             for (var i in mapUnits) {
                 if (mapUnits[i].isOccupied) {
                     continue;
                 }
-                var newUnit = angular.copy($scope.units[moveRules.movingUnitId]);
+                newUnit = angular.copy($scope.units[moveRules.movingUnitId]);
                 newUnit.pathToHere = mapUnits[i].pathToHere;
                 newUnit.pointsLeft = mapUnits[i].pointsLeft;
                 newUnit.style = {};
@@ -1037,75 +1017,146 @@ export default class GameController {
             $scope.$apply();
         });
 
-        sync.register("phaseClicks", function (clicks, data) {
-            var str = "";
-            var phaseClickNames = data.gameRules.phaseClickNames;
-            if (x.timeTravel) {
-                clicks = DR.clicks;
-                phaseClickNames = DR.phaseClickNames;
-            } else {
-                DR.phaseClickNames = phaseClickNames;
-                DR.clicks = clicks;
-                DR.maxClick = data.click;
-                DR.playTurnClicks = data.gameRules.playTurnClicks;
-            }
-            var maxClick = DR.maxClick;
+    }
+    mapUnits(){
+        let $scope = this.$scope;
+        this.sync.register('mapUnits',  (mapUnits, data) => {
+            var gameUnits = {};
+            var deployUnits = [];
+            var retiredUnits = [];
+            var notUsedUnits = [];
+            var reinforcements = {};
+            clearHexes();
 
-            var i;
-            var num = clicks.length;
-            var ticker;
-            ticker = clicks[0];
-            var q = 0;
-            for (i = 0; i < num; i++) {
-                str += '<div class="newPhase"><a class="phaseClick" data-click="' + ticker + '">';
-                if (data.gameRules.phaseClickNames) {
-                    str += phaseClickNames[q++];
-                    str += '</a><br><div class="newTick tickShim"></div>';
 
+            var hexesMap = $scope.hexesMap;
+            var newUnitHexes = {};
+            var unitsMap = $scope.unitsMap;
+            var newHexUnits = {};
+            for (var i in mapUnits) {
+                var newUnit = $scope.units[i];
+                Object.keys(mapUnits[i]).forEach(function (cur, index, arr) {
+                    newUnit[cur] = mapUnits[i][cur];
+                });
+                newUnit.hq = mapUnits[i].class === "hq";
+                newUnit.commandRadius = 0;
+                var range = 0;
+                if (mapUnits[i].class === "hq") {
+                    range = mapUnits[i].commandRadius;
+                    newUnit.commandRadius = ".........".slice(0, range);
                 }
-                if (i + 1 < num) {
-                    while (ticker < clicks[i + 1]) {
-                        str += '<div class="newTick" data-click="' + ticker + '"><a class="phaseClick" data-click="' + ticker + '">' + ticker + '</a></div>';
-                        ticker++;
+                newUnit.supplyRadius = 0;
+                if (mapUnits[i].class === "supply") {
+                    range = mapUnits[i].supplyRadius;
+                }
+                if (mapUnits[i].parent === 'gameImages') {
+                    newUnit.shift = 0;
+                    if (unitsMap[i] === undefined) {
+                        unitsMap[i] = mapUnits[i].hexagon;
+                        if (hexesMap[mapUnits[i].hexagon] === undefined) {
+                            hexesMap[mapUnits[i].hexagon] = [];
+                        }
+                        hexesMap[mapUnits[i].hexagon].push(i);
+                    } else {
+
+                        if (unitsMap[i] !== mapUnits[i].hexagon) {
+                            /* unit moved */
+                            var dead = hexesMap[unitsMap[i]].indexOf(i);
+                            hexesMap[unitsMap[i]].splice(dead, 1);
+                            if (hexesMap[mapUnits[i].hexagon] === undefined) {
+                                hexesMap[mapUnits[i].hexagon] = [];
+                            }
+                            hexesMap[mapUnits[i].hexagon].push(i);
+                            unitsMap[i] = mapUnits[i].hexagon;
+                        }
                     }
+                    if (Object.keys(hexesMap[mapUnits[i].hexagon]).length) {
+                        newUnit.shift = hexesMap[mapUnits[i].hexagon].indexOf(i) * 5;
+                    } else {
+                    }
+                    newUnit.maxMove = mapUnits[i].maxMove;
+                    newUnit.command = mapUnits[i].command;
+                    newUnit.unitDesig = mapUnits[i].unitDesig;
+                    newUnit.moveAmountUsed = mapUnits[i].moveAmountUsed;
+                    newUnit.wrapperstyle = {};
+//                        newUnit.facingstyle = {};
+                    newUnit.wrapperstyle.transform = "rotate(" + mapUnits[i].facing * 60 + "deg)";
+                    newUnit.wrapperstyle.top = newUnit.shift + mapUnits[i].y - 20 + "px";
+                    newUnit.wrapperstyle.left = newUnit.shift + mapUnits[i].x - 20 + "px";
+                    /*
+                     * Blaaaaaa Very non angular way to live one's life.........
+                     * Should not be removed and reinserted every mouse click.
+                     * only about 8 of them so for now :'( tears will stay this way.....
+                     */
+                    if (mapUnits[i].class === "hq" || mapUnits[i].class === "supply") {
+
+                        var hexSideLen = 32.0;
+                        var b = hexSideLen * .866;
+
+                        /* jquery way */
+                        drawHex(b * (range * 2 + 1), mapUnits[i]);
+                    }
+                    newUnit.wrapperstyle.zIndex = newUnit.shift + 1;
+                    newUnit.facing = mapUnits[i].facing;
+                    newUnit.strength = mapUnits[i].strength;
+                    newUnit.steps = mapUnits[i].steps;
+                    newUnit.orgStatus = mapUnits[i].orgStatus;
+                    var orgDisp = newUnit.orgStatus == 0 ? 'B' : 'D';
+                    newUnit.unitNumbers = newUnit.strength + ' ' + orgDisp + ' ' + (newUnit.maxMove - newUnit.moveAmountUsed);
+                    newUnit.infoLen = "infoLen" + newUnit.unitNumbers.length;
+                    gameUnits[i] = newUnit;
+
                 } else {
-                    while (ticker <= maxClick) {
-                        str += '<div class="newTick" data-click="' + ticker + '"><a class="phaseClick" data-click="' + ticker + '">' + ticker + '</a></div>';
-                        ticker++;
-                    }
-                    if (x.timeTravel) {
-                        str += '<div class="newTick"><a class="phaseClick realtime" >realtime</a></div>';
+                    if (unitsMap[i] !== undefined) {
+                        var dead = hexesMap[unitsMap[i]].indexOf(i);
+                        hexesMap[unitsMap[i]].splice(dead, 1);
+                        unitsMap[i] = undefined;
                     }
                 }
-                str += '</div>';
+                if (mapUnits[i].parent === 'deployBox') {
+                    newUnit.wrapperstyle = {};
+                    newUnit.style = {};
+                    newUnit.oddsDisp = null;
+                    newUnit.strength = mapUnits[i].strength;
 
-            }
-            $("#phaseClicks").html(str);
-            var click = data.click;
-            if (x.timeTravel) {
-                $(".newTick[data-click='" + click + "']").addClass('activeTick');
-            }
-        });
 
-        sync.register("click", function (click) {
-            if (x.timeTravel) {
-                $("#clickCnt").html('time travel ' + click);
-            } else {
-                $("#clickCnt").html('realtime ' + click);
-            }
-            DR.currentClick = click;
-        });
+                    newUnit.strength = mapUnits[i].strength;
+                    newUnit.steps = mapUnits[i].steps;
+                    newUnit.orgStatus = mapUnits[i].orgStatus;
+                    var orgDisp = newUnit.orgStatus == 0 ? 'B' : 'D';
 
-        sync.register("users", function (users) {
-            var str;
-            $("#users").html("");
-            for (i in users) {
-                str = "<li>" + users[i] + "</li>";
-                $("#users").append(str);
+                    if (mapUnits[i].status == STATUS_DEPLOYING || mapUnits[i].status == STATUS_REINFORCING) {
+                        newUnit.style.boxShadow = "5px 5px 5px #333";
+                    }
+
+                    deployUnits.push(newUnit);
+                }
+
+                if (mapUnits[i].parent.match(/gameTurn/)) {
+                    if (reinforcements[mapUnits[i].parent] === undefined) {
+                        reinforcements[mapUnits[i].parent] = [];
+                    }
+                    reinforcements[mapUnits[i].parent].push(newUnit);
+                }
+                if (mapUnits[i].parent === 'deadpile') {
+                    newUnit.style = {};
+                    newUnit.strength = mapUnits[i].strength;
+                    newUnit.style.borderColor = 'rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204)';
+                    retiredUnits.push(newUnit);
+                }
             }
+            $scope.mapUnits = gameUnits;
+            $scope.deployUnits = deployUnits;
+            $scope.retiredUnits = retiredUnits;
+            $scope.notUsedUnits = notUsedUnits;
+            $scope.reinforcements = reinforcements;
+
+            $scope.$apply();
         });
 
     }
+
+
 }
 
 function clearHexes(){
@@ -1219,3 +1270,11 @@ function flashMessage(playerStatus) {
 }
 
 GameController.$inject =     ['$scope', '$http', 'sync', '$sce']
+
+export  class SubGameController  extends GameController{
+    moveRules(){
+        console.log("SUper");
+        super.moveRules();
+    }
+
+}
