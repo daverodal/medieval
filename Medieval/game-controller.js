@@ -346,7 +346,17 @@ export class GameController {
                         shadow = false;
                         color = "cyan";
                         break;
-                    case STATUS_CAN_EXCHANGE:
+
+                    case STATUS_CAN_LOAD:
+                        color = "fuchsia";
+                        shadow = false;
+                        break;
+                    case STATUS_CAN_TRANSPORT:
+                        color = "lime";
+                        shadow = false;
+                        break;
+
+                        case STATUS_CAN_EXCHANGE:
                         if (data.gameRules.mode == EXCHANGING_MODE) {
                             var result = data.combatRules.lastResolvedCombat.combatResult;
 //                    $("#floatMessage header").html(result+' Exchanging Mode');
@@ -435,6 +445,11 @@ export class GameController {
                     color = 'red';
                     style = 'dotted';
                     $("#rangeHex" + i).css({display: 'block', stroke: 'red'});
+                }
+
+                if($scope.mapUnits[i].carriedBy){
+                    color = 'turquoise';
+                    style = 'dotted';
                 }
 
                 if ($scope.mapUnits) {
@@ -993,7 +1008,6 @@ export class GameController {
             var movingUnitId = moveRules.movingUnitId;
             var mapUnits = moveRules.moves;
             var newUnit;
-            console.log("MoveRules!");
             for (var i in mapUnits) {
                 if (mapUnits[i].isOccupied) {
                     continue;
