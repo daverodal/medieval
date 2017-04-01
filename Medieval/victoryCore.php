@@ -174,14 +174,13 @@ class victoryCore extends \Wargame\VictoryCore
 
 
                         $attackers = $mapHex->getZocUnits($force->attackingForceId);
-                        array_walk( $attackers, function(&$val, $key,  $cr){
-                            $val = true;
-                            if(isset($cr->attackers->$key)){
-                                $val = false;
+                        $attackers = array_map(  function($val) use ($cR) {
+                            if(isset($cR->attackers->$val)){
+                               return false;
                             }
-                            }
-                            , $cR);
-                        $force->requiredAttacks = array_merge($force->requiredAttacks,(array)$attackers);
+                            return true;
+                            },(array)$attackers);
+                        $force->requiredAttacks = array_merge($force->requiredAttacks,$attackers);
                     }
                 }
             }
@@ -249,6 +248,7 @@ class victoryCore extends \Wargame\VictoryCore
         $turn = $gameRules->turn;
 
         if ($gameRules->phase == RED_COMBAT_PHASE || $gameRules->phase == BLUE_COMBAT_PHASE) {
+            $this->calcFromAttackers();
             $gameRules->gameHasCombatResolutionMode = true;
         } else {
             $gameRules->gameHasCombatResolutionMode = false;
