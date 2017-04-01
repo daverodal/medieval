@@ -530,6 +530,9 @@ class MedievalCombatResultsTable
             }
         }
         $combatLog .= "Total Die Shift ".$combats->dieOffset."<br>";
+        if($combatIndex < 0){
+            $combatIndex = 0;
+        }
         $combats->index = $combatIndex;
         $combats->useAlt = false;
         $combats->useDetermined = false;

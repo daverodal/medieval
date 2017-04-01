@@ -170,11 +170,30 @@ class victoryCore extends \Wargame\VictoryCore
                         }
 
 
+
+                        $attackers = $mapHex->getZocUnits($force->attackingForceId);
+
+
+
+                        $allInf = true;
+                        foreach ($attackers as $attacker) {
+                            if ($force->units[$attacker]->class !== 'inf') {
+                                $allInf = false;
+                            }
+                        }
+                        if ($unit->class === 'cavalry') {
+                            if ($allInf) {
+                                $requiredVal = false;
+                            }
+                        }
+
                         $force->requiredDefenses->$unitId = $requiredVal;
 
 
-                        $attackers = $mapHex->getZocUnits($force->attackingForceId);
-                        $attackers = array_map(  function($val) use ($cR) {
+                        $attackers = array_map(  function($val) use ($cR, $unit, $force) {
+                            if($unit->class === 'cavalry' && $force->units[$val]->class === 'inf'){
+                                return false;
+                            }
                             if(isset($cR->attackers->$val)){
                                return false;
                             }
