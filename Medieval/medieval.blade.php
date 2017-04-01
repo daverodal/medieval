@@ -27,3 +27,30 @@
 <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Dosis:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+@section('local-header')
+@show
+
+<style>
+    .semi-circle {
+        width: 48px;
+        height: 24px;
+        /* background: #eee; */
+        border-color: red;
+        border-style: solid;
+        border-width: 25px 0px 0px 0px;
+        border-radius: 100%;
+        position: absolute;
+        top:-5px;
+        left:-5px;
+
+    }
+
+
+
+    .rel-unit{
+        position:relative;
+    }
+
+</style>
+</head>

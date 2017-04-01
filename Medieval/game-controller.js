@@ -28,7 +28,24 @@ import fixHeader from "./fix-header.js";
 
 export var flashMessages = [];
 
+
+
 export class GameController {
+    renderCrtDetails(combat) {
+    var atk = combat.attackStrength;
+    var def = combat.defenseStrength;
+    var div = atk / def;
+    div = div.toPrecision(2);
+    var ter = combat.terrainCombatEffect;
+    var combatCol = combat.index + 1;
+
+    var html = "<div id='crtDetails'>" + combat.combatLog + "</div>";
+    if (this.$scope.curCrt !== 'missile') {
+        html += "<div class='clear'>Attack = " + atk + " / Defender " + def + " = " + div + "</div>";
+    }
+    /*+ atk + " - Defender " + def + " = " + diff + "</div>";*/
+    return html;
+    }
     constructor($scope, $http, sync, $sce) {
         this.sync = sync;
         this.$http = $http;
@@ -146,21 +163,7 @@ export class GameController {
         this.force();
         this.gameRules();
 
-        function renderCrtDetails(combat) {
-            var atk = combat.attackStrength;
-            var def = combat.defenseStrength;
-            var div = atk / def;
-            div = div.toPrecision(2);
-            var ter = combat.terrainCombatEffect;
-            var combatCol = combat.index + 1;
 
-            var html = "<div id='crtDetails'>" + combat.combatLog + "</div>";
-            if ($scope.curCrt !== 'missile') {
-                html += "<div class='clear'>Attack = " + atk + " / Defender " + def + " = " + div + "</div>";
-            }
-            /*+ atk + " - Defender " + def + " = " + diff + "</div>";*/
-            return html;
-        }
 
         this.combatRules();
 
@@ -609,7 +612,6 @@ export class GameController {
                     for (i in combatRules.combats) {
                         if (combatRules.combats[i].index !== null) {
 
-
                             attackers = combatRules.combats[i].attackers;
                             defenders = combatRules.combats[i].defenders;
                             thetas = combatRules.combats[i].thetas;
@@ -644,13 +646,16 @@ export class GameController {
                                 useAltColor = " pinnedColor";
                             }
                             var currentOddsDisp = $scope.topCrt.crts[crtName].header[currentCombatCol];
-                            $scope.mapUnits[i].oddsDisp = currentOddsDisp;
-                            $scope.mapUnits[i].oddsColor = useAltColor;
+                            for(let defender in defenders){
+                                $scope.mapUnits[defender].oddsDisp = currentOddsDisp;
+                                $scope.mapUnits[defender].oddsColor = useAltColor;
+                            }
+
                             $scope.$apply();
 
 
                             if (cD !== false && cD == i) {
-                                var details = renderCrtDetails(combatRules.combats[i]);
+                                var details = this.renderCrtDetails(combatRules.combats[i]);
                                 $scope.crtOdds = "odds = " + currentOddsDisp;
                                 activeCombat = combatIndex;
                                 activeCombatLine = details;
@@ -742,7 +747,7 @@ export class GameController {
                         }
                         var oddsDisp = $scope.topCrt.crts[crtName].header[currentCombatCol];
 
-                        var details = renderCrtDetails(combatRules.lastResolvedCombat);
+                        var details = this.renderCrtDetails(combatRules.lastResolvedCombat);
 
                         $scope.crtOdds = "odds = " + oddsDisp;
                         var newLine = details;
@@ -811,7 +816,7 @@ export class GameController {
                             $scope.mapUnits[i].oddsColor = useAltColor;
                             $scope.$apply();
 //                                $("#"+i).attr('title',oddsDisp).prepend('<div class="unitOdds'+useAltColor+'">'+oddsDisp+'</div>');;
-                            var details = renderCrtDetails(combatRules.combatsToResolve[i]);
+                            var details = this.renderCrtDetails(combatRules.combatsToResolve[i]);
 
                             $scope.crtOdds = "odds = " + oddsDisp;
                             newLine = details;

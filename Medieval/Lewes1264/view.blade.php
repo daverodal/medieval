@@ -1,28 +1,3 @@
-<link rel="stylesheet" type="text/css" href="{{elixir('vendor/wargame/medieval/css/Lewes1264.css')}}">
-<style>
-    .semi-circle {
-        width: 48px;
-        height: 24px;
-        /* background: #eee; */
-        border-color: red;
-        border-style: solid;
-        border-width: 25px 0px 0px 0px;
-        border-radius: 100%;
-        position: absolute;
-        top:-5px;
-        left:-5px;
-
-    }
-
-
-
-    .rel-unit{
-        position:relative;
-    }
-
-</style>
-</head>
-
 @section('inner-crt')
     @include('wargame::Medieval.medieval-inner-crt', ['topCrt'=> new \Wargame\Medieval\MedievalCombatResultsTable()])
 @endsection
@@ -43,3 +18,7 @@
 @endsection
 
 @extends('wargame::Medieval.medieval')
+
+@section('local-header')
+<link rel="stylesheet" type="text/css" href="{{elixir('vendor/wargame/medieval/css/Lewes1264.css')}}">
+@endsection
