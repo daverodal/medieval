@@ -1,6 +1,8 @@
 <?php
 namespace Wargame\Medieval;
 use Wargame\Battle;
+use Wargame\Cnst;
+use Wargame\MapData;
 use stdClass;
 /**
  *
@@ -135,7 +137,7 @@ class victoryCore extends \Wargame\VictoryCore
     }
 
     public function calcFromAttackers(){
-        $mapData = \Wargame\MapData::getInstance();
+        $mapData = MapData::getInstance();
 
         $battle = Battle::getBattle();
         /* @var CombatRules $cR */
@@ -156,6 +158,7 @@ class victoryCore extends \Wargame\VictoryCore
                     $mapHex = $mapData->getHex($unit->hexagon->name);
                     $unitId = $unit->id;
                     if ($mapHex->isZoc($force->attackingForceId)) {
+                        var_dump($unitId);
                         $combatId = $cR->defenders->$unitId ?? null ;
                         $requiredVal = true;
                         if($combatId !== null){
@@ -172,6 +175,12 @@ class victoryCore extends \Wargame\VictoryCore
 
 
                         $attackers = $mapHex->getZocUnits($force->attackingForceId);
+                        var_dump($attackers);
+                        $attackers = $this->filterFlankedAttackers($attackers);
+                        var_dump($attackers);
+                        if(count((array)$attackers) === 0){
+                            $requiredVal = false;
+                        }
 
 
 
@@ -199,11 +208,16 @@ class victoryCore extends \Wargame\VictoryCore
                             }
                             return true;
                             },(array)$attackers);
+                        var_dump($attackers);
                         $force->requiredAttacks = array_merge($force->requiredAttacks,$attackers);
                     }
                 }
             }
         }
+        /*
+         * snip here remove flanked requiredAttacks
+         */
+
         foreach($cR->attackers as $attackId => $combatId){
             $unit = $battle->force->units[$attackId];
             $mapHex = $mapData->getHex($force->getUnitHexagon($attackId)->name);
@@ -254,6 +268,47 @@ class victoryCore extends \Wargame\VictoryCore
 //                }
 //            }
         }
+    }
+
+    public function filterFlankedAttackers($attackers){
+        $retAttackers = new stdClass();
+        foreach($attackers as $aId => $requireAttack){
+            if(!$this->isFlankedAttack($aId)){
+                $retAttackers->$aId = $requireAttack;
+            }
+        }
+        return $retAttackers;
+    }
+
+    public function isFlankedAttacker($args){
+        list($aId) = $args;
+        return $this->isFlankedAttack($aId);
+    }
+
+    protected function isFlankedAttack($aId){
+        $mapData = MapData::getInstance();
+        $battle = Battle::getBattle();
+        /* @var CombatRules $cR */
+        $cR = $battle->combatRules;
+        /* @var Force $force */
+        $force = $battle->force;
+
+        $isFlanked = false;
+        $mapHex = $mapData->getHex($force->units[$aId]->hexagon->name);
+        $defZocs = $mapHex->getZocUnits($force->defendingForceId);
+        foreach($defZocs as $defZoc){
+            $mapHex = $mapData->getHex($force->units[$defZoc]->hexagon->name);
+            $attZocs = $mapHex->getZocUnits($force->attackingForceId);
+            if(!isset($attZocs->$aId)){
+                $isFlanked = true;
+            }
+        }
+        if($isFlanked
+        ){
+            return true;
+        }
+
+        return false;
     }
 
     public function phaseChange()
