@@ -144,13 +144,14 @@ class victoryCore extends \Wargame\VictoryCore
         $cR = $battle->combatRules;
         /* @var Force $force */
         $force = $battle->force;
-//        echo "Def ";
-//        var_dump($force->requiredDefenses);
-//        echo "Att ";
-//        var_dump($force->requiredAttacks);
+        $gameRules = $battle->gameRules;
+        if (!($gameRules->phase == RED_COMBAT_PHASE || $gameRules->phase == BLUE_COMBAT_PHASE)) {
+            return;
+        }
+
+
         $force->clearRequiredCombats();
         $defenderForceId = $force->defendingForceId;
-//        var_dump($cR->attackers);
         $force->requiredAttacks = [];
         foreach($force->units as $unit){
             if($unit->forceId === $force->defendingForceId){
@@ -158,7 +159,6 @@ class victoryCore extends \Wargame\VictoryCore
                     $mapHex = $mapData->getHex($unit->hexagon->name);
                     $unitId = $unit->id;
                     if ($mapHex->isZoc($force->attackingForceId)) {
-                        var_dump($unitId);
                         $combatId = $cR->defenders->$unitId ?? null ;
                         $requiredVal = true;
                         if($combatId !== null){
@@ -175,9 +175,7 @@ class victoryCore extends \Wargame\VictoryCore
 
 
                         $attackers = $mapHex->getZocUnits($force->attackingForceId);
-                        var_dump($attackers);
                         $attackers = $this->filterFlankedAttackers($attackers);
-                        var_dump($attackers);
                         if(count((array)$attackers) === 0){
                             $requiredVal = false;
                         }
@@ -208,7 +206,6 @@ class victoryCore extends \Wargame\VictoryCore
                             }
                             return true;
                             },(array)$attackers);
-                        var_dump($attackers);
                         $force->requiredAttacks = array_merge($force->requiredAttacks,$attackers);
                     }
                 }
