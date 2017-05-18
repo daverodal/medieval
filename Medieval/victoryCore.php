@@ -158,6 +158,10 @@ class victoryCore extends \Wargame\VictoryCore
                 if($unit->isOnMap()) {
                     $mapHex = $mapData->getHex($unit->hexagon->name);
                     $unitId = $unit->id;
+                    /* exp */
+                    if($unit->class === "hq"){
+                        continue;
+                    }
                     if ($mapHex->isZoc($force->attackingForceId)) {
                         $combatId = $cR->defenders->$unitId ?? null ;
                         $requiredVal = true;
@@ -198,6 +202,10 @@ class victoryCore extends \Wargame\VictoryCore
 
 
                         $attackers = array_map(  function($val) use ($cR, $unit, $force) {
+                            /* exp */
+                            if($force->units[$val]->class === 'hq'){
+                                return false;
+                            }
                             if($unit->class === 'cavalry' && $force->units[$val]->class === 'inf'){
                                 return false;
                             }
