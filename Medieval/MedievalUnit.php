@@ -109,6 +109,9 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         return  $strength;
     }
 
+    public function isBow(){
+        return $this->bow === true;
+    }
 
     public function __get($name)
     {

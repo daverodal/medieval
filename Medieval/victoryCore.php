@@ -162,6 +162,10 @@ class victoryCore extends \Wargame\VictoryCore
                     if($unit->class === "hq"){
                         continue;
                     }
+                    if($unit->armorClass === "S"){
+                        continue;
+                    }
+                    echo "DefId $unitId ".$unit->armorClass." ";
                     if ($mapHex->isZoc($force->attackingForceId)) {
                         $combatId = $cR->defenders->$unitId ?? null ;
                         $requiredVal = true;
@@ -180,29 +184,51 @@ class victoryCore extends \Wargame\VictoryCore
 
                         $attackers = $mapHex->getZocUnits($force->attackingForceId);
                         $attackers = $this->filterFlankedAttackers($attackers);
+
                         if(count((array)$attackers) === 0){
                             $requiredVal = false;
                         }
 
 
 
-                        $allInf = true;
+//                        $allInf = true;
+//                        var_dump($attackers);
+//                        foreach ($attackers as $attacker) {
+//                            if ($force->units[$attacker]->class !== 'inf') {
+//                                $allInf = false;
+//                            }
+//                        }
+//                        echo " a $allInf i ";
+//                        if ($unit->class === 'cavalry') {
+//                            if ($allInf) {
+//                                $requiredVal = false;
+//                            }
+//                        }
+
+
+                        $allNotRequired = true;
+
                         foreach ($attackers as $attacker) {
-                            if ($force->units[$attacker]->class !== 'inf') {
-                                $allInf = false;
+                            $attackingUnit = $force->units[$attacker];
+
+                            if (!($attackingUnit->isBow() === true ||
+                            ($attackingUnit->class === 'inf' && $unit->class === 'cavalry') ||
+                            $attackingUnit->armorClass === 'S' ||
+                            $attackingUnit->status === STATUS_UNAVAIL_THIS_PHASE ||
+                            $attackingUnit->class === "hq")) {
+
+                                    $allNotRequired = false;
                             }
                         }
-                        if ($unit->class === 'cavalry') {
-                            if ($allInf) {
-                                $requiredVal = false;
-                            }
+                        if($allNotRequired){
+                            $requiredVal = false;
                         }
 
                         $force->requiredDefenses->$unitId = $requiredVal;
 
 
                         $attackers = array_map(  function($val) use ($cR, $unit, $force) {
-                            /* exp */
+
                             if($force->units[$val]->class === 'hq'){
                                 return false;
                             }
@@ -211,6 +237,15 @@ class victoryCore extends \Wargame\VictoryCore
                             }
                             if(isset($cR->attackers->$val)){
                                return false;
+                            }
+                            if ($force->units[$val]->isBow() === true) {
+                                return false;
+                            }
+                            if($force->units[$val]->armorClass === 'S') {
+                                return false;
+                            }
+                            if($force->units[$val]->status === STATUS_UNAVAIL_THIS_PHASE){
+                                return false;
                             }
                             return true;
                             },(array)$attackers);
