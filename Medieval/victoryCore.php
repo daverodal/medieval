@@ -165,7 +165,7 @@ class victoryCore extends \Wargame\VictoryCore
                     if($unit->armorClass === "S"){
                         continue;
                     }
-                    echo "DefId $unitId ".$unit->armorClass." ";
+//                    echo "DefId $unitId ".$unit->armorClass." ";
                     if ($mapHex->isZoc($force->attackingForceId)) {
                         $combatId = $cR->defenders->$unitId ?? null ;
                         $requiredVal = true;
