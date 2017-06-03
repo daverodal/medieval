@@ -74,11 +74,11 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
         if(in_array($mapHexName,$battle->specialHexB)) {
             if ($forceId == Civitate1053::NORMAN_FORCE) {
                 $this->victoryPoints[Civitate1053::NORMAN_FORCE] += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> +$vp Norman vp</span>";
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='Norman $class'> +$vp Norman vp</span>";
             }
             if ($forceId == Civitate1053::LOMBARD_FORCE) {
                 $this->victoryPoints[Civitate1053::NORMAN_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> -$vp Norman vp</span>";
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='Lombard $class'> -$vp Norman vp</span>";
             }
         }
 
@@ -87,11 +87,11 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
             $prevForceId = $battle->mapData->specialHexes->$mapHexName;
             if ($forceId == Civitate1053::NORMAN_FORCE) {
                 $this->victoryPoints[Civitate1053::LOMBARD_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'> -$vp Lombard vp</span>";
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='Norman $class'> -$vp Lombard vp</span>";
             }
             if ($forceId == Civitate1053::LOMBARD_FORCE) {
                 $this->victoryPoints[Civitate1053::LOMBARD_FORCE]  += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='$class'>+$vp Lombard vp</span>";
+                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='Lombard $class'>+$vp Lombard vp</span>";
 
             }
         }

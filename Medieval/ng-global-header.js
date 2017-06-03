@@ -78,7 +78,7 @@ var x = window.x;
                 var y = hexPos.match(/y(\d*)\D*/)[1];
                 $("#special"+hexPos).remove();
                 if(data.specialHexesChanges[i]){
-                    $("#gameImages").append('<div id="special'+hexPos+'" style="border-radius:30px;border:10px solid black;top:'+y+'px;left:'+x+'px;font-size:205px;z-index:1000;" class="'+classLab[specialHexes[i]]+' specialHexes">'+lab[specialHexes[i]]+'</div>');
+                    $("#gameImages").append('<div id="special'+hexPos+'" style="border-radius:30px;border:10px solid black;top:'+y+'px;left:'+x+'px;font-size:205px;z-index:1000;" class="'+lab[specialHexes[i]]+' specialHexes">'+lab[specialHexes[i]]+'</div>');
                     $('#special'+hexPos).animate({fontSize:"16px",zIndex:0,borderWidth:"0px",borderRadius:"0px"},1900,function(){
                         var id = $(this).attr('id');
                         id = id.replace(/special/,'');
@@ -100,7 +100,7 @@ var x = window.x;
 
                 }else{
 
-                        $("#gameImages").append('<div id="special'+i+'" class="specialHexes">'+lab[specialHexes[i]]+'</div>');
+                        $("#gameImages").append('<div id="special'+i+'" class="'+lab[specialHexes[i]]+' specialHexes">'+lab[specialHexes[i]]+'</div>');
                         $("#special"+i).css({top:y+"px", left:x+"px"}).addClass(classLab[specialHexes[i]]);                    }
 
             }
