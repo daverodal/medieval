@@ -140,10 +140,10 @@
                 <button id="nextPhaseButton">Next Phase</button>
                 <button id="fullScreenButton"><i class="fa fa-arrows-alt"></i></button>
                 <button class="dynamicButton combatButton" id="determinedAttackEvent">d</button>
-                <button class="dynamicButton movementButton" id="forceMarchEvent">m</button>
                 <button class="dynamicButton combatButton" id="clearCombatEvent">c</button>
                 <button class="dynamicButton combatButton" id="shiftKey">+</button>
-                <button class="dynamicButton hexButton" id="showHexes">H</button>
+                <button class="dynamicButton hexButton" id="showHexes1">H1</button>
+                <button class="dynamicButton hexButton" id="showHexes2">H2</button>
                 <button class="debugButton" id="debug"><i class="fa fa-bug"></i></button>
 
             </div>

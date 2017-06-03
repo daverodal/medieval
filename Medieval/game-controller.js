@@ -879,6 +879,8 @@ export class GameController {
             $(".dynamicButton").hide();
             if(DR.hasHq){
                 $('#showHexes').show();
+                $('#showHexes1').show();
+                $('#showHexes2').show();
             }
             if (gameRules.mode === MOVING_MODE) {
                 $(".movementButton").show();
@@ -1214,7 +1216,14 @@ function drawHex(hexside, unit, isShort){
     x = x - b;
     y = y - c;
 
-    var path = '<path stroke-dasharray="'+strokeDash+'" class="range-hex '+nat+' '+decoration+' '+cls+'" stroke="transparent" id="rangeHex'+id+'" fill="#000" fill-opacity="0" stroke-width="'+width+'" d="M '+x+' ' + (ac + y) + ' L ' + x + ' '+ (a + y) + ' L ' + (b + x) + ' ' + y;
+    var hClass = '';
+    if(unit.forceId === 1 && DR.showHexes1){
+        hClass = 'hovering';
+    }
+    if(unit.forceId === 2 && DR.showHexes2){
+        hClass = 'hovering';
+    }
+    var path = '<path stroke-dasharray="'+strokeDash+'" class="range-hex '+nat+' '+decoration+' '+hClass+' '+cls+' forceId'+unit.forceId+'" stroke="transparent" id="rangeHex'+id+'" fill="#000" fill-opacity="0" stroke-width="'+width+'" d="M '+x+' ' + (ac + y) + ' L ' + x + ' '+ (a + y) + ' L ' + (b + x) + ' ' + y;
     path += ' L ' + (2 * b + x) + ' ' + (a + y) + ' L ' + (2 * b + x) + ' ' + (ac + y) + ' L ' + (b + x) + ' '+ (2 * c + y)+' Z"></path>';
 
     $('#arrow-svg').append(path);
