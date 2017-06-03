@@ -3360,6 +3360,10 @@ svg#arrow-svg {
   background: rgba(255, 255, 255, 0.9);
   padding: 25px;
   text-align: center; }
+  .bug-report h2 {
+    margin: 0px;
+    text-align: left;
+    font-size: 20px; }
 
 .negative {
   color: #ECECEC;

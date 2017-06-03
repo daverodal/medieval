@@ -1242,6 +1242,11 @@ svg#arrow-svg {
   }
 }
 .bug-report{
+  h2{
+    margin:0px;
+    text-align:left;
+    font-size:20px;
+  }
   display:none;
   position:absolute;
   left:33%;

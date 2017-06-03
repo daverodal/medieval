@@ -27,6 +27,8 @@
 
 <body ng-app="gameApp" xmlns="http://www.w3.org/1999/html">
 <div class="bug-report"  style="display:none;">
+    <h2>Bug Report</h2>
+    Please describe what you where doing and what happened.
     <form id="bug-report-form">
         <textarea id="bug-report-message" rows="10" cols="50"></textarea><br>
         <button id="submit-bug-report">Submit Report</button>
