@@ -26,6 +26,13 @@
 </script>
 
 <body ng-app="gameApp" xmlns="http://www.w3.org/1999/html">
+<div class="bug-report"  style="display:none;">
+    <form id="bug-report-form">
+        <textarea id="bug-report-message" rows="10" cols="50"></textarea><br>
+        <button id="submit-bug-report">Submit Report</button>
+        <button id="cancel-bug-report">Cancel</button>
+    </form>
+</div>
 <div ng-controller="GameController" id="main-viewer">
     <header id="header">
         <div id="headerContent">
@@ -136,6 +143,8 @@
                 <button class="dynamicButton movementButton" id="forceMarchEvent">m</button>
                 <button class="dynamicButton combatButton" id="clearCombatEvent">c</button>
                 <button class="dynamicButton combatButton" id="shiftKey">+</button>
+                <button class="dynamicButton hexButton" id="showHexes">H</button>
+                <button class="debugButton" id="debug"><i class="fa fa-bug"></i></button>
 
             </div>
 

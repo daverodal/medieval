@@ -279,6 +279,9 @@ $vintage-unit-numbers-size:10px;
       display:none;
       stroke:$background;
       fill-opacity:.1;
+      &.hovering{
+        display:block !important;
+      }
     }
   }
 }

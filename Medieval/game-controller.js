@@ -877,6 +877,9 @@ export class GameController {
         let $scope = this.$scope;
         this.sync.register("gameRules",  (gameRules, data) => {
             $(".dynamicButton").hide();
+            if(DR.hasHq){
+                $('#showHexes').show();
+            }
             if (gameRules.mode === MOVING_MODE) {
                 $(".movementButton").show();
             }
@@ -1108,6 +1111,7 @@ export class GameController {
                      * only about 8 of them so for now :'( tears will stay this way.....
                      */
                     if (mapUnits[i].class === "hq" || mapUnits[i].class === "supply") {
+                        DR.hasHq = true;
 
                         var hexSideLen = 32.0;
                         var b = hexSideLen * .866;

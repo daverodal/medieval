@@ -2512,9 +2512,11 @@ h5 {
 
 #nextPhaseWrapper {
   float: left; }
-  #nextPhaseWrapper #nextPhaseButton, #nextPhaseWrapper #fullScreenButton, #nextPhaseWrapper #forceMarchEvent, #nextPhaseWrapper #determinedAttackEvent, #nextPhaseWrapper #clearCombatEvent, #nextPhaseWrapper #shiftKey {
+  #nextPhaseWrapper .dynamicButton, #nextPhaseWrapper #nextPhaseButton, #nextPhaseWrapper #fullScreenButton, #nextPhaseWrapper #forceMarchEvent, #nextPhaseWrapper #determinedAttackEvent, #nextPhaseWrapper #clearCombatEvent, #nextPhaseWrapper #shiftKey, #nextPhaseWrapper #debug {
     font-size: 28px;
     position: static; }
+    #nextPhaseWrapper .dynamicButton.debugButton, #nextPhaseWrapper #nextPhaseButton.debugButton, #nextPhaseWrapper #fullScreenButton.debugButton, #nextPhaseWrapper #forceMarchEvent.debugButton, #nextPhaseWrapper #determinedAttackEvent.debugButton, #nextPhaseWrapper #clearCombatEvent.debugButton, #nextPhaseWrapper #shiftKey.debugButton, #nextPhaseWrapper #debug.debugButton {
+      display: inline-block; }
 
 #phaseClicks a {
   color: black; }
@@ -3349,6 +3351,20 @@ svg#arrow-svg {
   font-style: italic;
   font-size: 16px; }
 
+.bug-report {
+  display: none;
+  position: absolute;
+  left: 33%;
+  top: 33%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 25px;
+  text-align: center; }
+
+.negative {
+  color: #ECECEC;
+  background: black; }
+
 /**
  *
  * Copyright 2012-2015 David Rodal
@@ -3777,6 +3793,8 @@ svg#arrow-svg {
   display: none;
   stroke: #60b2ff;
   fill-opacity: .1; }
+  #arrow-svg .range-hex.Lombard.hovering {
+    display: block !important; }
 
 /*
  * these are for the +5 vps when you kill a unit
@@ -3805,6 +3823,8 @@ svg#arrow-svg {
   display: none;
   stroke: red;
   fill-opacity: .1; }
+  #arrow-svg .range-hex.Norman.hovering {
+    display: block !important; }
 
 .lombard .counterWrapper .bow {
   background: url("/vendor/wargame/medieval/civitate1053/images/whiteArrow.svg");

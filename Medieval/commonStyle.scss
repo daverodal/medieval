@@ -197,9 +197,12 @@ h5 {
 
 #nextPhaseWrapper {
   float: left;
-  #nextPhaseButton, #fullScreenButton, #forceMarchEvent, #determinedAttackEvent, #clearCombatEvent, #shiftKey {
+  .dynamicButton, #nextPhaseButton, #fullScreenButton, #forceMarchEvent, #determinedAttackEvent, #clearCombatEvent, #shiftKey, #debug {
     font-size: 28px;
     position: static;
+    &.debugButton{
+      display:inline-block;
+    }
   }
 }
 
@@ -1237,4 +1240,19 @@ svg#arrow-svg {
       }
     }
   }
+}
+.bug-report{
+  display:none;
+  position:absolute;
+  left:33%;
+  top:33%;
+  z-index: 1000;
+  background: rgba(255,255,255,.9);
+  padding:25px;
+  text-align:center;
+}
+
+.negative{
+  color:#ECECEC;
+  background:black;
 }

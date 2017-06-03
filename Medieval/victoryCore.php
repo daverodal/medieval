@@ -254,60 +254,6 @@ class victoryCore extends \Wargame\VictoryCore
                 }
             }
         }
-        /*
-         * snip here remove flanked requiredAttacks
-         */
-
-        foreach($cR->attackers as $attackId => $combatId){
-            $unit = $battle->force->units[$attackId];
-            $mapHex = $mapData->getHex($force->getUnitHexagon($attackId)->name);
-            $zocHexes = $mapHex->getZocNeighbors($unit);
-            foreach($zocHexes as $zocHex){
-                $zocMapHex = $mapData->getHex($zocHex);
-                if($zocMapHex->isOccupied($defenderForceId)){
-                    $units = $zocMapHex->forces[$defenderForceId];
-                    foreach($units as $unitId=>$unitVal){
-                        $requiredVal = true;
-                        $combatId = isset($cR->defenders->$unitId) ? $cR->defenders->$unitId : null ;
-                        if($combatId !== null){
-                            $attackers = $cR->combats->$combatId->attackers;
-                            if($attackers){
-                                if(count((array)$attackers) > 0){
-                                    $requiredVal = false;
-                                }
-                            }
-
-                        }
-
-                        $force->requiredDefenses->$unitId = $requiredVal;
-                    }
-                }
-            }
-//            var_dump($force->requiredDefenses);
-//            $neighbors = $mapHex->getZocUnits($defenderForceId);
-//            foreach($neighbors as $neighbor){
-//                /* @var MapHex $hex */
-//                $hex = $mapData->getHex($force->getUnit($neighbor)->hexagon->name);
-//                if($hex->isOccupied($defenderForceId)){
-//                    $units = $hex->forces[$defenderForceId];
-//                    foreach($units as $unitId=>$unitVal){
-//                        $requiredVal = true;
-//                        $combatId = isset($cR->defenders->$unitId) ? $cR->defenders->$unitId : null ;
-//                        if($combatId !== null){
-//                            $attackers = $cR->combats->$combatId->attackers;
-//                            if($attackers){
-//                                if(count((array)$attackers) > 0){
-//                                    $requiredVal = false;
-//                                }
-//                            }
-//
-//                        }
-//
-//                        $force->requiredDefenses->$unitId = $requiredVal;
-//                    }
-//                }
-//            }
-        }
     }
 
     public function filterFlankedAttackers($attackers){
