@@ -74,9 +74,9 @@ class Lewes1264 extends MedievalLandBattle
             $baseValue = 7;
         }
 
-        UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox",  3, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox",  3, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, false, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, false, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'hq',1, false, 'K',false, MedievalUnit::BATTLE_READY, 1);
 
 
         for($i = 0;$i < 6;$i++){
@@ -90,7 +90,7 @@ class Lewes1264 extends MedievalLandBattle
         }
 
         for($i = 0;$i < 7;$i++){
-            UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox", 2, 3,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, false, 'M', true);
+            UnitFactory::create("lll", self::LOYALIST_FORCE, "deployBox", 2, 3,2,  STATUS_CAN_DEPLOY, "A", 1, "loyalist", 'inf',1, 0, 'M', true);
 
         }
 

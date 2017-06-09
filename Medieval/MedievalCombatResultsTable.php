@@ -187,7 +187,6 @@ class MedievalCombatResultsTable
         $attackers = $combats->attackers;
         $attackStrength = 0;
         $attackersCav = false;
-        $combinedArms = ['infantry'=>0, 'artillery'=>0, 'cavalry'=>0];
         $attackerArmor = 0;
 
         $flankedDefenders = [];
@@ -275,7 +274,19 @@ class MedievalCombatResultsTable
                     $attackUpHill = true;
                 }
             }
-
+            $attackDownHill = false;
+            if($attackerIsElevated && ($isElevated < $attackerIsElevated)){
+                /* Special case for elevation 2 and attack no elevated, can be from be behind */
+                if($attackerIsElevated == 2  && $isElevated === false) {
+//                    if ($battle->combatRules->thisAttackAcrossTwoType($defId, $attackerId, "elevation1")) {
+//                        $terrainReason .= "attack downhill ";
+//                        $attackUpHill = true;
+//                    }
+                }else{
+                    $terrainReason .= "attack downhill ";
+                    $attackDownHill = true;
+                }
+            }
             $acrossRiver = false;
             foreach ($defenders as $defId => $defender) {
                 if ($battle->combatRules->thisAttackAcrossRiver($defId, $attackerId)) {
@@ -298,29 +309,9 @@ class MedievalCombatResultsTable
                 }
             }
 
-            if ($unit->class == "infantry") {
-//                $combinedArms[$battle->force->units[$attackerId]->class]++;
-                $combatLog .= "$unitStrength Infantry ";
-                if(!empty($scenario->jagersdorfCombat)){
-                    if ($unit->nationality == "Prussian" && $isClear && !$acrossRiver) {
-                        $unitStrength++;
-                        $combatLog .= "+1 for attack into clear ";
-                    }
-                    if ($unit->nationality == "Russian" && ($isTown || $isForest) && !$acrossRiver) {
-                        $unitStrength++;
-                        $combatLog .= "+1 for attack into town or forest ";
-                    }
-                }
-                if(!empty($scenario->americanRevolution)){
-                    if ($unit->forceId == LOYALIST_FORCE && $isClear && !$acrossRiver) {
-                        $unitStrength++;
-                        $combatLog .= "+1 for attack into clear ";
-                    }
-                }
-                if (($unit->nationality == "Beluchi" || $unit->nationality == "Sikh") && ($isTown || $isForest) && !$acrossRiver) {
-                    $unitStrength++;
-                    $combatLog .= "+1 for attack into town or forest ";
-                }
+            if ($unit->class == "inf" || $unit->class == "hq") {
+                $combatLog .= "$unitStrength ".ucfirst($unit->class)." ";
+
                 if ($isSwamp || $isFrozenSwamp || $attackerIsFrozenSwamp ||  $attackerIsSwamp || $acrossRiver || $attackerIsSunkenRoad || $acrossRedoubt || $attackUpHill) {
                     if(!$terrainReason){
                         $terrainReason = " terrain ";
@@ -337,10 +328,10 @@ class MedievalCombatResultsTable
                         }
                     }
                 }
-            }
-            
-            if ($unit->class == "hq") {
-//                $combatLog .= "$unitStrength Hq ";
+                if($attackDownHill){
+                    $unitStrength += 1;
+                    $combatLog .= "unit strength +1  for $terrainReason ";
+                }
             }
 
             if ($unit->class == "cavalry") {
@@ -352,7 +343,6 @@ class MedievalCombatResultsTable
                     if(!$terrainReason){
                         $terrainReason = " terrain ";
                     }
-                    $combatLog .= " , loses combined arms bonus ";
 
                     $unitStrength /= 2;
                     $combatLog .= "attacker halved for $terrainReason ";
@@ -364,20 +354,10 @@ class MedievalCombatResultsTable
 //                    $combats->dieShift = -1;
                     $unitStrength -= 1;
                     $combatLog .= "unit strength -1 for $terrainReason ";
-                    if($unit->nationality != "Beluchi" && $unit->nationality != "Sikh"){
-//                        $combinedArms[$battle->force->units[$attackerId]->class]++;
-                    }else{
-                        $combatLog .= "no combined arms bonus for ".$unit->nationality." cavalry";
-                    }
                 }else{
-                    if(!empty($scenario->angloCavBonus) && $unit->nationality == "AngloAllied"){
-                        $unitStrength++;
-                        $combatLog .= "+1 for attack into clear ";
-                    }
-                    if($unit->nationality != "Beluchi" && $unit->nationality != "Sikh"){
-//                        $combinedArms[$battle->force->units[$attackerId]->class]++;
-                    }else{
-                        $combatLog .= "no combined arms bonus for ".$unit->nationality." cavalry";
+                    if($attackDownHill){
+                        $unitStrength += 1;
+                        $combatLog .= "unit strength +1  for $terrainReason ";
                     }
                 }
             }
@@ -401,11 +381,7 @@ class MedievalCombatResultsTable
                 if($class == 'horseartillery'){
                     $class = 'artillery';
                 }
-                if($unit->nationality != "Beluchi"){
-//                    $combinedArms[$class]++;
-                }else{
-                    $combatLog .= "no combined arms bonus for Beluchi";
-                }
+
             }
             $attackStrength += $unitStrength;
             $combatLog .= $unit->class." $unitStrength = $attackStrength<br>";
@@ -444,10 +420,6 @@ class MedievalCombatResultsTable
             }
 
             $clearHex = !$notClearHex;
-            if(($unit->class == 'artillery' || $unit->class == 'horseartillery') && !$isTown){
-                $combatLog .= "doubled for defending in non town ";
-                $artInNonTown = true;
-            }
 
             if ($unit->class != 'cavalry') {
                 $defendersAllCav = false;
