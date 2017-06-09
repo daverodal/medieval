@@ -67,9 +67,9 @@ class Grunwald1410 extends MedievalLandBattle
 
 
 
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,5,  STATUS_CAN_DEPLOY, "A", 1, "kingdom-of-poland", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,4,  STATUS_CAN_DEPLOY, "A", 1, "kingdom-of-poland", 'hq',1, 0, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 1, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "kingdom-of-poland", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,5,  STATUS_CAN_DEPLOY, "A", 1, "kingdom-of-poland", 'hq',1, false, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 4,4,  STATUS_CAN_DEPLOY, "A", 1, "kingdom-of-poland", 'hq',1, false, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 1, 5,3,  STATUS_CAN_DEPLOY, "A", 1, "kingdom-of-poland", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 10;$i++){
             UnitFactory::create("lll", POLISH_FORCE, "deployBox", 7, 4,1,  STATUS_CAN_DEPLOY, "A", 1, "kingdom-of-poland", 'cavalry',1, 0, 'K');
@@ -90,24 +90,24 @@ class Grunwald1410 extends MedievalLandBattle
 
         }
 
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,3,  STATUS_CAN_DEPLOY, "C", 1, "tartar", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,3,  STATUS_CAN_DEPLOY, "C", 1, "tartar", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 5;$i++){
             UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "C", 1, "tartar", 'cavalry',1, false, 'S', true);
 
         }
 
-        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,4,  STATUS_CAN_DEPLOY, "D", 1, "lithuanian", 'hq',1, 0, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", POLISH_FORCE, "deployBox", 2, 5,4,  STATUS_CAN_DEPLOY, "D", 1, "lithuanian", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 6;$i++){
             UnitFactory::create("lll", POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "D", 1, "lithuanian", 'cavalry',1, false, 'S', true);
 
         }
 
-        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  3, 4,5,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  2, 4,4,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  1, 4,3,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  1, 4,3,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'hq',1, 3, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  3, 4,5,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'hq',1, false, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  2, 4,4,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'hq',1, false, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  1, 4,3,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'hq',1, false, 'K',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  1, 4,3,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'hq',1, false, 'K',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 10;$i++) {
             UnitFactory::create("lll", TEUTONIC_FORCE, "deployBox",  8, 4,1,  STATUS_CAN_DEPLOY, "B", 1, "teutonic-order", 'cavalry',1, 3, 'K');
