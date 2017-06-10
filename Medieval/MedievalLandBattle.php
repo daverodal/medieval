@@ -3,7 +3,6 @@ namespace Wargame\Medieval;
 use stdClass;
 use Wargame\MapData;
 use Wargame\MapViewer;
-use Wargame\MedievalForce;
 use Wargame\FacingMoveRules;
 use Wargame\Terrain;
 use Wargame\CombatRules;

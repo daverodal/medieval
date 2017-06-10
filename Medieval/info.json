@@ -6,11 +6,7 @@
     "fileName": "\\Wargame\\Medieval\\Grunwald1410\\Grunwald1410.php",
     "description": "Old style combat",
     "options": [
-      {
-        "name": "Fog of war during Deployment. Enemy units remain hidden until movement phase..",
-        "keyName": "fogDeploy",
-        "value": false
-      }
+
     ],
     "scenarios": {
       "Main": {
@@ -26,11 +22,7 @@
     "fileName": "\\Wargame\\Medieval\\Civitate1053\\Civitate1053",
     "description": "Old style combat, even older than before",
     "options": [
-      {
-        "name": "Fog of war during Deployment. Enemy units remain hidden until movement phase..",
-        "keyName": "fogDeploy",
-        "value": false
-      }
+
     ],
     "scenarios": {
       "Main": {
@@ -46,11 +38,7 @@
     "fileName": "\\Wargame\\Medieval\\Lewes1264\\Lewes1264",
     "description": "Old style combat, even older than before",
     "options": [
-      {
-        "name": "Fog of war during Deployment. Enemy units remain hidden until movement phase..",
-        "keyName": "fogDeploy",
-        "value": false
-      }
+
     ],
     "scenarios": {
       "Main": {

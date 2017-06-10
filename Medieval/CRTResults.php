@@ -200,12 +200,23 @@ trait CRTResults
                     break;
                 }
 
+                echo "one ";
                 $eliminated = $defUnit->damageUnit();
+                var_dump($eliminated);
                 if ($combatResults === L2 && !$eliminated) {
-                    $defUnit->damageUnit();
+                    echo "again ";
+                    $eliminated = $defUnit->damageUnit();
                 }
-            $defUnit->status = STATUS_DEFENDED;
-            break;
+            if ($eliminated) {
+                $vacated = true;
+                $defUnit->retreatCountRequired = 0;
+                $defUnit->moveCount = 0;
+                $force->addToRetreatHexagonList($defenderId, $force->getUnitHexagon($defenderId));
+
+            } else {
+                $defUnit->status = STATUS_DEFENDED;
+                $defUnit->retreatCountRequired = 0;
+            }            break;
             default:
                 break;
         }
