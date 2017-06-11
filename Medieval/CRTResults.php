@@ -125,11 +125,11 @@ trait CRTResults
 
                 } else {
                     $defUnit->status = STATUS_CAN_RETREAT;
-                }
-                $defUnit->retreatCountRequired = $distance;
-                if ($combatResults === DL2F || $combatResults === DLF) {
-                    $defUnit->retreatCountRequired = $defUnit->maxMove;
-                    $defUnit->disorderUnit();
+                    $defUnit->retreatCountRequired = $distance;
+                    if ($combatResults === DL2F || $combatResults === DLF) {
+                        $defUnit->retreatCountRequired = $defUnit->maxMove;
+                        $defUnit->disorderUnit();
+                    }
                 }
                 break;
             case DR2:
@@ -175,11 +175,11 @@ trait CRTResults
                 } else {
                     $defUnit->status = STATUS_DEFENDED;
                     $defUnit->retreatCountRequired = 0;
+                    if ($combatResults === BLDR) {
+                        $defUnit->status = STATUS_CAN_RETREAT;
+                    }
+                    $defUnit->retreatCountRequired = 1;
                 }
-                if ($combatResults === BLDR) {
-                    $defUnit->status = STATUS_CAN_RETREAT;
-                }
-                $defUnit->retreatCountRequired = 1;
 
                 break;
             case D:
@@ -200,11 +200,8 @@ trait CRTResults
                     break;
                 }
 
-                echo "one ";
                 $eliminated = $defUnit->damageUnit();
-                var_dump($eliminated);
                 if ($combatResults === L2 && !$eliminated) {
-                    echo "again ";
                     $eliminated = $defUnit->damageUnit();
                 }
             if ($eliminated) {
