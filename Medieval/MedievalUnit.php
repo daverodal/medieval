@@ -338,6 +338,12 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         switch ($status) {
             case STATUS_EXCHANGED:
                 if (($this->status == STATUS_CAN_DEFEND_LOSE || $this->status == STATUS_CAN_ATTACK_LOSE || $this->status == STATUS_CAN_EXCHANGE)) {
+                    if($this->status === STATUS_CAN_DEFEND_LOSE && $battle->gameRules->mode !== DEFENDER_LOSING_MODE){
+                        break;
+                    }
+                    if($this->status === STATUS_CAN_ATTACK_LOSE && $battle->gameRules->mode !== ATTACKER_LOSING_MODE){
+                        break;
+                    }
                     $this->damageUnit();
                     $success = true;
                 }

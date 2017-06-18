@@ -52,8 +52,11 @@ class MedievalLandBattle extends \Wargame\LandBattle
     public $players;
 
 
-    function __construct($data = null, $arg = false, $scenario = false){
+    function __construct($data = null, $arg = false, $scenario = false, $game = false){
         global $phase_name;
+
+        parent::__construct($data, $arg, $scenario, $game);
+
         /* Gross !*/
         $phase_name[ 2] .= " Melee";
         $phase_name[ 5] .= " Melee";
