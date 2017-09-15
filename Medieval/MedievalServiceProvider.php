@@ -26,6 +26,9 @@ class MedievalServiceProvider extends ServiceProvider
             __DIR__.'/Lewes1264/all.css' => public_path('vendor/wargame/medieval/css/Lewes1264.css'),
             __DIR__.'/Lewes1264/all.css.map' => public_path('vendor/wargame/medieval/css/Lewes1264.css.map'),
             __DIR__.'/Lewes1264/Images' => public_path('vendor/wargame/medieval/lewes1264/images'),
+            __DIR__.'/Plowce1331/all.css' => public_path('vendor/wargame/medieval/css/Plowce1331.css'),
+            __DIR__.'/Plowce1331/all.css.map' => public_path('vendor/wargame/medieval/css/Plowce1331.css.map'),
+            __DIR__.'/Plowce1331/Images' => public_path('vendor/wargame/medieval/Plowce1331/images'),
             __DIR__.'/../Medieval/Maps' => public_path('battle-maps')
 
         ], 'medieval');

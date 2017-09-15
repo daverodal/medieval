@@ -1157,12 +1157,12 @@ export class GameController {
                     deployUnits.push(newUnit);
                 }
 
-                // if (mapUnits[i].parent.match(/gameTurn/)) {
-                //     if (reinforcements[mapUnits[i].parent] === undefined) {
-                //         reinforcements[mapUnits[i].parent] = [];
-                //     }
-                //     reinforcements[mapUnits[i].parent].push(newUnit);
-                // }
+                if (mapUnits[i].parent.match(/gameTurn/)) {
+                    if (reinforcements[mapUnits[i].parent] === undefined) {
+                        reinforcements[mapUnits[i].parent] = [];
+                    }
+                    reinforcements[mapUnits[i].parent].push(newUnit);
+                }
                 if (mapUnits[i].parent === 'deadpile') {
                     newUnit.style = {};
                     newUnit.strength = mapUnits[i].strength;
@@ -1176,6 +1176,7 @@ export class GameController {
             $scope.notUsedUnits = notUsedUnits;
             $scope.reinforcements = reinforcements;
 
+            debugger;
             $scope.$apply();
         });
 

@@ -314,6 +314,27 @@ class victoryCore extends \Wargame\VictoryCore
             $gameRules->gameHasCombatResolutionMode = false;
             $gameRules->flashMessages[] = "@hide crt";
         }
+
+
+        $theUnits = $battle->force->units;
+
+
+        if ($gameRules->phase == BLUE_MOVE_PHASE || $gameRules->phase == RED_MOVE_PHASE) {
+            $gameRules->flashMessages[] = "@hide deadpile";
+            if (!empty($battle->force->reinforceTurns->$turn->$forceId)) {
+                $gameRules->flashMessages[] = "@show deployWrapper";
+                $gameRules->flashMessages[] = "Reinforcements have been moved to the Deploy/Staging Area";
+            }
+
+            foreach ($theUnits as $id => $unit) {
+
+                if ($unit->status == STATUS_CAN_REINFORCE ) {
+                    if ($unit->reinforceTurn <= $battle->gameRules->turn && $unit->hexagon->parent != "deployBox") {
+                        $theUnits[$id]->hexagon->parent = "deployBox";
+                    }
+                }
+            }
+        }
     }
 
     public function preRecoverUnits(){
@@ -371,7 +392,7 @@ class victoryCore extends \Wargame\VictoryCore
         $this->checkCommand($unit);
 
         if($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE){
-            if(empty($unit->bow)){
+            if($unit->isOnMap() && empty($unit->bow)){
                 $unit->status = STATUS_UNAVAIL_THIS_PHASE;
             }
         }

@@ -34,6 +34,10 @@ trait Command
             $unit->command = true;
             return;
         }
+        if(!$unit->isOnMap()){
+            $unit->command = true;
+            return;
+        }
         if(($b->gameRules->phase == RED_MOVE_PHASE || $b->gameRules->phase == BLUE_MOVE_PHASE)){
             if($unit->forceId !== $b->force->attackingForceId){
                 return;

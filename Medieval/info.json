@@ -46,5 +46,21 @@
         "longDescription": "Killing up close"
       }
     }
+  },
+  "Plowce1331": {
+    "name": "Battle of Plowce 1331",
+    "path": "Medieval",
+    "genre": "Medieval Games",
+    "fileName": "\\Wargame\\Medieval\\Plowce1331\\Plowce1331",
+    "description": "Swords and maces",
+    "options": [
+
+    ],
+    "scenarios": {
+      "Main": {
+        "description": "Standard",
+        "longDescription": "Killing up close"
+      }
+    }
   }
 }
