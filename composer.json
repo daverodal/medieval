@@ -11,5 +11,14 @@
 	"psr-4":{
 	    "Wargame\\Medieval\\": "Medieval"
 	    }
-	}
+	},
+    "extra": {
+      "laravel": {
+        "providers": [
+          "Wargame\\Medieval\\MedievalServiceProvider"
+        ],
+        "aliases": {
+        }
+      }
+    }
 }

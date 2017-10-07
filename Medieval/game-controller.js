@@ -1176,7 +1176,6 @@ export class GameController {
             $scope.notUsedUnits = notUsedUnits;
             $scope.reinforcements = reinforcements;
 
-            debugger;
             $scope.$apply();
         });
 
