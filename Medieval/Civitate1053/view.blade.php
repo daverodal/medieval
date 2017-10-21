@@ -1,5 +1,5 @@
 @section('local-header')
-<link rel="stylesheet" type="text/css" href="{{elixir('vendor/wargame/medieval/css/Civitate1053.css')}}">
+<link rel="stylesheet" type="text/css" href="{{mix('/vendor/css/medieval/civitate1053.css')}}">
 @endsection
 
 @section('inner-crt')

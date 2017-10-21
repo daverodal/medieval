@@ -23,8 +23,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {doitUnit} from "./global-funcs.js";
-import fixHeader from "./fix-header.js";
+import {doitUnit} from "global-funcs";
+import {fixHeader} from "wargame-helpers";
 
 export var flashMessages = [];
 

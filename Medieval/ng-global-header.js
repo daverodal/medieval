@@ -1,7 +1,7 @@
-import initialize from "./initialize.js";
-import fixHeader from "./fix-header.js";
-
-import Sync from "./Sync.js";
+import {initialize, fixHeader, Sync} from "wargame-helpers";
+// import fixHeader from "./fix-header.js";
+//
+// import Sync from "./Sync.js";
 import {SubGameController , GameController } from "./game-controller.js";
 
 const classes = {

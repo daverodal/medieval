@@ -65,43 +65,26 @@ $vintage-unit-numbers-size:10px;
   .vintage{
 
     &.#{$nationality}.inf .counterWrapper .counter {
-      background-image: url('/js/#{$shortName}InfBadge.png');
+      background-image: url('../../../wargaming/Wargame/Mollwitz/badges/#{$shortName}InfBadge.png');
       background-size: $vintage-badge-size;
     }
     &.#{$nationality}.cavalry .counterWrapper .counter {
-      background-image: url('/js/#{$shortName}CavBadge.png');
+      background-image: url('../../../wargaming/Wargame/Mollwitz/badges/#{$shortName}CavBadge.png');
       background-size: $vintage-badge-size;
     }
 
     &.#{$nationality}.artillery .counterWrapper .counter {
-      background-image: url('/js/#{$shortName}ArtBadge.png');
+      background-image: url('../../../wargaming/Wargame/Mollwitz/badges/#{$shortName}ArtBadge.png');
       background-size: $vintage-badge-size;
     }
     &.#{$nationality}.horseartillery .counterWrapper .counter {
-      background-image: url('/js/#{$shortName}HorArtBadge.png');
+      background-image: url('../../../wargaming/Wargame/Mollwitz/badges/#{$shortName}HorArtBadge.png');
       background-size: $vintage-badge-size;
     }
     &.#{$nationality}.hq .counterWrapper .counter {
       font: normal normal normal 14px/1 FontAwesome;
       &:before{
         content:"\f024";
-      }
-    }
-    &.#{$nationality}.pontoon {
-      .counterWrapper {
-        border:none;
-        .counter {
-
-          background-color: lightgreen;
-          background-image: url('/js/#{$shortName}Pontoon.png');
-          background-size: 32px;
-          width: 32px;
-          height: 32px;
-          border:none;
-        }
-      }
-      .unit-numbers {
-        display:none;
       }
     }
   }
@@ -111,20 +94,20 @@ $vintage-unit-numbers-size:10px;
     border-bottom:1px solid $borderColor;
   }
   .#{$nationality}.inf .counterWrapper .counter {
-    background-image: url('/js/#{$shortName}InfBadge.png');
+    background-image: url('../../../wargaming/Wargame/Mollwitz/badges/#{$shortName}InfBadge.png');
     background-size: $badge-size;
   }
   .#{$nationality}.cavalry .counterWrapper .counter {
-    background-image: url('/js/#{$shortName}CavBadge.png');
+    background-image: url('../../../wargaming/Wargame/Mollwitz/badges/#{$shortName}CavBadge.png');
     background-size: $badge-size;
   }
 
   .#{$nationality}.artillery .counterWrapper .counter {
-    background-image: url('/js/#{$shortName}ArtBadge.png');
+    background-image: url('../../../wargaming/Wargame/Mollwitz/badges/#{$shortName}ArtBadge.png');
     background-size: $badge-size;
   }
   .#{$nationality}.horseartillery .counterWrapper .counter {
-    background-image: url('/js/#{$shortName}HorArtBadge.png');
+    background-image: url('../../../wargaming/Wargame/Mollwitz/badges/#{$shortName}HorArtBadge.png');
     background-size: $badge-size;
   }
   .#{$nationality}.hq .counterWrapper .counter {
@@ -136,27 +119,10 @@ $vintage-unit-numbers-size:10px;
   }
 
   .#{$nationality}.wagon .counterWrapper .counter {
-    background-image: url('/js/Wagon.png');
+    background-image: url('../../../wargaming/Wargame/Mollwitz/badges/Wagon.png');
     background-size: $badge-size;
   }
 
-  .#{$nationality}.pontoon {
-    .counterWrapper {
-      border:none;
-      .counter {
-
-        background-color: lightgreen;
-        background-image: url('/js/#{$shortName}Pontoon.png');
-        background-size: 32px;
-        width: 32px;
-        height: 32px;
-        border:none;
-      }
-    }
-    .unit-numbers {
-      display:none;
-    }
-  }
 }
 
 

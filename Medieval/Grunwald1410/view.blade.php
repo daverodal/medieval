@@ -19,5 +19,5 @@
 @extends('wargame::Medieval.medieval')
 
 @section('local-header')
-<link rel="stylesheet" type="text/css" href="{{elixir('vendor/wargame/medieval/css/Grunwald1410.css')}}">
+<link rel="stylesheet" type="text/css" href="{{mix('vendor/css/medieval/grunwald1410.css')}}">
 @endsection
