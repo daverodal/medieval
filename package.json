@@ -20,7 +20,6 @@
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "global-funcs": "file:///Users/david/global-funcs/global-funcs-1.0.0.tgz",
     "jquery-ui-bundle": "^1.12.1",
     "jquery.panzoom": "^3.2.2",
     "wargame-helpers": "file:///Users/david/wargame-helpers/wargame-helpers-1.0.0.tgz"
