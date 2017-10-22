@@ -3,6 +3,8 @@ import {initialize, fixHeader, Sync} from "../../wargaming/Wargame/wargame-helpe
 //
 // import Sync from "./Sync.js";
 import {SubGameController , GameController } from "./game-controller.js";
+import "jquery.panzoom"
+import 'jquery-ui-bundle';
 
 const classes = {
     SubGameController,
