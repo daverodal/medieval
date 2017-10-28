@@ -238,9 +238,9 @@
                 </div>
             </div>
 
-            <audio class="pop" src="{{asset('js/pop.m4a')}}"></audio>
-            <audio class="poop" src="{{asset('js/lowpop.m4a')}}"></audio>
-            <audio class="buzz" src="{{asset('js/buzz.m4a')}}"></audio>
+            <audio class="pop" src="{{asset('assets/audio/pop.m4a')}}"></audio>
+            <audio class="poop" src="{{asset('assets/audio/pop.m4a')}}"></audio>
+            <audio class="buzz" src="{{asset('assets/audio/pop.m4a')}}"></audio>
 
         </div>
     </div>
