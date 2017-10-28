@@ -144,6 +144,7 @@ h5 {
 .specialHexesVP {
   background: transparent !important;
   font-size:30px;
+  pointer-events: none;
   &.fire-phase{
     background: white !important;
   }

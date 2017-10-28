@@ -84,6 +84,10 @@ class MedievalForce extends Force
 
     }
 
+    function defenderLoseUnit($unit)
+    {
+        $this->defenderLoseAmount -= 1;
+    }
 
     function exchangeUnit($unit)
     {

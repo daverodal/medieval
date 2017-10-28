@@ -54,7 +54,7 @@
         <div class="range">@{{ unit.armorClass }}</div>
 
         <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow"
-             src="{{asset('js/short-red-arrow-md.png')}}" class="counter">
+             src="{{url('assets/unit-images/short-red-arrow-md.png')}}" class="counter">
 
         <div ng-class="unit.infoLen" class="unit-numbers">@{{ unit.unitNumbers }}</div>
         <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>

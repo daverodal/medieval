@@ -333,10 +333,15 @@ export class GameController {
                         }
                         break;
                     case STATUS_CAN_ADVANCE:
+                    case STATUS_MUST_ADVANCE:
                         if (data.gameRules.mode == ADVANCING_MODE) {
                             status = 'Click on one of the black units to advance it.';
                         }
                         color = "black";
+                        if(units[i].status === STATUS_MUST_ADVANCE){
+                            color = "lime";
+                            status = 'Click on one of the lime units to advance it.';
+                        }
                         shadow = false;
 
                         break;

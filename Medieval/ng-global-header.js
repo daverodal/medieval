@@ -1,4 +1,4 @@
-import {initialize, fixHeader, Sync} from "../../wargaming/Wargame/wargame-helpers";
+import {initialize, fixHeader, Sync} from "../../wargaming/Wargame/wargame-helpers/";
 // import fixHeader from "./fix-header.js";
 //
 // import Sync from "./Sync.js";
