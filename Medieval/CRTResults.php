@@ -11,12 +11,17 @@ namespace Wargame\Medieval;
 
 trait CRTResults
 {
-    function calcAdvance($defUnit, $attUnit){
+    function calcAdvance( $attUnit){
+        $b = \Wargame\Battle::getBattle();
+
+        if($attUnit->status === STATUS_MUST_ADVANCE){
+            return $attUnit->status;
+        }
         $ret = STATUS_CAN_ADVANCE;
         if($attUnit->class === "cavalry"){
             $ret = STATUS_MUST_ADVANCE;
         }
-        if($defUnit->class === 'inf' && $attUnit->class === 'inf'){
+        if($b->combatRules->combatDefenders->hasInf && $attUnit->class === 'inf'){
             $ret = STATUS_MUST_ADVANCE;
         }
         if($attUnit->bow){
@@ -317,13 +322,13 @@ trait CRTResults
                                 }
                             }
                             if ($combatResults === DEAL || $combatResults === BLDR) {
-                                $attUnit->status = $this->calcAdvance($defUnit, $attUnit);
+                                $attUnit->status = $this->calcAdvance( $attUnit);
                             }
                         }
                         break;
 
                     case DE:
-                        $attUnit->status = $this->calcAdvance($defUnit, $attUnit);
+                        $attUnit->status = $this->calcAdvance( $attUnit);
                         $attUnit->retreatCountRequired = 0;
                         break;
 
@@ -342,7 +347,7 @@ trait CRTResults
                     case DL2F:
 
                         if ($attUnit->status !== STATUS_NO_RESULT) {
-                            $attUnit->status = $this->calcAdvance($defUnit, $attUnit);
+                            $attUnit->status = $this->calcAdvance( $attUnit);
                         }
                         $attUnit->retreatCountRequired = 0;
                         break;
@@ -351,7 +356,7 @@ trait CRTResults
                     case DL2:
                         /* for multi defender combats */
                         if ($vacated || $attUnit->status == STATUS_MUST_ADVANCE || $attUnit->status === STATUS_CAN_ADVANCE) {
-                            $attUnit->status = $this->calcAdvance($defUnit, $attUnit);
+                            $attUnit->status = $this->calcAdvance( $attUnit);
                         } else {
                             $attUnit->status = STATUS_NO_RESULT;
                         }

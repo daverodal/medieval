@@ -286,7 +286,7 @@ class MedievalForce extends Force
         for ($id = 0; $id < count($this->units); $id++) {
             if ($this->units[$id]->status == STATUS_CAN_ATTACK_LOSE) {
                 if (count($this->retreatHexagonList)) {
-                        $this->units[$id]->status = STATUS_CAN_ADVANCE;
+                        $this->units[$id]->status = $b->combatRules->crt->calcAdvance($this->units[$id]);
                         $areAdvancing = true;
                 } else {
                     $this->units[$id]->status = STATUS_ATTACKED;
