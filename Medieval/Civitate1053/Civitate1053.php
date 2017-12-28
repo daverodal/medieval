@@ -59,12 +59,49 @@ class Civitate1053 extends MedievalLandBattle
         return $data;
     }
 
-    public function init()
-    {
-        UnitFactory::$injector = $this->force;
+    public function scenInit(){
 
 
         $scenario = $this->scenario;
+        $unitSets = $scenario->units;
+
+        foreach($unitSets as $unitSet) {
+//            dd($unitSet);
+            if($unitSet->forceId !== Civitate1053::NORMAN_FORCE){
+                continue;
+            }
+            for ($i = 0; $i < $unitSet->num; $i++) {
+                if($unitSet->hq){
+                    UnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->commandRadius, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  "hq", 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow,MedievalUnit::BATTLE_READY, $unitSet->steps);
+                }else{
+                    UnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->range, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  $unitSet->class, 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow);
+                }
+            }
+        }
+        foreach($unitSets as $unitSet) {
+//            dd($unitSet);
+            if($unitSet->forceId !== Civitate1053::LOMBARD_FORCE){
+                continue;
+            }
+            for ($i = 0; $i < $unitSet->num; $i++) {
+                if($unitSet->hq){
+                    UnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->commandRadius, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  $unitSet->class, 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow,MedievalUnit::BATTLE_READY, $unitSet->steps );
+                }else{
+                    UnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->range, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  $unitSet->class, 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow);
+                }
+            }
+        }
+    }
+    public function init()
+    {
+        UnitFactory::$injector = $this->force;
+        $scenario = $this->scenario;
+
+        if(isset($scenario->units)){
+            return $this->scenInit();
+        }
+
+
         $baseValue = 6;
         $reducedBaseValue = 3;
         if(!empty($scenario->weakerLoyalist)){
