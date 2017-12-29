@@ -1,0 +1,44 @@
+/**
+ *
+ * Copyright 2012-2015 David Rodal
+ * User: David Markarian Rodal
+ * Date: 3/8/15
+ * Time: 5:48 PM
+ *
+ *  This program is free software; you can redistribute it
+ *  and/or modify it under the terms of the GNU General Public License
+ *  as published by the Free Software Foundation;
+ *  either version 2 of the License, or (at your option) any later version
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+@import "civitateColors";
+/*df5842*/
+
+@include headerColor(Lombard, $lombardColor, #60b2ff);
+@include headerColor(Norman, $normanColor, red);
+@include unitColor(norman,#FFA99B,  Brit, red );
+@include unitColor(lombard, $lombardColor, Bavarian, #60b2ff, black, black);
+@include unitColor(swabian, $lombardColor,  Bavarian, #fb001d, black, black );
+
+@include flagColor(lombard, white);
+
+@include specialColor(Lombard, $lombardColor, white);
+@include specialColor(Norman, red, white);
+
+.lombard{
+  .counterWrapper .bow{
+    background: url('/vendor/wargame/medieval/arsouf1191/images/whiteArrow.svg');
+    background-size:10px 13px;
+    width:10px;
+  }
+}
+.jolly{
+  color:grey;
+}

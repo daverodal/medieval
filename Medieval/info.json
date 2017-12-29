@@ -5,6 +5,9 @@
     "genre": "Medieval Games",
     "fileName": "\\Wargame\\Medieval\\Grunwald1410\\Grunwald1410.php",
     "description": "Old style combat",
+    "params": {
+      "unitComponent": "medieval-unit"
+    },
     "options": [
 
     ],
@@ -21,6 +24,9 @@
     "genre": "Medieval Games",
     "fileName": "\\Wargame\\Medieval\\Civitate1053\\Civitate1053",
     "description": "Old style combat, even older than before",
+    "params": {
+      "unitComponent": "medieval-unit"
+    },
     "options": [
 
     ],
@@ -37,6 +43,9 @@
     "genre": "Medieval Games",
     "fileName": "\\Wargame\\Medieval\\Lewes1264\\Lewes1264",
     "description": "Old style combat, even older than before",
+    "params": {
+      "unitComponent": "medieval-unit"
+    },
     "options": [
 
     ],
@@ -53,6 +62,9 @@
     "genre": "Medieval Games",
     "fileName": "\\Wargame\\Medieval\\Plowce1331\\Plowce1331",
     "description": "Swords and maces",
+    "params": {
+      "unitComponent": "medieval-unit"
+    },
     "options": [
 
     ],
