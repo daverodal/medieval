@@ -162,6 +162,9 @@ class victoryCore extends \Wargame\VictoryCore
                     if($unit->class === "hq"){
                         continue;
                     }
+                    if($unit->class === "wagon"){
+                        continue;
+                    }
                     if($unit->armorClass === "S"){
                         continue;
                     }
