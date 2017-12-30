@@ -83,7 +83,7 @@
     "description": "Swords and maces, hitting each other",
     "params": {
       "unitComponent": "medieval-unit",
-      "nationalities": ["crusader", "turkish"]
+      "nationalities": ["turkish","crusader"]
     },
     "options": [
 
