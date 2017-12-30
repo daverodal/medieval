@@ -31,3 +31,4 @@ $turkishOrange: #FFC835;
 
 @include specialColor(Turkish, $turkishGreen, white);
 @include specialColor(Crusader, $crusaderColor, white);
+@include wagon(Crusader);
