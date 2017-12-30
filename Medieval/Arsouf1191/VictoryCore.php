@@ -46,6 +46,39 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
         $this->outgoingVP = [0,0,0,0,0];
     }
 
+    protected function checkVictory($attackingId, $battle){
+        if(!$this->gameOver){
+
+            $crusWin = $turkWin = false;
+            $winScore = 40;
+            if($this->victoryPoints[Arsouf1191::TURKISH_FORCE] > $winScore){
+                $turkWin = true;
+            }
+            if($this->victoryPoints[Arsouf1191::CRUSADER_FORCE] > $winScore){
+                $crusWin = true;
+            }
+            if($turkWin && $crusWin){
+                $battle->gameRules->flashMessages[] = "Tie Game";
+                $this->winner = 0;
+                $this->gameOver = true;
+                return true;
+            }
+            if($turkWin){
+                $battle->gameRules->flashMessages[] = "Turkish Win";
+                $this->winner = Arsouf1191::TURKISH_FORCE;
+                $this->gameOver = true;
+                return true;
+            }
+            if($turkWin){
+                $battle->gameRules->flashMessages[] = "Crusader Win";
+                $this->winner = Arsouf1191::CRUSADER_FORCE;
+                $this->gameOver = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function setSupplyLen($supplyLen)
     {
         $this->supplyLen = $supplyLen[0];
@@ -68,15 +101,9 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
     public function gameEnded()
     {
         $battle = Battle::getBattle();
-        if ($this->victoryPoints[Arsouf1191::CRUSADER_FORCE] > $this->victoryPoints[Arsouf1191::TURKISH_FORCE]) {
-            $battle->gameRules->flashMessages[] = "Lombard Player Wins";
-            $this->winner = Arsouf1191::CRUSADER_FORCE;
-        }
-        if ($this->victoryPoints[Arsouf1191::TURKISH_FORCE] > $this->victoryPoints[Arsouf1191::CRUSADER_FORCE]) {
-            $battle->gameRules->flashMessages[] = "Norman Player Wins";
-            $this->winner = Arsouf1191::TURKISH_FORCE;
-        }
-        if ($this->victoryPoints[Arsouf1191::CRUSADER_FORCE] == $this->victoryPoints[Arsouf1191::TURKISH_FORCE]) {
+
+        $victory = $this->checkVictory(null, null);
+        if(!$victory){
             $battle->gameRules->flashMessages[] = "Tie Game";
         }
         $this->gameOver = true;
