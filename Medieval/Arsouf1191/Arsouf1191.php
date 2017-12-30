@@ -41,7 +41,7 @@ class Arsouf1191 extends MedievalLandBattle
     }
 
     static function getPlayerData($scenario){
-        $forceName = ["Neutral Observer", "Norman", "Lombard"];
+        $forceName = ["Neutral Observer", "Turkish", "Crusader"];
         return \Wargame\Battle::register($forceName,
             [$forceName[0], $forceName[2], $forceName[1]]);
     }
@@ -112,47 +112,47 @@ class Arsouf1191 extends MedievalLandBattle
             $baseValue = 7;
         }
 
-        UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",  3, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",  3, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 9;$i++){
-            UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'cavalry',1, 0, 'H');
+            UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox", 6, 5,1,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'cavalry',1, 0, 'H');
 
         }
 
         for($i = 0;$i < 1;$i++){
-            UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox", 4,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'inf',1, 0, 'M');
+            UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox", 4,  3,1,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'inf',1, 0, 'M');
 
         }
 
         for($i = 0;$i < 2;$i++){
-            UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox", 1, 3,2,  STATUS_CAN_DEPLOY, "A", 1, "norman", 'inf',1, false, 'S', true);
+            UnitFactory::create("lll", self::TURKISH_FORCE, "deployBox", 1, 3,2,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'inf',1, false, 'S', true);
 
         }
 
-        UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  1, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-        UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  1, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  1, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  1, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
 
         for($i = 0;$i < 8;$i++) {
-            UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  4, 5,1,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'cavalry',1, 3, 'H');
+            UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  4, 5,1,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'cavalry',1, 3, 'H');
 
         }
         for($i = 0;$i < 6;$i++) {
-            UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  3, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'inf',1, 3, 'M');
+            UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  3, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'inf',1, 3, 'M');
 
         }
         for($i = 0;$i < 2;$i++) {
-            UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  2, 4,2,  STATUS_CAN_DEPLOY, "B", 1, "lombard", 'inf',1, 3, 'M', true);
+            UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  2, 4,2,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'inf',1, 3, 'M', true);
 
         }
 
-        UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  2, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "swabian", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
+        UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  2, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
 
         for($i = 0;$i < 2;$i++) {
-            UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  7, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "swabian", 'inf',1, 3, 'K');
+            UnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  7, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'inf',1, 3, 'K');
 
         }
 

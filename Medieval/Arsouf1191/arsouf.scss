@@ -18,27 +18,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-@import "civitateColors";
-/*df5842*/
 
-@include headerColor(Lombard, $lombardColor, #60b2ff);
-@include headerColor(Norman, $normanColor, red);
-@include unitColor(norman,#FFA99B,  Brit, red );
-@include unitColor(lombard, $lombardColor, Bavarian, #60b2ff, black, black);
-@include unitColor(swabian, $lombardColor,  Bavarian, #fb001d, black, black );
+$crusaderColor: #CE0323;
+$turkishGreen: #11943A;
+$turkishOrange: #FFC835;
 
-@include flagColor(lombard, white);
+@include headerColor(Turkish, $turkishOrange, $turkishOrange);
+@include headerColor(Crusader, $crusaderColor, $crusaderColor);
 
-@include specialColor(Lombard, $lombardColor, white);
-@include specialColor(Norman, red, white);
-
-.lombard{
-  .counterWrapper .bow{
-    background: url('/vendor/wargame/medieval/arsouf1191/images/whiteArrow.svg');
-    background-size:10px 13px;
-    width:10px;
-  }
-}
-.jolly{
-  color:grey;
-}
+@include unitColor(turkish, $turkishGreen,  Turk, $turkishOrange, black, white );
+@include unitColor(crusader, $crusaderColor,  Crusader, white, black, white );

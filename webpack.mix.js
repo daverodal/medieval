@@ -27,4 +27,4 @@ mix.js('Medieval/ngGameMain.js', 'javascripts/medieval/ngGameMain.js');
 mix.sass('Medieval/Civitate1053/all.scss', 'css/medieval/civitate1053.css')
 mix.sass('Medieval/Grunwald1410/all.scss', 'css/medieval/grunwald1410.css')
 mix.sass('Medieval/Lewes1264/all.scss', 'css/medieval/lewes1264.css')
-mix.sass('Medieval/Ausouf1191/all.scss', 'css/medieval/arsouf1191.css')
+mix.sass('Medieval/Arsouf1191/all.scss', 'css/medieval/arsouf1191.css')

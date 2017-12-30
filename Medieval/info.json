@@ -74,5 +74,24 @@
         "longDescription": "Killing up close"
       }
     }
+  },
+  "Arsouf1191": {
+    "name": "Battle of Arsouf 1191",
+    "path": "Medieval",
+    "genre": "Medieval Games",
+    "fileName": "\\Wargame\\Medieval\\Arsouf1191\\Arsouf1191",
+    "description": "Swords and maces, hitting each other",
+    "params": {
+      "unitComponent": "medieval-unit"
+    },
+    "options": [
+
+    ],
+    "scenarios": {
+      "Main": {
+        "description": "Standard",
+        "longDescription": "Killing up close"
+      }
+    }
   }
 }
