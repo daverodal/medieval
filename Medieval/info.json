@@ -82,7 +82,8 @@
     "fileName": "\\Wargame\\Medieval\\Arsouf1191\\Arsouf1191",
     "description": "Swords and maces, hitting each other",
     "params": {
-      "unitComponent": "medieval-unit"
+      "unitComponent": "medieval-unit",
+      "nationalities": ["crusader", "turkish"]
     },
     "options": [
 
