@@ -352,6 +352,9 @@ class victoryCore extends \Wargame\VictoryCore
         $battle = Battle::getBattle();
 
         $vp = $unit->damage;
+        if($unit->class === "wagon"){
+            $vp *= 4;
+        }
 
         $pData = $battle->getPlayerData(false);
 
