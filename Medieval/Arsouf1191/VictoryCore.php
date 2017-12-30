@@ -63,39 +63,6 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
 
         list($mapHexName, $forceId) = $args;
 
-        $vp = 10;
-
-        /*
-         *  Teutonic Camp
-         */
-
-        $pData = $battle->getPlayerData(false);
-        $class = preg_replace("/ /", "-",$pData['forceName'][$forceId]);
-        if(in_array($mapHexName,$battle->specialHexB)) {
-            if ($forceId == Arsouf1191::TURKISH_FORCE) {
-                $this->victoryPoints[Arsouf1191::TURKISH_FORCE] += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='Norman $class'> +$vp Norman vp</span>";
-            }
-            if ($forceId == Arsouf1191::CRUSADER_FORCE) {
-                $this->victoryPoints[Arsouf1191::TURKISH_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='Lombard $class'> -$vp Norman vp</span>";
-            }
-        }
-
-        if(in_array($mapHexName,$battle->specialHexA)){
-
-            $prevForceId = $battle->mapData->specialHexes->$mapHexName;
-            if ($forceId == Arsouf1191::TURKISH_FORCE) {
-                $this->victoryPoints[Arsouf1191::CRUSADER_FORCE] -= $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='Norman $class'> -$vp Lombard vp</span>";
-            }
-            if ($forceId == Arsouf1191::CRUSADER_FORCE) {
-                $this->victoryPoints[Arsouf1191::CRUSADER_FORCE]  += $vp;
-                $battle->mapData->specialHexesVictory->$mapHexName = "<span class='Lombard $class'>+$vp Lombard vp</span>";
-
-            }
-        }
-
     }
 
     public function gameEnded()

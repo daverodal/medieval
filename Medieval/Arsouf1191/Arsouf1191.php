@@ -48,6 +48,8 @@ class Arsouf1191 extends MedievalLandBattle
 
     function terrainGen($mapDoc, $terrainDoc)
     {
+        $this->terrain->addTerrainFeature("orchard", "orchard", "t", 0, 0,0, false, true);
+
         parent::terrainGen($mapDoc, $terrainDoc);
         $this->terrain->addTerrainFeature("town", "town", "t", 0, 0, 1, false);
     }
@@ -178,7 +180,7 @@ class Arsouf1191 extends MedievalLandBattle
             $this->victory = new \Wargame\Victory("Wargame\\Medieval\\Arsouf1191\\VictoryCore");
             
             // game data
-            $this->gameRules->setMaxTurn(7);
+            $this->gameRules->setMaxTurn(8);
             $this->gameRules->setInitialPhaseMode(RED_DEPLOY_PHASE, DEPLOY_MODE);
             $this->gameRules->attackingForceId = RED_FORCE; /* object oriented! */
             $this->gameRules->defendingForceId = BLUE_FORCE; /* object oriented! */
