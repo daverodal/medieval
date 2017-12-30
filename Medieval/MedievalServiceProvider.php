@@ -29,7 +29,11 @@ class MedievalServiceProvider extends ServiceProvider
             __DIR__.'/Plowce1331/all.css' => public_path('vendor/wargame/medieval/css/Plowce1331.css'),
             __DIR__.'/Plowce1331/all.css.map' => public_path('vendor/wargame/medieval/css/Plowce1331.css.map'),
             __DIR__.'/Plowce1331/Images' => public_path('vendor/wargame/medieval/Plowce1331/images'),
-            __DIR__.'/../Medieval/Maps' => public_path('battle-maps')
+            __DIR__.'/../Medieval/Maps' => public_path('battle-maps'),
+            __DIR__.'/Arsouf1191/all.css' => public_path('vendor/wargame/medieval/css/Arsouf1191.css'),
+            __DIR__.'/Arsouf1191/all.css.map' => public_path('vendor/wargame/medieval/css/Arsouf1191.css.map'),
+            __DIR__.'/Arsouf1191/Images' => public_path('vendor/wargame/medieval/arsouf1191/images'),
+
 
         ], 'medieval');
 
@@ -41,6 +45,8 @@ class MedievalServiceProvider extends ServiceProvider
             __DIR__.'/Civitate1053/all.css.map' => public_path('vendor/wargame/medieval/css/Civitate1053.css.map'),
             __DIR__.'/Lewes1264/all.css' => public_path('vendor/wargame/medieval/css/Lewes1264.css'),
             __DIR__.'/Lewes1264/all.css.map' => public_path('vendor/wargame/medieval/css/Lewes1264.css.map'),
+            __DIR__.'/Arsouf1191/all.css' => public_path('vendor/wargame/medieval/css/Arsouf1191.css'),
+            __DIR__.'/Arsouf1191/all.css.map' => public_path('vendor/wargame/medieval/css/Arsouf1191.css.map'),
         ], 'medieval-css');
 
         $this->loadViewsFrom(dirname(__DIR__), 'wargame');

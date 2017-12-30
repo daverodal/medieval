@@ -25,12 +25,12 @@
     body {
         background: #ccc;
         color: #333;
-        background: url("<?=asset("vendor/wargame/medieval/arsouf1191/images/Gérard_I,_Duke_of_Lorraine_Hadwiga.png")?>") #333 no-repeat;
-        background-position: 10% 0;
-        background-size: 100%;
+        background:url("<?=asset("vendor/wargame/medieval/arsouf1191/images/Gustave_dore_crusades_richard_and_saladin_at_the_battle_of_arsuf.jpg")?>") #333 no-repeat;
+        background-position: center center;
+        min-height:600px;
     }
 
 </style>
 <footer class="attribution">
-    By Augustin Calmet [Public domain], <a href="https://commons.wikimedia.org/wiki/File%3AG%C3%A9rard_I%2C_Duke_of_Lorraine_Hadwiga.png">via Wikimedia Commons</a>    </div>
+    Gustave Doré [Public domain], <a target="_blank" href="https://commons.wikimedia.org/wiki/File%3AGustave_dore_crusades_richard_and_saladin_at_the_battle_of_arsuf.jpg">via Wikimedia Commons</a>
 </footer>

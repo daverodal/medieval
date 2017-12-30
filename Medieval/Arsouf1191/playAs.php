@@ -24,19 +24,19 @@
 <style>
     <?php @include "playAs.css";?>
     body{
-        background:url("<?=asset("vendor/wargame/medieval/arsouf1191/images/Gérard_I,_Duke_of_Lorraine_Hadwiga.png")?>") #333 no-repeat;
-        background-position:center 0;
-        background-size:100%;
+        background:url("<?=asset("vendor/wargame/medieval/arsouf1191/images/Gustave_dore_crusades_richard_and_saladin_at_the_battle_of_arsuf.jpg")?>") #333 no-repeat;
+        background-position:center center;
     }
 </style>
 
 <h2 style="text-align:center;font-size:30px;font-family:'Poiret One'"> Welcome to</h2>
-<h1 style="text-align:center;font-size:90px;font-family:'Lobster'">Civitate 1053</h1>
+<h1 style="text-align:center;font-size:90px;font-family:'Lobster'">Arsouf 1191</h1>
 <div class="clear">&nbsp;</div>
 <fieldset ><Legend>Play As </Legend>
     <a class="link"  href="<?=url("wargame/enter-hotseat");?>/<?=$wargame?>">Play Hotseat</a><br>
     <a class="link"  href="<?=url("wargame/enter-multi");?>/<?=$wargame?>">Play Multi Player </a><br>
     <a class="link" href="<?=url("wargame/leave-game");?>">Go to Lobby</a>
     <div class="attribution">
-        By Augustin Calmet [Public domain], <a href="https://commons.wikimedia.org/wiki/File%3AG%C3%A9rard_I%2C_Duke_of_Lorraine_Hadwiga.png">via Wikimedia Commons</a>    </div>
+        Gustave Doré [Public domain], <a target="_blank" href="https://commons.wikimedia.org/wiki/File%3AGustave_dore_crusades_richard_and_saladin_at_the_battle_of_arsuf.jpg">via Wikimedia Commons</a>
+    </div>
 </fieldset>
