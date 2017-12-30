@@ -25,7 +25,8 @@
     "fileName": "\\Wargame\\Medieval\\Civitate1053\\Civitate1053",
     "description": "Old style combat, even older than before",
     "params": {
-      "unitComponent": "medieval-unit"
+      "unitComponent": "medieval-unit",
+      "nationalities": ["norman", "lombard"]
     },
     "options": [
 

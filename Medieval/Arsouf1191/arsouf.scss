@@ -28,3 +28,6 @@ $turkishOrange: #FFC835;
 
 @include unitColor(turkish, $turkishGreen,  Turk, $turkishOrange, black, white );
 @include unitColor(crusader, $crusaderColor,  Crusader, white, black, white );
+
+@include specialColor(Turkish, $turkishGreen, white);
+@include specialColor(Crusader, $crusaderColor, white);
