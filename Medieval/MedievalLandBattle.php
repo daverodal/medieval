@@ -156,6 +156,15 @@ class MedievalLandBattle extends \Wargame\LandBattle
                     return false;
                 }
             }
+            if($unit->armorClass === 'S'){
+                return false;
+            }
+
+            foreach($mapHex->forces[$forceId] as $mKey => $mVal){
+                if($this->force->units[$mKey]->armorClass === 'S'){
+                    return false;
+                }
+            }
             if($unit->class === "hq"){
                 foreach($mapHex->forces[$forceId] as $mKey => $mVal){
                     if($this->force->units[$mKey]->class === "hq"){
