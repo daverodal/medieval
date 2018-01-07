@@ -45,15 +45,20 @@
     "fileName": "\\Wargame\\Medieval\\Lewes1264\\Lewes1264",
     "description": "Old style combat, even older than before",
     "params": {
-      "unitComponent": "medieval-unit"
+      "unitComponent": "medieval-unit",
+      "nationalities": ["loyalist","rebels"]
     },
     "options": [
 
     ],
     "scenarios": {
       "Main": {
-        "description": "Standard",
-        "longDescription": "Killing up close"
+        "description": "Scenario 1",
+        "longDescription": "This scenario finds both armies deployed ready to give battle."
+      },
+      "Scenario2": {
+        "description": "Scenario 2",
+        "longDescription": "This scenario finds the armies after the initial Loyalist attack has swept away the Rebel Left Flank and many of the Loyalist Knights have impetuously pursued."
       }
     }
   },

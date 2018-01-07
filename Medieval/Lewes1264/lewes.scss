@@ -26,7 +26,6 @@
 @include headerColor(Loyalist, $loyalistColor, red);
 @include unitColor(loyalist,$loyalistColor,  Brit, red );
 @include unitColor(rebel, $rebelColor, Bavarian, #26d5ff, black, black);
-@include unitColor(swabian,#fb001d,  Bavarian, $rebelColor, black, black );
 
 @include flagColor(rebel, white);
 

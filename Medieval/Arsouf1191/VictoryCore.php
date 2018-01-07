@@ -51,10 +51,10 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
 
             $crusWin = $turkWin = false;
             $winScore = 40;
-            if($this->victoryPoints[Arsouf1191::TURKISH_FORCE] > $winScore){
+            if($this->victoryPoints[Arsouf1191::TURKISH_FORCE] >= $winScore){
                 $turkWin = true;
             }
-            if($this->victoryPoints[Arsouf1191::CRUSADER_FORCE] > $winScore){
+            if($this->victoryPoints[Arsouf1191::CRUSADER_FORCE] >= $winScore){
                 $crusWin = true;
             }
             if($turkWin && $crusWin){

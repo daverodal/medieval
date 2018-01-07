@@ -98,6 +98,39 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
 
     }
 
+    protected function checkVictory($attackingId, $battle){
+        if(!$this->gameOver){
+
+            $crusWin = $turkWin = false;
+            $winScore = 44;
+            if($this->victoryPoints[Civitate1053::NORMAN_FORCE] >= $winScore){
+                $normanWin = true;
+            }
+            if($this->victoryPoints[Civitate1053::LOMBARD_FORCE] >= $winScore){
+                $lombardWin = true;
+            }
+            if($normanWin && $lombardWin){
+                $battle->gameRules->flashMessages[] = "Tie Game";
+                $this->winner = 0;
+                $this->gameOver = true;
+                return true;
+            }
+            if($normanWin){
+                $battle->gameRules->flashMessages[] = "Norman Win";
+                $this->winner = Civitate1053::NORMAN_FORCE;
+                $this->gameOver = true;
+                return true;
+            }
+            if($lombardWin){
+                $battle->gameRules->flashMessages[] = "Lombard Win";
+                $this->winner = Civitate1053::LOMBARD_FORCE;
+                $this->gameOver = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function gameEnded()
     {
         $battle = Battle::getBattle();

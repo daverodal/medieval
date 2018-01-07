@@ -89,7 +89,12 @@ class victoryCore extends \Wargame\VictoryCore
 
 
         $gameRules = $battle->gameRules;
-
+        if($gameRules->mode !== MOVING_MODE){
+            return;
+        }
+        if($gameRules->turn === 1 && $attackingId === 1){
+            return;
+        }
         $theUnits = $battle->force->units;
         foreach ($theUnits as $id => $unit) {
 
