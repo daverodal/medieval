@@ -181,14 +181,7 @@ class Arsouf1191 extends MedievalLandBattle
             
             // game data
             $this->gameRules->setMaxTurn(8);
-            $this->gameRules->setInitialPhaseMode(RED_DEPLOY_PHASE, DEPLOY_MODE);
-            $this->gameRules->attackingForceId = RED_FORCE; /* object oriented! */
-            $this->gameRules->defendingForceId = BLUE_FORCE; /* object oriented! */
-            $this->force->setAttackingForceId($this->gameRules->attackingForceId); /* so object oriented */
-
-            $this->gameRules->addPhaseChange(RED_DEPLOY_PHASE, BLUE_DEPLOY_PHASE, DEPLOY_MODE, BLUE_FORCE, RED_FORCE, false);
-            $this->gameRules->addPhaseChange(BLUE_DEPLOY_PHASE, BLUE_MOVE_PHASE, MOVING_MODE, BLUE_FORCE, RED_FORCE, false);
-
+            $this->deployFirstMoveSecond();
         }
     }
 }

@@ -68,7 +68,7 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
          *  Teutonic Camp
          */
 
-        $pData = $battle->getPlayerData(false);
+        $pData = $battle->getPlayerData($battle->scenario);
         $class = preg_replace("/ /", "-",$pData['forceName'][$forceId]);
         if(in_array($mapHexName,$battle->specialHexB)) {
             if ($forceId == Plowce1331::POLISH_FORCE) {

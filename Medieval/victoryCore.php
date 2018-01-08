@@ -361,7 +361,7 @@ class victoryCore extends \Wargame\VictoryCore
             $vp *= 4;
         }
 
-        $pData = $battle->getPlayerData(false);
+        $pData = $battle->getPlayerData($battle->scenario);
 
         if ($unit->forceId == 1) {
             $victorId = 2;
@@ -414,7 +414,7 @@ class victoryCore extends \Wargame\VictoryCore
         list($unit) = $args;
         $hex = $unit->hexagon;
         $battle = Battle::getBattle();
-        $pData = $battle->getPlayerData(false);
+        $pData = $battle->getPlayerData($battle->scenario);
 
         $playerOne = $pData['forceName'][1];
         $playerTwo = $pData['forceName'][2];

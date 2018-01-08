@@ -188,6 +188,67 @@ class MedievalLandBattle extends \Wargame\LandBattle
 
         static::getPlayerData($scenario);
     }
+
+    protected function deployFirstMoveSecond(){
+        $this->gameRules->setInitialPhaseMode(RED_DEPLOY_PHASE, DEPLOY_MODE);
+        $this->gameRules->attackingForceId = RED_FORCE; /* object oriented! */
+        $this->gameRules->defendingForceId = BLUE_FORCE; /* object oriented! */
+        $this->force->setAttackingForceId($this->gameRules->attackingForceId); /* so object oriented */
+
+
+        $this->gameRules->addPhaseChange(RED_DEPLOY_PHASE, BLUE_DEPLOY_PHASE, DEPLOY_MODE, BLUE_FORCE, RED_FORCE, false);
+        $this->gameRules->addPhaseChange(BLUE_DEPLOY_PHASE, BLUE_MOVE_PHASE, MOVING_MODE, BLUE_FORCE, RED_FORCE, false);
+    }
+
+    protected function deployFirstMoveFirst(){
+        $this->gameRules->setInitialPhaseMode(BLUE_DEPLOY_PHASE, DEPLOY_MODE);
+        $this->gameRules->attackingForceId = BLUE_FORCE; /* object oriented! */
+        $this->gameRules->defendingForceId = RED_FORCE; /* object oriented! */
+        $this->force->setAttackingForceId($this->gameRules->attackingForceId); /* so object oriented */
+
+
+        $this->gameRules->addPhaseChange(BLUE_DEPLOY_PHASE, RED_DEPLOY_PHASE, DEPLOY_MODE, RED_FORCE, BLUE_FORCE, false);
+        $this->gameRules->addPhaseChange(RED_DEPLOY_PHASE, BLUE_MOVE_PHASE, MOVING_MODE, BLUE_FORCE, RED_FORCE, false);
+    }
+
+    /*
+ * Called if a unit finds units in the scenario.
+ */
+    public function scenInit(){
+
+
+        $scenario = $this->scenario;
+        $unitSets = $scenario->units;
+
+        foreach($unitSets as $unitSet) {
+//            dd($unitSet);
+            if($unitSet->forceId !== BLUE_FORCE){
+                continue;
+            }
+            for ($i = 0; $i < $unitSet->num; $i++) {
+                if($unitSet->hq){
+                    UnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->commandRadius, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  "hq", 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow,MedievalUnit::BATTLE_READY, $unitSet->steps);
+                }else{
+                    UnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->range, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  $unitSet->class, 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow);
+                }
+            }
+        }
+        foreach($unitSets as $unitSet) {
+//            dd($unitSet);
+            if($unitSet->forceId !== RED_FORCE){
+                continue;
+            }
+            for ($i = 0; $i < $unitSet->num; $i++) {
+                if($unitSet->hq){
+                    UnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->commandRadius, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality, "hq", 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow,MedievalUnit::BATTLE_READY, $unitSet->steps );
+                }else{
+                    UnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->range, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  $unitSet->class, 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow);
+                }
+            }
+        }
+    }
+
+
     /*
      * terrainInit() gets called during game init, from unitInit(). It happens as a new game gets started.
      */
