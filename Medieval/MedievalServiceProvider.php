@@ -14,7 +14,7 @@ class MedievalServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        \App\Services\WargameService::addProvider(dirname(__DIR__));
+        \App\Services\WargameService::addProvider(__DIR__);
         \App\Services\WargameService::addBattleMap( __DIR__.'/Maps');
         $this->publishes([
             __DIR__.'/Grunwald1410/all.css' => public_path('vendor/wargame/medieval/css/Grunwald1410.css'),
