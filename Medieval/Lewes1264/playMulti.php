@@ -29,7 +29,13 @@
         background-position: 10% 0;
         background-size: 100%;
     }
+    .Rebel{
+        color:#26D5FF;
 
+    }
+    .Loyalist{
+        color:  red;
+    }
 </style>
 <footer class="attribution">
     By John Cassell (Internet Archive) [Public domain], <a href="https://commons.wikimedia.org/wiki/File%3AP291-Henry_III_at_the_Battle_of_Lewes.jpg">via Wikimedia Commons</a>

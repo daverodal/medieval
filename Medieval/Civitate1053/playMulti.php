@@ -29,7 +29,13 @@
         background-position: 10% 0;
         background-size: 100%;
     }
+    .Lombard{
+        color:#60B2FF;
 
+    }
+    .Norman{
+        color:  red;
+    }
 </style>
 <footer class="attribution">
     By Augustin Calmet [Public domain], <a href="https://commons.wikimedia.org/wiki/File%3AG%C3%A9rard_I%2C_Duke_of_Lorraine_Hadwiga.png">via Wikimedia Commons</a>    </div>

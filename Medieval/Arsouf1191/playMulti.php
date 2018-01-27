@@ -29,6 +29,13 @@
         background-position: center center;
         min-height:600px;
     }
+    .Turkish{
+        color:#11943A;
+
+    }
+    .Crusader{
+        color:  #CD1027;
+    }
 
 </style>
 <footer class="attribution">
