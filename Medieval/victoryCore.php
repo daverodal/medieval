@@ -391,7 +391,7 @@ class victoryCore extends \Wargame\VictoryCore
         $battle = Battle::getBattle();
         $hex = $unit->hexagon;
 
-        $battle->mapData->specialHexesVictory->{$hex->name} = "D";
+        $battle->mapData->specialHexesVictory->{$hex->name} = "D ".$unit->dieRoll;
 
 
     }
@@ -420,7 +420,7 @@ class victoryCore extends \Wargame\VictoryCore
         $playerTwo = $pData['forceName'][2];
 
         if ($hex->name) {
-            $battle->mapData->specialHexesVictory->{$hex->name} = "NE";
+            $battle->mapData->specialHexesVictory->{$hex->name} = "N ". $unit->dieRoll;
         }
     }
 

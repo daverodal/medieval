@@ -58,6 +58,7 @@ trait CRTResults
         $defUnit = $force->units[$defenderId];
         $numDefenders = $battle->combatRules->numDefenders($defenderId);
 
+        $defUnit->dieRoll = $dieRoll;
         switch ($combatResults) {
             case EX2:
                 $distance = 2;
@@ -240,7 +241,6 @@ trait CRTResults
                 break;
         }
         $defUnit->combatResults = $combatResults;
-        $defUnit->dieRoll = $dieRoll;
         $defUnit->combatNumber = 0;
         $defUnit->moveCount = 0;
 
