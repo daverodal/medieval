@@ -187,6 +187,7 @@ class MedievalLandBattle extends \Wargame\LandBattle
         };
 
         static::getPlayerData($scenario);
+        $this->combatRules->unitsBlock = true;
     }
 
     protected function deployFirstMoveSecond(){
