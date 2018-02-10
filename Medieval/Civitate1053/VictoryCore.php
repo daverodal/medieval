@@ -101,7 +101,7 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
     protected function checkVictory($attackingId, $battle){
         if(!$this->gameOver){
 
-            $crusWin = $turkWin = false;
+            $normanWin = $lombardWin = false;
             $winScore = 44;
             if($this->victoryPoints[Civitate1053::NORMAN_FORCE] >= $winScore){
                 $normanWin = true;
