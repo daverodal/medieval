@@ -328,7 +328,7 @@ class MedievalCombatResultsTable
                         }
                     }
                 }
-                if($attackDownHill){
+                if($attackDownHill && !$fireCombat){
                     $unitStrength += 1;
                     $combatLog .= "unit strength +1  for $terrainReason ";
                 }
@@ -355,7 +355,7 @@ class MedievalCombatResultsTable
                     $unitStrength -= 1;
                     $combatLog .= "unit strength -1 for $terrainReason ";
                 }else{
-                    if($attackDownHill){
+                    if($attackDownHill && !$fireCombat){
                         $unitStrength += 1;
                         $combatLog .= "unit strength +1  for $terrainReason ";
                     }
