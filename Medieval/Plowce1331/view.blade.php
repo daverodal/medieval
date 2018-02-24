@@ -20,5 +20,5 @@
 @extends('wargame::Medieval.medieval')
 
 @section('local-header')
-<link rel="stylesheet" type="text/css" href="{{mix('vendor/css/medieval/Plowce1331.css')}}">
+<link rel="stylesheet" type="text/css" href="{{mix('vendor/css/medieval/plowce1331.css')}}">
 @endsection
