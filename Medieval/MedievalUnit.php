@@ -328,6 +328,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $mapUnit->hexagon = $this->hexagon->name;
         $mapUnit->commandRadius = $this->commandRadius;
         $mapUnit->command = $this->command;
+        $mapUnit->forceMarch = $this->forceMarch;
         return $mapUnit;
     }
 

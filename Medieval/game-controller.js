@@ -22,6 +22,9 @@
 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * import {doitUnit} from "./wargame-helpers/global-funcs";
+ * import {fixHeader} from "./wargame-helpers";
  */
 import {doitUnit} from "../../wargaming/Wargame/wargame-helpers/global-funcs";
 import {fixHeader} from "../../wargaming/Wargame/wargame-helpers";
@@ -233,13 +236,7 @@ export class GameController {
                 if (units[i].forceId !== force.attackingForceId) {
                     shadow = false;
                 }
-                if (units[i].forceMarch) {
-                    $("#" + i + " .forceMarch").show();
-                    $("#" + i + " .range").hide();
-                } else {
-                    $("#" + i + " .forceMarch").hide();
-                    $("#" + i + " .range").show();
-                }
+
                 if (force.requiredDefenses && force.requiredDefenses[i] === true) {
 
                     color = "black";
@@ -284,18 +281,6 @@ export class GameController {
 
                         break;
                     case STATUS_MOVING:
-                        if (units[i].forceMarch) {
-                            $("#" + i + " .forceMarch").show();
-                            $("#" + i + " .range").hide();
-
-                            color = "#f00 #666 #666 #f00";
-                        } else {
-                            $("#" + i + " .forceMarch").hide();
-                            $("#" + i + " .range").show();
-
-                            color = "#ccc #666 #666 #ccc";
-
-                        }
                         $("#" + i).css({zIndex: 4});
                         color = "lightgreen";
                         shadow = false;
@@ -1132,6 +1117,9 @@ export class GameController {
                     newUnit.steps = mapUnits[i].steps;
                     newUnit.orgStatus = mapUnits[i].orgStatus;
                     var orgDisp = newUnit.orgStatus == 0 ? 'B' : 'D';
+                    if(mapUnits[i].forceMarch){
+                        orgDisp = 'M';
+                    }
                     newUnit.unitNumbers = newUnit.strength + ' ' + orgDisp + ' ' + (newUnit.maxMove - newUnit.moveAmountUsed);
                     newUnit.infoLen = "infoLen" + newUnit.unitNumbers.length;
                     gameUnits[i] = newUnit;

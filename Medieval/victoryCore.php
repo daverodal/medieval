@@ -402,6 +402,15 @@ class victoryCore extends \Wargame\VictoryCore
         
         $this->checkCommand($unit);
 
+        /* Deal with Forced March */
+        if(($b->gameRules->phase == RED_MOVE_PHASE || $b->gameRules->phase == BLUE_MOVE_PHASE) && $unit->forceMarch){
+            $unit->forceMarch = false;
+        }
+        if(($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE ||
+                $b->gameRules->phase == RED_COMBAT_PHASE || $b->gameRules->phase == BLUE_COMBAT_PHASE) && $unit->forceMarch){
+            $unit->status = STATUS_UNAVAIL_THIS_PHASE;
+        }
+
         if($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE){
             if($unit->isOnMap() && empty($unit->bow)){
                 $unit->status = STATUS_UNAVAIL_THIS_PHASE;
