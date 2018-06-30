@@ -18,4 +18,4 @@
     @include('wargame::Medieval.obc')
 @endsection
 
-@extends('wargame::Medieval.medieval')
+@extends('wargame::Medieval.medieval', ['topCrt'=> new \Wargame\Medieval\MedievalCombatResultsTable()])

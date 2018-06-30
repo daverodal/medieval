@@ -17,7 +17,7 @@
     @include('wargame::Medieval.obc')
 @endsection
 
-@extends('wargame::Medieval.medieval')
+@extends('wargame::Medieval.medieval', ['topCrt'=> new \Wargame\Medieval\MedievalCombatResultsTable()])
 
 @section('local-header')
 <link rel="stylesheet" type="text/css" href="{{mix('vendor/css/medieval/plowce1331.css')}}">

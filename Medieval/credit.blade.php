@@ -22,8 +22,7 @@
 <div id="credits">
     <h2><cite><?= $name ?></cite></h2>
     <h4>Design Credits</h4>
-
-    <h4>Game Design:</h4>
+    Horse Icon made by Freepik from <a target="_blank" href="http://www.flaticon.com">www.flaticon.com</a>      <h4>Game Design:</h4>
     Lance Runolfsson
     <h4>Graphics and Rules:</h4>
     <site>Lance Runolfsson</site>

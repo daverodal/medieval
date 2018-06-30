@@ -1,9 +1,9 @@
-import {initialize, fixHeader, Sync} from "../../wargaming/Wargame/wargame-helpers/";
+import {initialize, fixHeader, Sync} from "./wargame-helpers/";
 // import fixHeader from "./fix-header.js";
 //
 // import Sync from "./Sync.js";
 import {SubGameController , GameController } from "./game-controller.js";
-import "jquery.panzoom"
+import "./wargame-helpers/jquery.panzoom"
 import 'jquery-ui-bundle';
 
 const classes = {
@@ -177,6 +177,24 @@ document.addEventListener("DOMContentLoaded",function() {
             var out = DR.globalZoom.toFixed(1);
 
             $("#zoom .defaultZoom").html(out);
+        },
+        onEnd: function(a,b,c,d,e){
+            console.log("end");
+
+            var xDrag = Math.abs(a.clientX - DR.clickX);
+            var yDrag = Math.abs(a.clientY - DR.clickY);
+
+            if (xDrag > 4 || yDrag > 4) {
+                DR.dragged = true;
+            }
+            console.log("dragged " + DR.dragged)
+
+        },
+        onStart: function(a,b,c,d,e){
+            console.log("start");
+            DR.dragged = false;
+            DR.clickX = c.clientX;
+            DR.clickY = c.clientY;
         }
     });
 

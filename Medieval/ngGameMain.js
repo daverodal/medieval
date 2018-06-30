@@ -28,5 +28,5 @@ import "angular-sanitize"
 import "angular-modal-service"
 import "angular-right-click"
 import 'jquery-ui-bundle';
-import "jquery.panzoom"
+import "./wargame-helpers/jquery.panzoom"
 import "./ng-global-header.js";

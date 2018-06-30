@@ -4,11 +4,10 @@
  * The template passes $topCrt
  * that is how a templates tells us which crt to render
  */
-?>
+``?>
 <div id="crt-buttons">
         <div  ng-click="showCrtTable(crtName)" ng-repeat="(crtName, crt) in topCrt.crts"  ng-show="crtName == curCrt" class="crt-switch" id="@{{crtName}}Table">show  @{{ crt.next }} Table</div>
 </div>
-<h4>Armor Class Offset @{{ dieOffset > 0 ?  '+':'' }}@{{ dieOffset }}</h4>
 <div ng-show="crtName == curCrt" ng-repeat="(crtName, crt) in topCrt.crts">
     <h4>@{{ crtName }} Combat Results Table</h4>
     <div id="odds">

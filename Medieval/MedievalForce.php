@@ -36,6 +36,7 @@ class MedievalForce extends Force
     public $requiredDefenses;
     public $combatRequired;
     public $exchangesKill = false;
+    public $anyCombatsPossible = false;
 
     function __construct($data = null)
     {
@@ -103,6 +104,8 @@ class MedievalForce extends Force
         $battle = Battle::getBattle();
         $victory = $battle->victory;
         $victory->preRecoverUnits();
+        $this->anyCombatsPossible = false;
+
         for ($id = 0; $id < count($this->units); $id++) {
             $unit = $this->units[$id];
             $victory->preRecoverUnit($this->units[$id]);
@@ -185,14 +188,17 @@ class MedievalForce extends Force
                             $isAdjacent = $this->unitIsAdjacent($id);
                             if ($this->units[$id]->forceId == $this->attackingForceId && ($isZoc || $isAdjacent)) {
                                 $status = STATUS_READY;
+                                $this->anyCombatsPossible = true;
                             }
                             if($this->units[$id]->usedFireCombat()){
                                 $status = STATUS_UNAVAIL_THIS_PHASE;
                                 $this->units[$id]->clearFireCombat();
+                                $this->anyCombatsPossible = false;
                             }
-                            if($victory->isFlankedAttacker($id)){
-                                $status = STATUS_UNAVAIL_THIS_PHASE;
-                            }
+//                            if($victory->isFlankedAttacker($id)){
+//                                $status = STATUS_UNAVAIL_THIS_PHASE;
+//                                $this->anyCombatsPossible = false;
+//                            }
                         }
                         if ($mode == FIRE_COMBAT_SETUP_MODE) {
                             $status = STATUS_UNAVAIL_THIS_PHASE;

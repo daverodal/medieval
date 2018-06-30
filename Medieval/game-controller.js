@@ -25,10 +25,13 @@
  *
  * import {doitUnit} from "./wargame-helpers/global-funcs";
  * import {fixHeader} from "./wargame-helpers";
+ *
+ * import {doitUnit} from "../../wargaming/Wargame/wargame-helpers/global-funcs";
+ * import {fixHeader} from "../../wargaming/Wargame/wargame-helpers";
  */
-import {doitUnit} from "../../wargaming/Wargame/wargame-helpers/global-funcs";
-import {fixHeader} from "../../wargaming/Wargame/wargame-helpers";
 
+import {doitUnit} from "./wargame-helpers/global-funcs";
+import {fixHeader} from "./wargame-helpers";
 export var flashMessages = [];
 
 
@@ -57,6 +60,15 @@ export class GameController {
         $scope.topCrt = angular.fromJson(topCrtJson);
         $scope.defaultCrt = $scope.curCrt = Object.keys($scope.topCrt.crts)[0];
         $scope.resultsNames = $scope.topCrt.resultsNames;
+
+        $scope.maxPluses = 3;
+        $scope.maxMinuses = 3;
+        if($scope.topCrt.crts[$scope.curCrt].maxMinuses !== undefined) {
+            $scope.maxMinuses = $scope.topCrt.crts[$scope.curCrt].maxMinuses
+        }
+        if($scope.topCrt.crts[$scope.curCrt].maxPluses !== undefined) {
+            $scope.maxPluses = $scope.topCrt.crts[$scope.curCrt].maxPluses
+        }
 
         $scope.units = angular.fromJson(unitsJson);
         $scope.hexesMap = {};
@@ -107,8 +119,14 @@ export class GameController {
             $scope.showDetails = !$scope.showDetails;
         };
         $scope.$watch('dieOffset', function (newVal, oldVal) {
-            $scope.topScreen = 'rows' + (3 + (newVal - 0));
-            $scope.bottomScreen = 'rows' + (3 - newVal);
+            if($scope.curCrt.maxMinuses !== undefined) {
+                $scope.maxMinuses = $scope.topCrt.maxMinuses
+            }
+            if($scope.curCrt.maxPluses !== undefined) {
+                $scope.maxPluses = $scope.topCrt.maxPluses
+            }
+            $scope.topScreen = 'rows' + ($scope.maxMinuses + (newVal - 0));
+            $scope.bottomScreen = 'rows' + ($scope.maxPluses - newVal);
         });
 
         $scope.showCrtTable = function (table) {
