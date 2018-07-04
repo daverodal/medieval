@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="12px" viewBox="0 0 33 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Sword</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="6.35517229" y="4.79425278" width="20.0689651" height="1.44942526"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Sword" transform="translate(1.000000, 1.000000)">
+            <g id="Group-3" transform="translate(6.184701, 3.373473)" fill="#D8D8D8" stroke="#979797">
+                <polygon id="Path-2" points="0.0401603976 2.94865169 20.8663776 2.94865169 25.7026545 1.50287738 20.8663776 0.0571030653 0.0401603976 0.0571030653"></polygon>
+            </g>
+            <polyline id="Path-3" stroke="#979797" fill="#5E4D4D" points="6.29827985 6.38707198 6.29827985 9.6312791 4.66550869 9.6312791 4.66550869 0 6.29827985 0 6.29827985 3.22004813"></polyline>
+            <polyline id="Path-4" stroke="#979797" fill="#520E0E" points="4.70629659 3.24608964 0.0436116818 3.24608964 0.0436116818 6.26000198 4.70629659 6.26000198"></polyline>
+            <g id="Rectangle-2">
+                <use fill="#9B9B9B" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <rect stroke="#979797" stroke-width="1" x="6.85517229" y="5.29425278" width="19.0689651" height="1"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="12px" viewBox="0 0 33 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>axe</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="5.1" y="0" width="2.025" height="32"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="axe" transform="translate(16.000000, 7.000000) rotate(90.000000) translate(-16.000000, -7.000000) translate(10.000000, -9.000000)">
+            <path d="M1.69072266,0.1 C3.0666185,1.3296875 4.50304428,1.94453125 6,1.94453125 C7.49695572,1.94453125 8.99763931,1.3296875 10.5020508,0.1 C11.5006836,2.19609375 12,4.18209635 12,6.05800781 C12,7.93391927 11.5006836,9.91992188 10.5020508,12.0160156 C8.9429954,10.635026 7.44231181,9.94453125 6,9.94453125 C4.55768819,9.94453125 3.12126241,10.635026 1.69072266,12.0160156 C0.563574219,10.0481771 0,8.06217448 0,6.05800781 C0,4.05384115 0.563574219,2.06783854 1.69072266,0.1 Z" id="Path-7" stroke="#000000" fill="#FAF5E4"></path>
+            <g id="Rectangle-3">
+                <use fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <rect stroke="#000000" stroke-width="1" x="5.6" y="0.5" width="1.025" height="31"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

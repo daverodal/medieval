@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="12px" viewBox="0 0 26 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>3arrows</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="3arrows" transform="translate(4.000000, 1.000000)" fill="#000000" stroke="#000000">
+            <path d="M0.254811323,20.1686515 L0.254811323,0.088848685" id="Line-2"></path>
+            <path id="Line-2-decoration-1" d="M0.254811323,0.088848685 L-2.74518868,10.8888487 L3.25481132,10.8888487 L0.254811323,0.088848685 Z"></path>
+            <path d="M8.9183963,20.1686515 L8.9183963,0.088848685" id="Line-2"></path>
+            <path id="Line-2-decoration-1" d="M8.9183963,0.088848685 L5.9183963,10.8888487 L11.9183963,10.8888487 L8.9183963,0.088848685 Z"></path>
+            <path d="M18.0916039,20.1686515 L18.0916039,0.088848685" id="Line-2"></path>
+            <path id="Line-2-decoration-1" d="M18.0916039,0.088848685 L15.0916039,10.8888487 L21.0916039,10.8888487 L18.0916039,0.088848685 Z"></path>
+        </g>
+    </g>
+</svg>

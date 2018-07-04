@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="12px" viewBox="0 0 79 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>6arrows</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="6arrows" transform="translate(3.000000, 3.000000)" fill="#000000" stroke="#000000" stroke-width="1.26371215">
+            <path d="M1.5,23.8947368 L1.5,0.105263158" id="Line-2"></path>
+            <path id="Line-2-decoration-1" d="M1.5,0.105263158 L-1.5,10.9052632 L4.5,10.9052632 L1.5,0.105263158 Z"></path>
+            <path d="M15.5,23.8947368 L15.5,0.105263158" id="Line-2"></path>
+            <path id="Line-2-decoration-1" d="M15.5,0.105263158 L12.5,10.9052632 L18.5,10.9052632 L15.5,0.105263158 Z"></path>
+            <path d="M28.5,23.8947368 L28.5,0.105263158" id="Line-2"></path>
+            <path id="Line-2-decoration-1" d="M28.5,0.105263158 L25.5,10.9052632 L31.5,10.9052632 L28.5,0.105263158 Z"></path>
+            <path d="M44.5,23.8947368 L44.5,0.105263158" id="Line-2"></path>
+            <path id="Line-2-decoration-1" d="M44.5,0.105263158 L41.5,10.9052632 L47.5,10.9052632 L44.5,0.105263158 Z"></path>
+            <path d="M58.5,23.8947368 L58.5,0.105263158" id="Line-2"></path>
+            <path id="Line-2-decoration-1" d="M58.5,0.105263158 L55.5,10.9052632 L61.5,10.9052632 L58.5,0.105263158 Z"></path>
+            <path d="M71.5,23.8947368 L71.5,0.105263158" id="Line-2"></path>
+            <path id="Line-2-decoration-1" d="M71.5,0.105263158 L68.5,10.9052632 L74.5,10.9052632 L71.5,0.105263158 Z"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="12px" viewBox="0 0 20 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>2arrows</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="2arrows" transform="translate(3.000000, 1.000000)" fill="#000000" stroke="#000000">
+            <path d="M1.10526316,18.547619 L1.10526316,0.452380952" id="Line"></path>
+            <path id="Line-decoration-1" d="M1.10526316,0.452380952 L-1.89473684,11.252381 L4.10526316,11.252381 L1.10526316,0.452380952 Z"></path>
+            <path d="M12.8947368,18.547619 L12.8947368,0.452380952" id="Line"></path>
+            <path id="Line-decoration-1" d="M12.8947368,0.452380952 L9.89473684,11.252381 L15.8947368,11.252381 L12.8947368,0.452380952 Z"></path>
+        </g>
+    </g>
+</svg>
