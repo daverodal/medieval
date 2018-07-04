@@ -913,6 +913,8 @@ export class GameController {
             var pix = turn + (turn - 1) * 36 + 1;
             var playerName = "player" + (DR.players[gameRules.attackingForceId].replace(/ /g, '-').replace(/\//gi, '_'));
             $scope.playerName = playerName;
+            $scope.turn = gameRules.turn;
+            $scope.maxTurn = gameRules.maxTurn;
             var removeThese = "";
             $("#header").removeClass().addClass(playerName);
             $("#turnCounter").css("background", "rgb(0,128,0)");
