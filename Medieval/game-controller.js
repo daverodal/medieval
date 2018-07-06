@@ -732,7 +732,12 @@ export class GameController {
                         /* for normal 0 based crt */
 
                         if (combatRules.lastResolvedCombat.dieOffset !== undefined) {
-                            dieOffset = combatRules.lastResolvedCombat.dieOffset + 2;
+                            let dieOffsetHelper = 2;
+
+                            if(typeof $scope.topCrt.crts.normal.dieOffsetHelper !== 'undefined'){
+                               dieOffsetHelper = $scope.topCrt.crts.normal.dieOffsetHelper
+                            }
+                            dieOffset = combatRules.lastResolvedCombat.dieOffset + dieOffsetHelper;
                         }
 
                         $scope.topCrt.crts[crtName].combatRoll = combatRoll + dieOffset;
@@ -871,7 +876,8 @@ export class GameController {
 
                 }
             }
-            $("#crt h3").html(title);
+            $scope.title = title;
+            // $("#crt h3").html(title);
 
             $scope.$apply();
 
@@ -1109,6 +1115,7 @@ export class GameController {
                     } else {
                     }
                     newUnit.maxMove = mapUnits[i].maxMove;
+                    newUnit.name = mapUnits[i].name;
                     newUnit.command = mapUnits[i].command;
                     newUnit.unitDesig = mapUnits[i].unitDesig;
                     newUnit.moveAmountUsed = mapUnits[i].moveAmountUsed;

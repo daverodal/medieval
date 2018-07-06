@@ -81,7 +81,7 @@
 
                 <div id="crt">
                     <div class="close">X</div>
-                    <h3>Combat Odds</h3>
+                    <h3 ng-bind-html="title"></h3>
 
                     @section('inner-crt')
                         @include('wargame::stdIncludes.inner-crt',['topCrt'=> new \Wargame\TMCW\CombatResultsTable()])

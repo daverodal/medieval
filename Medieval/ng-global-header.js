@@ -15,7 +15,7 @@ window.x = new Sync(fetchUrl);
 var x = window.x;
 
 
-    var gameApp = angular.module('gameApp', ['ngRightClick']);
+    var gameApp = angular.module('gameApp', ['ngRightClick', 'ngSanitize']);
         gameApp.controller('GameController',  classes[GAME_NAME_DUDE]);
 
 
