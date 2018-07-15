@@ -30,7 +30,7 @@
  * import {fixHeader} from "../../wargaming/Wargame/wargame-helpers";
  */
 import {doitUnit, doitCRT} from "./wargame-helpers/imported/global-funcs";
-import {fixHeader} from "./wargame-helpers/imported/fix-header";
+import fixHeader from "./wargame-helpers/imported/fix-header";
 export var flashMessages = [];
 
 export class GameController {

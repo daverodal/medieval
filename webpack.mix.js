@@ -22,15 +22,6 @@ mix.webpackConfig({
         })
     ]});
 
-mix.copyDirectory('../wargaming/Wargame/wargame-helpers', 'wargame-helpers/imported');
-
-
-
-// mix.copy("../wargaming/Wargame/wargame-helpers/fix-header.js", "wargame-helpers/imported/fix-header.js");//js('Medieval/medieval.js', 'javascripts/medieval/medieval.js');
-// mix.copy("../wargaming/Wargame/wargame-helpers/global-funcs.js", "wargame-helpers/imported/global-funcs.js");
-// mix.copy("../wargaming/Wargame/wargame-helpers/jquery.panzoom.js", "wargame-helpers/imported/jquery.panzoom.js");
-// mix.copy("../wargaming/Wargame/wargame-helpers/Sync.js", "wargame-helpers/imported/Sync.js");
-//
 mix.setPublicPath("../game-dispatcher/public/vendor/");
 mix.setResourceRoot("/vendor/");
 mix.js('Medieval/medieval.js', 'javascripts/medieval/medieval.js');

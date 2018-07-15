@@ -1,6 +1,5 @@
-import { Sync} from "./wargame-helpers/imported/Sync";
-import { fixHeader} from "./wargame-helpers/imported/fix-header";
-import initialize from "./wargame-helpers/ng-initialize";
+import  fixHeader from "./wargame-helpers/imported/fix-header";
+import { initialize }  from "./wargame-helpers/ng-initialize";
 
 import "./wargame-helpers/imported/jquery.panzoom"
 import 'jquery-ui-bundle';

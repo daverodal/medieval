@@ -25,8 +25,10 @@
  */
 import {playAudio, playAudioBuzz, playAudioLow, counterClick, mapClick, doitOption, doitNext, nextPhaseMouseDown, doitKeypress, showCrtTable, fixItAll, doitSaveGame, rotateUnits, toggleFullScreen, doitCRT} from "./imported/global-funcs";
 import "./imported/jquery.panzoom";
+import fixHeader from './imported/fix-header';
+
 import "jquery-ui-bundle";
-export default function initialize() {
+export function initialize() {
     var zoomed = window.zoomed;
 
     /* yuck */
