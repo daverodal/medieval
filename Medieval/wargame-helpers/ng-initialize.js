@@ -23,8 +23,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {playAudio, playAudioBuzz, playAudioLow, counterClick, mapClick, doitOption, doitNext, nextPhaseMouseDown, doitKeypress, showCrtTable, fixItAll, doitSaveGame, rotateUnits, toggleFullScreen, doitCRT} from "./global-funcs";
-import "./jquery.panzoom";
+import {playAudio, playAudioBuzz, playAudioLow, counterClick, mapClick, doitOption, doitNext, nextPhaseMouseDown, doitKeypress, showCrtTable, fixItAll, doitSaveGame, rotateUnits, toggleFullScreen, doitCRT} from "../../../wargaming/Wargame/wargame-helpers/global-funcs";
+import "../../../wargaming/Wargame/wargame-helpers/jquery.panzoom";
 import "jquery-ui-bundle";
 export default function initialize() {
     var zoomed = window.zoomed;
