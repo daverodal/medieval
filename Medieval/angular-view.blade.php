@@ -96,10 +96,17 @@
                 <div id="comlinkWrapper">
                     <div id="comlink"></div>
                 </div>
-                <div id="topStatus"></div>
+                <div id="topStatus">
+                    <span id="turn">Turn @{{ turn }} of @{{ maxTurn }}</span>
+                    <span id="phase">
+                        <span ng-class="phasePlayerFace">@{{ phasePlayer }}</span> <span>@{{ phase }}</span> <span> @{{ mode }}</span>
+                    </span>
+                </div>
                 <div class="clear">
                     <span id="status"></span>
+@section('victory')
                     <span id="victory"></span>
+@show
                 </div>
             </div>
             <div id="zoomWrapper">

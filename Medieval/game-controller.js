@@ -29,12 +29,9 @@
  * import {doitUnit} from "../../wargaming/Wargame/wargame-helpers/global-funcs";
  * import {fixHeader} from "../../wargaming/Wargame/wargame-helpers";
  */
-
-import {doitUnit} from "./wargame-helpers/global-funcs";
-import {fixHeader} from "./wargame-helpers";
+import {doitUnit, doitCRT} from "../../wargaming/Wargame/wargame-helpers/global-funcs";
+import {fixHeader} from "../../wargaming/Wargame/wargame-helpers";
 export var flashMessages = [];
-
-
 
 export class GameController {
     renderCrtDetails(combat) {
@@ -134,6 +131,11 @@ export class GameController {
                 $scope.curCrt = $scope.topCrt.crts[table].next;
             }
         }
+        $scope.pinShow = (a,b,c) => {
+
+            doitCRT(a+1, b);
+            return false;
+        }
         $scope.unHoverThis = function (unit) {
             unit.style.border = '';
             unit.style.opacity = .3;
@@ -196,6 +198,7 @@ export class GameController {
         this.click();
 
         this.users();
+        this.victory();
 
     }
 
@@ -209,6 +212,12 @@ export class GameController {
                 $("#users").append(str);
             }
         });
+    }
+    victory(){
+        this.sync.register("victory", (victory, data) => {
+            this.$scope.winner = victory.winner;
+            this.$scope.vp = victory.victoryPoints;
+        })
     }
     click(){
         this.sync.register("click",  (click) => {
@@ -936,8 +945,13 @@ export class GameController {
             $(".row-1,.row1,.row3,.row5,.row7,.row9,.row11,.row13").removeClass(removeThese).addClass(playerName);
             $("#revolt-table").removeClass(removeThese).addClass(playerName);
 
-            var html = "<span id='turn'>Turn " + turn + " of " + maxTurn + "</span> ";
+            var html = "";
             var phase = gameRules.phase_name[gameRules.phase];
+            var strippedPhase = phase.replace(/<span.*\/span> */,'');
+            this.$scope.phase = strippedPhase;
+            this.$scope.mode = "";
+            this.$scope.phasePlayer = DR.players[gameRules.attackingForceId];
+            this.$scope.phasePlayerFace = "player" + DR.players[gameRules.attackingForceId].replace(/ /g, '-') + "Face";
             phase = phase.replace(/fNameOne/, DR.playerOne);
             phase = phase.replace(/playerOneFace/, "player" + DR.playerOne.replace(/ /g, '-') + "Face");
             phase = phase.replace(/playerTwoFace/, "player" + DR.playerTwo.replace(/ /g, '-') + "Face");
@@ -947,11 +961,11 @@ export class GameController {
             phase = phase.replace(/fNameTwo/, DR.playerTwo);
             phase = phase.replace(/fNameThree/, DR.playerThree);
             phase = phase.replace(/fNameFour/, DR.playerFour);
-            html += "<span id='phase'>" + phase;
+            html += phase;
             if (gameRules.mode_name[gameRules.mode]) {
                 html += " " + gameRules.mode_name[gameRules.mode];
+                this.$scope.mode = gameRules.mode_name[gameRules.mode];
             }
-            html += "</span>";
 
             switch (gameRules.phase) {
                 case BLUE_REPLACEMENT_PHASE:
@@ -967,7 +981,6 @@ export class GameController {
                 case EXCHANGING_MODE:
                     var result = data.combatRules.lastResolvedCombat.combatResult;
 
-//                        $("#floatMessage header").html(result+": Exchanging Mode");
                     $scope.floatMessage.header = result + ": Exchanging Mode";
 
                 case ATTACKER_LOSING_MODE:
@@ -976,13 +989,12 @@ export class GameController {
                     $scope.floatMessage.header = result + ": Attacker Loss Mode.";
 
 
-//                        $("#floatMessage header").html(result+": Attacker Loss Mode.");
-//                        var floatStat = $("#floatMessage p").html();
+
+
 
                     $scope.floatMessage.body += " Lose at least " + data.force.exchangeAmount + " steps";
-//                        $("#floatMessage p").html(floatStat);
 
-//            html += "<br>Lose at least "+gameRules.exchangeAmount+" strength points from the units outlined in red";
+
                     break;
 
                 case DEFENDER_LOSING_MODE:
@@ -991,30 +1003,22 @@ export class GameController {
                     $scope.floatMessage.header = result + ": Defender Loss Mode.";
 
 
-//                        $("#floatMessage header").html(result+": Attacker Loss Mode.");
-//                        var floatStat = $("#floatMessage p").html();
 
                     $scope.floatMessage.body += " Lose at least " + data.force.defenderLoseAmount + " steps";
-//                        $("#floatMessage p").html(floatStat);
 
-//            html += "<br>Lose at least "+gameRules.exchangeAmount+" strength points from the units outlined in red";
                     break
                 case ADVANCING_MODE:
-//            html += "<br>Click on one of the black units to advance it.<br>then  click on a hex to advance, or the unit to stay put.";
                     var result = data.combatRules.lastResolvedCombat.combatResult;
 
                     $scope.floatMessage.header = result + ": Advancing Mode";
 
-//                        $("#floatMessage header").html(result+": Advancing Mode");
                     break;
                 case RETREATING_MODE:
                     var result = data.combatRules.lastResolvedCombat.combatResult;
                     $scope.floatMessage.header = result + ": Retreating Mode";
 
-//                        $("#floatMessage header").html(result+": Retreating Mode");
                     break;
             }
-            $("#topStatus").html(html);
             if (status) {
                 $("#status").html(status);
                 $("#status").show();
@@ -1322,11 +1326,3 @@ function flashMessage(playerStatus) {
 }
 
 GameController.$inject =     ['$scope', '$http', 'sync', '$sce']
-
-export  class SubGameController  extends GameController{
-    moveRules(){
-        console.log("SUper");
-        super.moveRules();
-    }
-
-}

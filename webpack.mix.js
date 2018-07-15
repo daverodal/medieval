@@ -23,7 +23,7 @@ mix.webpackConfig({
     ]});
 mix.setPublicPath("../game-dispatcher/public/vendor/");
 mix.setResourceRoot("/vendor/");
-mix.js('Medieval/ngGameMain.js', 'javascripts/medieval/ngGameMain.js');
+mix.js('Medieval/medieval.js', 'javascripts/medieval/medieval.js');
 mix.sass('Medieval/Civitate1053/all.scss', 'css/medieval/civitate1053.css')
 mix.sass('Medieval/Grunwald1410/all.scss', 'css/medieval/grunwald1410.css')
 mix.sass('Medieval/Lewes1264/all.scss', 'css/medieval/lewes1264.css')
