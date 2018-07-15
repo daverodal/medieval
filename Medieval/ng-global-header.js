@@ -1,7 +1,8 @@
-import { fixHeader, Sync} from "../../wargaming/Wargame/wargame-helpers/";
+import { Sync} from "./wargame-helpers/imported/Sync";
+import { fixHeader} from "./wargame-helpers/imported/fix-header";
 import initialize from "./wargame-helpers/ng-initialize";
 
-import "../../wargaming/Wargame/wargame-helpers/jquery.panzoom"
+import "./wargame-helpers/imported/jquery.panzoom"
 import 'jquery-ui-bundle';
 
 DR.globalZoom = 1;
