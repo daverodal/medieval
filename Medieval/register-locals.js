@@ -1,4 +1,4 @@
-import { Sync} from "../../wargaming/Wargame/wargame-helpers/";
+import { Sync} from "./wargame-helpers/imported/Sync";
 window.x = new Sync(fetchUrl);
 var x = window.x;
 

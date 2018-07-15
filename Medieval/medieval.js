@@ -1,6 +1,6 @@
 import "./ngGameMain";
 import { GameController } from "./game-controller";
-import { Sync } from "../../wargaming/Wargame/wargame-helpers/";
+import { Sync } from "./wargame-helpers/imported/Sync";
 
 var gameApp = angular.module('gameApp', ['ngRightClick', 'ngSanitize']);
 
