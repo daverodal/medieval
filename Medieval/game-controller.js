@@ -199,6 +199,7 @@ export class GameController {
 
         this.users();
         this.victory();
+        this.mapSymbols();
 
     }
 
@@ -212,6 +213,9 @@ export class GameController {
                 $("#users").append(str);
             }
         });
+    }
+    mapSymbols(){
+
     }
     victory(){
         this.sync.register("victory", (victory, data) => {
