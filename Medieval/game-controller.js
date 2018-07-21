@@ -899,6 +899,10 @@ export class GameController {
     gameRules(){
         let $scope = this.$scope;
         this.sync.register("gameRules",  (gameRules, data) => {
+            this.$scope.options = false;
+            if(gameRules.options && gameRules.options.length > 0){
+                this.$scope.options = gameRules.options;
+            }
             $(".dynamicButton").hide();
             if(DR.hasHq){
                 $('#showHexes').show();
@@ -1077,6 +1081,10 @@ export class GameController {
             var newUnitHexes = {};
             var unitsMap = $scope.unitsMap;
             var newHexUnits = {};
+            $scope.deployMap = {};
+            this.freeDeplpyMap = {};
+            $scope.freeDeployMap = {}
+
             for (var i in mapUnits) {
                 var newUnit = $scope.units[i];
                 Object.keys(mapUnits[i]).forEach(function (cur, index, arr) {
@@ -1179,6 +1187,12 @@ export class GameController {
                     }
 
                     deployUnits.push(newUnit);
+                    let mapIndex = newUnit.strength+'-'+newUnit.maxMove;
+                    if(!$scope.deployMap[newUnit.strength+'-'+newUnit.maxMove]){
+                        $scope.deployMap[newUnit.strength+'-'+newUnit.maxMove] = {unit: newUnit, count: 0, units: []};
+                    }
+                    $scope.deployMap[newUnit.strength+'-'+newUnit.maxMove].count++;
+                    $scope.deployMap[newUnit.strength+'-'+newUnit.maxMove].units.push(newUnit);
                 }
 
                 if (mapUnits[i].parent.match(/gameTurn/)) {
@@ -1204,7 +1218,6 @@ export class GameController {
         });
 
     }
-
 
 }
 

@@ -253,6 +253,8 @@
     </div>
     <div id="display"></div>
 
+    @section('options')
+    @show
 </div>
 
 
