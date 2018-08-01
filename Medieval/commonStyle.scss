@@ -933,14 +933,13 @@ svg {
   background: white;
   color:black;
   border-radius: 10px;
-  left: -10px;
-  right: 18px;
+  left: 5px;
   text-align: center;
   letter-spacing: -1px;
   font-size: 70%;
   z-index: 2;
   border: 1px solid #999;
-  top:5px;
+  top:7px;
 
   &:hover {
     background: transparent;
