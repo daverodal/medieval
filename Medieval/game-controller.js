@@ -138,15 +138,15 @@ export class GameController {
             return false;
         }
         $scope.unHoverThis = function (unit) {
-            unit.style.border = '';
-            unit.style.opacity = .3;
+            unit.style.border = '3px solid goldenrod';
+            unit.style.opacity = 1.0;
             var pathToHere = unit.pathToHere;
             var path;
             for (path in pathToHere) {
                 for (var i in $scope.moveUnits) {
                     if ($scope.moveUnits[i].hex == pathToHere[path]) {
-                        $scope.moveUnits[i].style.border = '';
-                        $scope.moveUnits[i].style.opacity = .3;
+                        $scope.moveUnits[i].style.border = '3px solid goldenrod';
+                        $scope.moveUnits[i].style.opacity = 1.0;
                     }
                 }
             }
@@ -1195,8 +1195,8 @@ export class GameController {
                 newUnit.pathToHere = mapUnits[i].pathToHere;
                 newUnit.pointsLeft = mapUnits[i].pointsLeft;
                 newUnit.style = {};
-                newUnit.style.borderColor = 'rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204)';
-                newUnit.style.opacity = .6;
+                newUnit.style.borderColor = 'goldenrod';
+                newUnit.style.opacity = 1.0;
                 if(newUnit.status === STATUS_ADVANCING){
                     newUnit.style.borderColor = 'aqua';
                     newUnit.style.opacity = 1;
