@@ -1194,7 +1194,10 @@ export class GameController {
                 newUnit.pathToHere = mapUnits[i].pathToHere;
                 newUnit.pointsLeft = mapUnits[i].pointsLeft;
                 newUnit.style = {};
+                newUnit.style.borderWidth = 3;
+                newUnit.style.borderStyle = 'solid';
                 newUnit.style.borderColor = 'goldenrod';
+                newUnit.style.zIndex = 9;
                 newUnit.style.opacity = 1.0;
                 if(newUnit.status === STATUS_ADVANCING){
                     newUnit.style.borderColor = 'aqua';
