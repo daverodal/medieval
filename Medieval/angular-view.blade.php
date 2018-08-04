@@ -126,7 +126,9 @@
                     @show
                 </div>
             </div>
-            <?php //include_once "tec.php"; ?>
+
+            @section('tec')
+            @show
 
             @section('outer-units-menu')
             <div class="dropDown" id="unitsWrapper">

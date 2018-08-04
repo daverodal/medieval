@@ -1178,7 +1178,6 @@ export class GameController {
                     continue;
                 }
                 let shift = 0;
-                debugger;
 
                 let hexagon = mapUnits[i].hexagon;
 

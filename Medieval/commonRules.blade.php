@@ -142,7 +142,9 @@
                     @include('wargame::Medieval.commonMoveRules')
                 </li>
                 <li id="zocRules">
-                    @include('wargame::Medieval.commonZocRules')
+                    @section('zoc-rules')
+                        @include('wargame::Medieval.commonZocRules')
+                    @show
                 </li>
                 <li id="missileCombatRules"><span class="big">MISSILE COMBAT</span>
                     <p>Missile Combat is the first type of combat executed each turn. Units that are capable of missile combat are most skirmishers, all Bow armed, Artillery and some Wagons.</p>
