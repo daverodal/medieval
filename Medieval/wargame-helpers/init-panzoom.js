@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded",function(){
         DR = {};
     }
     DR.$ = $;
-    console.log("$ Registered");
     DR.globalZoom = 1;
     DR.playerNameMap = ["Zero", "One", "Two", "Three", "Four"];
 
@@ -109,7 +108,6 @@ document.addEventListener("DOMContentLoaded",function(){
 
     /* Sync object, well named as x don't start fetching till everything is ready.*/
 
-    console.log(DR.exported);
 
 });
 

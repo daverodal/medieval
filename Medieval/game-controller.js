@@ -797,7 +797,6 @@ export class GameController {
 
         }
         if (status) {
-            console.log(status);
             var x = unit.wrapperstyle.left.replace(/px/, '');
             var y = unit.wrapperstyle.top.replace(/px/, '');
             y /= DR.globalZoom;
@@ -1187,7 +1186,6 @@ export class GameController {
                 }
                 newUnit = angular.copy($scope.units[moveRules.movingUnitId]);
 
-                console.log(hexagon);
                 if($scope.hexesMap[hexagon]){
                     shift += $scope.hexesMap[hexagon].length;
                 }
