@@ -161,12 +161,12 @@ class WayBack extends AncientsLandBattle
         }
         for($i = 0;$i < 2;$i++) {
             FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
-                1, 1,1, 9,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'bow',1, 3, 'H');
+                1, 1,1, 9,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'cavalry',1, 3, 'H');
 
         }
         for($i = 0;$i < 2;$i++) {
             FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
-                2, 2,1, 11,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'M',1, 3, 'H', true);
+                2, 2,1, 11,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'cavalry',1, 3, 'H', true);
 
         }
 //        FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);

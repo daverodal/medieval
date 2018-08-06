@@ -695,6 +695,7 @@ export class GameController {
             case STATUS_MOVING:
                 color = "lightgreen";
                 shadow = false;
+                unit.wrapperstyle.zIndex = 9;
                 break;
 
             case STATUS_STOPPED:
