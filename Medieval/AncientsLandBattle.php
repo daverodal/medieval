@@ -88,6 +88,8 @@ class AncientsLandBattle extends \Wargame\LandBattle
             $this->victory = new Victory($data);
             $this->moveRules->moveCannotOverstack = false;
             $this->moveRules->retreatCannotOverstack = false;
+            $this->moveRules->noZocZocOneHex = false;
+            $this->moveRules->noZocZoc = false;
 
             $this->players = $data->players;
         } else {
@@ -102,8 +104,8 @@ class AncientsLandBattle extends \Wargame\LandBattle
             $this->moveRules->blockedRetreatDamages = true;
             $this->moveRules->enterZoc = "stop";
             $this->moveRules->exitZoc = 0;
-            $this->moveRules->noZocZocOneHex = true;
-            $this->moveRules->noZocZoc = true;
+            $this->moveRules->noZocZocOneHex = false;
+            $this->moveRules->noZocZoc = false;
             $this->moveRules->retreatCannotOverstack = false;
             $this->moveRules->moveCannotOverstack = false;
 

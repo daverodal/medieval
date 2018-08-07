@@ -53,6 +53,12 @@ $turkishOrange: #FFC835;
   text-align: center;
   background-color:white;
   color:white;
+  &.milita{
+    background-image: url("Images/milita.svg");
+  }
+  &.spear{
+    background-image: url("Images/spear.svg");
+  }
   &.arrow4{
     background-image: url("4arrows.svg");
   }

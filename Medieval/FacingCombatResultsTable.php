@@ -71,6 +71,8 @@ class FacingCombatResultsTable
         $this->crts->melee->maxCombatIndex = 7;
         $this->combatIndexCount = 8;
         $this->maxCombatIndex = $this->combatIndexCount - 1;
+        $this->crts->melee->dieOffsetHelper = -1;
+
         $this->dieSideCount = 6;
 
         $this->crts->missile = new stdClass();

@@ -237,6 +237,9 @@ class FacingUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $this->armorClass = $armorClass;
         $this->vp = 0;
         $this->bow = $bow;
+        if(!$this->bow){
+            $this->noZoc = true;
+        }
     }
 
 

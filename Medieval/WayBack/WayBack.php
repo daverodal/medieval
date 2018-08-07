@@ -122,13 +122,13 @@ class WayBack extends AncientsLandBattle
 
         for($i = 0;$i < 10;$i++){
             FacingUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
-                4, 4,2,3,1,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'arrow2',1, 0, 'H');
+                4, 4,2,3,1,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'spear',1, 0, 'H');
 
         }
 
         for($i = 0;$i < 10;$i++){
             FacingUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
-                3, 3,2,3,1,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'arrow2',1, 0, 'H');
+                3, 3,2,3,1,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'milita',1, 0, 'H');
 
         }
         for($i = 0;$i < 4;$i++){
@@ -144,13 +144,13 @@ class WayBack extends AncientsLandBattle
 
         for($i = 0;$i < 5;$i++) {
             FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
-                5, 5,2, 4,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'arrow4',1, 3, 'H');
+                5, 5,2, 4,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'spear',1, 3, 'H');
 
         }
 
         for($i = 0;$i < 9;$i++) {
             FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
-                2, 2,2, 3,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'arrow4',1, 3, 'H');
+                2, 2,2, 3,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'milita',1, 3, 'H');
 
         }
 
