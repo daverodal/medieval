@@ -50,11 +50,11 @@
             @{{ unit.attackStrength }} @{{ unit.defStrength }} @{{ unit.maxMove - unit.moveAmountUsed }}
         </div>
         <div class="type-wrapper"  ng-class="unit.class">
-            &nbsp;
+            @{{ unit.bow ? unit.fireStrength : '&nbsp;' }}&nbsp;
         </div>
         <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow"
              src="{{url('assets/unit-images/short-red-arrow-md.png')}}" class="counter">
-        <div ng-class="unit.infoLen" class="unit-numbers"> -@{{ unit.flankStrength }}-</div>
+        <div ng-class="unit.infoLen" class="unit-numbers">@{{ unit.bow ? unit.fireStrength : '' }} -@{{ unit.flankStrength }}-</div>
     </div>
 @endsection
 
@@ -65,7 +65,7 @@
             @{{ unit.attackStrength }} @{{ unit.defStrength }} @{{ unit.maxMove - unit.moveAmountUsed }}
         </div>
         <div class="type-wrapper" ng-class="unit.class">
-            &nbsp;
+            @{{ unit.bow ? unit.fireStrength : '&nbsp;' }}
         </div>
         <div ng-class="unit.infoLen" class="unit-numbers"> -@{{ unit.flankStrength }}-</div>
         <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
@@ -74,12 +74,12 @@
 @endsection
 
 @section('ng-ghost-unit-template')
+    <div class="shadow-mask" ng-class="unit.shadow"></div>
     <div class="counterWrapper">
-        <div ng-show="unit.bow" class="bow" style=""></div>
-        <div ng-show="unit.hq" class="hq">@{{ unit.commandRadius }}</div>
-        <div class="counter"></div>
+        @{{ unit.attackStrength }} @{{ unit.defStrength }} @{{ unit.maxMove - unit.moveAmountUsed }}
     </div>
-    <div class="range">@{{ unit.armorClass }}</div>
-    <div class="unit-numbers">@{{ unit.strength }} - @{{ unit.pointsLeft }}</div>
-    <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
+    <div class="type-wrapper" ng-class="unit.class">
+        @{{ unit.bow ? unit.fireStrength : '&nbsp;' }}
+    </div>
+    <div ng-class="unit.infoLen" class="unit-numbers"> -@{{ unit.flankStrength }}-</div>
 @endsection

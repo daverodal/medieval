@@ -46,13 +46,14 @@ $turkishOrange: #FFC835;
 
 }
 .type-wrapper{
-  font-size:12px;
+  font-size:10px;
   line-height: 12px;
   background-position:0px 0px;
   background-repeat:no-repeat;
   text-align: center;
   background-color:white;
-  color:white;
+  color:black;
+  text-align:left;
   &.milita{
     background-image: url("Images/milita.svg");
   }

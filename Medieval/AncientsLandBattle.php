@@ -129,12 +129,12 @@ class AncientsLandBattle extends \Wargame\LandBattle
                 return false;
             }else{
                 $unitType = $unit->class;
-                if($unitType === 'bow'){
+                if($unit->bow === true){
                     return count((array)$mapHex->forces[$forceId]) >= 3;
                 }
                 foreach($mapHex->forces[$forceId] as $mKey => $mVal){
                     if($this->force->units[$mKey]->class !== $unitType){
-                        if($this->force->units[$mKey]->class !== 'bow'){
+                        if($this->force->units[$mKey]->bow !== true){
                             return true;
                         }
                     }

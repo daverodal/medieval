@@ -2,7 +2,7 @@
 namespace Wargame\Medieval\WayBack;
 use Wargame\Medieval\AncientsLandBattle;
 use Wargame\Medieval\MedievalUnit;
-use Wargame\Medieval\FacingUnitFactory;
+use Wargame\Medieval\AncientUnitFactory;
 use Wargame\FacingMoveRules;
 /**
  *
@@ -39,7 +39,7 @@ class WayBack extends AncientsLandBattle
     public $specialHexesMap = ['SpecialHexA'=>1, 'SpecialHexB'=>2, 'SpecialHexC'=>1];
 
     public static function buildUnit($data = false){
-        return FacingUnitFactory::build($data);
+        return AncientUnitFactory::build($data);
     }
 
     static function getPlayerData($scenario){
@@ -63,127 +63,66 @@ class WayBack extends AncientsLandBattle
         return $data;
     }
 
-    public function scenInit(){
-
-
-        $scenario = $this->scenario;
-        $unitSets = $scenario->units;
-
-        foreach($unitSets as $unitSet) {
-//            dd($unitSet);
-            if($unitSet->forceId !== WayBack::TURKISH_FORCE){
-                continue;
-            }
-            for ($i = 0; $i < $unitSet->num; $i++) {
-                if($unitSet->hq){
-                    FacingUnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->commandRadius, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  "hq", 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow,MedievalUnit::BATTLE_READY, $unitSet->steps);
-                }else{
-                    FacingUnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->range, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  $unitSet->class, 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow);
-                }
-            }
-        }
-        foreach($unitSets as $unitSet) {
-//            dd($unitSet);
-            if($unitSet->forceId !== WayBack::CRUSADER_FORCE){
-                continue;
-            }
-            for ($i = 0; $i < $unitSet->num; $i++) {
-                if($unitSet->hq){
-                    FacingUnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->commandRadius, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality, "hq", 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow,MedievalUnit::BATTLE_READY, $unitSet->steps );
-                }else{
-                    FacingUnitFactory::create("lll", $unitSet->forceId, "deployBox", $unitSet->combat, $unitSet->movement, $unitSet->range, STATUS_CAN_DEPLOY,  $unitSet->reinforce, 1,  $unitSet->nationality,  $unitSet->class, 1, $unitSet->facing, $unitSet->armorClass, $unitSet->bow);
-                }
-            }
-        }
-    }
     public function init()
     {
-        FacingUnitFactory::$injector = $this->force;
+        AncientUnitFactory::$injector = $this->force;
         $scenario = $this->scenario;
 
-        if(isset($scenario->units)){
-//            return $this->scenInit();
-        }
-
-
-        $baseValue = 6;
-        $reducedBaseValue = 3;
-        if(!empty($scenario->weakerLoyalist)){
-            $baseValue = 5;
-            $reducedBaseValue = 2;
-        }
-        if(!empty($scenario->strongerLoyalist)){
-            $baseValue = 7;
-        }
-
-//        FacingUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",  3, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-//        FacingUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-//        FacingUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-
         for($i = 0;$i < 10;$i++){
-            FacingUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
+            AncientUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
                 4, 4,2,3,1,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'spear',1, 0, 'H');
 
         }
 
         for($i = 0;$i < 10;$i++){
-            FacingUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
+            AncientUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
                 3, 3,2,3,1,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'milita',1, 0, 'H');
 
         }
         for($i = 0;$i < 4;$i++){
-            FacingUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
+            AncientUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
                 1, 1,1,9,1,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'cavalry',1, 0, 'H');
 
         }
         for($i = 0;$i < 2;$i++){
-            FacingUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
-                0, 1,.5,5,2,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'bow',1, 0, 'H', true);
-
+            AncientUnitFactory::create("lll", self::TURKISH_FORCE, "deployBox",
+                0, 1,.5,5,2,  STATUS_CAN_DEPLOY, "A", 1, "turkish", 'bow',1, 0, 'H', true, 2);
         }
 
         for($i = 0;$i < 5;$i++) {
-            FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
+            AncientUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
                 5, 5,2, 4,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'spear',1, 3, 'H');
 
         }
 
         for($i = 0;$i < 9;$i++) {
-            FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
+            AncientUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
                 2, 2,2, 3,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'milita',1, 3, 'H');
 
         }
 
         for($i = 0;$i < 6;$i++) {
-            FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
+            AncientUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
                 6, 2,2, 4,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'sword',1, 3, 'H');
 
         }
         for($i = 0;$i < 2;$i++) {
-            FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
+            AncientUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
                 1, 1,1, 9,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'cavalry',1, 3, 'H');
 
         }
         for($i = 0;$i < 2;$i++) {
-            FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
-                2, 2,1, 11,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'cavalry',1, 3, 'H', true);
+            AncientUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
+                2, 2,1, 11,1, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'cavalry',1, 3, 'H', true, 2);
 
         }
-//        FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  2, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-//        FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  1, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-//        FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  1, 5,2,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-
-
-
-//        FacingUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",  2, 3,1,  STATUS_CAN_DEPLOY, "B", 1, "crusader", 'hq',1, false, 'H',false, MedievalUnit::BATTLE_READY, 1);
-
-
 
     }
 
     public static function myName(){
         echo __CLASS__;
     }
+
     function __construct($data = null, $arg = false, $scenario = false)
     {
 
@@ -192,7 +131,6 @@ class WayBack extends AncientsLandBattle
         $crt = new \Wargame\Medieval\FacingCombatResultsTable();
         $this->combatRules->injectCrt($crt);
 
-//        $this->gameRules->gameHasCombatResolutionMode = false;
         if ($data) {
             $this->specialHexA = $data->specialHexA;
             $this->specialHexB = $data->specialHexB;
