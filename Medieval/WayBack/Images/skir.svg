@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="12px" viewBox="0 0 29 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="5.96642655" y="2.50352996" width="19.3031447" height="1"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-4" transform="translate(-1.000000, 1.000000)">
+            <g id="Sword" transform="translate(15.903978, 6.364375) rotate(-26.000000) translate(-15.903978, -6.364375) translate(0.403978, 3.722173)">
+                <g id="Group-3" transform="translate(5.966427, 1.925792)" fill="#D8D8D8" stroke="#979797">
+                    <polygon id="Path-2" points="0.0388543601 1.63915197 20.1877919 1.63915197 24.8667905 0.83544775 20.1877919 0.0317435262 0.0388543601 0.0317435262"></polygon>
+                </g>
+                <polyline id="Path-3" stroke="#979797" fill="#5E4D4D" points="6.31739282 3.44818888 6.31739282 5.19963915 4.56256148 5.19963915 4.56256148 0 6.31739282 0 6.31739282 1.73840755"></polyline>
+                <polyline id="Path-4" stroke="#979797" fill="#520E0E" points="4.56256148 1.92579228 0 1.92579228 0 3.4664261 4.56256148 3.4664261"></polyline>
+                <g id="Rectangle-2">
+                    <use fill="#9B9B9B" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <rect stroke="#979797" stroke-width="1" x="6.46642655" y="3.00352996" width="18.3031447" height="1"></rect>
+                </g>
+            </g>
+            <path d="M15.9368421,10.5144187 L6.73684211,6.93300824 C9.78405874,5.0712025 12.8507254,4.14029963 15.9368421,4.14029963 C19.0229588,4.14029963 22.0896255,5.0712025 25.1368421,6.93300824 L15.9368421,10.5144187 Z" id="Path" stroke="#000000" stroke-width="2.25600004"></path>
+            <path d="M15.5,10.2704168 L15.5,2.64701463" id="Line-4" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+        </g>
+    </g>
+</svg>
