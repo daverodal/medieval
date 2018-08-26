@@ -56,7 +56,7 @@
         <img ng-repeat="arrow in unit.arrows" ng-style="arrow.style" class="arrow"
              src="{{url('assets/unit-images/short-red-arrow-md.png')}}" class="counter">
 
-        <div ng-class="unit.infoLen" class="unit-numbers">@{{ unit.unitNumbers }}</div>
+        <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.maxMove - unit.moveAmountUsed }}</div>
         <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
         <i ng-show="!unit.command" class="fa fa-star unit-command" aria-hidden="true"></i>
 
@@ -87,6 +87,6 @@
         <div class="counter"></div>
     </div>
     <div class="range">@{{ unit.armorClass }}</div>
-    <div class="unit-numbers">@{{ unit.strength }} - @{{ unit.pointsLeft }}</div>
+    <div class="unit-numbers">@{{ unit.strength }} @{{ unit.orgStatus == 0 ? 'B':'D' }} @{{ unit.pointsLeft }}</div>
     <div class="unit-steps">@{{ "...".slice(0, unit.steps) }}</div>
 @endsection

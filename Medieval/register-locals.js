@@ -20,6 +20,7 @@ x.register("vp", function (vp, data) {
 
 /* still doing this the non angular way :( */
 x.register("specialHexes", function(specialHexes, data) {
+    return;
     var phase = data.gameRules.phase;
     var firePhase =  (phase === BLUE_COMBAT_RES_PHASE || phase === RED_COMBAT_RES_PHASE);
     var firePhaseClass = firePhase ? "fire-phase" : "";
@@ -35,7 +36,7 @@ x.register("specialHexes", function(specialHexes, data) {
 
         if(true || newHtml != curHtml){
             var hexPos = i.replace(/\.\d*/g,'');
-            var x = hexPos.match(/x(\d*)y/)[1];
+            var x = hexPos.match(/x([-]\d*)y/)[1];
             var y = hexPos.match(/y(\d*)\D*/)[1];
             $("#special"+hexPos).remove();
             if(data.specialHexesChanges[i]){
@@ -73,7 +74,8 @@ x.register("specialHexes", function(specialHexes, data) {
             continue;
         }
         var hexPos = id.replace(/\.\d*/g,'');
-        var x = hexPos.match(/x(\d*)y/)[1];
+        var xstr = hexPos.match(/x(-?\d*)y/);
+        var x = xstr[1];
         var y = hexPos.match(/y(\d*)\D*/)[1];
         var newVP = $('<div  style="z-index:1000;border-radius:0px;border:0px;top:'+y+'px;left:'+x+'px;" class="'+firePhaseClass+' specialHexesVP">'+data.specialHexesVictory[id]+'</div>').appendTo('#gameImages');
         if(!firePhase){

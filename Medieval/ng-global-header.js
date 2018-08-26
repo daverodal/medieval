@@ -13,7 +13,7 @@ DR.showArrows = false;
 
 document.addEventListener("DOMContentLoaded",function() {
     initialize();
-    x.fetch(0);
+    // x.fetch(0);
     fixHeader();
 });
 

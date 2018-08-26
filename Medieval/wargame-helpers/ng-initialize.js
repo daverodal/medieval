@@ -291,6 +291,21 @@ export function initialize() {
         return;
     });
 
+    $("#showGermany").click(function () {
+        up ^= 1;
+        $("#germanyWrapper").toggle({effect: "blind", direction: "up", complete: fixHeader});
+        $(this).parent().parent().find(".WrapperLabel").click();
+        fixHeader();
+        return;
+    });
+
+    $("#showOman").click(function () {
+        up ^= 1;
+        $("#omanWrapper").toggle({effect: "blind", direction: "up", complete: fixHeader});
+        $(this).parent().parent().find(".WrapperLabel").click();
+        fixHeader();
+        return;
+    });
 
     $("#showDeploy").click(function () {
         up ^= 1;
@@ -432,6 +447,7 @@ export function initialize() {
     });
 
     $("#phaseClicks").on("click", ".phaseClick", function () {
+        let x = DR.sync;
         x.timeTravel = true;
         if (x.current) {
             x.current.abort();
@@ -441,6 +457,8 @@ export function initialize() {
         x.fetch(click);
     });
     $("#click-back").click(function () {
+        let x = DR.sync;
+
         x.timeTravel = true;
         if (x.current) {
             x.current.abort();
@@ -450,6 +468,8 @@ export function initialize() {
         x.fetch(click);
     });
     $("#phase-back").click(function () {
+        let x = DR.sync;
+
         x.timeTravel = true;
         if (x.current) {
             x.current.abort();
@@ -472,6 +492,8 @@ export function initialize() {
     });
 
     $("#phase-surge").click(function () {
+        let x = DR.sync;
+
         x.timeTravel = true;
         if (x.current) {
             x.current.abort();
@@ -495,6 +517,8 @@ export function initialize() {
     });
 
     $("#player-turn-back").click(function () {
+        let x = DR.sync;
+
         x.timeTravel = true;
         if (x.current) {
             x.current.abort();
@@ -517,6 +541,8 @@ export function initialize() {
     });
 
     $("#player-turn-surge").click(function () {
+        let x = DR.sync;
+
         x.timeTravel = true;
         if (x.current) {
             x.current.abort();
@@ -540,12 +566,16 @@ export function initialize() {
     });
 
     $("#click-surge").click(function () {
+        let x = DR.sync;
+
         var click = DR.currentClick;
         click++;
         x.fetch(click);
     });
 
     $("#timeBranch").click(function () {
+        let x = DR.sync;
+
         x.timeTravel = true;
         x.timeBranch = true;
         if (x.current) {
@@ -557,6 +587,8 @@ export function initialize() {
     });
 
     $("#timeFork").click(function () {
+        let x = DR.sync;
+
         x.timeTravel = true;
         x.timeFork = true;
         if (x.current) {
@@ -568,10 +600,14 @@ export function initialize() {
     });
 
     $("#phaseClicks").on("click", ".realtime", function () {
+        let x = DR.sync;
+
         x.timeTravel = false;
         x.fetch(0);
     })
     $("#timeLive").click(function () {
+        let x = DR.sync;
+
         $("#TimeWrapper .WrapperLabel").click();
         x.timeTravel = false;
         x.fetch(0);

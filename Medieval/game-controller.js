@@ -51,6 +51,7 @@ export class GameController {
     return html;
     }
     constructor($scope, $http, sync, $sce) {
+        DR.sync = sync;
         this.sync = sync;
         this.$http = $http;
         this.$scope = $scope;
@@ -201,15 +202,27 @@ export class GameController {
         this.users();
         this.victory();
         this.mapSymbols();
+        this.specialHexes();
 
+        this.sync.fetchDone(() => {
+            console.log("FetchDone ");
+            this.$scope.$apply();
+        })
     }
 
+    $onInit(){
+        this.sync.fetch(0);
+    }
+
+    specialHexes(){
+
+    }
     users(){
 
         this.sync.register("users",  (users) => {
             var str;
             $("#users").html("");
-            for (i in users) {
+            for (let i in users) {
                 str = "<li>" + users[i] + "</li>";
                 $("#users").append(str);
             }
@@ -324,7 +337,6 @@ export class GameController {
                 crtName = $scope.curCrt = $scope.defaultCrt;
             }
 
-            $scope.$apply();
 
             var title = "Combat Results ";
             var cdLine = "";
@@ -421,7 +433,6 @@ export class GameController {
                                 $scope.mapUnits[defender].oddsColor = useAltColor;
                             }
 
-                            $scope.$apply();
 
 
                             if (cD !== false && cD == i) {
@@ -445,7 +456,6 @@ export class GameController {
                         $("#crtDetails").toggle();
                     }
                     $("#status").show();
-                    $scope.$apply();
 
                 } else {
                     chattyCrt = false;
@@ -474,12 +484,10 @@ export class GameController {
 
                         var combatRoll = combatRules.lastResolvedCombat.Die;
                         $scope.dieOffset = combatRules.lastResolvedCombat.dieOffset;
-                        $scope.$apply();
 
 //                                $(".col" + combatCol).css('background-color', "rgba(255,255,1,.6)");
                         $scope.topCrt.crts[crtName].selected = combatCol - 1;
 
-                        $scope.$apply();
 
                         var pin = combatRules.lastResolvedCombat.pinCRT;
                         if (pin !== false) {
@@ -589,7 +597,6 @@ export class GameController {
 
                             $scope.mapUnits[i].oddsDisp = oddsDisp;
                             $scope.mapUnits[i].oddsColor = useAltColor;
-                            $scope.$apply();
 //                                $("#"+i).attr('title',oddsDisp).prepend('<div class="unitOdds'+useAltColor+'">'+oddsDisp+'</div>');;
                             var details = this.renderCrtDetails(combatRules.combatsToResolve[i]);
 
@@ -641,8 +648,6 @@ export class GameController {
             $scope.title = title;
             // $("#crt h3").html(title);
 
-            $scope.$apply();
-
         });
 
     }
@@ -650,6 +655,8 @@ export class GameController {
         let status = '';
         const $scope = this.$scope;
 
+        var totalAttackers = 0;
+        var totalDefenders = 0;
         const force = data.force;
         let color = "#ccc #666 #666 #ccc";
         let style = "solid";
@@ -668,6 +675,13 @@ export class GameController {
             }
         }
 
+        if (force.requiredDefenses && force.requiredDefenses[unit.id] === true) {
+
+            color = "black";
+            style = "dotted";
+            totalDefenders++;
+        }
+
         switch (unit.status) {
             case STATUS_CAN_REINFORCE:
             case STATUS_CAN_DEPLOY:
@@ -682,6 +696,11 @@ export class GameController {
 
                     shadow = false;
                 } else {
+                }
+                if (force.requiredAttacks && force.requiredAttacks[unit.id] === true) {
+                    color = "black";
+                    style = "dotted";
+                    totalAttackers++;
                 }
                 break;
             case STATUS_REINFORCING:
@@ -848,6 +867,11 @@ export class GameController {
         } else {
             unit.shadow = '';
         }
+        if (totalAttackers || totalDefenders) {
+            $("#requiredCombats").html(totalAttackers + " attackers " + totalDefenders + " defenders required");
+        } else {
+            $("#requiredCombats").html('');
+        }
     }
     force(){
         let $scope = this.$scope;
@@ -873,7 +897,7 @@ export class GameController {
             var retiredUnits = [];
             var notUsedUnits = [];
             var reinforcements = {};
-            clearHexes();
+            this.clearHexes();
 
 
             var hexesMap = $scope.hexesMap;
@@ -963,8 +987,6 @@ export class GameController {
                     if(mapUnits[i].forceMarch){
                         orgDisp = 'M';
                     }
-                    newUnit.unitNumbers = newUnit.strength + ' ' + orgDisp + ' ' + (newUnit.maxMove - newUnit.moveAmountUsed);
-                    newUnit.infoLen = "infoLen" + newUnit.unitNumbers.length;
                     this.decorateUnit(newUnit, data);
                     gameUnits[i] = newUnit;
 
@@ -1020,7 +1042,6 @@ export class GameController {
             $scope.notUsedUnits = notUsedUnits;
             $scope.reinforcements = reinforcements;
 
-            $scope.$apply();
         });
 
     }
@@ -1212,9 +1233,11 @@ export class GameController {
 
             }
             $scope.moveUnits = moveUnits;
-            $scope.$apply();
         });
 
+    }
+    clearHexes(){
+        $('#arrow-svg .range-hex').remove();
     }
 }
 

@@ -90,7 +90,7 @@ class Plowce1331 extends MedievalLandBattle
         }
 
         for($i = 0;$i < 2;$i++){
-            UnitFactory::create("lll", self::POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "A", 1, "kingdom-of-poland", 'cavalry',1, 0, 'S', true);
+            UnitFactory::create("lll", self::POLISH_FORCE, "deployBox", 3, 6,2,  STATUS_CAN_DEPLOY, "A", 1, "kingdom-of-poland", 'cavalry',1, false, 'S', true);
 
         }
 
@@ -131,7 +131,7 @@ class Plowce1331 extends MedievalLandBattle
 
 
         for($i = 0;$i < 2;$i++) {
-            UnitFactory::create("lll", self::TEUTONIC_FORCE, "gameTurn4",  2, 6,2,  STATUS_CAN_REINFORCE, "C", 4, "teutonic-order", 'cavalry',1, 3, 'S', true);
+            UnitFactory::create("lll", self::TEUTONIC_FORCE, "gameTurn4",  2, 6,2,  STATUS_CAN_REINFORCE, "C", 4, "teutonic-order", 'cavalry',1, false, 'S', true);
 
         }
 
