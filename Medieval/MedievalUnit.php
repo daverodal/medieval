@@ -153,9 +153,6 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function standOrgStatus(){
         $b = Battle::getBattle();
-        if($this->orgStatus === self::DISORDED){
-            return false;
-        }
         if($this->orgStatus === self::STAND_MODE){
             return false;
         }else {
