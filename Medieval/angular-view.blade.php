@@ -38,6 +38,39 @@
 <div ng-controller="GameController" id="main-viewer">
     <header id="header">
         <div id="headerContent">
+            <div class="right-wrapper">
+                <div id="nextPhaseWrapper">
+                    <button id="fullScreenButton"><i class="fa fa-arrows-alt"></i></button>
+                    <button class="dynamicButton combatButton" id="determinedAttackEvent">d</button>
+                    <button class="dynamicButton combatButton" id="clearCombatEvent">c</button>
+                    <button class="dynamicButton combatButton" id="shiftKey">+</button>
+                    <button class="dynamicButton hexButton" id="showHexes1">H1</button>
+                    <button class="dynamicButton hexButton" id="showHexes2">H2</button>
+                    <button class="debugButton" id="debug"><i class="fa fa-bug"></i></button>
+                    <button id="nextPhaseButton">Next Phase</button>
+                    <div id="comlinkWrapper">
+                        <div id="comlink"></div>
+                    </div>
+                </div>
+                <div id="statusWrapper">
+
+                    <div id="topStatus">
+                        <span id="turn">Turn @{{ turn }} of @{{ maxTurn }}</span>
+                        <span id="phase">
+                        <span ng-class="phasePlayerFace">@{{ phasePlayer }}</span> <span>@{{ phase }}</span> <span> @{{ mode }}</span>
+                    </span>
+                    </div>
+                    <div class="clear">
+                        <span id="status"></span>
+                        @section('victory')
+                            <span id="victory">
+                                Victory: <span class='playerOneFace'><?=$forceName[1]?></span> @{{ vp[1] }} /
+                                <span class='playerTwoFace'><?=$forceName[2]?></span> @{{ vp[2] }}
+                            </span>
+                        @show
+                    </div>
+                </div>
+            </div>
             <div id="mouseMove">mouse</div>
 
             <div class="dropDown alpha" id="menuWrapper">
@@ -92,23 +125,6 @@
             </div>
             @include("wargame::stdIncludes.timeTravel")
             <?php //include "timeTravel.php"; ?>
-            <div id="statusWrapper">
-                <div id="comlinkWrapper">
-                    <div id="comlink"></div>
-                </div>
-                <div id="topStatus">
-                    <span id="turn">Turn @{{ turn }} of @{{ maxTurn }}</span>
-                    <span id="phase">
-                        <span ng-class="phasePlayerFace">@{{ phasePlayer }}</span> <span>@{{ phase }}</span> <span> @{{ mode }}</span>
-                    </span>
-                </div>
-                <div class="clear">
-                    <span id="status"></span>
-@section('victory')
-                    <span id="victory"></span>
-@show
-                </div>
-            </div>
             <div id="zoomWrapper">
                     <span id="zoom">
                         <span class="defaultZoom">1.0</span>
@@ -147,17 +163,7 @@
             @section('outer-aux-menu')
             @show
 
-            <div id="nextPhaseWrapper">
-                <button id="nextPhaseButton">Next Phase</button>
-                <button id="fullScreenButton"><i class="fa fa-arrows-alt"></i></button>
-                <button class="dynamicButton combatButton" id="determinedAttackEvent">d</button>
-                <button class="dynamicButton combatButton" id="clearCombatEvent">c</button>
-                <button class="dynamicButton combatButton" id="shiftKey">+</button>
-                <button class="dynamicButton hexButton" id="showHexes1">H1</button>
-                <button class="dynamicButton hexButton" id="showHexes2">H2</button>
-                <button class="debugButton" id="debug"><i class="fa fa-bug"></i></button>
 
-            </div>
 
             <div style="clear:both;"></div>
 

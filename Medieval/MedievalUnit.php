@@ -24,12 +24,15 @@ namespace Wargame\Medieval;
 use Wargame\Hexagon;
 use Wargame\Battle;
 use stdClass;
+use Wargame\Constants;
 
 
 class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 {
-    const BATTLE_READY = 0;
-    const DISORDED = 1;
+    const BATTLE_READY = 'B';
+    const DISORDED = 'D';
+    const MOVE_MODE = 'M';
+    const STAND_MODE = 'S';
     /* L, M, H, K */
     public $armorClass;
     /* battle ready, reserve, disorganized */
@@ -45,6 +48,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public $commandRadius = false;
     public $fireCombat = false;
     public $unitsBlock = true;
+    public $prevOrgStatus;
 
 
     public function jsonSerialize()
@@ -68,6 +72,13 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         }
         if($this->command === false){
             $maxMove = floor($maxMove/2);
+        }
+        if($this->forceMarch){
+            if($this->class === 'cavalry'){
+                $maxMove += 2;
+            }else{
+                $maxMove += 1;
+            }
         }
         return $maxMove;
     }
@@ -140,6 +151,47 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         return $strength;
     }
 
+    public function standOrgStatus(){
+        $b = Battle::getBattle();
+        if($this->orgStatus === self::DISORDED){
+            return false;
+        }
+        if($this->orgStatus === self::STAND_MODE){
+            return false;
+        }else {
+            $this->orgStatus = self::STAND_MODE;
+        }
+        $b->moveRules->stopMove($this, true);
+        return true;
+    }
+
+
+    public function battleReadyOrgStatus(){
+        $b = Battle::getBattle();
+        if($this->orgStatus === self::DISORDED){
+            return false;
+        }
+        if($this->orgStatus === self::BATTLE_READY){
+            return false;
+        }else {
+            $this->orgStatus = self::BATTLE_READY;
+        }
+        $b->moveRules->stopMove($this, true);
+        return true;
+    }
+
+    function railMove(bool $mode){
+        $b = MedievalLandBattle::getBattle();
+        if($this->forceMarch) {
+            $b->moveRules->noZoc = true;
+            $this->prevOrgStatus = $this->orgStatus;
+            $this->orgStatus = self::MOVE_MODE;
+        }else{
+            $b->moveRules->noZoc = false;
+            $this->orgStatus = $this->prevOrgStatus;
+            $this->prevOrgStatus = false;
+        }
+    }
 
     function set($unitName,
                   $unitForceId,

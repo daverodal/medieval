@@ -196,11 +196,14 @@ h5 {
 }
 
 #headerContent {
-  /*min-height:110px;*/
+    .right-wrapper{
+      width:55%;
+      float: right;
+    }
 }
 
 #nextPhaseWrapper {
-  float: left;
+  float: right;
   .dynamicButton, #nextPhaseButton, #fullScreenButton, #forceMarchEvent, #determinedAttackEvent, #clearCombatEvent, #shiftKey, #debug {
     font-size: 28px;
     position: static;
@@ -1054,13 +1057,13 @@ svg#arrow-svg {
   color: #eee;
 }
 
-@media screen and (min-width: 1281px) {
+@media screen and (min-width: 0px) {
   .tablet {
     display: none !important;
   }
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 0px) {
   .tablet {
 
   }

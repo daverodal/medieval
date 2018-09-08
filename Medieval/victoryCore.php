@@ -395,6 +395,21 @@ class victoryCore extends \Wargame\VictoryCore
 
 
     }
+
+    public function preStartMovingUnit($arg)
+    {
+        $unit = $arg[0];
+        $battle = Battle::getBattle();
+        if (!empty($battle->scenario->supply) === true) {
+            if ($unit->forceMarch) {
+                $battle->moveRules->noZoc = true;
+
+            } else {
+                $battle->moveRules->noZoc = false;
+            }
+        }
+    }
+
     public function postRecoverUnit($args)
     {
         list($unit) = $args;
@@ -405,6 +420,7 @@ class victoryCore extends \Wargame\VictoryCore
         /* Deal with Forced March */
         if(($b->gameRules->phase == RED_MOVE_PHASE || $b->gameRules->phase == BLUE_MOVE_PHASE) && $unit->forceMarch){
             $unit->forceMarch = false;
+            $unit->railMove(false);
         }
         if(($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE ||
                 $b->gameRules->phase == RED_COMBAT_PHASE || $b->gameRules->phase == BLUE_COMBAT_PHASE) && $unit->forceMarch){

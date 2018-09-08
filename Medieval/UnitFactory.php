@@ -48,7 +48,7 @@ class UnitFactory {
                                   $facing,
                                   $armorClass,
                                   $bow = false,
-                                  $orgStatus = 0,
+                                  $orgStatus = MedievalUnit::BATTLE_READY,
                                   $numSteps = 2){
         $unit = static::build();
         $unit->set($unitName, $unitForceId, $unitHexagon, $unitStrength,$range,
