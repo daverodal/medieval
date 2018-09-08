@@ -29,7 +29,6 @@ use stdClass;
  * Time: 7:06 PM
  * To change this template use File | Settings | File Templates.
  */
-//include "supplyRulesTraits.php";
 
 class victoryCore extends \Wargame\VictoryCore
 {
@@ -173,7 +172,6 @@ class victoryCore extends \Wargame\VictoryCore
                     if($unit->armorClass === "S"){
                         continue;
                     }
-//                    echo "DefId $unitId ".$unit->armorClass." ";
                     if ($mapHex->isZoc($force->attackingForceId)) {
                         $combatId = $cR->defenders->$unitId ?? null ;
                         $requiredVal = true;
@@ -197,34 +195,16 @@ class victoryCore extends \Wargame\VictoryCore
                             $requiredVal = false;
                         }
 
-
-
-//                        $allInf = true;
-//                        var_dump($attackers);
-//                        foreach ($attackers as $attacker) {
-//                            if ($force->units[$attacker]->class !== 'inf') {
-//                                $allInf = false;
-//                            }
-//                        }
-//                        echo " a $allInf i ";
-//                        if ($unit->class === 'cavalry') {
-//                            if ($allInf) {
-//                                $requiredVal = false;
-//                            }
-//                        }
-
-
                         $allNotRequired = true;
 
                         foreach ($attackers as $attacker) {
                             $attackingUnit = $force->units[$attacker];
-
                             if (!($attackingUnit->isBow() === true ||
                             ($attackingUnit->class === 'inf' && $unit->class === 'cavalry') ||
                             $attackingUnit->armorClass === 'S' ||
                             $attackingUnit->status === STATUS_UNAVAIL_THIS_PHASE ||
+                            $attackingUnit->orgStatus === MedievalUnit::STAND_MODE ||
                             $attackingUnit->class === "hq")) {
-
                                     $allNotRequired = false;
                             }
                         }
@@ -253,6 +233,9 @@ class victoryCore extends \Wargame\VictoryCore
                                 return false;
                             }
                             if($force->units[$val]->status === STATUS_UNAVAIL_THIS_PHASE){
+                                return false;
+                            }
+                            if($force->units[$val]->orgStatus === MedievalUnit::STAND_MODE){
                                 return false;
                             }
                             return true;
@@ -412,9 +395,13 @@ class victoryCore extends \Wargame\VictoryCore
 
     public function postRecoverUnit($args)
     {
+        /* @var $unit MedievalUnit */
         list($unit) = $args;
         $b = Battle::getBattle();
-        
+
+        if(!$unit->isOnMap()){
+            return;
+        }
         $this->checkCommand($unit);
 
         /* Deal with Forced March */
@@ -426,7 +413,11 @@ class victoryCore extends \Wargame\VictoryCore
                 $b->gameRules->phase == RED_COMBAT_PHASE || $b->gameRules->phase == BLUE_COMBAT_PHASE) && $unit->forceMarch){
             $unit->status = STATUS_UNAVAIL_THIS_PHASE;
         }
-
+        if( $b->gameRules->phase == RED_COMBAT_PHASE || $b->gameRules->phase == BLUE_COMBAT_PHASE){
+            if($unit->orgStatus === MedievalUnit::STAND_MODE && $unit->forceId === $b->force->attackingForceId){
+                $unit->status = STATUS_UNAVAIL_THIS_PHASE;
+            }
+        }
         if($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE){
             if($unit->isOnMap() && empty($unit->bow)){
                 $unit->status = STATUS_UNAVAIL_THIS_PHASE;
