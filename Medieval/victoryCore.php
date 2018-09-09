@@ -99,7 +99,7 @@ class victoryCore extends \Wargame\VictoryCore
 
 
             if ($gameRules->mode === MOVING_MODE && $unit->forceId !== $battle->force->attackingForceId && $unit->class === 'hq' && $unit->hexagon->parent === "deadpile") {
-
+                $unit->resurrected = true;
                 $unit->hexagon->parent = "deployBox";
                 $unit->commandRadius = ceil($unit->commandRadius/2);
                 $unit->origStrength = ceil($unit->origStrength/2);
@@ -119,6 +119,25 @@ class victoryCore extends \Wargame\VictoryCore
             return;
         }
     }
+
+
+    public function postReinforceZones($args)
+    {
+        list($zones, $unit) = $args;
+        if ($unit->resurrected) {
+            $b = Battle::getBattle();
+            $units = $b->force->units;
+            $newZones = [];
+            foreach($units as $aUnit) {
+                if($aUnit->isOnMap() && $unit->forceId == $aUnit->forceId && $unit->id !== $aUnit->id){
+                    $newZones[] = new \Wargame\ReinforceZone($aUnit->hexagon->name, $unit->reinforceZone);
+                }
+            }
+            $zones = $newZones;
+        }
+        return array($zones);
+    }
+
 
     public function postUnsetAttacker($args){
         $this->calcFromAttackers();

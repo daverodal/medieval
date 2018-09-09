@@ -49,6 +49,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public $fireCombat = false;
     public $unitsBlock = true;
     public $prevOrgStatus;
+    public $resurrected = false;
 
 
     public function jsonSerialize()
