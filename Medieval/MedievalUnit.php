@@ -162,7 +162,9 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         }else {
             $this->orgStatus = self::STAND_MODE;
         }
-        $b->moveRules->stopMove($this, true);
+        if($b->gameRules->mode !== DEPLOY_MODE){
+            $b->moveRules->stopMove($this, true);
+        }
         return true;
     }
 
@@ -177,7 +179,9 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         }else {
             $this->orgStatus = self::BATTLE_READY;
         }
-        $b->moveRules->stopMove($this, true);
+        if($b->gameRules->mode !== DEPLOY_MODE){
+            $b->moveRules->stopMove($this, true);
+        }
         return true;
     }
 

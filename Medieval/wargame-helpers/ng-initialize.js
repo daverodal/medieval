@@ -381,6 +381,13 @@ export function initialize() {
         doitKeypress(67);
     });
 
+    $("#battleReadyEvent").on('click', function () {
+        doitKeypress(66);
+    });
+
+    $("#standEvent").on('click', function () {
+        doitKeypress(83);
+    });
     $("#showHexes").on('click', function () {
         DR.showHexes = !DR.showHexes;
         if(DR.showHexes){
