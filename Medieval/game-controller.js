@@ -231,8 +231,8 @@ export class GameController {
 
                 if(true || newHtml != curHtml){
                     var hexPos = i.replace(/\.\d*/g,'');
-                    var x = hexPos.match(/x([-]\d*)y/)[1];
-                    var y = hexPos.match(/y(\d*)\D*/)[1];
+                    var x = hexPos.match(/x(-?\d*)y/)[1];
+                    var y = hexPos.match(/y(-?\d*)\D*/)[1];
                     $("#special"+hexPos).remove();
                     if(data.specialHexesChanges[i]){
                         $("#gameImages").append('<div id="special'+hexPos+'" style="border-radius:30px;border:10px solid black;top:'+y+'px;left:'+x+'px;font-size:205px;z-index:1000;" class="'+lab[specialHexes[i]]+' specialHexes">'+lab[specialHexes[i]]+'</div>');
@@ -244,8 +244,8 @@ export class GameController {
                             if(data.specialHexesVictory[id]){
                                 var hexPos = id.replace(/\.\d*/g,'');
 
-                                var x = hexPos.match(/x(\d*)y/)[1];
-                                var y = hexPos.match(/y(\d*)\D*/)[1];
+                                var x = hexPos.match(/x(-?\d*)y/)[1];
+                                var y = hexPos.match(/y(-?\d*)\D*/)[1];
                                 var newVP = $('<div style="z-index:1000;border-radius:0px;border:0px;top:'+y+'px;left:'+x+'px;" class="'+firePhaseClass+' specialHexesVP">'+data.specialHexesVictory[id]+'</div>').insertAfter('#special'+i);
                                 if(!firePhase) {
                                     $(newVP).animate({top: y - 30, opacity: 0.0}, 1900, function () {
@@ -271,7 +271,7 @@ export class GameController {
                 var hexPos = id.replace(/\.\d*/g,'');
                 var xstr = hexPos.match(/x(-?\d*)y/);
                 var x = xstr[1];
-                var y = hexPos.match(/y(\d*)\D*/)[1];
+                var y = hexPos.match(/y(-?\d*)\D*/)[1];
                 var newVP = $('<div  style="z-index:1000;border-radius:0px;border:0px;top:'+y+'px;left:'+x+'px;" class="'+firePhaseClass+' specialHexesVP">'+data.specialHexesVictory[id]+'</div>').appendTo('#gameImages');
                 if(!firePhase){
                     $(newVP).animate({top:y-30,opacity:0.0},1900,function(){
@@ -1370,8 +1370,8 @@ function flashMessage(playerStatus) {
             if (mess.match(/^@hex/)) {
 
                 var hexPos = mess.replace(/\.\d*/g, '');
-                var x = hexPos.match(/x(\d*)y/)[1] - 0;
-                var y = hexPos.match(/y(\d*)\D*/)[1] - 0;
+                var x = hexPos.match(/x(-?\d*)y/)[1] - 0;
+                var y = hexPos.match(/y(-?\d*)\D*/)[1] - 0;
 
                 var newHtml;
                 newHtml = '<img src="'+Const_line21+'" class="row-hex">';
