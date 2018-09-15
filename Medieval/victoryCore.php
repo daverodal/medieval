@@ -120,6 +120,21 @@ class victoryCore extends \Wargame\VictoryCore
         }
     }
 
+    public function postReinforceZoneNames($args){
+        list($zoneNames, $unit, $hexagon) = $args;
+        if ($unit->resurrected) {
+            $b = Battle::getBattle();
+            $units = $b->force->units;
+            $newZones = [];
+            foreach($units as $aUnit) {
+                if($aUnit->isOnMap() && $unit->forceId == $aUnit->forceId && $unit->id !== $aUnit->id && $hexagon->name === $aUnit->hexagon->name){
+                    $newZones[] = $unit->reinforceZone;
+                }
+            }
+            return [$newZones];
+        }
+        return [$zoneNames];
+    }
 
     public function postReinforceZones($args)
     {
