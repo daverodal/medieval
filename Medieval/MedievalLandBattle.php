@@ -82,6 +82,8 @@ class MedievalLandBattle extends \Wargame\LandBattle
                 $this->terrain = new \stdClass();
             }
             $this->moveRules = new FacingMoveRules($this->force, $this->terrain, $data->moveRules);
+            $this->moveRules->oneHex = false;
+
             $this->combatRules = new CombatRules($this->force, $this->terrain, $data->combatRules);
             $this->gameRules = new GameRules($this->moveRules, $this->combatRules, $this->force, $data->gameRules);
             $this->victory = new Victory($data);
@@ -100,6 +102,7 @@ class MedievalLandBattle extends \Wargame\LandBattle
             $this->moveRules->enterZoc = "stop";
             $this->moveRules->exitZoc = 0;
             $this->moveRules->noZocZocOneHex = true;
+            $this->moveRules->oneHex = false;
             $this->moveRules->noZocZoc = true;
             $this->moveRules->retreatCannotOverstack = true;
             $this->moveRules->moveCannotOverstack = true;
@@ -147,12 +150,12 @@ class MedievalLandBattle extends \Wargame\LandBattle
         };
 
         $this->moveRules->transitStacking = function($mapHex, $forceId, $unit){
-            if($unit->orgStatus === MedievalUnit::DISORDED){
+            if($unit->orgStatus === MedievalUnit::DISORDERED){
                 return false;
             }
 
             foreach($mapHex->forces[$forceId] as $mKey => $mVal){
-                if($this->force->units[$mKey]->orgStatus === MedievalUnit::DISORDED){
+                if($this->force->units[$mKey]->orgStatus === MedievalUnit::DISORDERED){
                     return false;
                 }
             }

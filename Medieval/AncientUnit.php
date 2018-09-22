@@ -29,7 +29,7 @@ use stdClass;
 class AncientUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 {
     const BATTLE_READY = 0;
-    const DISORDED = 1;
+    const DISORDERED = 1;
     /* L, M, H, K */
     public $armorClass;
     /* battle ready, reserve, disorganized */
@@ -65,7 +65,7 @@ class AncientUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function getMaxMove(){
         $maxMove = parent::getMaxMove();
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
             $maxMove /= 2;
         }
         if($this->command === false){
@@ -215,7 +215,7 @@ class AncientUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function disorderUnit(){
         $b = Battle::getBattle();
-        $this->orgStatus = self::DISORDED;
+        $this->orgStatus = self::DISORDERED;
         $this->disorderedPlayerTurns = 2;
         $b->victory->disorderUnit($this);
     }
@@ -242,7 +242,7 @@ class AncientUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     }
 
     public function rallyCheck(){
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
 
             if($this->disorderedPlayerTurns === 0){
                 $this->orgStatus = self::BATTLE_READY;
@@ -492,5 +492,14 @@ class AncientUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $this->fireCombat = false;
     }
     /* 999999999 */
+    public function getZocNeighbors($neighbors){
+        if($this->noZoc === true){
+            return [];
+        }
+        if(isset($this->facing)){
+            $neighbors = array_slice(array_merge($neighbors,$neighbors), ($this->facing + 6 - 1)%6, 3);
+        }
+        return $neighbors;
+    }
 
 }

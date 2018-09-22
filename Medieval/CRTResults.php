@@ -17,6 +17,9 @@ trait CRTResults
         if($attUnit->status === STATUS_MUST_ADVANCE){
             return $attUnit->status;
         }
+        if($attUnit->status === STATUS_ADVANCING){
+            return $attUnit->status;
+        }
         $ret = STATUS_CAN_ADVANCE;
         if($attUnit->class === "cavalry"){
             $ret = STATUS_MUST_ADVANCE;

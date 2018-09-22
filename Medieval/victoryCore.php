@@ -417,14 +417,13 @@ class victoryCore extends \Wargame\VictoryCore
     {
         $unit = $arg[0];
         $battle = Battle::getBattle();
-        if (!empty($battle->scenario->supply) === true) {
-            if ($unit->forceMarch) {
-                $battle->moveRules->noZoc = true;
+        if ($unit->forceMarch) {
+            $battle->moveRules->noZoc = true;
 
-            } else {
-                $battle->moveRules->noZoc = false;
-            }
+        } else {
+            $battle->moveRules->noZoc = false;
         }
+
     }
 
     public function postRecoverUnit($args)
@@ -438,23 +437,26 @@ class victoryCore extends \Wargame\VictoryCore
         }
         $this->checkCommand($unit);
 
-        /* Deal with Forced March */
-        if(($b->gameRules->phase == RED_MOVE_PHASE || $b->gameRules->phase == BLUE_MOVE_PHASE) && $unit->forceMarch){
-            $unit->forceMarch = false;
-            $unit->railMove(false);
-        }
-        if(($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE ||
-                $b->gameRules->phase == RED_COMBAT_PHASE || $b->gameRules->phase == BLUE_COMBAT_PHASE) && $unit->forceMarch){
-            $unit->status = STATUS_UNAVAIL_THIS_PHASE;
-        }
-        if( $b->gameRules->phase == RED_COMBAT_PHASE || $b->gameRules->phase == BLUE_COMBAT_PHASE){
-            if($unit->orgStatus === MedievalUnit::STAND_MODE && $unit->forceId === $b->force->attackingForceId){
-                $unit->status = STATUS_UNAVAIL_THIS_PHASE;
+        if( $unit->forceId === $b->force->attackingForceId) {
+            /* Deal with Forced March */
+            if (($b->gameRules->phase == RED_MOVE_PHASE || $b->gameRules->phase == BLUE_MOVE_PHASE) && $unit->forceMarch) {
+                $unit->prevOrgStatus = $unit->orgStatus;
             }
-        }
-        if($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE){
-            if($unit->isOnMap() && empty($unit->bow)){
-                $unit->status = STATUS_UNAVAIL_THIS_PHASE;
+            if (($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE ||
+                $b->gameRules->phase == RED_COMBAT_PHASE || $b->gameRules->phase == BLUE_COMBAT_PHASE)) {
+                if ($unit->forceMarch || $unit->orgStatus === MedievalUnit::HEDGE_HOG_MODE) {
+                    $unit->status = STATUS_UNAVAIL_THIS_PHASE;
+                }
+            }
+            if ($b->gameRules->phase == RED_COMBAT_PHASE || $b->gameRules->phase == BLUE_COMBAT_PHASE) {
+                if ($unit->orgStatus === MedievalUnit::STAND_MODE){
+                    $unit->status = STATUS_UNAVAIL_THIS_PHASE;
+                }
+            }
+            if ($b->gameRules->phase === BLUE_FIRE_COMBAT_PHASE || $b->gameRules->phase === RED_FIRE_COMBAT_PHASE) {
+                if (empty($unit->bow)) {
+                    $unit->status = STATUS_UNAVAIL_THIS_PHASE;
+                }
             }
         }
     }

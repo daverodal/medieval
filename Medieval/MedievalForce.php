@@ -108,15 +108,15 @@ class MedievalForce extends Force
 
         for ($id = 0; $id < count($this->units); $id++) {
             $unit = $this->units[$id];
-            $victory->preRecoverUnit($this->units[$id]);
+            $victory->preRecoverUnit($unit);
 
-            switch ($this->units[$id]->status) {
+            switch ($unit->status) {
 
 
                 case STATUS_ELIMINATED:
                     if ($mode === REPLACING_MODE) {
-                        if ($this->units[$id]->forceId == $this->attackingForceId) {
-                            $this->units[$id]->status = STATUS_CAN_REPLACE;
+                        if ($unit->forceId == $this->attackingForceId) {
+                            $unit->status = STATUS_CAN_REPLACE;
                         }
                     }
                     break;
@@ -124,7 +124,7 @@ class MedievalForce extends Force
                     if ($mode == DEPLOY_MODE) {
                         continue;
                     }
-                    if ($this->units[$id]->isDeploy()) {
+                    if ($unit->isDeploy()) {
                         continue;
                     }
 
@@ -152,7 +152,7 @@ class MedievalForce extends Force
 
                     if ($mode === COMBINING_MODE) {
                         $status = STATUS_UNAVAIL_THIS_PHASE;
-                        if ($this->units[$id]->status === STATUS_CAN_COMBINE) {
+                        if ($unit->status === STATUS_CAN_COMBINE) {
                             $status = STATUS_READY;
                         }
                     }
@@ -163,17 +163,17 @@ class MedievalForce extends Force
 //                        $status = STATUS_STOPPED;
 //                    }
 
-                    if ($phase == BLUE_MECH_PHASE && $this->units[$id]->forceId == BLUE_FORCE && $this->units[$id]->class != "mech") {
+                    if ($phase == BLUE_MECH_PHASE && $unit->forceId == BLUE_FORCE && $unit->class != "mech") {
                         $status = STATUS_STOPPED;
                     }
-                    if ($phase == RED_MECH_PHASE && $this->units[$id]->forceId == RED_FORCE && $this->units[$id]->class != "mech") {
+                    if ($phase == RED_MECH_PHASE && $unit->forceId == RED_FORCE && $unit->class != "mech") {
                         $status = STATUS_STOPPED;
                     }
                     if ($phase == BLUE_REPLACEMENT_PHASE || $phase == RED_REPLACEMENT_PHASE || $phase == TEAL_REPLACEMENT_PHASE || $phase == PURPLE_REPLACEMENT_PHASE) {
                         $status = STATUS_STOPPED;
                         /* TODO Hack Hack Hack better answer is not isReduced, but canReduce */
-                        if ($this->units[$id]->forceId == $this->attackingForceId &&
-                            $this->units[$id]->isReduced && $this->units[$id]->class !== "gorilla"
+                        if ($unit->forceId == $this->attackingForceId &&
+                            $unit->isReduced && $unit->class !== "gorilla"
                         ) {
                             $status = STATUS_CAN_UPGRADE;
                         }
@@ -186,13 +186,13 @@ class MedievalForce extends Force
                             $isZoc = $this->unitIsZoc($id);
 
                             $isAdjacent = $this->unitIsAdjacent($id);
-                            if ($this->units[$id]->forceId == $this->attackingForceId && ($isZoc || $isAdjacent)) {
+                            if ($unit->forceId == $this->attackingForceId && ($isZoc || $isAdjacent)) {
                                 $status = STATUS_READY;
                                 $this->anyCombatsPossible = true;
                             }
-                            if($this->units[$id]->usedFireCombat()){
+                            if($unit->usedFireCombat()){
                                 $status = STATUS_UNAVAIL_THIS_PHASE;
-                                $this->units[$id]->clearFireCombat();
+                                $unit->clearFireCombat();
                                 $this->anyCombatsPossible = false;
                             }
 //                            if($victory->isFlankedAttacker($id)){
@@ -206,13 +206,13 @@ class MedievalForce extends Force
                             $isZoc = $this->unitIsZoc($id);
 
                             $isAdjacent = $this->unitIsAdjacent($id);
-                            if ($this->units[$id]->forceId == $this->attackingForceId && ($isZoc || $isAdjacent || $this->unitIsInRange($id))) {
+                            if ($unit->forceId == $this->attackingForceId && ($isZoc || $isAdjacent || $this->unitIsInRange($id))) {
                                 $status = STATUS_READY;
                             }
 
                             if($unit->isBow()){
                                 /* make sure then can fire in fire phase, maybe not good to do here */
-                                $this->units[$id]->clearFireCombat();
+                                $unit->clearFireCombat();
                             }else{
                                 $status = STATUS_UNAVAIL_THIS_PHASE;
                             }
@@ -223,10 +223,10 @@ class MedievalForce extends Force
                         }
                         if ($mode == COMBAT_RESOLUTION_MODE || $mode == FIRE_COMBAT_RESOLUTION_MODE) {
                             $status = STATUS_UNAVAIL_THIS_PHASE;
-                            if ($this->units[$id]->status == STATUS_ATTACKING ||
-                                $this->units[$id]->status == STATUS_DEFENDING
+                            if ($unit->status == STATUS_ATTACKING ||
+                                $unit->status == STATUS_DEFENDING
                             ) {
-                                $status = $this->units[$id]->status;
+                                $status = $unit->status;
                             }
 
                         }
@@ -234,27 +234,27 @@ class MedievalForce extends Force
 
 
                     if ($mode == MOVING_MODE && $moveRules->stickyZoc) {
-                        if ($this->units[$id]->forceId == $this->attackingForceId &&
+                        if ($unit->forceId == $this->attackingForceId &&
                             $this->unitIsZOC($id)
                         ) {
                             $status = STATUS_STOPPED;
                         }
                     }
 
-                    $this->units[$id]->status = $status;
-                    $this->units[$id]->moveAmountUsed = 0;
+                    $unit->status = $status;
+                    $unit->moveAmountUsed = 0;
                     break;
 
                 default:
                     break;
             }
             if ($phase === BLUE_MOVE_PHASE || $phase === RED_MOVE_PHASE || $phase == TEAL_MOVE_PHASE || $phase == PURPLE_MOVE_PHASE) {
-                $this->units[$id]->moveAmountUnused = $this->units[$id]->getMaxMove();
+                $unit->moveAmountUnused = $unit->getMaxMove();
             }
-            $this->units[$id]->combatIndex = 0;
-            $this->units[$id]->combatNumber = 0;
-            $this->units[$id]->combatResults = NE;
-            $victory->postRecoverUnit($this->units[$id]);
+            $unit->combatIndex = 0;
+            $unit->combatNumber = 0;
+            $unit->combatResults = NE;
+            $victory->postRecoverUnit($unit);
 
         }
         $victory->postRecoverUnits();
@@ -265,16 +265,18 @@ class MedievalForce extends Force
     {
         $areAdvancing = false;
         $b = Battle::getBattle();
+        $this->groomRetreatList();
         /*
          * Todo should not assign to status, should set status
          */
         for ($id = 0; $id < count($this->units); $id++) {
-            if ($this->units[$id]->status == STATUS_CAN_EXCHANGE) {
+            $unit = $this->units[$id];
+            if ($unit->status == STATUS_CAN_EXCHANGE) {
                 if(count($this->retreatHexagonList)){
-                        $this->units[$id]->status = STATUS_CAN_ADVANCE;
-                        $areAdvancing = true;
+                    $unit->status = $b->combatRules->crt->calcAdvance($unit);
+                    $areAdvancing = true;
                 }else{
-                    $this->units[$id]->status = STATUS_ATTACKED;
+                    $unit->status = STATUS_ATTACKED;
                 }
             }
         }
@@ -286,20 +288,44 @@ class MedievalForce extends Force
     {
         $areAdvancing = false;
         $b = Battle::getBattle();
+        $this->groomRetreatList();
+        $this->groomRetreatList();
+
         /*
          * Todo should not assign to status, should set status
          */
         for ($id = 0; $id < count($this->units); $id++) {
-            if ($this->units[$id]->status == STATUS_CAN_ATTACK_LOSE) {
+            $unit = $this->units[$id];
+            if ($unit->status == STATUS_CAN_ATTACK_LOSE) {
                 if (count($this->retreatHexagonList)) {
-                        $this->units[$id]->status = $b->combatRules->crt->calcAdvance($this->units[$id]);
-                        $areAdvancing = true;
-                } else {
-                    $this->units[$id]->status = STATUS_ATTACKED;
+                    $unit->status = $b->combatRules->crt->calcAdvance($unit);
+                    $areAdvancing = true;
+            }else{
+                    $unit->status = STATUS_ATTACKED;
                 }
             }
         }
         return $areAdvancing;
     }
 
+    function unitsAreAdvancing()
+    {
+        $areAdvancing = false;
+        /* @var $b ModernLandBattle */
+        $b = Battle::getBattle();
+        $this->groomRetreatList();
+        $b->combatRules->groomAdvancing();
+
+        for ($id = 0; $id < count($this->units); $id++) {
+            $unit = $this->units[$id];
+            if ($unit->status == STATUS_CAN_ADVANCE
+                || $unit->status == STATUS_ADVANCING
+                || $unit->status == STATUS_MUST_ADVANCE
+            ) {
+                $unit->status = $b->combatRules->crt->calcAdvance($unit);
+                $areAdvancing = true;
+            }
+        }
+        return $areAdvancing;
+    }
 }

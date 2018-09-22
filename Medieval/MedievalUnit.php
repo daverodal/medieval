@@ -30,9 +30,10 @@ use Wargame\Constants;
 class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 {
     const BATTLE_READY = 'B';
-    const DISORDED = 'D';
+    const DISORDERED = 'D';
     const MOVE_MODE = 'M';
     const STAND_MODE = 'S';
+    const HEDGE_HOG_MODE = 'H';
     /* L, M, H, K */
     public $armorClass;
     /* battle ready, reserve, disorganized */
@@ -68,11 +69,14 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function getMaxMove(){
         $maxMove = parent::getMaxMove();
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
             $maxMove /= 2;
         }
         if($this->command === false){
             $maxMove = floor($maxMove/2);
+        }
+        if($this->orgStatus === self::STAND_MODE || $this->orgStatus === self::HEDGE_HOG_MODE){
+            return 0;
         }
         if($this->forceMarch){
             if($this->class === 'cavalry'){
@@ -115,7 +119,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             $strength = 1;
         }
 
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
             $strength /= 2;
         }
 
@@ -154,13 +158,18 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function standOrgStatus(){
         $b = Battle::getBattle();
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
             return false;
         }
         if($this->orgStatus === self::STAND_MODE){
             return false;
         }else {
+            $name = $this->hexagon->getName();
+            $this->hexagon->parent = 'neverneverland';
+            $this->updateMoveStatus($this->hexagon, $this->getMaxMove());
+            $this->forceMarch = false;
             $this->orgStatus = self::STAND_MODE;
+            $this->updateMoveStatus(new Hexagon($name), $this->getMaxMove());
         }
         if($b->gameRules->mode !== DEPLOY_MODE){
             $b->moveRules->stopMove($this, true);
@@ -168,16 +177,42 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         return true;
     }
 
+    public function hedgeHogOrgStatus(){
+        $b = Battle::getBattle();
+        if($this->orgStatus === self::DISORDERED){
+            return false;
+        }
+        if($this->orgStatus === self::HEDGE_HOG_MODE){
+            return false;
+        }else {
+            $name = $this->hexagon->getName();
+            $this->hexagon->parent = 'neverneverland';
+            $this->updateMoveStatus($this->hexagon, $this->getMaxMove());
+            $this->forceMarch = false;
+
+            $this->orgStatus = self::HEDGE_HOG_MODE;
+            $this->updateMoveStatus(new Hexagon($name), $this->getMaxMove());
+        }
+        if($b->gameRules->mode !== DEPLOY_MODE){
+            $b->moveRules->stopMove($this, true);
+        }
+        return true;
+    }
 
     public function battleReadyOrgStatus(){
         $b = Battle::getBattle();
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
             return false;
         }
         if($this->orgStatus === self::BATTLE_READY){
             return false;
         }else {
+            $name = $this->hexagon->getName();
+            $this->hexagon->parent = 'neverneverland';
+            $this->updateMoveStatus($this->hexagon, $this->getMaxMove());
+            $this->forceMarch = false;
             $this->orgStatus = self::BATTLE_READY;
+            $this->updateMoveStatus(new Hexagon($name), $this->getMaxMove());
         }
         if($b->gameRules->mode !== DEPLOY_MODE){
             $b->moveRules->stopMove($this, true);
@@ -192,6 +227,13 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             $this->prevOrgStatus = $this->orgStatus;
             $this->orgStatus = self::MOVE_MODE;
         }else{
+            /* Once in March mode must spend whole turn getting out by selecting new orgStatus
+             *  prevOrgStatus is set to move_mode in postRecoverUnit in victoryCore.php
+             */
+            if($this->prevOrgStatus === self::MOVE_MODE){
+                $this->forceMarch = true;
+                return;
+            }
             $b->moveRules->noZoc = false;
             $this->orgStatus = $this->prevOrgStatus;
             $this->prevOrgStatus = false;
@@ -278,7 +320,10 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function disorderUnit(){
         $b = Battle::getBattle();
-        $this->orgStatus = self::DISORDED;
+        if($this->prevOrgStatus !== self::DISORDERED){
+            $this->prevOrgStatus = $this->orgStatus;
+        }
+        $this->orgStatus = self::DISORDERED;
         $this->disorderedPlayerTurns = 2;
         $b->victory->disorderUnit($this);
     }
@@ -305,10 +350,14 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     }
 
     public function rallyCheck(){
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
 
             if($this->disorderedPlayerTurns === 0){
-                $this->orgStatus = self::BATTLE_READY;
+                if($this->prevOrgStatus !== self::DISORDERED){
+                    $this->orgStatus = $this->prevOrgStatus;
+                }else{
+                    $this->orgStatus = self::BATTLE_READY;
+                }
             }
             $this->disorderedPlayerTurns--;
         }
@@ -332,7 +381,7 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
             if($this->status === STATUS_RETREATING){
                 /* Defender was not able to retreat and got a loss instead.
-                 * This makes the unit disorded.
+                 * This makes the unit DISORDERED.
                  */
                 $this->disorderUnit();
             }
@@ -570,4 +619,20 @@ class MedievalUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     }
     /* 999999999 */
 
+    public function getZocNeighbors($neighbors){
+          if($this->noZoc === true){
+              return [];
+          }
+          if(isset($this->facing)){
+              if(isset($this->orgStatus)) {
+                  $status = $this->orgStatus;
+                  if ($status === self::HEDGE_HOG_MODE) {
+                      return $neighbors;
+                  }
+              }
+            /* just the front 3 hexes */
+            $neighbors = array_slice(array_merge($neighbors,$neighbors), ($this->facing + 6 - 1)%6, 3);
+        }
+        return $neighbors;
+    }
 }

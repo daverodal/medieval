@@ -29,7 +29,7 @@ use stdClass;
 class FacingUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 {
     const BATTLE_READY = 0;
-    const DISORDED = 1;
+    const DISORDERED = 1;
     /* L, M, H, K */
     public $armorClass;
     /* battle ready, reserve, disorganized */
@@ -66,7 +66,7 @@ class FacingUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function getMaxMove(){
         $maxMove = parent::getMaxMove();
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
             $maxMove /= 2;
         }
         if($this->command === false){
@@ -107,7 +107,7 @@ class FacingUnit extends \Wargame\MovableUnit  implements \JsonSerializable
             $strength = 1;
         }
 
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
             $strength /= 2;
         }
 
@@ -248,7 +248,7 @@ class FacingUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function disorderUnit(){
         $b = Battle::getBattle();
-        $this->orgStatus = self::DISORDED;
+        $this->orgStatus = self::DISORDERED;
         $this->disorderedPlayerTurns = 2;
         $b->victory->disorderUnit($this);
     }
@@ -275,7 +275,7 @@ class FacingUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     }
 
     public function rallyCheck(){
-        if($this->orgStatus === self::DISORDED){
+        if($this->orgStatus === self::DISORDERED){
 
             if($this->disorderedPlayerTurns === 0){
                 $this->orgStatus = self::BATTLE_READY;
@@ -302,7 +302,7 @@ class FacingUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
             if($this->status === STATUS_RETREATING){
                 /* Defender was not able to retreat and got a loss instead.
-                 * This makes the unit disorded.
+                 * This makes the unit DISORDERED.
                  */
                 $this->disorderUnit();
             }
