@@ -239,7 +239,7 @@
                                 </defs>
                             </svg>
                         </div>
-                        <img id="map" alt="map" src="<?php preg_match("/http/",$mapUrl) ?   $pre = '': $pre = url('.');echo "$pre$mapUrl";?>">
+                        <img id="map" alt="map" src="<?php preg_match("/http/",$mapUrl) ?   $pre = '': $pre = url('.'); $mapUrl = preg_replace("/http[s]?:/", "", $mapUrl); echo "$pre$mapUrl";?>">
                         <?php $id = 0; ?>
 
                         @section('units')
