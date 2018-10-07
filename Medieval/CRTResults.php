@@ -38,6 +38,7 @@ trait CRTResults
 
     function applyCRTResults($defenderId, $attackers, $combatResults, $dieRoll, $force)
     {
+        dd("namral");
         $battle = \Wargame\Battle::getBattle();
 
         $distance = 1;

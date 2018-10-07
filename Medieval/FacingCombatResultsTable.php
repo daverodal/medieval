@@ -26,7 +26,6 @@ use \Wargame\Hexpart;
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 class FacingCombatResultsTable
 {
     public $combatIndexCount;
@@ -55,7 +54,7 @@ class FacingCombatResultsTable
         $this->crts = new stdClass();
         $this->crts->melee = new stdClass();
         $this->crts->melee->header  = array("1:2",  "1:1",  "2:1", "3:1", "4:1", "5:1", "6:1", "7:1", "8:1");
-        $this->crts->melee->next = 'missile';
+//        $this->crts->melee->next = 'missile';
         $this->crts->melee->maxMinuses = 0;
         $this->crts->melee->maxPluses = 1;
 
@@ -75,28 +74,28 @@ class FacingCombatResultsTable
 
         $this->dieSideCount = 6;
 
-        $this->crts->missile = new stdClass();
-        $this->crts->missile->header =  array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12+");
-        $this->crts->missile->next = 'melee';
-        $this->crts->missile->table = array(
-            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
-            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
-            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
-            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, D),
-            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, D),
-            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, D,  D,  D),
-            array(NE, NE, NE, NE, NE, NE, NE, D,  D,  D,  D,  D),
-            array(NE, NE, NE, NE, NE, NE, NE, D,  D,  D,  D,  D),
-            array(NE, NE, NE, NE, NE,  D,  D, D,  D,  D,  D,  L),
-            array(NE, NE, NE,  D,  D,  D,  D, D,  D,  D,  D,  L),
-            array(NE,  D,  D,  D,  D,  D,  D, D,  D,  L,  L,  L),
-            array(NE,  D,  D,  D,  D,  D,  D, L,  L,  L,  L,  L),
-            array( D,  D,  D,  D,  D,  D,  D, L,  L,  L,  L,  L2),
-            array( D,  D,  D,  D,  D,  L,  L, L,  L,  L,  L,  L2),
-            array( D,  D,  D,  L,  L,  L,  L, L,  L,  L2,  L2,  L2),
-            array( D,  L,  L,  L,  L,  L,  L, L,  L2,  L2,  L2,  L2),
-        );
-        $this->crts->missile->maxCombatIndex = 11;
+//        $this->crts->missile = new stdClass();
+//        $this->crts->missile->header =  array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12+");
+//        $this->crts->missile->next = 'melee';
+//        $this->crts->missile->table = array(
+//            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
+//            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
+//            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
+//            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, D),
+//            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, D),
+//            array(NE, NE, NE, NE, NE, NE, NE, NE, NE, D,  D,  D),
+//            array(NE, NE, NE, NE, NE, NE, NE, D,  D,  D,  D,  D),
+//            array(NE, NE, NE, NE, NE, NE, NE, D,  D,  D,  D,  D),
+//            array(NE, NE, NE, NE, NE,  D,  D, D,  D,  D,  D,  L),
+//            array(NE, NE, NE,  D,  D,  D,  D, D,  D,  D,  D,  L),
+//            array(NE,  D,  D,  D,  D,  D,  D, D,  D,  L,  L,  L),
+//            array(NE,  D,  D,  D,  D,  D,  D, L,  L,  L,  L,  L),
+//            array( D,  D,  D,  D,  D,  D,  D, L,  L,  L,  L,  L2),
+//            array( D,  D,  D,  D,  D,  L,  L, L,  L,  L,  L,  L2),
+//            array( D,  D,  D,  L,  L,  L,  L, L,  L,  L2,  L2,  L2),
+//            array( D,  L,  L,  L,  L,  L,  L, L,  L2,  L2,  L2,  L2),
+//        );
+//        $this->crts->missile->maxCombatIndex = 11;
 
 //        $this->combatIndexCount = 12;
 //        $this->maxCombatIndex = $this->combatIndexCount - 1;
@@ -105,12 +104,7 @@ class FacingCombatResultsTable
 
     function getCombatResults(&$Die, $index, $combat)
     {
-//        $Die += $combat->dieShift;
-        $battle = \Wargame\Battle::getBattle();
         $crt = $this->crts->melee;
-        if (($battle->gameRules->phase == BLUE_COMBAT_RES_PHASE) || ($battle->gameRules->phase == RED_COMBAT_RES_PHASE)) {
-            $crt = $this->crts->missile;
-        }
 
         return $crt->table[$Die  + $combat->dieOffset][$index];
     }
@@ -122,7 +116,7 @@ class FacingCombatResultsTable
 
     public function setCombatIndex($defenderId)
     {
-
+        $this->crrentCrt = $this->crts->melee;
         $fireCombat = false;
 
         $combatLog = "";
@@ -146,8 +140,6 @@ class FacingCombatResultsTable
         $defenders = $combats->defenders;
         $isFrozenSwamp = $isTown = $isHill = $isForest = $isSwamp = $attackerIsSunkenRoad = $isRedoubt = $isElevated = false;
 
-        $defArmor = -1;
-        $defArmorClass = 'L';
         $range = 1;
         foreach ($defenders as $defId => $defender) {
 
@@ -166,12 +158,6 @@ class FacingCombatResultsTable
                 }
             }
 
-;
-            if($this->armorValue($defendingUnit->armorClass) > $defArmor){
-                $defArmor = $this->armorValue($defendingUnit->armorClass);
-                $defArmorClass = $defendingUnit->armorClass;
-            }
-
             if($battle->terrain->terrainIs($hexpart, 'elevation1')){
                 $isElevated = 1;
             }
@@ -187,10 +173,11 @@ class FacingCombatResultsTable
         $attackers = $combats->attackers;
         $attackStrength = 0;
         $attackersCav = false;
-        $attackerArmor = 0;
 
         $flankedDefenders = [];
         $combatLog .= "Attackers<br>";
+        $isSpear = $isAx = $isCavalry = false;
+
         foreach ($attackers as $attackerId => $attacker) {
             $terrainReason = "";
             $unit = $battle->force->units[$attackerId];
@@ -210,15 +197,12 @@ class FacingCombatResultsTable
                     $flankedDefenders[$defId] = true;
                 }
 
-
             }
 
-            if($this->armorValue($unit->armorClass) > $attackerArmor){
-                $attackerArmor = $this->armorValue($unit->armorClass);
-            }
-            $unitStrength = $unit->attackStrength;
-            if($unit->class === "wagon"){
-                $unitStrength = 0;
+            if($fireCombat){
+                $unitStrength = $unit->fireStrength;
+            }else{
+                $unitStrength = $unit->attackStrength;
             }
 
             $hexagon = $unit->hexagon;
@@ -303,79 +287,19 @@ class FacingCombatResultsTable
                 }
             }
 
-            if ($unit->class == "inf" || $unit->class == "hq") {
+            if ($unit->class == "sword" || $unit->class == "ax") {
+                $isAx = true;
                 $combatLog .= "$unitStrength ".ucfirst($unit->class)." ";
-
-                if ($isSwamp || $isFrozenSwamp || $attackerIsFrozenSwamp ||  $attackerIsSwamp || $acrossRiver || $attackerIsSunkenRoad || $acrossRedoubt || $attackUpHill) {
-                    if(!$terrainReason){
-                        $terrainReason = " terrain ";
-                    }
-                    if(($attackUpHill || $isFrozenSwamp || $attackerIsFrozenSwamp) && !($isSwamp || $attackerIsSwamp || $acrossRiver || $attackerIsSunkenRoad || $acrossRedoubt)){
-//                        $unitStrength *= .75;
-//                        $combats->dieShift = -1;
-                        $unitStrength -= 1;
-                        $combatLog .= "unit strength -1  for $terrainReason ";
-                    }else{
-                        if(empty($scenario->weakRedoubts)){
-                            $unitStrength /= 2;
-                            $combatLog .= "attacker halved for $terrainReason ";
-                        }
-                    }
-                }
-                if($attackDownHill && !$fireCombat){
-                    $unitStrength += 1;
-                    $combatLog .= "unit strength +1  for $terrainReason ";
-                }
             }
 
             if ($unit->class == "cavalry") {
+                $isCavalry = true;
                 $combatLog .= "$unitStrength Cavalry ";
                 $attackersCav = true;
-
-                if ($attackerIsSwamp || $acrossRiver || !$isClear || $attackerIsSunkenRoad || $acrossRedoubt) {
-
-                    if(!$terrainReason){
-                        $terrainReason = " terrain ";
-                    }
-
-                    $unitStrength /= 2;
-                    $combatLog .= "attacker halved for $terrainReason ";
-
-
-                }elseif ( $attackUpHill || $attackerIsFrozenSwamp ) {
-
-//                    $unitStrength *= .75;
-//                    $combats->dieShift = -1;
-                    $unitStrength -= 1;
-                    $combatLog .= "unit strength -1 for $terrainReason ";
-                }else{
-                    if($attackDownHill && !$fireCombat){
-                        $unitStrength += 1;
-                        $combatLog .= "unit strength +1  for $terrainReason ";
-                    }
-                }
             }
-            if ($unit->class == "artillery" || $unit->class == "horseartillery") {
+            if ($unit->class == "milita" || $unit->class == "spear") {
                 $combatLog .= "$unitStrength ".ucfirst($unit->class)." ";
-                if($isSwamp || $acrossRedoubt || $attackUpHill || $isFrozenSwamp || $attackerIsFrozenSwamp){
-                    if($attackUpHill || $isFrozenSwamp || $attackerIsFrozenSwamp){
-//                        $unitStrength *= .75;
-//                        $combats->dieShift = -1;
-                        $unitStrength -= 1;
-                        $combatLog .= "unit strength -1 for $terrainReason ";
-                    }else{
-                        $unitStrength /= 2;
-                        $combatLog .= "attacker halved for $terrainReason ";
-                    }
-                    if(!$terrainReason){
-                        $terrainReason = " terrain ";
-                    }
-                }
-                $class = $unit->class;
-                if($class == 'horseartillery'){
-                    $class = 'artillery';
-                }
-
+                $isSpear = true;
             }
             $attackStrength += $unitStrength;
             $combatLog .= $unit->class." $unitStrength = $attackStrength<br>";
@@ -392,7 +316,21 @@ class FacingCombatResultsTable
 
             $unit = $battle->force->units[$defId];
             $class = $unit->class;
-            $unitDefense = $unit->defStrength;
+            if(!$fireCombat){
+                $unitDefense = $unit->defStrength;
+
+            }else{
+                $unitDefense = 2;
+                if($isTown){
+                    $unitDefense = 4;
+                }
+                if($isForest){
+                    $unitDefense = 3;
+                }
+                if($isHill){
+                    $unitDefense = 3;
+                }
+            }
             /*
              * map made above of units being attacked on their flank
              */
@@ -426,13 +364,13 @@ class FacingCombatResultsTable
             }
 
             $defMultiplier = 1;
-            if(($isTown && $class !== 'cavalry') || $artInNonTown || $isHill){
-                $defMultiplier = 2.0;
-                if(($isTown && $class !== 'cavalry') || $isHill){
-                    $defMultiplier = 2;
-                    $combatLog .= "defender doubled for terrain ";
-                }
-            }
+//            if(($isTown && $class !== 'cavalry') || $artInNonTown || $isHill){
+//                $defMultiplier = 2.0;
+//                if(($isTown && $class !== 'cavalry') || $isHill){
+//                    $defMultiplier = 2;
+//                    $combatLog .= "defender doubled for terrain ";
+//                }
+//            }
 
             $defenseStrength += $unitDefense * $defMultiplier;
             $combatLog .= " = $defenseStrength<br>";
@@ -443,15 +381,11 @@ class FacingCombatResultsTable
 
         $combatIndex = $this->getCombatIndex($attackStrength, $defenseStrength);
 
-        if($fireCombat) {
-            if ($combatIndex >= $this->crts->missile->maxCombatIndex) {
-                $combatIndex = $this->crts->missile->maxCombatIndex;
-            }
-        }else{
-            if ($combatIndex >= $this->crts->melee->maxCombatIndex) {
-                $combatIndex = $this->crts->melee->maxCombatIndex;
-            }
+
+        if ($combatIndex >= $this->crts->melee->maxCombatIndex) {
+            $combatIndex = $this->crts->melee->maxCombatIndex;
         }
+
 
         $combats->attackStrength = $attackStrength;
         $combats->defenseStrength = $defenseStrength;
@@ -459,34 +393,10 @@ class FacingCombatResultsTable
         if($fireCombat) {
             /* knight */
             $dieShift = 0;
-            if($defArmorClass === 'K'){
-                $dieShift = -2;
-                $combatLog .= "Kinghts Die Shift -2<br>";
-            }
-            if($defArmorClass === 'M'){
-                $combatLog .= "Medium Die Shift +1<br>";
-
-                $dieShift = 1;
-            }
-            if($defArmorClass === 'L'){
-                $combatLog .= "Light Die Shift +2<br>";
-
-                $dieShift = 2;
-            }
-            if($defArmorClass === 'S'){
-                $combatLog .= "Skirmisher Die Shift -2<br>";
-
-                $dieShift = -2;
-            }
-            /* for adjacent */
-            if($range === 1){
-                $dieShift++;
-                $combatLog .= "Adjacent Die Shift +1<br>";
-            }
             $combats->dieOffset = $dieShift;
 
         }else{
-            $combats->dieOffset = $attackerArmor - $defArmor;
+            $combats->dieOffset = 0;
 
         }
 
@@ -508,27 +418,15 @@ class FacingCombatResultsTable
         $combats->combatLog = $combatLog;
     }
 
-    function armorDiff($a, $d){
-//        $strMap = ['K'=>3, 'H'=>2, 'M'=>1, 'L'=>0];
-        return $this->armorValue($a) - $this->armorValue($d);
-    }
 
-    function armorValue($class){
-        return  ['K'=>3, 'H'=>2, 'M'=>1, 'L'=>0, 'S'=>0][$class];
-    }
 
     function getCombatIndex($attackStrength, $defenseStrength)
     {
         $battle = \Wargame\Battle::getBattle();
 
-        if (($battle->gameRules->phase == BLUE_FIRE_COMBAT_PHASE) || ($battle->gameRules->phase == RED_FIRE_COMBAT_PHASE) ||
-            $battle->gameRules->phase === BLUE_FIRE_COMBAT_PHASE_TWO || $battle->gameRules->phase === RED_FIRE_COMBAT_PHASE_TWO) {
-            return $attackStrength - 1;
-        }
         $ratio = $attackStrength / $defenseStrength;
         if ($attackStrength >= $defenseStrength) {
             $combatIndex = floor($ratio);
-
         } else {
             $combatIndex = 2 - ceil($defenseStrength / $attackStrength);
         }

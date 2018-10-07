@@ -42,6 +42,7 @@
 @endsection
 
 @section('ng-unit-template')
+    <div class="disrupted-unit" ng-if="unit.isDisrupted">D</div>
     <div id="@{{unit.id}}" ng-right-click="rightClickMe({id:unit.id})" ng-style="unit.style" class="unit rel-unit"
          ng-class="[unit.nationality, unit.class]">
         <div ng-show="unit.oddsDisp" class="unitOdds" ng-class="unit.oddsColor">@{{ unit.oddsDisp }}</div>

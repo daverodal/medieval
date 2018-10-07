@@ -80,6 +80,7 @@ class MedievalForce extends Force
 
     function applyCRTResults($defenderId, $attackers, $combatResults, $dieRoll)
     {
+        dd("medieval");
         /* Should not even get here */
         throw new Exception("Bad call to apply CrtResults ");
 
@@ -193,7 +194,6 @@ class MedievalForce extends Force
                             if($unit->usedFireCombat()){
                                 $status = STATUS_UNAVAIL_THIS_PHASE;
                                 $unit->clearFireCombat();
-                                $this->anyCombatsPossible = false;
                             }
 //                            if($victory->isFlankedAttacker($id)){
 //                                $status = STATUS_UNAVAIL_THIS_PHASE;

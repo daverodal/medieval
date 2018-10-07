@@ -90,6 +90,7 @@ class AncientsLandBattle extends \Wargame\LandBattle
             $this->moveRules->retreatCannotOverstack = false;
             $this->moveRules->noZocZocOneHex = false;
             $this->moveRules->noZocZoc = false;
+            $this->moveRules->oneHex = false;
 
             $this->players = $data->players;
         } else {
@@ -108,6 +109,7 @@ class AncientsLandBattle extends \Wargame\LandBattle
             $this->moveRules->noZocZoc = false;
             $this->moveRules->retreatCannotOverstack = false;
             $this->moveRules->moveCannotOverstack = false;
+            $this->moveRules->oneHex = false;
 
             $this->combatRules = new CombatRules($this->force, $this->terrain);
             $this->gameRules = new GameRules($this->moveRules, $this->combatRules, $this->force);

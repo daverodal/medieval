@@ -47,6 +47,7 @@ class AncientUnit extends \Wargame\MovableUnit  implements \JsonSerializable
     public $commandRadius = false;
     public $fireCombat = false;
     public $unitsBlock = true;
+    public $isDisrupted = false;
 
 
     public function jsonSerialize()
@@ -65,11 +66,8 @@ class AncientUnit extends \Wargame\MovableUnit  implements \JsonSerializable
 
     public function getMaxMove(){
         $maxMove = parent::getMaxMove();
-        if($this->orgStatus === self::DISORDERED){
-            $maxMove /= 2;
-        }
-        if($this->command === false){
-            $maxMove = floor($maxMove/2);
+        if($this->isDisrupted !== false){
+            return 0;
         }
         return $maxMove;
     }
@@ -309,9 +307,19 @@ class AncientUnit extends \Wargame\MovableUnit  implements \JsonSerializable
         $mapUnit->attackStrength = $this->attackStrength;
         $mapUnit->defstrength = $this->defStrength;
         $mapUnit->flankStrength = $this->flankStrength;
+        $mapUnit->isDisrupted = $this->isDisrupted;
         return $mapUnit;
     }
 
+    function disruptUnit($phase){
+        $this->isDisrupted = $phase;
+    }
+
+    public function attemptUnDisrupt($phase){
+        if($this->isDisrupted == $phase){
+            $this->isDisrupted = false;
+        }
+    }
     function setStatus($status)
     {
         $battle = Battle::getBattle();

@@ -120,7 +120,7 @@ class WayBack extends AncientsLandBattle
 
         for($i = 0;$i < 6;$i++) {
             AncientUnitFactory::create("lll", self::CRUSADER_FORCE, "deployBox",
-                1, 1,1, 5,2, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'skirm',1, 3, 'H', true, 1);
+                1, 1,1, 5,2, STATUS_CAN_DEPLOY, "B", 1, "crusader", 'bow',1, 3, 'H', true, 1);
 
         }
 

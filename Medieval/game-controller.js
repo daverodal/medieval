@@ -398,8 +398,11 @@ export class GameController {
 
             $scope.crtOdds = null;
             if (data.gameRules.phase == BLUE_FIRE_COMBAT_PHASE_TWO || data.gameRules.phase == RED_FIRE_COMBAT_PHASE_TWO || data.gameRules.phase == BLUE_FIRE_COMBAT_PHASE || data.gameRules.phase == RED_FIRE_COMBAT_PHASE) {
-                $scope.curCrt = 'missile';
-                crtName = 'missile';
+                if($scope.topCrt.crts.missile){
+                    $scope.curCrt = 'missile';
+                    crtName = 'missile';
+                }
+
             }
             if (data.gameRules.phase == BLUE_COMBAT_PHASE || data.gameRules.phase == RED_COMBAT_PHASE) {
                 crtName = $scope.curCrt = $scope.defaultCrt;
@@ -432,8 +435,11 @@ export class GameController {
 
 
                         if (data.gameRules.phase == BLUE_FIRE_COMBAT_PHASE || data.gameRules.phase == RED_FIRE_COMBAT_PHASE) {
-                            $scope.curCrt = 'missile';
-                            crtName = 'missile';
+                            if($scope.topCrt.crts.missile){
+                                $scope.curCrt = 'missile';
+                                crtName = 'missile';
+                            }
+
                         }
 
                         for (var loop in defenders) {
@@ -1027,6 +1033,7 @@ export class GameController {
                     newUnit.command = mapUnits[i].command;
                     newUnit.unitDesig = mapUnits[i].unitDesig;
                     newUnit.moveAmountUsed = mapUnits[i].moveAmountUsed;
+                    newUnit.isDisrupted = mapUnits[i].isDisrupted;
                     newUnit.wrapperstyle = {};
 //                        newUnit.facingstyle = {};
                     newUnit.wrapperstyle.transform = "rotate(" + mapUnits[i].facing * 60 + "deg)";

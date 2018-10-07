@@ -1,5 +1,6 @@
 <?php
 namespace Wargame\Medieval\WayBack;
+use const Grpc\STATUS_UNAVAILABLE;
 use Wargame\Battle;
 /**
  *
@@ -148,6 +149,40 @@ class VictoryCore extends \Wargame\Medieval\victoryCore
                         $theUnits[$id]->hexagon->parent = "deployBox";
                     }
                 }
+            }
+        }
+    }
+
+    /* this happens before gameRules->phase gets updated */
+//    public function nextPhase()
+//    {
+//
+//        /* @var $b Battle */
+//        $b = Battle::getBattle();
+//
+//        $theUnits = $b->force->units;
+//
+//        foreach ($theUnits as $id => $unit) {
+//            $unit->attemptUnDisrupt($b->gameRules->phase);
+//        }
+//    }
+
+    public function postRecoverUnit($args)
+    {
+        /* @var $unit MedievalUnit */
+        list($unit) = $args;
+        $b = Battle::getBattle();
+
+        if(!$unit->isOnMap()){
+            return;
+        }
+        $this->checkCommand($unit);
+
+        if( $unit->forceId === $b->force->attackingForceId) {
+
+
+            if($unit->isDisrupted !== false){
+                $unit->status = STATUS_UNAVAIL_THIS_PHASE;
             }
         }
     }
