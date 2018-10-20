@@ -80,7 +80,6 @@ class MedievalForce extends Force
 
     function applyCRTResults($defenderId, $attackers, $combatResults, $dieRoll)
     {
-        dd("medieval");
         /* Should not even get here */
         throw new Exception("Bad call to apply CrtResults ");
 
@@ -206,8 +205,9 @@ class MedievalForce extends Force
                             $isZoc = $this->unitIsZoc($id);
 
                             $isAdjacent = $this->unitIsAdjacent($id);
-                            if ($unit->forceId == $this->attackingForceId && ($isZoc || $isAdjacent || $this->unitIsInRange($id))) {
+                            if ($unit->forceId == $this->attackingForceId && $unit->isBow() && ($isZoc || $isAdjacent || $this->unitIsInRange($id))) {
                                 $status = STATUS_READY;
+                                $this->anyCombatsPossible = true;
                             }
 
                             if($unit->isBow()){
