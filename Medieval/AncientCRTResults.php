@@ -46,6 +46,10 @@ trait AncientCRTResults
         $defUnit->dieRoll = $dieRoll;
         switch ($combatResults) {
 
+            case NE:
+                $defUnit->status = STATUS_DEFENDED;
+                $defUnit->retreatCountRequired = 0;
+                break;
             case D:
                 if($battle->gameRules->phase === RED_COMBAT_PHASE || $battle->gameRules->phase === BLUE_COMBAT_PHASE){
                     $defUnit->status = STATUS_CAN_RETREAT;

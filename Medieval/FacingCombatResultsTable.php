@@ -309,71 +309,67 @@ class FacingCombatResultsTable
         $defenseStrength = 0;
         $defendersAllCav = true;
         $combatLog .= " Total Attack = $attackStrength<br>";
-        if(!$fireCombat){
-            $combatLog .= "<br>Defenders<br>";
-        }
-        foreach ($defenders as $defId => $defender) {
+        $combatLog .= "<br>Defenders<br>";
+        if($fireCombat){
+            $reason = "clear";
+            $unitDefense = 2;
+            if ($isTown) {
+                $reason = 'town';
+                $unitDefense = 4;
+            }
+            if ($isForest) {
+                $reason = 'forest';
+                $unitDefense = 3;
+            }
+            if ($isHill) {
+                $reason = 'hill';
+                $unitDefense = 3;
+            }
+            $combatLog .= "$unitDefense $reason ";
+            $defenseStrength += $unitDefense;
+        }else {
+            foreach ($defenders as $defId => $defender) {
 
-            $unit = $battle->force->units[$defId];
-            $class = $unit->class;
-            if(!$fireCombat){
+                $unit = $battle->force->units[$defId];
+                $class = $unit->class;
                 $unitDefense = $unit->defStrength;
-
-            }else{
-                $unitDefense = 2;
-                if($isTown){
-                    $unitDefense = 4;
+                /*
+                 * map made above of units being attacked on their flank
+                 */
+                if (!empty($flankedDefenders[$defId])) {
+                    $combatLog .= " Defender Flanked, halved";
+                    $unitDefense = $unit->flankStrength;
                 }
-                if($isForest){
-                    $unitDefense = 3;
+                if ($fireCombat) {
+                    $combatLog .= "$unitDefense " . $unit->class . " ";
                 }
-                if($isHill){
-                    $unitDefense = 3;
+                /* set to true to disable for not scenario->doubleArt */
+                $artInNonTown = false;
+                $notClearHex = false;
+                $hexagon = $unit->hexagon;
+                $hexpart = new Hexpart();
+                $hexpart->setXYwithNameAndType($hexagon->name, HEXAGON_CENTER);
+                $isTown = $battle->terrain->terrainIs($hexpart, 'town');
+                $isHill = $battle->terrain->terrainIs($hexpart, 'hill');
+                $isForest = $battle->terrain->terrainIs($hexpart, 'forest');
+                $isSwamp = $battle->terrain->terrainIs($hexpart, 'swamp');
+
+                $notClearHex = false;
+                if ($isTown || $isForest || $isHill || $isSwamp) {
+                    $notClearHex = true;
                 }
-            }
-            /*
-             * map made above of units being attacked on their flank
-             */
-            if(!empty($flankedDefenders[$defId])){
-                $combatLog .= " Defender Flanked, halved";
-                $unitDefense = $unit->flankStrength;
-            }
-            if(!$fireCombat){
-                $combatLog .= "$unitDefense ".$unit->class." ";
-            }
-            /* set to true to disable for not scenario->doubleArt */
-            $artInNonTown = false;
-            $notClearHex = false;
-            $hexagon = $unit->hexagon;
-            $hexpart = new Hexpart();
-            $hexpart->setXYwithNameAndType($hexagon->name, HEXAGON_CENTER);
-            $isTown = $battle->terrain->terrainIs($hexpart, 'town');
-            $isHill = $battle->terrain->terrainIs($hexpart, 'hill');
-            $isForest = $battle->terrain->terrainIs($hexpart, 'forest');
-            $isSwamp = $battle->terrain->terrainIs($hexpart, 'swamp');
 
-            $notClearHex = false;
-            if ($isTown || $isForest || $isHill || $isSwamp) {
-                $notClearHex = true;
+                $clearHex = !$notClearHex;
+
+                if ($unit->class != 'cavalry') {
+                    $defendersAllCav = false;
+                }
+
+                $defMultiplier = 1;
+
+                $defenseStrength += $unitDefense * $defMultiplier;
+                $combatLog .= " = $defenseStrength<br>";
             }
-
-            $clearHex = !$notClearHex;
-
-            if ($unit->class != 'cavalry') {
-                $defendersAllCav = false;
-            }
-
-            $defMultiplier = 1;
-//            if(($isTown && $class !== 'cavalry') || $artInNonTown || $isHill){
-//                $defMultiplier = 2.0;
-//                if(($isTown && $class !== 'cavalry') || $isHill){
-//                    $defMultiplier = 2;
-//                    $combatLog .= "defender doubled for terrain ";
-//                }
-//            }
-
-            $defenseStrength += $unitDefense * $defMultiplier;
-            $combatLog .= " = $defenseStrength<br>";
         }
 
         $combatLog .= "Total Defense = $defenseStrength<br><br>";
