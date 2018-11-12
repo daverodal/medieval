@@ -250,6 +250,8 @@
                             <header>@{{ floatMessage.header }}</header>
                             <p>@{{ floatMessage.body }}</p>
                         </div>
+                        @section('mapSymbols')
+                        @show
                     </div>
                     @show
                 </div>

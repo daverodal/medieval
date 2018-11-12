@@ -208,6 +208,19 @@ export class GameController {
             console.log("FetchDone ");
             this.$scope.$apply();
         })
+
+
+        this.sync.register('mapViewer', function (mapViewer) {
+            debugger;
+            var src = $('#map').attr('src');
+            src = src.replace(/Left.png$/, '.png');
+            if (mapViewer.trueRows) {
+                src = src.replace(/.png$/, 'Left.png');
+            }
+            $('#map').attr('src', src);
+
+
+        });
     }
 
     $onInit(){

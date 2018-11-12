@@ -291,21 +291,7 @@ export function initialize() {
         return;
     });
 
-    $("#showGermany").click(function () {
-        up ^= 1;
-        $("#germanyWrapper").toggle({effect: "blind", direction: "up", complete: fixHeader});
-        $(this).parent().parent().find(".WrapperLabel").click();
-        fixHeader();
-        return;
-    });
 
-    $("#showOman").click(function () {
-        up ^= 1;
-        $("#omanWrapper").toggle({effect: "blind", direction: "up", complete: fixHeader});
-        $(this).parent().parent().find(".WrapperLabel").click();
-        fixHeader();
-        return;
-    });
 
     $("#showDeploy").click(function () {
         up ^= 1;
