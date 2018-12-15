@@ -125,8 +125,18 @@ $vintage-unit-numbers-size:10px;
 
 }
 
+#gameImages .a-unit-wrapper{
+  position:absolute;
+  z-index:1;
 
-#crt {
+}
+.unit-wrapper{
+  .a-unit-wrapper{
+    float:left;
+  }
+}
+
+#crtWrapper #crt {
   width: 875px;
   .crt-table-name{
     display:none;
@@ -135,6 +145,10 @@ $vintage-unit-numbers-size:10px;
     width:56px;
   }
 
+
+  .roll span,  #odds span{
+    width: 56px;
+  }
 
   .shadow-wrapper{
     position:relative;

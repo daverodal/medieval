@@ -51,6 +51,7 @@ export class GameController {
     return html;
     }
     constructor($scope, $http, sync, $sce) {
+        DR.$scope = $scope;
         DR.sync = sync;
         this.sync = sync;
         this.$http = $http;
@@ -205,13 +206,11 @@ export class GameController {
         this.specialHexes();
 
         this.sync.fetchDone(() => {
-            console.log("FetchDone ");
             this.$scope.$apply();
         })
 
 
         this.sync.register('mapViewer', function (mapViewer) {
-            debugger;
             var src = $('#map').attr('src');
             src = src.replace(/Left.png$/, '.png');
             if (mapViewer.trueRows) {

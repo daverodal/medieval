@@ -75,7 +75,7 @@
             </div>
             <div id="mouseMove">mouse</div>
 
-            <div class="dropDown alpha" id="menuWrapper">
+            <div class="top-menu dropDown alpha" id="menuWrapper">
                 <h4 class="WrapperLabel" title="Game Menu"><i class="tablet fa fa-bars"></i><span class="desktop">Menu</span></h4>
 
                 <div id="menu">
@@ -94,7 +94,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="dropDown" id="infoWrapper">
+            <div class="top-menu dropDown" id="infoWrapper">
                 <h4 class="WrapperLabel" title="Game Information"><i class="tablet">i</i><span class="desktop">Info</span></h4>
                 <div id="info">
                     <div class="close">X</div>
@@ -110,7 +110,7 @@
                     </ul>
                 </div>
             </div>
-            <div id="crtWrapper">
+            <div class="top-menu" id="crtWrapper">
                 <h4 class="WrapperLabel" title='Combat Results Table'>
                     <span>CRT</span></h4>
 
@@ -127,12 +127,12 @@
             </div>
             @include("wargame::stdIncludes.timeTravel")
             <?php //include "timeTravel.php"; ?>
-            <div id="zoomWrapper">
+            <div class="top-menu" id="zoomWrapper">
                     <span id="zoom">
                         <span class="defaultZoom">1.0</span>
                     </span>
             </div>
-            <div class="dropDown">
+            <div class="dropDown top-menu">
                 <h4 class="WrapperLabel"><span class="tablet">?</span><span class="desktop">Rules</span></h4>
                 <div class="subMenu">
 
@@ -142,14 +142,14 @@
                     @show
                     @section('obc')
                     @show
+                    @section('tec')
+                    @show
                 </div>
             </div>
 
-            @section('tec')
-            @show
 
             @section('outer-units-menu')
-            <div class="dropDown" id="unitsWrapper">
+            <div class="dropDown top-menu" id="unitsWrapper">
                 <h4 class="WrapperLabel" title="Offmap Units">Units</h4>
 
                 <div id="units" class="subMenu">

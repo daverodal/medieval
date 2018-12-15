@@ -25,7 +25,7 @@
  */
 import "jquery-ui-bundle";
 import "./imported/jquery.panzoom";
-
+import {counterClick} from "./imported/global-funcs";
 document.addEventListener("DOMContentLoaded",function(){
 
 
@@ -44,50 +44,57 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
     var $panzoom = $('#gameContainer').panzoom({
-        cursor: "normal", animate: true, maxScale: 2.0, minScale: .3, onPan: function (e, panzoom, e2, e3, e4) {
+        cursor: "normal", animate: true, maxScale: 2.0, minScale: .3,
+        onPan: function (e, panzoom, e2, e3, e4) {
 
-            var event = e;
-            var xDrag;
-            var yDrag;
-            if (event.type === 'touchmove') {
-                // xDrag = Math.abs(event.touches[0].clientX - DR.clickX);
-                // yDrag = Math.abs(event.touches[0].clientY - DR.clickY);
-                // if (xDrag > 40 || yDrag > 40) {
-                //     // DR.dragged = true;
-                // }
-            } else {
-                // xDrag = Math.abs(event.clientX - DR.clickX);
-                // yDrag = Math.abs(event.clientY - DR.clickY);
-                // if (xDrag > 4 || yDrag > 4) {
-                //     // DR.dragged = true;
-                // }
-            }
-            // DR.dragged = true;
         },
         onZoom: function (e, p, q) {
             DR.globalZoom = q;
+            DR.doingZoom = true;
             var out = DR.globalZoom.toFixed(1);
 
             $("#zoom .defaultZoom").html(out);
         },
         onEnd: function(a,b,c,d,e){
 
-            var xDrag = Math.abs(a.clientX - DR.clickX);
-            var yDrag = Math.abs(a.clientY - DR.clickY);
+            let top = $(a.target).parents('.unit');
+            let id = null;
+            if(top.length){
+                id = top.attr('id');
+            }
+
+            let clientX = a.clientX;
+            let clientY = a.clientY;
+            if(a.originalEvent.changedTouches) {
+                clientX = a.originalEvent.changedTouches[0].clientX;
+                clientY = a.originalEvent.changedTouches[0].clientY;
+            }
+
+            var xDrag = Math.abs(clientX - DR.clickX);
+            var yDrag = Math.abs(clientY - DR.clickY);
 
             if (xDrag > 4 || yDrag > 4) {
                 DR.dragged = true;
+            }else{
+                if(DR.doingZoom !== true && a.originalEvent.changedTouches && id !== null){
+                    DR.$scope.clickMe(id, a);
+                }
             }
 
-
+            DR.doingZoom = false;
         },
         onStart: function(a,b,c,d,e){
+
+            DR.doingZoom = false;
+
             DR.dragged = false;
-            DR.clickX = c.clientX;
-            DR.clickY = c.clientY;
-
-
-
+            if(c.changedTouches){
+                DR.clickX = c.changedTouches[0].clientX;
+                DR.clickY = c.changedTouches[0].clientY;
+            }else{
+                DR.clickX = c.clientX;
+                DR.clickY = c.clientY;
+            }
         }
     });
 

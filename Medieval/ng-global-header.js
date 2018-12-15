@@ -1,5 +1,5 @@
 import  fixHeader from "./wargame-helpers/imported/fix-header";
-import { initialize }  from "./wargame-helpers/ng-initialize";
+import initialize from "./wargame-helpers/imported/initialize";
 
 import "./wargame-helpers/imported/jquery.panzoom"
 import 'jquery-ui-bundle';
@@ -13,7 +13,6 @@ DR.showArrows = false;
 
 document.addEventListener("DOMContentLoaded",function() {
     initialize();
-    // x.fetch(0);
     fixHeader();
 });
 

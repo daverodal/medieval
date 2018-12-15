@@ -10,7 +10,7 @@
         const fetchUrl = "<?=url("wargame/fetch/$wargame");?>";
     }
     const wargame = "<?=$wargame?>";
-    const rowSvg = "<?php echo asset('vendor/wargame/genre/images/rowxHex.svg');?>";
+    const rowSvg = "<?php echo asset('vendor/wargame/genre/images/rowHex.svg');?>";
     const imagesBase = "<?php echo asset('vendor/wargame/genre/images/');?>";
 
     const mapSymbolsBefore = "<?php echo asset('js');?>/";
