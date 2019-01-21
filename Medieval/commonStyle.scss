@@ -41,3 +41,10 @@ $rules-font:'Dosis';
 $darkBlack: #333;
 $stdFont: 16px;
 @import "../../wargaming/Wargame/commonStyle";
+#crtWrapper {
+  #crt {
+    #crtDetails {
+      display: block;
+    }
+  }
+}

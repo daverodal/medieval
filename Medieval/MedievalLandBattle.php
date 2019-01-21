@@ -79,7 +79,7 @@ class MedievalLandBattle extends \Wargame\LandBattle
                 $this->terrain = new Terrain($data->terrain);
 
             }else{
-                $this->terrain = new \stdClass();
+                $this->terrain = new Terrain();
             }
             $this->moveRules = new FacingMoveRules($this->force, $this->terrain, $data->moveRules);
             $this->moveRules->oneHex = false;

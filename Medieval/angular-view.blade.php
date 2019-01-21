@@ -89,6 +89,7 @@
                         <li><a href="#" onclick="seeUnits();return false;">See Units</a></li>
                         <li><a href="#" onclick="seeBoth();return false;">See Both</a></li>
                         <li><a href="#" onclick="seeMap();return false;">See Map</a></li>
+                            <li><a href="#" onclick="showSurrender();return false;">Surrender</a></li>
                         @show
                         <li class="closer"></li>
                     </ul>
@@ -249,6 +250,11 @@
                         <div ng-style="{top: floatMessage.top, left: floatMessage.left}" ng-show="floatMessage.header" id="floatMessage">
                             <header>@{{ floatMessage.header }}</header>
                             <p>@{{ floatMessage.body }}</p>
+                        </div>
+                        <div id="surrender">
+                            <div class="header">Do you really want to surrender?</div>
+                            <div class="fancy-button" onclick="showSurrender()">Keep Fighting!</div>
+                            <div class="fancy-button" onclick="surrender()">Yes, Surrender.</div>
                         </div>
                         @section('mapSymbols')
                         @show
