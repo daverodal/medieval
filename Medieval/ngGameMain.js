@@ -29,5 +29,3 @@ import "angular-modal-service"
 import "angular-right-click"
 import 'jquery-ui-bundle';
 import "./wargame-helpers/init-panzoom";
-import "./ng-global-header.js";
-// import './register-locals.js';

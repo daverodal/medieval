@@ -1,4 +1,5 @@
 import { Sync } from "./wargame-helpers/imported/Sync";
+import {DR} from './wargame-helpers/imported/DR'
 window.x = new Sync(fetchUrl);
 var x = window.x;
 

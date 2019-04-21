@@ -19,8 +19,67 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 ?>
-@include('wargame::ng-global-header')
-<script src="{{mix("vendor/javascripts/medieval/medieval.js")}}"></script>
+<!doctype html>
+<html>
+<head>
+    <?php
+    $oClass = new ReflectionClass('Wargame\Cnst');
+    $constants = $oClass->getConstants();
+
+    ?>
+    <script>
+        debugger;
+            <?php foreach($constants as $k => $v){
+                echo "const $k = $v;\n";
+            }?>
+
+
+        const fetchUrl = "<?=url("wargame/fetch/$wargame");?>";
+
+
+        if (!window.PHP_INIT_VARS) {
+            window.PHP_INIT_VARS = {};
+        }
+
+
+        window.legacy = {};
+        window.PHP_INIT_VARS.playerOne = "{{$forceName[1]}}";
+        window.PHP_INIT_VARS.playerTwo = "{{$forceName[2]}}";
+        window.PHP_INIT_VARS.playerThree = "{{$forceName[3] or ''}}";
+        window.PHP_INIT_VARS.playerFour = "{{$forceName[4] or ''}}";
+
+    </script>
+
+        @include('wargame::Medieval.ng-global-header')
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/icon">
+
+
+    <script type="text/javascript">
+
+
+
+    </script>
+    <link href='https://fonts.googleapis.com/css?family=Nosifer' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="{{mix("vendor/javascripts/medieval/medieval.js")}}"></script>
 @extends('wargame::Medieval.angular-view',['topCrt'=> $topCrt] )
 @include('wargame::Medieval.medieval-units')
 <link href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900" rel="stylesheet">

@@ -26,14 +26,9 @@
 import "jquery-ui-bundle";
 import "./imported/jquery.panzoom";
 import {counterClick} from "./imported/global-funcs";
+import {DR} from './imported/DR'
 document.addEventListener("DOMContentLoaded",function(){
 
-
-    var DR = window.DR;
-
-    if (!DR) {
-        DR = {};
-    }
     DR.$ = $;
     DR.globalZoom = 1;
     DR.playerNameMap = ["Zero", "One", "Two", "Three", "Four"];
