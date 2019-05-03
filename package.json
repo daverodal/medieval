@@ -19,10 +19,8 @@
     "babel-preset-stage-2": "^6.24.1",
     "bootstrap-sass": ">=3.4.1",
     "cross-env": "^5.0.1",
-    "jquery": "^3.1.1",
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
-    "vue": "^2.1.10",
     "webpack-dev-server": ">=3.1.11"
   },
   "dependencies": {
@@ -30,6 +28,8 @@
     "jquery-ui-bundle": "^1.12.1",
     "jquery.panzoom": "^3.2.2",
     "bootstrap-sass": ">=3.4.1",
-    "webpack-dev-server": ">=3.1.11"
+    "webpack-dev-server": ">=3.1.11",
+    "vue": "^2.1.10",
+    "jquery": ">=3.4.0"
   }
 }
