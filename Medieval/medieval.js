@@ -1,6 +1,7 @@
 import {GameController} from './wargame-helpers/imported/ng-global-imports';
 
-import { Sync } from "./wargame-helpers/imported/Sync";
+import { syncObj } from "./wargame-helpers/imported/Vue/syncObj";
+
 
 import {DR} from './wargame-helpers/imported/DR';
 var gameApp = angular.module('gameApp', ['ngRightClick', 'ngSanitize']);
@@ -39,6 +40,5 @@ gameApp.directive('ghostUnit', function() {
 });
 
 gameApp.factory('sync',function(){
-    var sync = new Sync(fetchUrl);
-    return sync;
+    return syncObj;
 });
