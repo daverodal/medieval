@@ -1,4 +1,5 @@
 <?php
+global $results_name, $phase_name, $mode_name;
 /**
  * Created by PhpStorm.
  * User: david
@@ -28,12 +29,17 @@
 
     ?>
     <script>
-        debugger;
+
+        const resultsNames = JSON.parse('<?=json_encode($results_name)?>');
+        const mode_name = JSON.parse('<?=json_encode($mode_name)?>');
             <?php foreach($constants as $k => $v){
                 echo "const $k = $v;\n";
             }?>
 
-
+            const phase_name = []
+                <?php foreach($phase_name as $k => $v){
+                    echo "phase_name[$k] = \"$v\";\n";
+                }?>
         const fetchUrl = "<?=url("wargame/fetch/$wargame");?>";
 
 
@@ -45,8 +51,8 @@
         window.legacy = {};
         window.PHP_INIT_VARS.playerOne = "{{$forceName[1]}}";
         window.PHP_INIT_VARS.playerTwo = "{{$forceName[2]}}";
-        window.PHP_INIT_VARS.playerThree = "{{$forceName[3] or ''}}";
-        window.PHP_INIT_VARS.playerFour = "{{$forceName[4] or ''}}";
+        window.PHP_INIT_VARS.playerThree = "{{$forceName[3] ?? ''}}";
+        window.PHP_INIT_VARS.playerFour = "{{$forceName[4] ?? ''}}";
 
     </script>
 

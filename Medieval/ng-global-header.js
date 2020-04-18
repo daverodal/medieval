@@ -1,8 +1,8 @@
-import  fixHeader from "./wargame-helpers/imported/fix-header";
+import  {fixHeader} from "@markarian/wargame-helpers";
 import initialize from "./wargame-helpers/imported/initialize";
-import {DR} from './wargame-helpers/imported/DR'
+import {DR} from '@markarian/wargame-helpers'
 
-import "./wargame-helpers/imported/jquery.panzoom"
+import ""
 import 'jquery-ui-bundle';
 
 DR.globalZoom = 1;

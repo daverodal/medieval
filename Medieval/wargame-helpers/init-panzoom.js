@@ -25,8 +25,8 @@
  */
 import "jquery-ui-bundle";
 import "./imported/jquery.panzoom";
-import {counterClick} from "./imported/global-funcs";
-import {DR} from './imported/DR'
+import {counterClick} from "@markarian/wargame-helpers";
+import {DR} from '@markarian/wargame-helpers'
 document.addEventListener("DOMContentLoaded",function(){
 
     DR.$ = $;

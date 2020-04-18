@@ -24,6 +24,7 @@
     "webpack-dev-server": ">=3.1.11"
   },
   "dependencies": {
+    "@markarian/wargame-helpers": "0.0.3",
     "font-awesome": "^4.7.0",
     "jquery-ui-bundle": "^1.12.1",
     "jquery.panzoom": "^3.2.2",

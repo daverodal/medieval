@@ -1,9 +1,8 @@
 import {GameController} from './wargame-helpers/imported/ng-global-imports';
 
-import { syncObj } from "./wargame-helpers/imported/Vue/syncObj";
+import { syncObj } from "@markarian/wargame-helpers";
 
 
-import {DR} from './wargame-helpers/imported/DR';
 var gameApp = angular.module('gameApp', ['ngRightClick', 'ngSanitize']);
 
 gameApp.controller('GameController',  GameController);

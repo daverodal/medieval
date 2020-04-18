@@ -20,7 +20,12 @@ mix.webpackConfig({
             'window.$': 'jquery',
             Popper: ['popper.js', 'default']
         })
-    ]});
+    ],
+    resolve: {
+        symlinks: false,
+        extensions: ['*', '.js', '.jsx', '.vue', '.ts', '.tsx'],
+    },
+});
 
 mix.setPublicPath("../game-dispatcher/public/vendor/");
 mix.setResourceRoot("/vendor/");
