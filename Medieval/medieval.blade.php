@@ -43,13 +43,7 @@ global $results_name, $phase_name, $mode_name;
                     echo "phase_name[$k] = \"$v\";\n";
                 }?>
         const fetchUrl = "<?=url("wargame/fetch/$wargame");?>";
-        const mode_name = JSON.parse('<?=json_encode($mode_name)?>');
         ;
-        const phase_name = []
-        <?php foreach($phase_name as $k => $v){
-            echo "phase_name[$k] = \"$v\";\n";
-        }?>
-            const fetchUrl = "<?=url("wargame/fetch/$wargame");?>";
 
 
         if (!window.PHP_INIT_VARS) {
