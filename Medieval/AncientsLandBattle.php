@@ -230,7 +230,7 @@ class AncientsLandBattle extends \Wargame\LandBattle
             $this->mapViewer[$player]->setData($terrainInfo->originX, $terrainInfo->originY, // originX, originY
                 $terrainInfo->b, $terrainInfo->b, // top hexagon height, bottom hexagon height
                 $terrainInfo->a, $terrainInfo->c,// hexagon edge width, hexagon center width
-            $terrainInfo->mapWidth);
+            $terrainInfo->mapWidth, $terrainInfo->mapHeight ?? false);
         }
 
         $oldMapUrl = $this->mapData->mapUrl;
