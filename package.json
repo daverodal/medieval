@@ -10,7 +10,7 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
-    "angular": "^1.5.8",
+    "angular": "^1.8.0",
     "angular-modal-service": "^0.13.0",
     "angular-right-click": "^0.1.1",
     "angular-sanitize": "^1.5.8",
