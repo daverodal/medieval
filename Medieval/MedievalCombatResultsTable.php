@@ -53,7 +53,7 @@ class MedievalCombatResultsTable extends \Wargame\CombatResultsTable
         $this->resultsNames = $results_name;
         $this->crts = new stdClass();
         $this->crts->melee = new \Wargame\CRT(array("1:4", "1:3", "1:2", "1:1.5", "1:1", "1.5:1", "2:1", "3:1", "4:1", "5:1", "6:1"),
-            'missile', 11, 2);
+            'missile', 11, -2);
         $this->crts->melee->table = array(
             array(AE,  AE,    AE,   AE,   AL,  ALR,  NE,   NE,   DLF,  DEAL, DEAL),
             array(AE,  AE,    AE,   AL2F, AL,  AL,   ALR,  BLDR, DLF,  DEAL, DEAL),
@@ -74,7 +74,7 @@ class MedievalCombatResultsTable extends \Wargame\CombatResultsTable
         );
 
         $this->crts->missile = new \Wargame\CRT( array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12+"),
-            'melee', 12, 2);
+            'melee', 12, -2);
 
         $this->crts->missile->table = array(
             array(NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE, NE),
