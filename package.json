@@ -15,7 +15,7 @@
     "angular-right-click": "^0.1.1",
     "angular-sanitize": "^1.5.8",
     "axios": "^0.21.1",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "bootstrap-sass": ">=3.4.1",
     "cross-env": "^5.0.1",
